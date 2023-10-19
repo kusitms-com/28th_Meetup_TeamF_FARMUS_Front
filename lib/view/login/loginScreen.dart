@@ -40,9 +40,12 @@ class LoginScreen extends StatelessWidget {
 
   void getKakaoLogin() async {
     print("카카오 로그인 버튼 클릭");
-    if (await isKakaoTalkInstalled()) {
+    bool isInstalled = await isKakaoTalkInstalled();
+    OAuthToken? token;
+
+    if (isInstalled) {
       try {
-        await UserApi.instance.loginWithKakaoTalk();
+        token = await UserApi.instance.loginWithKakaoTalk();
         print('카카오톡으로 로그인 성공');
       } catch (error) {
         print('카카오톡으로 로그인 실패 $error');
@@ -54,7 +57,7 @@ class LoginScreen extends StatelessWidget {
         }
         // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인
         try {
-          await UserApi.instance.loginWithKakaoAccount();
+          token = await UserApi.instance.loginWithKakaoAccount();
           print('카카오계정으로 로그인 성공');
         } catch (error) {
           print('카카오계정으로 로그인 실패 $error');
@@ -62,11 +65,9 @@ class LoginScreen extends StatelessWidget {
       }
     } else {
       try {
-        await UserApi.instance.loginWithKakaoAccount();
+        token = await UserApi.instance.loginWithKakaoAccount();
         print('카카오계정으로 로그인 성공');
-
-        User user = await UserApi.instance.me();
-        print(user.id);
+        print(token.accessToken);
       } catch (error) {
         print('카카오계정으로 로그인 실패 $error');
       }
@@ -82,6 +83,6 @@ class LoginScreen extends StatelessWidget {
     final GoogleSignInAuthentication googleSignInAuthentication =
         await googleSignInAccount!.authentication;
 
-    print(googleSignInAuthentication);
+    print(googleSignInAuthentication.accessToken);
   }
 }
