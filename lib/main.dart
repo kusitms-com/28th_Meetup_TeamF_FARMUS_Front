@@ -1,10 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_template.dart';
+import 'package:mojacknong_android/firebase_options.dart';
 import 'package:mojacknong_android/view/login/loginScreen.dart';
 
-void main() {
+void main() async {
   // 웹 환경에서 카카오 로그인을 정상적으로 완료하기 위함
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   // runApp() 호출 전 Flutter SDK 초기화
   KakaoSdk.init(
