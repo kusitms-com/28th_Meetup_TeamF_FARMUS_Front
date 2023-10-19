@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -68,6 +69,7 @@ class LoginScreen extends StatelessWidget {
         token = await UserApi.instance.loginWithKakaoAccount();
         print('카카오계정으로 로그인 성공');
         print(token.accessToken);
+        fetchSecureData(token);
       } catch (error) {
         print('카카오계정으로 로그인 실패 $error');
       }
@@ -84,5 +86,21 @@ class LoginScreen extends StatelessWidget {
         await googleSignInAccount!.authentication;
 
     print(googleSignInAuthentication.accessToken);
+    fetchSecureData(googleSignInAuthentication.accessToken.toString());
+  }
+
+  Future fetchSecureData(token) async {
+    final url = Uri.parse('https://example.com/endpoint');
+
+    final response = await http.get(
+      url,
+      headers: {'Authorization': token},
+    );
+
+    if (response.statusCode == 200) {
+      print(response.body);
+    } else {
+      print('Error: ${response.statusCode}');
+    }
   }
 }
