@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_template.dart';
+import 'package:mojacknong_android/view/login/loginScreen.dart';
 
 void main() {
   // 웹 환경에서 카카오 로그인을 정상적으로 완료하기 위함
@@ -10,7 +11,8 @@ void main() {
     nativeAppKey: 'e0e5595eef76546ac7d980217627e9bf',
     javaScriptAppKey: '7f2a1972870b2cadb2a0506a7e309020',
   );
-  runApp(MyApp());
+
+  runApp(LoginScreen());
 }
 
 class MyApp extends StatelessWidget {
