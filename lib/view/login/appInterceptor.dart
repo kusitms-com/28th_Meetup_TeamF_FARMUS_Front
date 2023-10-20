@@ -1,14 +1,30 @@
 import 'package:dio/dio.dart';
 
 class AppInterceptor extends InterceptorsWrapper {
-  var dio = Dio();
-  static String baseUrl =
-      "http://ec2-43-202-6-54.ap-northeast-2.compute.amazonaws.com";
+  Dio dio;
 
-  AppInterceptor() {
-    dio.options = BaseOptions(
-      contentType: 'application/json',
-      baseUrl: baseUrl,
-    );
+  AppInterceptor(this.dio);
+
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    options.headers['Content-Type'] = 'application/json';
+    print("Request");
+    handler.next(options);
+  }
+
+  @override
+  void onError(err, ErrorInterceptorHandler handler) async {
+    print("Error");
+    if (err.response?.statusCode == 401) {
+      String newAccessToken = await refreshToken();
+      err.requestOptions.headers['Authorization'] = 'Bearer $newAccessToken';
+      handler.next(err);
+      return;
+    }
+    throw err;
+  }
+
+  Future<String> refreshToken() async {
+    return "";
   }
 }

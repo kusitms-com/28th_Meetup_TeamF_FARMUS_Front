@@ -86,7 +86,6 @@ class LoginScreen extends StatelessWidget {
 
   Future<void> getGoogleLogin() async {
     print("구글 로그인 버튼 클릭");
-    dio.interceptors.add(AppInterceptor());
 
     final GoogleSignInAccount? googleSignInAccount =
         await googleSignIn.signIn();
@@ -99,6 +98,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   Future<void> fetchKaKaoData(token) async {
+    dio.interceptors.add(AppInterceptor(dio));
     try {
       Response response = await dio.post(
         '/api/user/auth/kakao-login',
@@ -113,6 +113,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   Future<void> fetchGoogleData(token) async {
+    dio.interceptors.add(AppInterceptor(dio));
     try {
       print(token.toString());
       Response response = await dio.post(
@@ -125,5 +126,9 @@ class LoginScreen extends StatelessWidget {
       print(e.message);
       print("실패");
     }
+  }
+
+  Future<String> refreshToken() async {
+    return "";
   }
 }
