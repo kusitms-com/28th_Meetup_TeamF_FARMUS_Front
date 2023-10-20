@@ -69,7 +69,7 @@ class LoginScreen extends StatelessWidget {
         token = await UserApi.instance.loginWithKakaoAccount();
         print('카카오계정으로 로그인 성공');
         print(token.accessToken);
-        fetchSecureData(token);
+        fetchSecureData(token.accessToken);
       } catch (error) {
         print('카카오계정으로 로그인 실패 $error');
       }
@@ -90,11 +90,13 @@ class LoginScreen extends StatelessWidget {
   }
 
   Future fetchSecureData(token) async {
-    final url = Uri.parse('https://example.com/endpoint');
+    final url = Uri.parse(
+        'http://ec2-43-202-6-54.ap-northeast-2.compute.amazonaws.com/api/user/auth/kakao-login');
 
-    final response = await http.get(
+    print(token);
+    final response = await http.post(
       url,
-      headers: {'Authorization': token},
+      headers: {'Authentication': "Bearer $token"},
     );
 
     if (response.statusCode == 200) {
