@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
-import 'package:mojacknong_android/view/login/CustomInterceptor.dart';
+import 'package:mojacknong_android/view/login/appInterceptor.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -48,7 +48,6 @@ class LoginScreen extends StatelessWidget {
 
   void getKakaoLogin() async {
     print("카카오 로그인 버튼 클릭");
-    dio.interceptors.add(CustomInterceptor());
 
     bool isInstalled = await isKakaoTalkInstalled();
     OAuthToken? token;
@@ -78,7 +77,7 @@ class LoginScreen extends StatelessWidget {
         token = await UserApi.instance.loginWithKakaoAccount();
         print('카카오계정으로 로그인 성공3');
         print(token.accessToken);
-        fetchData(token.accessToken);
+        fetchKaKaoData(token.accessToken);
       } catch (error) {
         print('카카오계정으로 로그인 실패3 $error');
       }
@@ -87,7 +86,7 @@ class LoginScreen extends StatelessWidget {
 
   Future<void> getGoogleLogin() async {
     print("구글 로그인 버튼 클릭");
-    dio.interceptors.add(CustomInterceptor());
+    dio.interceptors.add(AppInterceptor());
 
     final GoogleSignInAccount? googleSignInAccount =
         await googleSignIn.signIn();
@@ -96,15 +95,28 @@ class LoginScreen extends StatelessWidget {
         await googleSignInAccount!.authentication;
 
     print("구글 액세스 토큰 ${googleSignInAuthentication.accessToken}");
-    fetchData(googleSignInAuthentication.accessToken);
-    print(googleSignInAccount);
-    print(googleSignInAuthentication);
+    fetchGoogleData(googleSignInAuthentication.accessToken);
   }
 
-  Future<void> fetchData(token) async {
+  Future<void> fetchKaKaoData(token) async {
     try {
       Response response = await dio.post(
         '/api/user/auth/kakao-login',
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
+      print(response.data);
+      print("성공");
+    } on DioError catch (e) {
+      print(e.message);
+      print("실패");
+    }
+  }
+
+  Future<void> fetchGoogleData(token) async {
+    try {
+      print(token.toString());
+      Response response = await dio.post(
+        '/api/user/auth/google-login',
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
       print(response.data);
