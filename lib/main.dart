@@ -18,7 +18,7 @@ void main() async {
     javaScriptAppKey: '7f2a1972870b2cadb2a0506a7e309020',
   );
 
-  runApp(LoginScreen());
+  runApp(const LoginScreen());
 }
 
 class MyApp extends StatelessWidget {
