@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
+import 'package:mojacknong_android/view/login/appInterceptor.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -97,27 +98,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   Future<void> fetchKaKaoData(token) async {
-    dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) {
-          options.headers['Authorization'] = 'Bearer $token';
-          print("Request");
-          return handler.next(options);
-        },
-        onError: ((e, handler) async {
-          print("Error");
-
-          if (e.response?.statusCode == 401) {
-            String newAccessToken = await refreshToken();
-            e.requestOptions.headers['Authorization'] =
-                'Bearer $newAccessToken';
-
-            return handler.resolve(await dio.fetch(e.requestOptions));
-          }
-          return handler.next(e);
-        }),
-      ),
-    );
+    dio.interceptors.add(AppInterceptor(dio));
     try {
       Response response = await dio.post(
         '/api/user/auth/kakao-login',
@@ -132,6 +113,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   Future<void> fetchGoogleData(token) async {
+    dio.interceptors.add(AppInterceptor(dio));
     try {
       print(token.toString());
       Response response = await dio.post(
