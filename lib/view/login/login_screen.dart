@@ -7,7 +7,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 import 'package:mojacknong_android/view/login/app_interceptor.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
-final storage = new FlutterSecureStorage();
+const storage = FlutterSecureStorage();
 
 Dio dio = Dio(
   BaseOptions(
@@ -80,6 +80,7 @@ class LoginScreen extends StatelessWidget {
         print('카카오계정으로 로그인 성공3');
         print(token.accessToken);
         fetchKaKaoData(token.accessToken);
+        await storage.write(key: 'refreshToken', value: token.refreshToken);
       } catch (error) {
         print('카카오계정으로 로그인 실패3 $error');
       }
@@ -106,9 +107,9 @@ class LoginScreen extends StatelessWidget {
         '/api/user/auth/kakao-login',
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
+      final newToken = storage.read(key: 'refreshToken');
       print(response.data);
-      await storage.write(key: 'jwt', value: token);
-      print("성공");
+      print("성공 $newToken");
     } on DioError catch (e) {
       print(e.message);
       print("실패");
@@ -124,9 +125,8 @@ class LoginScreen extends StatelessWidget {
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
       print(response.data);
-      await storage.write(key: 'jwt', value: token);
-      final newToken = storage.read(key: 'jwt');
-      print("성공 $newToken");
+      final newToken = await storage.read(key: 'refreshToken');
+      print("성공 ${newToken}");
     } on DioError catch (e) {
       print(e.message);
       print("실패");
