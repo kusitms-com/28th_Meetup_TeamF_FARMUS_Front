@@ -80,7 +80,6 @@ class LoginScreen extends StatelessWidget {
         print('카카오계정으로 로그인 성공3');
         print(token.accessToken);
         fetchKaKaoData(token.accessToken);
-        await storage.write(key: 'refreshToken', value: token.refreshToken);
       } catch (error) {
         print('카카오계정으로 로그인 실패3 $error');
       }
@@ -107,9 +106,12 @@ class LoginScreen extends StatelessWidget {
         '/api/user/auth/kakao-login',
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
-      final newToken = storage.read(key: 'refreshToken');
+      final newToken = await storage.read(key: 'refreshToken');
       print(response.data);
-      print("성공 $newToken");
+      await storage.write(
+          key: 'refreshToken', value: response.data["refreshToken"]);
+      final refreshKakaoToken = await storage.read(key: 'refreshToken');
+      print("성공 $refreshKakaoToken");
     } on DioError catch (e) {
       print(e.message);
       print("실패");
@@ -125,8 +127,11 @@ class LoginScreen extends StatelessWidget {
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
       print(response.data);
-      final newToken = await storage.read(key: 'refreshToken');
-      print("성공 ${newToken}");
+      await storage.write(
+          key: 'refreshToken', value: response.data["refreshToken"]);
+
+      final refreshGoogleToken = await storage.read(key: 'refreshToken');
+      print("성공 $refreshGoogleToken");
     } on DioError catch (e) {
       print(e.message);
       print("실패");
