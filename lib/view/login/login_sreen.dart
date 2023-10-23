@@ -1,15 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
-import 'package:mojacknong_android/view/login/appInterceptor.dart';
+import 'package:mojacknong_android/view/login/app_interceptor.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
+final storage = new FlutterSecureStorage();
 
 Dio dio = Dio(
   BaseOptions(
-    baseUrl: "http://ec2-43-202-6-54.ap-northeast-2.compute.amazonaws.com",
+    baseUrl: "http://ec2-13-125-15-222.ap-northeast-2.compute.amazonaws.com",
   ),
 );
 
@@ -105,6 +107,7 @@ class LoginScreen extends StatelessWidget {
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
       print(response.data);
+      await storage.write(key: 'jwt', value: token);
       print("성공");
     } on DioError catch (e) {
       print(e.message);
@@ -121,14 +124,12 @@ class LoginScreen extends StatelessWidget {
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
       print(response.data);
-      print("성공");
+      await storage.write(key: 'jwt', value: token);
+      final newToken = storage.read(key: 'jwt');
+      print("성공 $newToken");
     } on DioError catch (e) {
       print(e.message);
       print("실패");
     }
-  }
-
-  Future<String> refreshToken() async {
-    return "";
   }
 }
