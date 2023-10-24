@@ -11,9 +11,12 @@ class AppInterceptor extends InterceptorsWrapper {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
+    final accessToken = await storage.read(key: 'accessToken');
+    print("AppInterceptor: 액세스 토큰 : $accessToken");
+
     options.headers['Content-Type'] = 'application/json';
-    final refreshToken = await storage.read(key: 'refreshToken');
-    getRefreshToken(refreshToken);
+    options.headers['Authorization'] = 'Bearer $accessToken';
+
     handler.next(options);
   }
 
@@ -33,7 +36,6 @@ class AppInterceptor extends InterceptorsWrapper {
   }
 
   Future<String> getRefreshToken(token) async {
-    dio.interceptors.add(AppInterceptor(dio));
     try {
       final newToken = await storage.read(key: 'jwt');
       print("토큰 $newToken");

@@ -15,11 +15,19 @@ Dio dio = Dio(
   ),
 );
 
+Dio authDio = Dio(
+  BaseOptions(
+    baseUrl: "http://ec2-13-125-15-222.ap-northeast-2.compute.amazonaws.com",
+  ),
+);
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    authDio.interceptors.add(AppInterceptor(authDio));
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -39,6 +47,22 @@ class LoginScreen extends StatelessWidget {
                 onPressed: getGoogleLogin,
                 child: const Text(
                   "구글 로그인",
+                ),
+              ),
+            ),
+            GestureDetector(
+              child: TextButton(
+                onPressed: reissue,
+                child: const Text(
+                  "토큰 재발급",
+                ),
+              ),
+            ),
+            GestureDetector(
+              child: TextButton(
+                onPressed: logout,
+                child: const Text(
+                  "로그아웃",
                 ),
               ),
             ),
@@ -100,18 +124,20 @@ class LoginScreen extends StatelessWidget {
   }
 
   Future<void> fetchKaKaoData(token) async {
-    dio.interceptors.add(AppInterceptor(dio));
     try {
       Response response = await dio.post(
         '/api/user/auth/kakao-login',
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
-      final newToken = await storage.read(key: 'refreshToken');
       print(response.data);
       await storage.write(
           key: 'refreshToken', value: response.data["refreshToken"]);
-      final refreshKakaoToken = await storage.read(key: 'refreshToken');
-      print("성공 $refreshKakaoToken");
+      await storage.write(
+          key: 'accessToken', value: response.data["accessToken"]);
+
+      final accessGoogleToken = await storage.read(key: 'accessToken');
+      final refreshGoogleToken = await storage.read(key: 'refreshToken');
+      print("성공 \n액세스 : $accessGoogleToken \n리프레시 : $refreshGoogleToken");
     } on DioError catch (e) {
       print(e.message);
       print("실패");
@@ -119,7 +145,6 @@ class LoginScreen extends StatelessWidget {
   }
 
   Future<void> fetchGoogleData(token) async {
-    dio.interceptors.add(AppInterceptor(dio));
     try {
       print(token.toString());
       Response response = await dio.post(
@@ -129,12 +154,60 @@ class LoginScreen extends StatelessWidget {
       print(response.data);
       await storage.write(
           key: 'refreshToken', value: response.data["refreshToken"]);
+      await storage.write(
+          key: 'accessToken', value: response.data["accessToken"]);
 
+      final accessGoogleToken = await storage.read(key: 'accessToken');
       final refreshGoogleToken = await storage.read(key: 'refreshToken');
-      print("성공 $refreshGoogleToken");
+      print("성공 \n액세스 : $accessGoogleToken \n리프레시 : $refreshGoogleToken");
     } on DioError catch (e) {
       print(e.message);
       print("실패");
     }
+  }
+
+  Future<String> reissue() async {
+    try {
+      final token = await storage.read(key: 'refreshToken');
+      print("토큰 $token");
+
+      Response response = await dio.get(
+        '/api/user/reissue-token',
+        options: Options(
+          headers: {'Authorization': 'Bearer $token'},
+        ),
+      );
+      print(response.data);
+      print("reissue 성공");
+
+      await storage.write(
+          key: "accessToken", value: response.data["accessToken"]);
+      final newAccessToken = await storage.read(key: 'accessToken');
+      print("새 액세스 토큰 : $newAccessToken");
+    } on DioError catch (e) {
+      print(e.message);
+      print("reissue 실패");
+    }
+    return "response";
+  }
+
+  Future<String> logout() async {
+    try {
+      final token = await storage.read(key: 'accessToken');
+      print("토큰 $token");
+
+      Response response = await authDio.delete(
+        '/api/user/logout',
+      );
+      print(response.data);
+      print("logout 성공");
+
+      storage.delete(key: "accessToken");
+      storage.delete(key: "refreshToken");
+    } on DioError catch (e) {
+      print(e.message);
+      print("logout 실패");
+    }
+    return "response";
   }
 }
