@@ -6,11 +6,6 @@
 한 줄 요약
 
 
-### 🥔 Commits
-- 1
-- 2
-
-
 ### 🌽 PR Type
 - [ ] Feature
 - [ ] Bugfix
