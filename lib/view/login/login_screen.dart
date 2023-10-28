@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
+import 'package:mojacknong_android/repository/login_repository.dart';
 import 'package:mojacknong_android/view/login/app_interceptor.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -60,7 +61,7 @@ class LoginScreen extends StatelessWidget {
             ),
             GestureDetector(
               child: TextButton(
-                onPressed: logout,
+                onPressed: getData,
                 child: const Text(
                   "로그아웃",
                 ),
@@ -186,9 +187,14 @@ class LoginScreen extends StatelessWidget {
       print("새 액세스 토큰 : $newAccessToken");
     } on DioError catch (e) {
       print(e.message);
+      print(e.response);
       print("reissue 실패");
     }
     return "response";
+  }
+
+  getData() {
+    LoginRepository.hitApi().then((value) => print(value));
   }
 
   Future<String> logout() async {
@@ -206,6 +212,7 @@ class LoginScreen extends StatelessWidget {
       storage.delete(key: "refreshToken");
     } on DioError catch (e) {
       print(e.message);
+      print(e.response);
       print("logout 실패");
     }
     return "response";
