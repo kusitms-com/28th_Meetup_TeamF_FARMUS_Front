@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
+import 'package:mojacknong_android/repository/login_repository.dart';
 import 'package:mojacknong_android/view/login/app_interceptor.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -44,7 +45,7 @@ class LoginScreen extends StatelessWidget {
             ),
             GestureDetector(
               child: TextButton(
-                onPressed: getGoogleLogin,
+                onPressed: googleLogin,
                 child: const Text(
                   "구글 로그인",
                 ),
@@ -72,7 +73,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void getKakaoLogin() async {
+  getKakaoLogin() async {
     print("카카오 로그인 버튼 클릭");
 
     bool isInstalled = await isKakaoTalkInstalled();
@@ -82,6 +83,7 @@ class LoginScreen extends StatelessWidget {
       try {
         token = await UserApi.instance.loginWithKakaoTalk();
         print('카카오톡으로 로그인 성공1');
+        fetchKaKaoData(token.accessToken);
       } catch (error) {
         print('카카오톡으로 로그인 실패1 $error');
 
@@ -94,6 +96,7 @@ class LoginScreen extends StatelessWidget {
         try {
           token = await UserApi.instance.loginWithKakaoAccount();
           print('카카오계정으로 로그인 성공2');
+          fetchKaKaoData(token.accessToken);
         } catch (error) {
           print('카카오계정으로 로그인 실패2 $error');
         }
@@ -110,104 +113,19 @@ class LoginScreen extends StatelessWidget {
     }
   }
 
-  Future<void> getGoogleLogin() async {
-    print("구글 로그인 버튼 클릭");
-
-    final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
-
-    final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount!.authentication;
-
-    print("구글 액세스 토큰 ${googleSignInAuthentication.accessToken}");
-    fetchGoogleData(googleSignInAuthentication.accessToken);
+  fetchKaKaoData(token) {
+    LoginRepository.kakaoLoginApi(token).then((value) {});
   }
 
-  Future<void> fetchKaKaoData(token) async {
-    try {
-      Response response = await dio.post(
-        '/api/user/auth/kakao-login',
-        options: Options(headers: {'Authorization': 'Bearer $token'}),
-      );
-      print(response.data);
-      await storage.write(
-          key: 'refreshToken', value: response.data["refreshToken"]);
-      await storage.write(
-          key: 'accessToken', value: response.data["accessToken"]);
-
-      final accessGoogleToken = await storage.read(key: 'accessToken');
-      final refreshGoogleToken = await storage.read(key: 'refreshToken');
-      print("성공 \n액세스 : $accessGoogleToken \n리프레시 : $refreshGoogleToken");
-    } on DioError catch (e) {
-      print(e.message);
-      print("실패");
-    }
+  googleLogin() {
+    LoginRepository.googleLoginApi().then((value) {});
   }
 
-  Future<void> fetchGoogleData(token) async {
-    try {
-      print(token.toString());
-      Response response = await dio.post(
-        '/api/user/auth/google-login',
-        options: Options(headers: {'Authorization': 'Bearer $token'}),
-      );
-      print(response.data);
-      await storage.write(
-          key: 'refreshToken', value: response.data["refreshToken"]);
-      await storage.write(
-          key: 'accessToken', value: response.data["accessToken"]);
-
-      final accessGoogleToken = await storage.read(key: 'accessToken');
-      final refreshGoogleToken = await storage.read(key: 'refreshToken');
-      print("성공 \n액세스 : $accessGoogleToken \n리프레시 : $refreshGoogleToken");
-    } on DioError catch (e) {
-      print(e.message);
-      print("실패");
-    }
+  reissue() {
+    LoginRepository.reissueApi().then((value) {});
   }
 
-  Future<String> reissue() async {
-    try {
-      final token = await storage.read(key: 'refreshToken');
-      print("토큰 $token");
-
-      Response response = await dio.get(
-        '/api/user/reissue-token',
-        options: Options(
-          headers: {'Authorization': 'Bearer $token'},
-        ),
-      );
-      print(response.data);
-      print("reissue 성공");
-
-      await storage.write(
-          key: "accessToken", value: response.data["accessToken"]);
-      final newAccessToken = await storage.read(key: 'accessToken');
-      print("새 액세스 토큰 : $newAccessToken");
-    } on DioError catch (e) {
-      print(e.message);
-      print("reissue 실패");
-    }
-    return "response";
-  }
-
-  Future<String> logout() async {
-    try {
-      final token = await storage.read(key: 'accessToken');
-      print("토큰 $token");
-
-      Response response = await authDio.delete(
-        '/api/user/logout',
-      );
-      print(response.data);
-      print("logout 성공");
-
-      storage.delete(key: "accessToken");
-      storage.delete(key: "refreshToken");
-    } on DioError catch (e) {
-      print(e.message);
-      print("logout 실패");
-    }
-    return "response";
+  logout() {
+    LoginRepository.logoutApi().then((value) {});
   }
 }
