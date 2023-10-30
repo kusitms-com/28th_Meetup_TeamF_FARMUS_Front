@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SampleScreen extends StatefulWidget {
   const SampleScreen({Key? key}) : super(key: key);
@@ -39,51 +40,44 @@ class _SampleScreenState extends State<SampleScreen> {
       items: [
         BottomNavigationBarItem(
           icon: Container(
-            child: Image.asset(
-              'assets/icons/ic_home.png',
-              width: 32,
-              height: 32,
-            ),
-          ),
-          activeIcon: Container(
-            child: Image.asset(
-              'assets/icons/ic_home.svg',
-              width: 32,
-              height: 32,
-            ),
-          ),
+              child: SvgPicture.asset(
+            'assets/icons/ic_home.svg',
+          )),
           label: "홈",
         ),
         BottomNavigationBarItem(
           icon: Container(
-              child: Image.asset(
-            'assets/icons/ic_home.png',
-            height: 20,
-            width: 23,
+              child: SvgPicture.asset(
+            'assets/icons/ic_challenge.svg',
           )),
           activeIcon: Container(
-              child: Image.asset(
-            'assets/icons/ic_home.png',
-            height: 20,
-            width: 23,
+              child: SvgPicture.asset(
+            'assets/icons/ic_challenge.svg',
           )),
           backgroundColor: Colors.white,
           label: "챌린지",
         ),
         BottomNavigationBarItem(
           icon: Container(
-              child: Image.asset(
-            'assets/icons/ic_home.png',
-            height: 20,
-            width: 23,
+              child: SvgPicture.asset(
+            'assets/icons/ic_community.svg',
           )),
-          activeIcon: Icon(Icons.person),
+          activeIcon: Container(
+              child: SvgPicture.asset(
+            'assets/icons/ic_community.svg',
+          )),
           backgroundColor: Colors.white,
           label: "커뮤니티",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person_outline),
-          activeIcon: Icon(Icons.person),
+          icon: Container(
+              child: SvgPicture.asset(
+            'assets/icons/ic_mypage.svg',
+          )),
+          activeIcon: Container(
+              child: SvgPicture.asset(
+            'assets/icons/ic_mypage.svg',
+          )),
           backgroundColor: Colors.white,
           label: "마이페이지",
         ),
