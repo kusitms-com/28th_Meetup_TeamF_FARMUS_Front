@@ -1,82 +1,93 @@
 import 'package:flutter/material.dart';
 
-/// Flutter code sample for [BottomNavigationBar].
-
-void main() => runApp(const BottomNavigationBarExampleApp());
-
-class BottomNavigationBarExampleApp extends StatelessWidget {
-  const BottomNavigationBarExampleApp({super.key});
+class SampleScreen extends StatefulWidget {
+  const SampleScreen({Key? key}) : super(key: key);
 
   @override
+  State<SampleScreen> createState() => _SampleScreenState();
+}
+
+class _SampleScreenState extends State<SampleScreen> {
+  @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: BottomNavigationBarExample(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(),
+        body: Column(),
+        bottomNavigationBar: _bottom(),
+      ),
     );
   }
-}
 
-class BottomNavigationBarExample extends StatefulWidget {
-  const BottomNavigationBarExample({super.key});
+  int selectedIndex = 0;
+  final String assetName = 'assets/icons/ic_home.svg';
 
-  @override
-  State<BottomNavigationBarExample> createState() =>
-      _BottomNavigationBarExampleState();
-}
-
-class _BottomNavigationBarExampleState
-    extends State<BottomNavigationBarExample> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+  Widget _bottom() {
+    return BottomNavigationBar(
+      currentIndex: selectedIndex,
+      onTap: (value) {
+        setState(() {
+          selectedIndex = value;
+        });
+      },
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      selectedItemColor: Color(0xFF184B2D),
+      unselectedItemColor: Colors.grey,
+      type: BottomNavigationBarType.fixed,
+      items: [
+        BottomNavigationBarItem(
+          icon: Container(
+            child: Image.asset(
+              'assets/icons/ic_home.png',
+              width: 32,
+              height: 32,
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+          activeIcon: Container(
+            child: Image.asset(
+              'assets/icons/ic_home.svg',
+              width: 32,
+              height: 32,
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
-      ),
+          label: "홈",
+        ),
+        BottomNavigationBarItem(
+          icon: Container(
+              child: Image.asset(
+            'assets/icons/ic_home.png',
+            height: 20,
+            width: 23,
+          )),
+          activeIcon: Container(
+              child: Image.asset(
+            'assets/icons/ic_home.png',
+            height: 20,
+            width: 23,
+          )),
+          backgroundColor: Colors.white,
+          label: "챌린지",
+        ),
+        BottomNavigationBarItem(
+          icon: Container(
+              child: Image.asset(
+            'assets/icons/ic_home.png',
+            height: 20,
+            width: 23,
+          )),
+          activeIcon: Icon(Icons.person),
+          backgroundColor: Colors.white,
+          label: "커뮤니티",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person_outline),
+          activeIcon: Icon(Icons.person),
+          backgroundColor: Colors.white,
+          label: "마이페이지",
+        ),
+      ],
     );
   }
 }
