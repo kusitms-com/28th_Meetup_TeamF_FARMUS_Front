@@ -35,50 +35,43 @@ class _SampleScreenState extends State<SampleScreen> {
       showSelectedLabels: true,
       showUnselectedLabels: true,
       selectedItemColor: Color(0xFF184B2D),
-      unselectedItemColor: Colors.grey,
+      unselectedItemColor: Color(0xFFC0C0C0),
       type: BottomNavigationBarType.fixed,
       items: [
         BottomNavigationBarItem(
           icon: Container(
-              child: SvgPicture.asset(
-            'assets/icons/ic_home.svg',
-          )),
+            child: SvgPicture.asset(
+              'assets/icons/ic_home.svg',
+              color: selectedIndex == 0 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
+            ),
+          ),
           label: "홈",
         ),
         BottomNavigationBarItem(
           icon: Container(
-              child: SvgPicture.asset(
-            'assets/icons/ic_challenge.svg',
-          )),
-          activeIcon: Container(
-              child: SvgPicture.asset(
-            'assets/icons/ic_challenge.svg',
-          )),
-          backgroundColor: Colors.white,
+            child: SvgPicture.asset(
+              'assets/icons/ic_challenge.svg',
+              color: selectedIndex == 1 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
+            ),
+          ),
           label: "챌린지",
         ),
         BottomNavigationBarItem(
           icon: Container(
-              child: SvgPicture.asset(
-            'assets/icons/ic_community.svg',
-          )),
-          activeIcon: Container(
-              child: SvgPicture.asset(
-            'assets/icons/ic_community.svg',
-          )),
-          backgroundColor: Colors.white,
+            child: SvgPicture.asset(
+              'assets/icons/ic_community.svg',
+              color: selectedIndex == 2 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
+            ),
+          ),
           label: "커뮤니티",
         ),
         BottomNavigationBarItem(
           icon: Container(
-              child: SvgPicture.asset(
-            'assets/icons/ic_mypage.svg',
-          )),
-          activeIcon: Container(
-              child: SvgPicture.asset(
-            'assets/icons/ic_mypage.svg',
-          )),
-          backgroundColor: Colors.white,
+            child: SvgPicture.asset(
+              'assets/icons/ic_mypage.svg',
+              color: selectedIndex == 3 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
+            ),
+          ),
           label: "마이페이지",
         ),
       ],
