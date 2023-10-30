@@ -1,21 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mojacknong_android/view/challenge/challenge_screen.dart';
+import 'package:mojacknong_android/view/community/community_screen.dart';
+import 'package:mojacknong_android/view/home/home_screen.dart';
+import 'package:mojacknong_android/view/my_page/my_page_screen.dart';
 
-class SampleScreen extends StatefulWidget {
-  const SampleScreen({Key? key}) : super(key: key);
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
-  State<SampleScreen> createState() => _SampleScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _SampleScreenState extends State<SampleScreen> {
+class _MainScreenState extends State<MainScreen> {
+  int _selectedIndex = 0;
+  final List<Widget> _screens = <Widget>[
+    HomeScreen(),
+    ChallengeScreen(),
+    CommunityScreen(),
+    MyPageScreen()
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(),
-        body: Column(),
+        body: _screens[_selectedIndex],
         bottomNavigationBar: _bottom(),
       ),
     );
@@ -26,10 +38,10 @@ class _SampleScreenState extends State<SampleScreen> {
 
   Widget _bottom() {
     return BottomNavigationBar(
-      currentIndex: selectedIndex,
+      currentIndex: _selectedIndex,
       onTap: (value) {
         setState(() {
-          selectedIndex = value;
+          _selectedIndex = value;
         });
       },
       showSelectedLabels: true,
@@ -42,7 +54,8 @@ class _SampleScreenState extends State<SampleScreen> {
           icon: Container(
             child: SvgPicture.asset(
               'assets/icons/ic_home.svg',
-              color: selectedIndex == 0 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
+              color:
+                  _selectedIndex == 0 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
             ),
           ),
           label: "홈",
@@ -51,7 +64,8 @@ class _SampleScreenState extends State<SampleScreen> {
           icon: Container(
             child: SvgPicture.asset(
               'assets/icons/ic_challenge.svg',
-              color: selectedIndex == 1 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
+              color:
+                  _selectedIndex == 1 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
             ),
           ),
           label: "챌린지",
@@ -60,7 +74,8 @@ class _SampleScreenState extends State<SampleScreen> {
           icon: Container(
             child: SvgPicture.asset(
               'assets/icons/ic_community.svg',
-              color: selectedIndex == 2 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
+              color:
+                  _selectedIndex == 2 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
             ),
           ),
           label: "커뮤니티",
@@ -68,8 +83,9 @@ class _SampleScreenState extends State<SampleScreen> {
         BottomNavigationBarItem(
           icon: Container(
             child: SvgPicture.asset(
-              'assets/icons/ic_mypage.svg',
-              color: selectedIndex == 3 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
+              'assets/icons/ic_my_page.svg',
+              color:
+                  _selectedIndex == 3 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
             ),
           ),
           label: "마이페이지",
