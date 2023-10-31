@@ -32,42 +32,37 @@ class LoginScreen extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(),
-        body: Column(
-          children: [
-            GestureDetector(
-              child: TextButton(
-                onPressed: getKakaoLogin,
-                child: const Text(
-                  "카카오 로그인",
+        body: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 100),
+              Center(
+                child: GestureDetector(
+                  child: Image.asset(
+                    "assets/image/logo_tree.png",
+                    width: 128,
+                    height: 128,
+                  ),
                 ),
               ),
-            ),
-            GestureDetector(
-              child: TextButton(
-                onPressed: googleLogin,
-                child: const Text(
-                  "구글 로그인",
+              SizedBox(height: 100),
+              GestureDetector(
+                child: Image.asset(
+                  "assets/image/kakao_login_large_narrow.png",
+                  width: 200,
                 ),
               ),
-            ),
-            GestureDetector(
-              child: TextButton(
-                onPressed: reissue,
-                child: const Text(
-                  "토큰 재발급",
+              SizedBox(height: 10),
+              GestureDetector(
+                child: Image.asset(
+                  "assets/image/android_light_sq_SI@4x.png",
+                  width: 200,
                 ),
               ),
-            ),
-            GestureDetector(
-              child: TextButton(
-                onPressed: logout,
-                child: const Text(
-                  "로그아웃",
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

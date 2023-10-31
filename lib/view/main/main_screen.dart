@@ -53,7 +53,7 @@ class _MainScreenState extends State<MainScreen> {
         BottomNavigationBarItem(
           icon: Container(
             child: SvgPicture.asset(
-              'assets/icons/ic_home.svg',
+              'assets/image/ic_home.svg',
               color:
                   _selectedIndex == 0 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
             ),
@@ -63,7 +63,7 @@ class _MainScreenState extends State<MainScreen> {
         BottomNavigationBarItem(
           icon: Container(
             child: SvgPicture.asset(
-              'assets/icons/ic_challenge.svg',
+              'assets/image/ic_challenge.svg',
               color:
                   _selectedIndex == 1 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
             ),
@@ -73,7 +73,7 @@ class _MainScreenState extends State<MainScreen> {
         BottomNavigationBarItem(
           icon: Container(
             child: SvgPicture.asset(
-              'assets/icons/ic_community.svg',
+              'assets/image/ic_community.svg',
               color:
                   _selectedIndex == 2 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
             ),
@@ -83,7 +83,7 @@ class _MainScreenState extends State<MainScreen> {
         BottomNavigationBarItem(
           icon: Container(
             child: SvgPicture.asset(
-              'assets/icons/ic_my_page.svg',
+              'assets/image/ic_my_page.svg',
               color:
                   _selectedIndex == 3 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
             ),
