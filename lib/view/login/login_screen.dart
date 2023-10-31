@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 import 'package:mojacknong_android/repository/login_repository.dart';
 import 'package:mojacknong_android/view/login/app_interceptor.dart';
+import 'package:mojacknong_android/view/onboarding/onboarding_screen.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 const storage = FlutterSecureStorage();
@@ -22,9 +23,14 @@ Dio authDio = Dio(
   ),
 );
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  State<LoginScreen> createState() => _LoginScreen();
+}
+
+class _LoginScreen extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     authDio.interceptors.add(AppInterceptor(authDio));
@@ -32,43 +38,41 @@ class LoginScreen extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 100),
-              Center(
-                child: GestureDetector(
-                  child: Image.asset(
-                    "assets/image/logo_tree.png",
-                    width: 128,
-                    height: 128,
-                  ),
-                ),
-              ),
-              SizedBox(height: 100),
-              GestureDetector(
-                onTap: () {
-                  kakaoLogin();
-                },
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 100),
+            Center(
+              child: GestureDetector(
                 child: Image.asset(
-                  "assets/image/kakao_login_large_narrow.png",
-                  width: 200,
+                  "assets/image/logo_tree.png",
+                  width: 128,
+                  height: 128,
                 ),
               ),
-              SizedBox(height: 10),
-              GestureDetector(
-                onTap: () {
-                  googleLogin();
-                },
-                child: Image.asset(
-                  "assets/image/android_light_sq_SI@4x.png",
-                  width: 200,
-                ),
+            ),
+            const SizedBox(height: 100),
+            GestureDetector(
+              onTap: () {
+                kakaoLogin();
+              },
+              child: Image.asset(
+                "assets/image/kakao_login_large_narrow.png",
+                width: 200,
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 10),
+            GestureDetector(
+              onTap: () {
+                googleLogin();
+              },
+              child: Image.asset(
+                "assets/image/android_light_sq_SI@4x.png",
+                width: 200,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -115,11 +119,25 @@ class LoginScreen extends StatelessWidget {
   }
 
   fetchKaKaoData(token) {
-    LoginRepository.kakaoLoginApi(token).then((value) {});
+    LoginRepository.kakaoLoginApi(token).then(
+      (value) {
+        if (value) {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => OnboardingScreen()),
+          );
+        }
+      },
+    );
   }
 
   googleLogin() {
-    LoginRepository.googleLoginApi().then((value) {});
+    LoginRepository.googleLoginApi().then((value) {
+      if (value) {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => OnboardingScreen()),
+        );
+      }
+    });
   }
 
   reissue() {

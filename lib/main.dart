@@ -18,7 +18,13 @@ void main() async {
     javaScriptAppKey: '7f2a1972870b2cadb2a0506a7e309020',
   );
 
-  runApp(const LoginScreen());
+  runApp(
+    MaterialApp(
+      title: "Farmus",
+      home: LoginScreen(),
+      debugShowCheckedModeBanner: false,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

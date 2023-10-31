@@ -19,7 +19,7 @@ Dio authDio = Dio(
 );
 
 class ApiServices {
-  Future<void> fetchKaKaoData(token) async {
+  Future<bool> fetchKaKaoData(token) async {
     try {
       Response response = await dio.post(
         '/api/user/auth/kakao-login',
@@ -33,14 +33,16 @@ class ApiServices {
 
       final accessGoogleToken = await storage.read(key: 'accessToken');
       final refreshGoogleToken = await storage.read(key: 'refreshToken');
+      return true;
       print("성공 \n액세스 : $accessGoogleToken \n리프레시 : $refreshGoogleToken");
     } on DioError catch (e) {
       print(e.message);
       print("실패");
+      return false;
     }
   }
 
-  Future<void> getGoogleLogin() async {
+  Future<bool> getGoogleLogin() async {
     print("구글 로그인 버튼 클릭");
 
     final GoogleSignInAccount? googleSignInAccount =
@@ -50,10 +52,10 @@ class ApiServices {
         await googleSignInAccount!.authentication;
 
     print("구글 액세스 토큰 ${googleSignInAuthentication.accessToken}");
-    fetchGoogleData(googleSignInAuthentication.accessToken);
+    return fetchGoogleData(googleSignInAuthentication.accessToken);
   }
 
-  Future<void> fetchGoogleData(token) async {
+  Future<bool> fetchGoogleData(token) async {
     try {
       print(token.toString());
       Response response = await dio.post(
@@ -69,9 +71,11 @@ class ApiServices {
       final accessGoogleToken = await storage.read(key: 'accessToken');
       final refreshGoogleToken = await storage.read(key: 'refreshToken');
       print("성공 \n액세스 : $accessGoogleToken \n리프레시 : $refreshGoogleToken");
+      return true;
     } on DioError catch (e) {
       print(e.message);
       print("실패");
+      return false;
     }
   }
 
