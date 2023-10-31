@@ -49,6 +49,9 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 100),
               GestureDetector(
+                onTap: () {
+                  kakaoLogin();
+                },
                 child: Image.asset(
                   "assets/image/kakao_login_large_narrow.png",
                   width: 200,
@@ -56,6 +59,9 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               GestureDetector(
+                onTap: () {
+                  googleLogin();
+                },
                 child: Image.asset(
                   "assets/image/android_light_sq_SI@4x.png",
                   width: 200,
@@ -68,7 +74,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  getKakaoLogin() async {
+  kakaoLogin() async {
     print("카카오 로그인 버튼 클릭");
 
     bool isInstalled = await isKakaoTalkInstalled();

@@ -46,6 +46,8 @@ class _MainScreenState extends State<MainScreen> {
       },
       showSelectedLabels: true,
       showUnselectedLabels: true,
+      selectedFontSize: 10,
+      unselectedFontSize: 10,
       selectedItemColor: Color(0xFF184B2D),
       unselectedItemColor: Color(0xFFC0C0C0),
       type: BottomNavigationBarType.fixed,
