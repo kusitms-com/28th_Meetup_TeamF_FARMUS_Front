@@ -49,6 +49,7 @@ dependencies:
   http_interceptor: ^2.0.0-beta.7
   flutter_secure_storage: ^9.0.0
   flutter_svg: ^2.0.8
+  flutter_native_splash: ^2.3.5
 
 dev_dependencies:
   flutter_test:
@@ -112,3 +113,4 @@ flutter:
           weight: 900
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
