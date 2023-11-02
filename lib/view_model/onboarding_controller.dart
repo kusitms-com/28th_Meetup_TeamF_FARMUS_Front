@@ -3,19 +3,20 @@ import 'package:get/get.dart';
 
 class OnboardingController extends GetxController {
   final TextEditingController controller = TextEditingController();
-  bool hasSpecialCharacters = false;
+  RxBool hasSpecialCharacters = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     controller.addListener(() {
       final value = controller.text;
-      if (value.contains(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%$]'))) {
-        hasSpecialCharacters = true;
+      if (value.contains(RegExp(r'[!@#<>?":.,_`~;/[\]\\|=+)(*&^%$]'))) {
+        hasSpecialCharacters.value = true;
+      } else if (value.contains(RegExp(r"['-]"))) {
+        hasSpecialCharacters.value = true;
       } else {
-        hasSpecialCharacters = false;
+        hasSpecialCharacters.value = false;
       }
-      update();
     });
   }
 
