@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 import 'package:mojacknong_android/repository/login_repository.dart';
 import 'package:mojacknong_android/view/login/app_interceptor.dart';
+import 'package:mojacknong_android/view/onboarding/onboarding_screen.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 const storage = FlutterSecureStorage();
@@ -22,9 +23,14 @@ Dio authDio = Dio(
   ),
 );
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  State<LoginScreen> createState() => _LoginScreen();
+}
+
+class _LoginScreen extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     authDio.interceptors.add(AppInterceptor(authDio));
@@ -32,39 +38,38 @@ class LoginScreen extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            GestureDetector(
-              child: TextButton(
-                onPressed: getKakaoLogin,
-                child: const Text(
-                  "카카오 로그인",
+            const SizedBox(height: 100),
+            Center(
+              child: GestureDetector(
+                child: Image.asset(
+                  "assets/image/logo_tree.png",
+                  width: 128,
+                  height: 128,
                 ),
               ),
             ),
+            const SizedBox(height: 100),
             GestureDetector(
-              child: TextButton(
-                onPressed: googleLogin,
-                child: const Text(
-                  "구글 로그인",
-                ),
+              onTap: () {
+                kakaoLogin();
+              },
+              child: Image.asset(
+                "assets/image/kakao_login_large_narrow.png",
+                width: 200,
               ),
             ),
+            const SizedBox(height: 10),
             GestureDetector(
-              child: TextButton(
-                onPressed: reissue,
-                child: const Text(
-                  "토큰 재발급",
-                ),
-              ),
-            ),
-            GestureDetector(
-              child: TextButton(
-                onPressed: logout,
-                child: const Text(
-                  "로그아웃",
-                ),
+              onTap: () {
+                googleLogin();
+              },
+              child: Image.asset(
+                "assets/image/android_light_sq_SI@4x.png",
+                width: 200,
               ),
             ),
           ],
@@ -73,7 +78,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  getKakaoLogin() async {
+  kakaoLogin() async {
     print("카카오 로그인 버튼 클릭");
 
     bool isInstalled = await isKakaoTalkInstalled();
@@ -114,11 +119,25 @@ class LoginScreen extends StatelessWidget {
   }
 
   fetchKaKaoData(token) {
-    LoginRepository.kakaoLoginApi(token).then((value) {});
+    LoginRepository.kakaoLoginApi(token).then(
+      (value) {
+        if (value) {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => OnboardingScreen()),
+          );
+        }
+      },
+    );
   }
 
   googleLogin() {
-    LoginRepository.googleLoginApi().then((value) {});
+    LoginRepository.googleLoginApi().then((value) {
+      if (value) {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => OnboardingScreen()),
+        );
+      }
+    });
   }
 
   reissue() {
