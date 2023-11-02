@@ -20,7 +20,7 @@ Future<void> main() async {
   );
 
   runApp(
-    MaterialApp(
+    const MaterialApp(
       title: "Farmus",
       home: OnboardingScreen(),
       debugShowCheckedModeBanner: false,
