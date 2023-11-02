@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
-class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({
+class NextButton extends StatelessWidget {
+  const NextButton({
     super.key,
   });
 

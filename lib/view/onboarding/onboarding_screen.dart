@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mojacknong_android/view/onboarding/component/primary_button.dart';
+import 'package:mojacknong_android/view/onboarding/component/next_button.dart';
+import 'package:mojacknong_android/view/onboarding/component/previous_button.dart';
 import 'package:mojacknong_android/view/onboarding/component/progress_bar.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 36,
             ),
             const Padding(
@@ -33,11 +34,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: PrimaryButton(),
+                    child: PreviousButton(),
                   ),
                   SizedBox(width: 16),
                   Expanded(
-                    child: PrimaryButton(),
+                    child: NextButton(),
                   ),
                 ],
               ),
@@ -48,32 +49,3 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 }
-
-
-
-// //
-// Padding(
-//                 padding: EdgeInsets.all(16),
-//                 child: Column(
-//                   mainAxisAlignment: MainAxisAlignment.start,
-//                   children: [
-//                     Expanded(
-//                       child: SizedBox(),
-//                     ),
-//                     Row(
-//                       mainAxisAlignment: MainAxisAlignment.center,
-//                       children: [
-//                         Expanded(
-//                           child: PrimaryButton(),
-//                         ),
-//                         SizedBox(
-//                           width: 16,
-//                         ),
-//                         Expanded(
-//                           child: PrimaryButton(),
-//                         ),
-//                       ],
-//                     )
-//                   ],
-//                 ),
-//               ),

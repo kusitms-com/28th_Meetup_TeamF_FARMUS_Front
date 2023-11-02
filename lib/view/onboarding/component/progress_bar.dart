@@ -5,19 +5,22 @@ import '../../../common/farmus_theme_data.dart';
 
 class ProgressBar extends StatelessWidget {
   const ProgressBar({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return LinearPercentIndicator(
-      percent: 1,
-      alignment: MainAxisAlignment.start,
-      animation: true,
-      animationDuration: 1200,
-      fillColor: FarmusThemeData.grey3,
-      progressColor: FarmusThemeData.button,
-      lineHeight: 10,
+    return Expanded(
+      child: LinearPercentIndicator(
+        padding: EdgeInsets.zero,
+        percent: 0,
+        alignment: MainAxisAlignment.start,
+        animation: true,
+        animationDuration: 1200,
+        backgroundColor: FarmusThemeData.grey3,
+        progressColor: FarmusThemeData.button,
+        lineHeight: 10,
+      ),
     );
   }
 }
