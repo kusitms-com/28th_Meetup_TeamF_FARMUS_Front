@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/view/onboarding/component/next_button.dart';
+import 'package:mojacknong_android/view/onboarding/component/onboarding_login.dart';
 import 'package:mojacknong_android/view/onboarding/component/previous_button.dart';
 import 'package:mojacknong_android/view/onboarding/component/progress_bar.dart';
 
@@ -13,22 +14,24 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 36,
+            SizedBox(
+              height: 50,
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 16.0),
               child: ProgressBar(),
             ),
-            Expanded(child: Container()),
-            const Padding(
+            Expanded(
+              child: OnboardingLogin(
+                title: '프로필과 나의 닉네임을 정해주세요.',
+              ),
+            ),
+            Padding(
               padding: EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
