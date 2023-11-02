@@ -14,24 +14,29 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    String title = "프로필과 나의 닉네임을 정해주세요.";
+    String description;
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 16.0),
               child: ProgressBar(),
             ),
-            Expanded(
-              child: OnboardingLogin(
-                title: '프로필과 나의 닉네임을 정해주세요.',
-              ),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 20, fontFamily: "Pretendard"),
+              textAlign: TextAlign.start,
             ),
-            Padding(
+            const Expanded(
+              child: OnboardingLogin(),
+            ),
+            const Padding(
               padding: EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
