@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/common/primary_button.dart';
 
 class PreviousButton extends StatelessWidget {
-  const PreviousButton({
-    super.key,
-  });
+  const PreviousButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      width: double.infinity,
-      height: 48,
-      child: ElevatedButton(
-        onPressed: null,
-        child: Text("이전"),
-        style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(FarmusThemeData.button),
-          foregroundColor: MaterialStatePropertyAll(FarmusThemeData.white),
-        ),
-      ),
+    return PrimaryButton(
+      text: "이전",
+      onPressed: () {},
+      backgroundColor: FarmusThemeData.grey2,
+      foregroundColor: FarmusThemeData.black,
     );
   }
 }
