@@ -20,6 +20,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
               height: 50,
@@ -28,10 +29,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               padding: EdgeInsets.only(top: 16.0),
               child: ProgressBar(),
             ),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 20, fontFamily: "Pretendard"),
-              textAlign: TextAlign.start,
+            const SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                title,
+                style: const TextStyle(fontSize: 20, fontFamily: "Pretendard"),
+                textAlign: TextAlign.start,
+              ),
             ),
             const Expanded(
               child: OnboardingLogin(),
