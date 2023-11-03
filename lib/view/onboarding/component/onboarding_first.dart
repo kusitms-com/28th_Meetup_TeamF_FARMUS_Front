@@ -3,19 +3,18 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/view_model/onboarding_controller.dart';
 
-class OnboardingLogin extends StatefulWidget {
-  const OnboardingLogin({Key? key}) : super(key: key);
+class OnboardingFirst extends StatefulWidget {
+  const OnboardingFirst({Key? key}) : super(key: key);
 
   @override
-  _OnboardingLoginState createState() => _OnboardingLoginState();
+  _OnboardingFirstState createState() => _OnboardingFirstState();
 }
 
-class _OnboardingLoginState extends State<OnboardingLogin> {
+class _OnboardingFirstState extends State<OnboardingFirst> {
   final OnboardingController _controller = Get.put(OnboardingController());
 
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
   }
 
