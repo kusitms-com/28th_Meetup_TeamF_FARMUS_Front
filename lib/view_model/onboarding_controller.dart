@@ -4,20 +4,23 @@ import 'package:get/get.dart';
 class OnboardingController extends GetxController {
   // 텍스트 입력 필드 컨트롤러
   final TextEditingController controller = TextEditingController();
-  RxBool hasSpecialCharacters = false.obs;
-  RxBool hasInput = false.obs;
+  RxBool hasSpecialCharacters = RxBool(false);
+  RxBool hasInput = RxBool(false);
 
   // 선택 박스 컨트롤러
-  final isSelected1 = false.obs;
-  final isSelected2 = false.obs;
-  final isSelected3 = false.obs;
-  final isSelected4 = false.obs;
-  final isSelected5 = false.obs;
-  final isSelected6 = false.obs;
-  final isSelected7 = false.obs;
-  final isSelected8 = false.obs;
-  final isSelected9 = false.obs;
-  final isSelected10 = false.obs;
+  final isSelected1 = RxBool(false);
+  final isSelected2 = RxBool(false);
+  final isSelected3 = RxBool(false);
+  final isSelected4 = RxBool(false);
+  final isSelected5 = RxBool(false);
+  final isSelected6 = RxBool(false);
+  final isSelected7 = RxBool(false);
+  final isSelected8 = RxBool(false);
+  final isSelected9 = RxBool(false);
+  final isSelected10 = RxBool(false);
+  final isSecond = RxBool(false);
+
+  RxBool hasBoxesSelected = RxBool(false);
 
   @override
   void onInit() {
@@ -30,13 +33,19 @@ class OnboardingController extends GetxController {
       } else {
         hasInput.value = false;
       }
-      // 특스문자를 입력했는지
+      // 특수문자를 입력했는지
       if (value.contains(RegExp(r'[!@#<>?":.,_`~;/[\]\\|=+)(*&^%$]'))) {
         hasSpecialCharacters.value = true;
       } else if (value.contains(RegExp(r"['-]"))) {
         hasSpecialCharacters.value = true;
       } else {
         hasSpecialCharacters.value = false;
+      }
+
+      if (isSelected1.value || isSelected2.value || isSelected3.value) {
+        hasBoxesSelected.value = true;
+      } else {
+        hasBoxesSelected.value = false;
       }
     });
   }

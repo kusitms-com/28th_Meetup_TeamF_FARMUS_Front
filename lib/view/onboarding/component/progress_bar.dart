@@ -17,7 +17,7 @@ class ProgressBar extends StatelessWidget {
       percent: percent,
       alignment: MainAxisAlignment.start,
       animation: true,
-      animationDuration: 1200,
+      animationDuration: 600,
       animateFromLastPercent: true,
       backgroundColor: FarmusThemeData.grey3,
       progressColor: FarmusThemeData.button,
