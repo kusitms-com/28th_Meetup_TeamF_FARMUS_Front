@@ -35,7 +35,7 @@ class _OnboardingSecond extends State<OnboardingSecond> {
           GestureDetector(
             child: const SelectBox(
               title: "스트레스를 해소하고 안정을 얻고 싶어요",
-              content: "홈파밍을 통해 정서적 안정이 필요해요 ",
+              content: "홈파밍을 통해 정서적 안정이 필요해요",
             ),
           ),
         ],
