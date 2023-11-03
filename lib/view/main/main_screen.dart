@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/challenge/challenge_screen.dart';
 import 'package:mojacknong_android/view/community/community_screen.dart';
 import 'package:mojacknong_android/view/home/home_screen.dart';
@@ -48,16 +49,17 @@ class _MainScreenState extends State<MainScreen> {
       showUnselectedLabels: true,
       selectedFontSize: 10,
       unselectedFontSize: 10,
-      selectedItemColor: Color(0xFF184B2D),
-      unselectedItemColor: Color(0xFFC0C0C0),
+      selectedItemColor: FarmusThemeData.green1,
+      unselectedItemColor: FarmusThemeData.grey3,
       type: BottomNavigationBarType.fixed,
       items: [
         BottomNavigationBarItem(
           icon: Container(
             child: SvgPicture.asset(
               'assets/image/ic_home.svg',
-              color:
-                  _selectedIndex == 0 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
+              color: _selectedIndex == 0
+                  ? FarmusThemeData.green1
+                  : FarmusThemeData.grey3,
             ),
           ),
           label: "홈",
@@ -66,8 +68,9 @@ class _MainScreenState extends State<MainScreen> {
           icon: Container(
             child: SvgPicture.asset(
               'assets/image/ic_challenge.svg',
-              color:
-                  _selectedIndex == 1 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
+              color: _selectedIndex == 1
+                  ? FarmusThemeData.green1
+                  : FarmusThemeData.grey3,
             ),
           ),
           label: "챌린지",
@@ -76,8 +79,9 @@ class _MainScreenState extends State<MainScreen> {
           icon: Container(
             child: SvgPicture.asset(
               'assets/image/ic_community.svg',
-              color:
-                  _selectedIndex == 2 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
+              color: _selectedIndex == 2
+                  ? FarmusThemeData.green1
+                  : FarmusThemeData.grey3,
             ),
           ),
           label: "커뮤니티",
@@ -86,8 +90,9 @@ class _MainScreenState extends State<MainScreen> {
           icon: Container(
             child: SvgPicture.asset(
               'assets/image/ic_my_page.svg',
-              color:
-                  _selectedIndex == 3 ? Color(0xFF184B2D) : Color(0xFFC0C0C0),
+              color: _selectedIndex == 3
+                  ? FarmusThemeData.green1
+                  : FarmusThemeData.grey3,
             ),
           ),
           label: "마이페이지",

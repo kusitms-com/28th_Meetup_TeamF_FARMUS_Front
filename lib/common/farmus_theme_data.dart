@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class FarmusThemeData {
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color black = Color(0xFF000000);
+
   static const Color grey1 = Color(0xFFF9F9F9);
   static const Color grey2 = Color(0xFFF0F0F0);
   static const Color grey3 = Color(0xFFC0C0C0);
@@ -15,4 +18,6 @@ class FarmusThemeData {
   static const Color beige1 = Color(0xFFBCAC8D);
   static const Color beige2 = Color(0xFFCCBEA4);
   static const Color beige3 = Color(0xFFEAE4E1);
+
+  static const Color button = Color(0xFF5A5A5A);
 }
