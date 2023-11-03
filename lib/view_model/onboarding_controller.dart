@@ -54,31 +54,49 @@ class OnboardingController extends GetxController {
   }
 
   void selectBox4() {
-    isSelected4.toggle();
+    isSelected4.value = true;
+    isSelected5.value = false;
+    isSelected6.value = false;
   }
 
   void selectBox5() {
-    isSelected5.toggle();
+    isSelected4.value = false;
+    isSelected5.value = true;
+    isSelected6.value = false;
   }
 
   void selectBox6() {
-    isSelected6.toggle();
+    isSelected4.value = false;
+    isSelected5.value = false;
+    isSelected6.value = true;
   }
 
   void selectBox7() {
-    isSelected7.toggle();
+    isSelected7.value = true;
+    isSelected8.value = false;
+    isSelected9.value = false;
+    isSelected10.value = false;
   }
 
   void selectBox8() {
-    isSelected8.toggle();
+    isSelected7.value = false;
+    isSelected8.value = true;
+    isSelected9.value = false;
+    isSelected10.value = false;
   }
 
   void selectBox9() {
-    isSelected9.toggle();
+    isSelected7.value = false;
+    isSelected8.value = false;
+    isSelected9.value = true;
+    isSelected10.value = false;
   }
 
   void selectBox10() {
-    isSelected10.toggle();
+    isSelected7.value = false;
+    isSelected8.value = false;
+    isSelected9.value = false;
+    isSelected10.value = true;
   }
 
   @override
