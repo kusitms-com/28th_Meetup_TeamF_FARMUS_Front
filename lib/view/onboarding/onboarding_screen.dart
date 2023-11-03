@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mojacknong_android/view/main/main_screen.dart';
 import 'package:mojacknong_android/view/onboarding/component/next_button.dart';
 import 'package:mojacknong_android/view/onboarding/component/onboarding_finish.dart';
 import 'package:mojacknong_android/view/onboarding/component/onboarding_first.dart';
@@ -35,6 +36,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           _currentPage += 1;
         } else {
           isLastPage = true;
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const MainScreen()),
+          );
           return;
         }
       } else {
