@@ -33,17 +33,19 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
           const SizedBox(
             height: 30,
           ),
-          Obx(() => TextFormField(
-                controller: _controller.controller,
-                maxLength: 10,
-                decoration: InputDecoration(
-                  labelText: '닉네임',
-                  errorText: _controller.hasSpecialCharacters.value
-                      ? '특수문자는 입력할 수 없어요'
-                      : null,
-                  border: OutlineInputBorder(),
-                ),
-              )),
+          Obx(
+            () => TextFormField(
+              controller: _controller.controller,
+              maxLength: 10,
+              decoration: InputDecoration(
+                labelText: '닉네임',
+                errorText: _controller.hasSpecialCharacters.value
+                    ? '특수문자는 입력할 수 없어요'
+                    : null,
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
         ],
       ),
     );

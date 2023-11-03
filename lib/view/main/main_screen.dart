@@ -27,7 +27,6 @@ class _MainScreenState extends State<MainScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(),
         body: _screens[_selectedIndex],
         bottomNavigationBar: _bottom(),
       ),

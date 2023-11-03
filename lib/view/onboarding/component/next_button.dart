@@ -4,16 +4,27 @@ import 'package:mojacknong_android/common/primary_button.dart';
 
 class NextButton extends StatelessWidget {
   final void Function() onPressed;
+  // 텍스트 입력 값 여부
+  final bool enabled;
 
-  const NextButton({Key? key, required this.onPressed}) : super(key: key);
+  const NextButton({
+    Key? key,
+    required this.onPressed,
+    required this.enabled,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return PrimaryButton(
-      text: '다음',
-      onPressed: onPressed,
-      backgroundColor: FarmusThemeData.button,
-      foregroundColor: FarmusThemeData.white,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: PrimaryButton(
+        text: '다음',
+        onPressed: enabled ? onPressed : null,
+        backgroundColor:
+            enabled ? FarmusThemeData.button : FarmusThemeData.grey3,
+        foregroundColor:
+            enabled ? FarmusThemeData.white : FarmusThemeData.grey6,
+      ),
     );
   }
 }
