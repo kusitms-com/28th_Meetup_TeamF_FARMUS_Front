@@ -5,6 +5,7 @@ class PrimaryButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Color? backgroundColor;
   final Color? foregroundColor;
+  final Color? surfaceTintColor;
 
   const PrimaryButton({
     Key? key,
@@ -12,6 +13,7 @@ class PrimaryButton extends StatelessWidget {
     this.onPressed,
     this.backgroundColor,
     this.foregroundColor,
+    this.surfaceTintColor,
   }) : super(key: key);
 
   @override
@@ -25,6 +27,7 @@ class PrimaryButton extends StatelessWidget {
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(backgroundColor),
           foregroundColor: MaterialStateProperty.all(foregroundColor),
+          surfaceTintColor: MaterialStateProperty.all(surfaceTintColor),
         ),
       ),
     );

@@ -19,11 +19,11 @@ class SelectBox extends StatelessWidget {
     return Obx(
       () {
         Color backgroundColor =
-            isSelected.value ? FarmusThemeData.green2 : FarmusThemeData.white;
+            isSelected.value ? FarmusThemeData.primary : FarmusThemeData.white;
         Color titleColor =
-            isSelected.value ? FarmusThemeData.white : FarmusThemeData.grey6;
+            isSelected.value ? FarmusThemeData.white : FarmusThemeData.dark;
         Color contentColor =
-            isSelected.value ? FarmusThemeData.white : FarmusThemeData.grey4;
+            isSelected.value ? FarmusThemeData.white : FarmusThemeData.grey1;
 
         return Container(
           width: double.infinity,

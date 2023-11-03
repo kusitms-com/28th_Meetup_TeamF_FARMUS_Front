@@ -19,8 +19,8 @@ class ProgressBar extends StatelessWidget {
       animation: true,
       animationDuration: 600,
       animateFromLastPercent: true,
-      backgroundColor: FarmusThemeData.grey3,
-      progressColor: FarmusThemeData.button,
+      backgroundColor: FarmusThemeData.grey4,
+      progressColor: FarmusThemeData.green1,
       lineHeight: 10,
     );
   }
