@@ -144,7 +144,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: Obx(
                       () => NextButton(
                         onPressed: () => _handleButtonPress(true),
-                        enabled: _onboardingController.hasInput.value,
+                        enabled: _onboardingController.hasInput.value &&
+                            !_onboardingController.hasSpecialCharacters.value,
                       ),
                     ),
                   ),
