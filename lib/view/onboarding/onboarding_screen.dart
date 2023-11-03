@@ -36,9 +36,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           _currentPage += 1;
         } else {
           isLastPage = true;
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const MainScreen()),
-          );
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MainScreen()));
           return;
         }
       } else {
@@ -130,14 +129,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: PreviousButton(
-                      onPressed: () => _handleButtonPress(false),
+                  if (_currentPage != 5)
+                    Expanded(
+                      child: PreviousButton(
+                        onPressed: () => _handleButtonPress(false),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 16,
-                  ),
                   Expanded(
                     child: NextButton(
                       onPressed: () => _handleButtonPress(true),

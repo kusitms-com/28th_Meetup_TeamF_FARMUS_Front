@@ -9,11 +9,14 @@ class PreviousButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PrimaryButton(
-      text: '이전',
-      onPressed: onPressed,
-      backgroundColor: FarmusThemeData.grey2,
-      foregroundColor: FarmusThemeData.black,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: PrimaryButton(
+        text: '이전',
+        onPressed: onPressed,
+        backgroundColor: FarmusThemeData.grey2,
+        foregroundColor: FarmusThemeData.black,
+      ),
     );
   }
 }
