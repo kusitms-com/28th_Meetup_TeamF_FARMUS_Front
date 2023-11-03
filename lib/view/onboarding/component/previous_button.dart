@@ -15,7 +15,7 @@ class PreviousButton extends StatelessWidget {
         text: '이전',
         onPressed: onPressed,
         backgroundColor: FarmusThemeData.grey2,
-        foregroundColor: FarmusThemeData.black,
+        foregroundColor: FarmusThemeData.grey6,
       ),
     );
   }

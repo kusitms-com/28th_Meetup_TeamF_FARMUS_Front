@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/view/main/main_screen.dart';
 import 'package:mojacknong_android/view/onboarding/component/next_button.dart';
 import 'package:mojacknong_android/view/onboarding/component/onboarding_finish.dart';
@@ -8,6 +9,7 @@ import 'package:mojacknong_android/view/onboarding/component/onboarding_second.d
 import 'package:mojacknong_android/view/onboarding/component/onboarding_third.dart';
 import 'package:mojacknong_android/view/onboarding/component/previous_button.dart';
 import 'package:mojacknong_android/view/onboarding/component/progress_bar.dart';
+import 'package:mojacknong_android/view_model/onboarding_controller.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -22,6 +24,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   String description = "";
   late Widget _currentWidget;
   bool isLastPage = false;
+
+  final OnboardingController _onboardingController =
+      Get.put(OnboardingController());
 
   @override
   void initState() {
@@ -136,8 +141,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     ),
                   Expanded(
-                    child: NextButton(
-                      onPressed: () => _handleButtonPress(true),
+                    child: Obx(
+                      () => NextButton(
+                        onPressed: () => _handleButtonPress(true),
+                        enabled: _onboardingController.hasInput.value,
+                      ),
                     ),
                   ),
                 ],
