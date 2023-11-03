@@ -3,7 +3,8 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_button.dart';
 
 class PreviousButton extends StatelessWidget {
-  const PreviousButton({Key? key}) : super(key: key);
+  const PreviousButton({Key? key, required void Function() onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
