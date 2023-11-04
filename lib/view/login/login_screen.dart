@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
+import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/repository/login_repository.dart';
 import 'package:mojacknong_android/view/login/app_interceptor.dart';
 import 'package:mojacknong_android/view/onboarding/onboarding_screen.dart';
@@ -53,23 +54,29 @@ class _LoginScreen extends State<LoginScreen> {
               ),
             ),
             const SizedBox(height: 100),
-            GestureDetector(
-              onTap: () {
-                kakaoLogin();
-              },
-              child: Image.asset(
-                "assets/image/kakao_login_large_narrow.png",
-                width: 200,
+            Bouncing(
+              onPress: () {},
+              child: GestureDetector(
+                onTap: () {
+                  kakaoLogin();
+                },
+                child: Image.asset(
+                  "assets/image/kakao_login_large_narrow.png",
+                  width: 200,
+                ),
               ),
             ),
             const SizedBox(height: 10),
-            GestureDetector(
-              onTap: () {
-                googleLogin();
-              },
-              child: Image.asset(
-                "assets/image/android_light_sq_SI@4x.png",
-                width: 200,
+            Bouncing(
+              onPress: () {},
+              child: GestureDetector(
+                onTap: () {
+                  googleLogin();
+                },
+                child: Image.asset(
+                  "assets/image/android_light_sq_SI@4x.png",
+                  width: 200,
+                ),
               ),
             ),
           ],

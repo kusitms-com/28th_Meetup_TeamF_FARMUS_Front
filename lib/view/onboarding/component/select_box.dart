@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class SelectBox extends StatelessWidget {
@@ -25,42 +26,45 @@ class SelectBox extends StatelessWidget {
         Color contentColor =
             isSelected.value ? FarmusThemeData.white : FarmusThemeData.grey1;
 
-        return Container(
-          width: double.infinity,
-          height: 82,
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              width: 1,
-              color: FarmusThemeData.grey3,
+        return Bouncing(
+          onPress: () {},
+          child: Container(
+            width: double.infinity,
+            height: 82,
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                width: 1,
+                color: FarmusThemeData.grey3,
+              ),
             ),
-          ),
-          padding: EdgeInsets.all(16),
-          margin: EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 15,
-                  fontFamily: "Pretendard",
-                  fontWeight: FontWeight.bold,
-                  color: titleColor,
+            padding: EdgeInsets.all(16),
+            margin: EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: "Pretendard",
+                    fontWeight: FontWeight.bold,
+                    color: titleColor,
+                  ),
                 ),
-              ),
-              SizedBox(height: 8),
-              Text(
-                content,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: "Pretendard",
-                  color: contentColor,
+                SizedBox(height: 8),
+                Text(
+                  content,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontFamily: "Pretendard",
+                    color: contentColor,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
