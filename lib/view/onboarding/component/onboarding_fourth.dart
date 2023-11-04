@@ -48,7 +48,7 @@ class _OnboardingFourth extends State<OnboardingFourth> {
               _onboardingController.selectBox9();
             },
             child: SelectBox(
-              title: "증급자",
+              title: "중급자",
               content: "작물을 잘 관리하고 재배하는 법을 알고 있어요",
               isSelected: _onboardingController.isSelected9,
             ),

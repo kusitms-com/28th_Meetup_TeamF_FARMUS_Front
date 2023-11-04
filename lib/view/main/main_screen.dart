@@ -48,7 +48,7 @@ class _MainScreenState extends State<MainScreen> {
       showUnselectedLabels: true,
       selectedFontSize: 10,
       unselectedFontSize: 10,
-      selectedItemColor: FarmusThemeData.green1,
+      selectedItemColor: FarmusThemeData.primary,
       unselectedItemColor: FarmusThemeData.grey3,
       type: BottomNavigationBarType.fixed,
       items: [
@@ -57,7 +57,7 @@ class _MainScreenState extends State<MainScreen> {
             child: SvgPicture.asset(
               'assets/image/ic_home.svg',
               color: _selectedIndex == 0
-                  ? FarmusThemeData.green1
+                  ? FarmusThemeData.primary
                   : FarmusThemeData.grey3,
             ),
           ),
@@ -68,7 +68,7 @@ class _MainScreenState extends State<MainScreen> {
             child: SvgPicture.asset(
               'assets/image/ic_challenge.svg',
               color: _selectedIndex == 1
-                  ? FarmusThemeData.green1
+                  ? FarmusThemeData.primary
                   : FarmusThemeData.grey3,
             ),
           ),
@@ -79,7 +79,7 @@ class _MainScreenState extends State<MainScreen> {
             child: SvgPicture.asset(
               'assets/image/ic_community.svg',
               color: _selectedIndex == 2
-                  ? FarmusThemeData.green1
+                  ? FarmusThemeData.primary
                   : FarmusThemeData.grey3,
             ),
           ),
@@ -90,7 +90,7 @@ class _MainScreenState extends State<MainScreen> {
             child: SvgPicture.asset(
               'assets/image/ic_my_page.svg',
               color: _selectedIndex == 3
-                  ? FarmusThemeData.green1
+                  ? FarmusThemeData.primary
                   : FarmusThemeData.grey3,
             ),
           ),
