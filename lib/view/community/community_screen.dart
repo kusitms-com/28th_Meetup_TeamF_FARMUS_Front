@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/view/community/component/button_next_my_post.dart';
 import 'package:mojacknong_android/view/community/component/community_category.dart';
+import 'package:mojacknong_android/view/community/component/community_profile.dart';
 
 class CommunityScreen extends StatefulWidget {
   @override
@@ -34,6 +35,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 ),
               ],
             ),
+            CommunityProfile()
           ],
         ),
       ),

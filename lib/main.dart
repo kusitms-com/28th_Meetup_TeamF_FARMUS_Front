@@ -22,9 +22,9 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       title: "Farmus",
-      home: MainScreen(),
+      home: const MainScreen(),
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: "Pretendard"),
+      theme: ThemeData(fontFamily: 'Pretendard'),
     ),
   );
 }

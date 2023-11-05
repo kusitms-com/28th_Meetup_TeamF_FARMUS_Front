@@ -24,10 +24,15 @@ class ButtonNextMyPost extends StatelessWidget {
         },
         child: Row(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
               '나의 글',
-              style: TextStyle(color: FarmusThemeData.primary),
+              style: TextStyle(
+                color: FarmusThemeData.primary,
+                fontSize: 14,
+              ),
             ),
             const SizedBox(
               width: 5,
@@ -36,6 +41,8 @@ class ButtonNextMyPost extends StatelessWidget {
             SvgPicture.asset(
               "assets/image/ic_arrow_right.svg",
               color: FarmusThemeData.primary,
+              width: 18,
+              height: 18,
             ),
           ],
         ),

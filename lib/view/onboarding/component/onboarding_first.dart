@@ -29,7 +29,7 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
           const SizedBox(
             height: 30,
           ),
-          SvgPicture.asset("assets/image/ic_onboarding_profile.svg"),
+          SvgPicture.asset("assets/image/ic_profile.svg"),
           const SizedBox(
             height: 30,
           ),

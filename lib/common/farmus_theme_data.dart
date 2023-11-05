@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FarmusThemeData {
+  static const String fontFamily = 'Pretendard';
+
   static const Color dark = Color(0xFF1D1D1D);
 
   static const Color grey1 = Color(0xFF505050);
