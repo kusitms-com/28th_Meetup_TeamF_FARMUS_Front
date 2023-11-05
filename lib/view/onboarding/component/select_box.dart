@@ -19,12 +19,13 @@ class SelectBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        Color backgroundColor =
-            isSelected.value ? FarmusThemeData.primary : FarmusThemeData.white;
+        Color backgroundColor = isSelected.value
+            ? FarmusThemeData.greenLight
+            : FarmusThemeData.white;
         Color titleColor =
-            isSelected.value ? FarmusThemeData.white : FarmusThemeData.dark;
+            isSelected.value ? FarmusThemeData.dark : FarmusThemeData.dark;
         Color contentColor =
-            isSelected.value ? FarmusThemeData.white : FarmusThemeData.grey1;
+            isSelected.value ? FarmusThemeData.grey1 : FarmusThemeData.grey1;
 
         return Bouncing(
           onPress: () {},
@@ -36,7 +37,9 @@ class SelectBox extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
                 width: 1,
-                color: FarmusThemeData.grey3,
+                color: isSelected.value
+                    ? FarmusThemeData.green1
+                    : FarmusThemeData.grey4,
               ),
             ),
             padding: EdgeInsets.all(16),

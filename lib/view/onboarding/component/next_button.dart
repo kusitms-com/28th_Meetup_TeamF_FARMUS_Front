@@ -21,7 +21,7 @@ class NextButton extends StatelessWidget {
         text: '다음',
         onPressed: enabled ? onPressed : null,
         backgroundColor:
-            enabled ? FarmusThemeData.primary : FarmusThemeData.grey4,
+            enabled ? FarmusThemeData.brownButton : FarmusThemeData.grey4,
         foregroundColor:
             enabled ? FarmusThemeData.white : FarmusThemeData.grey2,
       ),
