@@ -5,6 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
+import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/repository/login_repository.dart';
 import 'package:mojacknong_android/view/login/app_interceptor.dart';
 import 'package:mojacknong_android/view/onboarding/onboarding_screen.dart';
@@ -39,11 +40,11 @@ class _LoginScreen extends State<LoginScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: CustomAppBar(),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 100),
             Center(
               child: GestureDetector(
                 child: Image.asset(

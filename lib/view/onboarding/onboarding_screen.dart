@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/view/main/main_screen.dart';
 import 'package:mojacknong_android/view/onboarding/component/next_button.dart';
 import 'package:mojacknong_android/view/onboarding/component/onboarding_finish.dart';
@@ -106,12 +107,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: CustomAppBar(),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 50,
-            ),
             Padding(
               padding: const EdgeInsets.only(top: 16.0),
               child: ProgressBar(
