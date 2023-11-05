@@ -24,6 +24,7 @@ Future<void> main() async {
       title: "Farmus",
       home: MainScreen(),
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: "Pretendard"),
     ),
   );
 }
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(),
       ),
-      theme: ThemeData(fontFamily: 'Pretendard'),
+      theme: ThemeData(fontFamily: 'Pretendard', useMaterial3: true),
     );
   }
 }
