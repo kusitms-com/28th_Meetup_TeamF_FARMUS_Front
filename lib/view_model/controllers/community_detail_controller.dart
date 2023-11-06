@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class CommunityDetailController extends GetxController {
-  // 텍스트 입력 관리
   final textValue = "".obs;
-  // 바텀 시트 관리
   final isBottomSheetOpen = false.obs;
 
   void openBottomSheet() {
@@ -20,12 +18,17 @@ class CommunityDetailController extends GetxController {
     textValue.value = value;
   }
 
-  void showActionSheetComment(BuildContext context) {
+  void showActionSheetComment(
+    BuildContext? context, {
+    required String message,
+    required String cancelText,
+    required String confirmText,
+  }) {
     showCupertinoModalPopup<void>(
-      context: context,
+      context: context!,
       builder: (BuildContext context) => CupertinoActionSheet(
         message: Text(
-          '댓글을 삭제하시겠어요?',
+          message,
           style: TextStyle(
             color: FarmusThemeData.grey2,
             fontSize: 12,
@@ -40,7 +43,7 @@ class CommunityDetailController extends GetxController {
               Navigator.pop(context);
             },
             child: Text(
-              '취소',
+              cancelText,
               style: TextStyle(
                 color: FarmusThemeData.dark,
                 fontSize: 14,
@@ -54,7 +57,7 @@ class CommunityDetailController extends GetxController {
               Navigator.pop(context);
             },
             child: Text(
-              '확인',
+              confirmText,
               style: TextStyle(
                 color: FarmusThemeData.dark,
                 fontSize: 14,

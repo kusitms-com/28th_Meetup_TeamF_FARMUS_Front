@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/community/component/bottom_comment.dart';
 import 'package:mojacknong_android/view/community/component/community_comment.dart';
 import 'package:mojacknong_android/view/community/component/community_content.dart';
@@ -13,6 +14,7 @@ class DetailPostScreen extends StatefulWidget {
   final String nickname;
   final String postTime;
   final String postCategory;
+  final String title;
   final String content;
   final String image;
 
@@ -22,6 +24,7 @@ class DetailPostScreen extends StatefulWidget {
     required this.nickname,
     required this.postTime,
     required this.postCategory,
+    required this.title,
     required this.content,
     required this.image,
   }) : super(key: key);
@@ -47,7 +50,7 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: PrimaryAppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.fromLTRB(8.0, 0, 8.0, 100),
@@ -71,6 +74,7 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
                 ],
               ),
               CommunityContent(
+                title: widget.title,
                 content: widget.content,
               ),
               CommunityPicture(

@@ -30,7 +30,12 @@ class CommunityComment extends StatelessWidget {
                 Bouncing(
                   onPress: () {
                     _controller.openBottomSheet();
-                    _controller.showActionSheetComment(context);
+                    _controller.showActionSheetComment(
+                      context,
+                      message: "댓글을 삭제하시겠어요?",
+                      cancelText: "취소",
+                      confirmText: "확인",
+                    );
                   },
                   child: SvgPicture.asset("assets/image/ic_more_vertical.svg"),
                 ),

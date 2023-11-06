@@ -25,7 +25,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
       "postTime": "11/6 12:18",
       "comment": "0",
       "postCategory": "도와주세요",
-      "content": "방울토마토가 자라지 않습니다..\n왜 안자라는 걸까요? 봐주실 분 구합니다.",
+      "title": "방울토마토가 자라지 않습니다..",
+      "content": "왜 안자라는 걸까요? 봐주실 분 구합니다.",
       "image": "assets/image/image_example_community.png",
     },
     {
@@ -34,8 +35,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
       "postTime": "11/6 12:18",
       "comment": "0",
       "postCategory": "자랑할래요",
-      "content":
-          "25년 생에 처음으로\n새싹 발아에 성공했습니다. 감격스럽네요.. \n저는 이제 농약손이 아니에요 ^_____^",
+      "title": "25년 생에 처음으로",
+      "content": "새싹 발아에 성공했습니다. 감격스럽네요.. \n저는 이제 농약손이 아니에요 ^_____^",
       "image": "assets/image/image_example_community2.png",
     },
   ];
@@ -46,6 +47,9 @@ class _CommunityScreenState extends State<CommunityScreen> {
       appBar: CustomAppBar(),
       body: Column(
         children: [
+          SizedBox(
+            height: 8,
+          ),
           Row(
             children: [
               ...category.map(
@@ -71,6 +75,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                   postTime: dummyData[index]['postTime']!,
                   comment: dummyData[index]['comment']!,
                   postCategory: dummyData[index]['postCategory']!,
+                  title: dummyData[index]['title']!,
                   content: dummyData[index]['content']!,
                   image: dummyData[index]['image']!,
                 );
@@ -80,6 +85,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                   postTime: feedController.postTime.value,
                   comment: feedController.comment.value,
                   postCategory: feedController.postCategory.value,
+                  title: feedController.title.value,
                   content: feedController.content.value,
                   image: feedController.image.value,
                 );

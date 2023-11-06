@@ -13,6 +13,7 @@ class CommunityFeed extends StatelessWidget {
   final String postTime;
   final String comment;
   final String postCategory;
+  final String title;
   final String content;
   final String image;
 
@@ -23,6 +24,7 @@ class CommunityFeed extends StatelessWidget {
     required this.postTime,
     required this.comment,
     required this.postCategory,
+    required this.title,
     required this.content,
     required this.image,
   }) : super(key: key);
@@ -40,6 +42,7 @@ class CommunityFeed extends StatelessWidget {
                 nickname: nickname,
                 postTime: postTime,
                 postCategory: postCategory,
+                title: title,
                 content: content,
                 image: image,
               );
@@ -69,6 +72,7 @@ class CommunityFeed extends StatelessWidget {
               ],
             ),
             CommunityContent(
+              title: title,
               content: content,
             ),
             CommunityPicture(
