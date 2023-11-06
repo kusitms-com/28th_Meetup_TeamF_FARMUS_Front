@@ -22,44 +22,41 @@ class CommunityProfile extends StatefulWidget {
 class _CommunityProfileState extends State<CommunityProfile> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset(
-            widget.profileImage,
-            width: 32,
-            height: 32,
-            fit: BoxFit.fill,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Image.asset(
+          widget.profileImage,
+          width: 32,
+          height: 32,
+          fit: BoxFit.fill,
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        Text(
+          widget.nickname,
+          style: const TextStyle(
+            color: FarmusThemeData.dark,
+            fontSize: 16,
+            fontFamily: "Pretendard",
           ),
-          const SizedBox(
-            width: 8,
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        Text(
+          widget.postTime,
+          style: const TextStyle(
+            color: FarmusThemeData.grey2,
+            fontSize: 12,
+            fontFamily: "Pretendard",
           ),
-          Text(
-            widget.nickname,
-            style: const TextStyle(
-              color: FarmusThemeData.dark,
-              fontSize: 16,
-              fontFamily: "Pretendard",
-            ),
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          Text(
-            widget.postTime,
-            style: const TextStyle(
-              color: FarmusThemeData.grey2,
-              fontSize: 12,
-              fontFamily: "Pretendard",
-            ),
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+      ],
     );
   }
 }

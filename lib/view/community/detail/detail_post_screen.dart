@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/community/component/community_comment.dart';
 import 'package:mojacknong_android/view/community/component/community_content.dart';
 import 'package:mojacknong_android/view/community/component/community_picture.dart';
 import 'package:mojacknong_android/view/community/component/detail_post_profile.dart';
@@ -61,6 +62,11 @@ class DetailPostScreen extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(
+              height: 8,
+            ),
+            CommunityComment(),
+            CommunityComment(),
           ],
         ),
       ),
