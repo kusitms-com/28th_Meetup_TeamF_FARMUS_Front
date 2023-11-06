@@ -60,17 +60,17 @@ class MyPageHome extends StatelessWidget {
               padding: const EdgeInsets.only(top: 4.0),
               children: const <Widget>[
                 MyPageHistory(
-                  name: '상훈이',
+                  name: '상추 좋아하세요',
                   nickname: '상추',
                   date: '2023.10.01~2023.11.22',
                 ),
                 MyPageHistory(
-                  name: '먹쟁이토마토',
-                  nickname: '방울토마토',
+                  name: '남아프리카공화국',
+                  nickname: '파프리카',
                   date: '2023.06.27~현재',
                 ),
                 MyPageHistory(
-                  name: '깨르륵',
+                  name: '깨르륵깨르륵',
                   nickname: '깻잎',
                   date: '2023.05.03~현재',
                 ),
