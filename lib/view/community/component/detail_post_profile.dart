@@ -2,6 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class DetailPostProfile extends StatelessWidget {
+  final String profileImage;
+  final String nickname;
+  final String postTime;
+
+  DetailPostProfile({
+    Key? key,
+    required this.profileImage,
+    required this.nickname,
+    required this.postTime,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -10,25 +21,25 @@ class DetailPostProfile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
-            "assets/image/image_example_profile.png",
+            profileImage,
             width: 44,
             height: 44,
           ),
           const SizedBox(
             width: 12,
           ),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "노준국",
+                nickname,
                 style: TextStyle(color: FarmusThemeData.dark, fontSize: 16),
               ),
               SizedBox(
                 height: 6,
               ),
               Text(
-                "10/29 16:12",
+                postTime,
                 style: TextStyle(color: FarmusThemeData.grey2, fontSize: 12),
               ),
             ],

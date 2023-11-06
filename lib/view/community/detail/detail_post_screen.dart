@@ -9,6 +9,23 @@ import 'package:mojacknong_android/view/community/component/detail_post_profile.
 import 'package:mojacknong_android/view/community/component/post_category.dart';
 
 class DetailPostScreen extends StatefulWidget {
+  final String profileImage;
+  final String nickname;
+  final String postTime;
+  final String postCategory;
+  final String content;
+  final String image;
+
+  const DetailPostScreen({
+    Key? key,
+    required this.profileImage,
+    required this.nickname,
+    required this.postTime,
+    required this.postCategory,
+    required this.content,
+    required this.image,
+  }) : super(key: key);
+
   @override
   _DetailPostScreenState createState() => _DetailPostScreenState();
 }
@@ -38,22 +55,26 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
             children: [
               Row(
                 children: [
-                  DetailPostProfile(),
-                  const Expanded(
+                  DetailPostProfile(
+                    profileImage: widget.profileImage,
+                    nickname: widget.nickname,
+                    postTime: widget.postTime,
+                  ),
+                  Expanded(
                     child: Align(
                       alignment: Alignment.topRight,
                       child: PostCategory(
-                        category: "도와주세요",
+                        category: widget.postCategory,
                       ),
                     ),
                   ),
                 ],
               ),
               CommunityContent(
-                content: "방울토마토가 자라지 않습니다..\n왜 안자라는 걸까요? 봐주실 분 구합니다.",
+                content: widget.content,
               ),
               CommunityPicture(
-                image: "assets/image/image_example_community.png",
+                image: widget.image,
               ),
               const SizedBox(
                 height: 16,

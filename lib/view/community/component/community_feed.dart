@@ -35,7 +35,14 @@ class CommunityFeed extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return DetailPostScreen();
+              return DetailPostScreen(
+                profileImage: profileImage,
+                nickname: nickname,
+                postTime: postTime,
+                postCategory: postCategory,
+                content: content,
+                image: image,
+              );
             },
           ),
         );
