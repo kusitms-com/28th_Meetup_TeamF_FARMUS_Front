@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mojacknong_android/common/custom_app_bar.dart';
+import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/common/primary_app_bar.dart';
 
 class PostScreen extends StatefulWidget {
   const PostScreen({Key? key}) : super(key: key);
@@ -12,7 +13,21 @@ class _PostScreenState extends State<PostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: PrimaryAppBar(
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: Text(
+              "완료",
+              style: TextStyle(
+                color: FarmusThemeData.dark,
+                fontSize: 14,
+                fontFamily: "Pretendard",
+              ),
+            ),
+          ),
+        ],
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),

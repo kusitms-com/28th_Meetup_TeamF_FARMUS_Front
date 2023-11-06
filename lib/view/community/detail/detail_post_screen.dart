@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mojacknong_android/common/custom_app_bar.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/community/component/bottom_comment.dart';
@@ -8,6 +9,7 @@ import 'package:mojacknong_android/view/community/component/community_content.da
 import 'package:mojacknong_android/view/community/component/community_picture.dart';
 import 'package:mojacknong_android/view/community/component/detail_post_profile.dart';
 import 'package:mojacknong_android/view/community/component/post_category.dart';
+import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 class DetailPostScreen extends StatefulWidget {
   final String profileImage;
@@ -35,6 +37,7 @@ class DetailPostScreen extends StatefulWidget {
 
 class _DetailPostScreenState extends State<DetailPostScreen> {
   final List<Widget> comments = [];
+  final BottomSheetController _controller = Get.put(BottomSheetController());
 
   _DetailPostScreenState() {
     comments.addAll([
@@ -50,7 +53,17 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PrimaryAppBar(),
+      appBar: PrimaryAppBar(actions: [
+        IconButton(
+          icon: SvgPicture.asset("assets/image/ic_more_vertical.svg"),
+          onPressed: () {
+            _controller.showCustomCupertinoActionSheet(context,
+                message: "글 메뉴",
+                options: ["수정", "삭제", "URL 공유"],
+                cancelButtonText: "취소");
+          },
+        ),
+      ]),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.fromLTRB(8.0, 0, 8.0, 100),

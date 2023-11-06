@@ -6,6 +6,10 @@ import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controlle
 
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final BottomSheetController _controller = Get.put(BottomSheetController());
+  final Widget? leading;
+  final List<Widget>? actions;
+
+  PrimaryAppBar({this.leading, this.actions});
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
@@ -23,17 +27,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
           Navigator.of(context).pop();
         },
       ),
-      actions: [
-        IconButton(
-          icon: SvgPicture.asset("assets/image/ic_more_vertical.svg"),
-          onPressed: () {
-            _controller.showCustomCupertinoActionSheet(context,
-                message: "글 메뉴",
-                options: ["수정", "삭제", "URL 공유"],
-                cancelButtonText: "취소");
-          },
-        ),
-      ],
+      actions: actions,
       elevation: 0,
       backgroundColor: FarmusThemeData.white,
     );
