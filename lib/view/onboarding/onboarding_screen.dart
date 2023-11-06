@@ -10,7 +10,7 @@ import 'package:mojacknong_android/view/onboarding/component/onboarding_second.d
 import 'package:mojacknong_android/view/onboarding/component/onboarding_third.dart';
 import 'package:mojacknong_android/view/onboarding/component/previous_button.dart';
 import 'package:mojacknong_android/view/onboarding/component/progress_bar.dart';
-import 'package:mojacknong_android/view_model/onboarding_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/onboarding_controller.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);

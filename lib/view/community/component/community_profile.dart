@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class CommunityProfile extends StatefulWidget {
@@ -28,10 +27,11 @@ class _CommunityProfileState extends State<CommunityProfile> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SvgPicture.asset(
+          Image.asset(
             widget.profileImage,
             width: 32,
             height: 32,
+            fit: BoxFit.fill,
           ),
           const SizedBox(
             width: 8,
