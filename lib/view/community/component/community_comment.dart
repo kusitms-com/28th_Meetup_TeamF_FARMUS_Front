@@ -28,10 +28,10 @@ class CommunityComment extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
-            Text(
+            const Text(
               "그건 당신이 최선을 다하지 않아서가 아닐까요? ^_____^",
               style: TextStyle(
                 color: FarmusThemeData.dark,
@@ -40,10 +40,10 @@ class CommunityComment extends StatelessWidget {
               ),
               textAlign: TextAlign.start,
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
-            Divider(
+            const Divider(
               height: 1,
               color: FarmusThemeData.grey3,
             ),
