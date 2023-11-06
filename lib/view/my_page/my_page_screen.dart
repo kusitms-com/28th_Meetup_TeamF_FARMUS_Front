@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mojacknong_android/view/my_page/component/my_challenge_header.dart';
 import 'package:mojacknong_android/view/my_page/component/my_history_header.dart';
 import 'package:mojacknong_android/view/my_page/component/my_page_header.dart';
 import 'package:mojacknong_android/view/my_page/component/my_page_history.dart';
@@ -53,7 +54,7 @@ class MyPageHome extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10.0),
-          const HistoryHeader(historyType: "챌린지 히스토리"),
+          const ChallengeHeader(historyType: "챌린지 히스토리"),
           const SizedBox(height: 12.0),
           Expanded(
             child: ListView(
