@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/view/onboarding/component/select_box.dart';
-import 'package:mojacknong_android/view_model/onboarding_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/onboarding_controller.dart';
 
 class OnboardingThird extends StatefulWidget {
   const OnboardingThird({Key? key}) : super(key: key);

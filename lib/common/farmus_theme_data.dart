@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class FarmusThemeData {
+  static final TextStyle darkTextStyle = TextStyle(
+    color: dark,
+    fontFamily: "Pretendard",
+  );
   static const Color dark = Color(0xFF1D1D1D);
 
   static const Color grey1 = Color(0xFF505050);
@@ -17,6 +21,7 @@ class FarmusThemeData {
   static const Color greenLight2 = Color(0xFFDAF3EB);
 
   static const Color brownText = Color(0xFFAD9782);
+  static const Color brownButton = Color(0xFFBCAD96);
   static const Color brown = Color(0xFFB7A795);
   static const Color brown2 = Color(0xFFCCBEA4);
   static const Color brown3 = Color(0xFFF6F1EB);

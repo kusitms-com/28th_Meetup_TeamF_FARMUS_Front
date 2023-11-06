@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:mojacknong_android/view_model/onboarding_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/onboarding_controller.dart';
 
 class OnboardingFirst extends StatefulWidget {
   const OnboardingFirst({Key? key}) : super(key: key);
@@ -29,7 +29,7 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
           const SizedBox(
             height: 30,
           ),
-          SvgPicture.asset("assets/image/ic_onboarding_profile.svg"),
+          SvgPicture.asset("assets/image/ic_profile.svg"),
           const SizedBox(
             height: 30,
           ),
