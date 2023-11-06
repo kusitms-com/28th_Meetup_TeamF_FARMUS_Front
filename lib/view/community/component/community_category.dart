@@ -30,7 +30,7 @@ class _CommunityCategoryState extends State<CommunityCategory> {
         child: Container(
           decoration: BoxDecoration(
             color: isSelected
-                ? FarmusThemeData.brown2
+                ? FarmusThemeData.category
                 : FarmusThemeData.background,
             borderRadius: BorderRadius.circular(16),
           ),
@@ -40,6 +40,8 @@ class _CommunityCategoryState extends State<CommunityCategory> {
               child: Text(
                 widget.category,
                 style: TextStyle(
+                  color:
+                      isSelected ? FarmusThemeData.white : FarmusThemeData.dark,
                   fontWeight: FontWeight.w500,
                 ),
               ),

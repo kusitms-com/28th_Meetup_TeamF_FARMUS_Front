@@ -13,6 +13,7 @@ class FarmusThemeData {
   static const Color grey4 = Color(0xFFECECEC);
 
   static const Color background = Color(0xFFF6F6F6);
+  static const Color category = Color(0xFF535353);
   static const Color primary = Color(0xFF184B36);
 
   static const Color green1 = Color(0xFF4DCF76);

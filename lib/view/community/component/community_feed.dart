@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/view/community/component/community_content.dart';
 import 'package:mojacknong_android/view/community/component/community_picture.dart';
 import 'package:mojacknong_android/view/community/component/community_profile.dart';
 import 'package:mojacknong_android/view/community/component/post_category.dart';
+import 'package:mojacknong_android/view/community/detail/detail_post_screen.dart';
 
 class CommunityFeed extends StatelessWidget {
   final String profileImage;
@@ -26,28 +28,40 @@ class CommunityFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CommunityProfile(
-                  profileImage: profileImage,
-                  nickname: nickname,
-                  postTime: postTime,
-                  comment: comment),
-              PostCategory(category: postCategory),
-            ],
+    return Bouncing(
+      onPress: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return DetailPostScreen();
+            },
           ),
-          CommunityContent(
-            content: content,
-          ),
-          CommunityPicture(
-            image: image,
-          ),
-        ],
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CommunityProfile(
+                    profileImage: profileImage,
+                    nickname: nickname,
+                    postTime: postTime,
+                    comment: comment),
+                PostCategory(category: postCategory),
+              ],
+            ),
+            CommunityContent(
+              content: content,
+            ),
+            CommunityPicture(
+              image: image,
+            ),
+          ],
+        ),
       ),
     );
   }
