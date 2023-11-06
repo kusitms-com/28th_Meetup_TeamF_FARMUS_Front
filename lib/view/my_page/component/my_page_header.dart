@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/my_page/component/my_page_profile.dart';
 
 class MyPageHeader extends StatelessWidget {
   final String name;
@@ -16,11 +17,18 @@ class MyPageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _navigateToMyProfilePage() {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const MyProfilePage(),
+        ),
+      );
+    }
+
     return Container(
       color: FarmusThemeData.green1,
       padding: const EdgeInsets.fromLTRB(16, 25, 0, 0),
       child: SafeArea(
-        // To keep the content within the safe area of the phone
         child: Row(
           children: <Widget>[
             ClipOval(
@@ -37,28 +45,26 @@ class MyPageHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Row(
-                    mainAxisSize: MainAxisSize
-                        .min, // Use min to contain the size to fit the content
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        '$name 님', // The variable $name will be replaced with the actual name
-                        style: const TextStyle(
-                          color: FarmusThemeData
-                              .dark, // Assuming FarmusThemeData.dark is defined somewhere in your theme
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      InkWell(
+                        onTap: _navigateToMyProfilePage,
+                        child: Row(
+                          children: [
+                            Text(
+                              '$name 님',
+                              style: const TextStyle(
+                                color: FarmusThemeData.dark,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(width: 4),
+                            SvgPicture.asset(
+                              "assets/image/arrow_right_mypage.svg",
+                            ),
+                          ],
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          // Action when the button is pressed
-                        },
-                        icon: SvgPicture.asset(
-                          "assets/image/arrow_right_mypage.svg", // Path to your SVG icon
-                        ),
-                        padding: EdgeInsets.zero, // Remove padding
-                        constraints:
-                            const BoxConstraints(), // Tighten constraints
                       ),
                     ],
                   ),
