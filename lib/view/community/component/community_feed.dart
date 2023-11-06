@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
+import 'package:mojacknong_android/view/community/component/community_comment_count.dart';
 import 'package:mojacknong_android/view/community/component/community_content.dart';
 import 'package:mojacknong_android/view/community/component/community_picture.dart';
 import 'package:mojacknong_android/view/community/component/community_profile.dart';
@@ -46,11 +47,17 @@ class CommunityFeed extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CommunityProfile(
-                    profileImage: profileImage,
-                    nickname: nickname,
-                    postTime: postTime,
-                    comment: comment),
+                Row(
+                  children: [
+                    CommunityProfile(
+                      profileImage: profileImage,
+                      nickname: nickname,
+                      postTime: postTime,
+                      comment: comment,
+                    ),
+                    CommunityCommentCount(comment: comment),
+                  ],
+                ),
                 PostCategory(category: postCategory),
               ],
             ),
