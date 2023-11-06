@@ -14,7 +14,15 @@ class _CommunityScreenState extends State<CommunityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-      body: CommunityFeed(),
+      body: CommunityFeed(
+        profileImage: "assets/image/ic_profile.svg",
+        nickname: "노준국",
+        postTime: "11/6 12:18",
+        comment: "0",
+        postCategory: "도와주세요",
+        content: "방울토마토가 자라지 않습니다..\n왜 안자라는 걸까요? 봐주실 분 구합니다.",
+        image: "assets/image/image_example_community.png",
+      ),
     );
   }
 }

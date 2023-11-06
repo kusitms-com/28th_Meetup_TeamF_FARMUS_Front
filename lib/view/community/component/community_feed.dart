@@ -8,6 +8,24 @@ import 'package:mojacknong_android/view/community/component/post_category.dart';
 
 class CommunityFeed extends StatelessWidget {
   List<String> category = <String>["도와주세요", "자랑할래요", "정보나눔"];
+  final String profileImage;
+  final String nickname;
+  final String postTime;
+  final String comment;
+  final String postCategory;
+  final String content;
+  final String image;
+
+  CommunityFeed({
+    Key? key,
+    required this.profileImage,
+    required this.nickname,
+    required this.postTime,
+    required this.comment,
+    required this.postCategory,
+    required this.content,
+    required this.image,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +51,20 @@ class CommunityFeed extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CommunityProfile(),
-              PostCategory(category: category[0]),
+              CommunityProfile(
+                  profileImage: profileImage,
+                  nickname: nickname,
+                  postTime: postTime,
+                  comment: comment),
+              PostCategory(category: postCategory),
             ],
           ),
-          CommunityContent(),
-          CommunityPicture(),
+          CommunityContent(
+            content: content,
+          ),
+          CommunityPicture(
+            image: image,
+          ),
         ],
       ),
     );

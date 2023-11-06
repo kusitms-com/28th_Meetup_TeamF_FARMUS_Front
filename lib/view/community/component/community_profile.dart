@@ -3,6 +3,19 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class CommunityProfile extends StatefulWidget {
+  final String profileImage;
+  final String nickname;
+  final String postTime;
+  final String comment;
+
+  const CommunityProfile({
+    Key? key,
+    required this.profileImage,
+    required this.nickname,
+    required this.postTime,
+    required this.comment,
+  }) : super(key: key);
+
   @override
   State<CommunityProfile> createState() => _CommunityProfileState();
 }
@@ -16,16 +29,16 @@ class _CommunityProfileState extends State<CommunityProfile> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SvgPicture.asset(
-            "assets/image/ic_profile.svg",
+            widget.profileImage,
             width: 32,
             height: 32,
           ),
           const SizedBox(
             width: 8,
           ),
-          const Text(
-            "노준국",
-            style: TextStyle(
+          Text(
+            widget.nickname,
+            style: const TextStyle(
               color: FarmusThemeData.dark,
               fontSize: 16,
               fontFamily: "Pretendard",
@@ -34,9 +47,9 @@ class _CommunityProfileState extends State<CommunityProfile> {
           const SizedBox(
             width: 8,
           ),
-          const Text(
-            "10/29 16:12",
-            style: TextStyle(
+          Text(
+            widget.postTime,
+            style: const TextStyle(
               color: FarmusThemeData.grey2,
               fontSize: 12,
               fontFamily: "Pretendard",
@@ -56,9 +69,9 @@ class _CommunityProfileState extends State<CommunityProfile> {
           const SizedBox(
             width: 4,
           ),
-          const Text(
-            "0",
-            style: TextStyle(
+          Text(
+            widget.comment,
+            style: const TextStyle(
               color: FarmusThemeData.grey2,
               fontSize: 12,
               fontFamily: "Pretendard",
