@@ -192,8 +192,8 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
         print("갤러리에서 사진을 선택하지 않았습니다.");
         return OnboardingRepository.postProfileApi(null, nickname);
       }
-    } else {}
-
-    return Future.value();
+    } else {
+      return OnboardingRepository.postProfileApi(null, nickname);
+    }
   }
 }
