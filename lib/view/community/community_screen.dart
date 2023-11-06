@@ -4,6 +4,7 @@ import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/view/community/component/button_next_my_post.dart';
 import 'package:mojacknong_android/view/community/component/community_category.dart';
 import 'package:mojacknong_android/view/community/component/community_feed.dart';
+import 'package:mojacknong_android/view/community/component/floating_button_post.dart';
 import 'package:mojacknong_android/view_model/controllers/community_feed_controller.dart';
 
 class CommunityScreen extends StatefulWidget {
@@ -87,6 +88,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
           ),
         ],
       ),
+      floatingActionButton: FloatingButtonPost(),
     );
   }
 }
