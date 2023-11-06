@@ -4,11 +4,10 @@ import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/community/component/community_profile.dart';
-import 'package:mojacknong_android/view_model/controllers/community_detail_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 class CommunityComment extends StatelessWidget {
-  final CommunityDetailController _controller =
-      Get.put(CommunityDetailController());
+  final BottomSheetController _controller = Get.put(BottomSheetController());
 
   @override
   Widget build(BuildContext context) {
