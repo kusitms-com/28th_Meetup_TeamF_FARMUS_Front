@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/community/component/community_profile.dart';
+import 'package:mojacknong_android/view_model/controllers/community_detail_controller.dart';
 
 class CommunityComment extends StatelessWidget {
+  final CommunityDetailController _controller =
+      Get.put(CommunityDetailController());
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +28,10 @@ class CommunityComment extends StatelessWidget {
                   postTime: "11/6 19:01",
                 ),
                 Bouncing(
-                  onPress: () {},
+                  onPress: () {
+                    _controller.openBottomSheet();
+                    _controller.showActionSheetComment(context);
+                  },
                   child: SvgPicture.asset("assets/image/ic_more_vertical.svg"),
                 ),
               ],
