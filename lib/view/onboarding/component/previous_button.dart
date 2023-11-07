@@ -16,7 +16,7 @@ class PreviousButton extends StatelessWidget {
         onPressed: onPressed,
         backgroundColor: FarmusThemeData.white,
         foregroundColor: FarmusThemeData.grey2,
-        surfaceTintColor: FarmusThemeData.grey2,
+        surfaceTintColor: FarmusThemeData.grey3,
       ),
     );
   }
