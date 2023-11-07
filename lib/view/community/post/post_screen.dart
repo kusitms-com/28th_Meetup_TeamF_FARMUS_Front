@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/community/component/community_category.dart';
+import 'package:mojacknong_android/view/community/component/community_picture.dart';
 import 'package:mojacknong_android/view_model/controllers/community_detail_controller.dart';
 
 class PostScreen extends StatefulWidget {
@@ -12,12 +14,20 @@ class PostScreen extends StatefulWidget {
   _PostScreenState createState() => _PostScreenState();
 }
 
-final int maxLength = 500;
+final int maxLengthTitle = 20;
+final int maxLengthContent = 500;
 
 class _PostScreenState extends State<PostScreen> {
   final CommunityDetailController _controller =
       Get.put(CommunityDetailController());
-  final int maxLength = 500;
+  final ImagePicker _picker = ImagePicker();
+
+  void _getImageFromGallery() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +63,9 @@ class _PostScreenState extends State<PostScreen> {
                       fontFamily: "Pretendard",
                     ),
                   ),
-                  CommunityCategory(category: "category"),
-                  CommunityCategory(category: "category"),
-                  CommunityCategory(category: "category"),
+                  CommunityCategory(category: "도와주세요"),
+                  CommunityCategory(category: "자랑할래요"),
+                  CommunityCategory(category: "정보나눔"),
                 ],
               ),
               TextFormField(
@@ -66,13 +76,19 @@ class _PostScreenState extends State<PostScreen> {
                   ),
                   counterText: "",
                   suffix: Obx(() => Text(
-                      "${_controller.textValue.value.length} / $maxLength")),
+                      "${_controller.titleValue.value.length} / $maxLengthTitle")),
                   suffixStyle: TextStyle(
                     color: FarmusThemeData.dark.withOpacity(0.3),
                   ),
+                  focusedBorder: const UnderlineInputBorder(
+                    borderSide: BorderSide(color: FarmusThemeData.grey2),
+                  ),
+                  enabledBorder: const UnderlineInputBorder(
+                    borderSide: BorderSide(color: FarmusThemeData.grey2),
+                  ),
                 ),
-                maxLength: maxLength,
-                onChanged: _controller.updateTextValue,
+                maxLength: maxLengthTitle,
+                onChanged: _controller.updateTitleValue,
               ),
               Expanded(
                 child: Stack(
@@ -86,17 +102,23 @@ class _PostScreenState extends State<PostScreen> {
                           color: FarmusThemeData.dark.withOpacity(0.3),
                         ),
                         counterText: "",
+                        focusedBorder: const UnderlineInputBorder(
+                          borderSide: BorderSide(color: FarmusThemeData.grey2),
+                        ),
+                        enabledBorder: const UnderlineInputBorder(
+                          borderSide: BorderSide(color: FarmusThemeData.grey2),
+                        ),
                       ),
                       expands: true,
-                      maxLength: maxLength,
-                      onChanged: _controller.updateTextValue,
+                      maxLength: maxLengthContent,
+                      onChanged: _controller.updateContentValue,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 16.0, horizontal: 8.0),
                       child: Obx(
                         () => Text(
-                          "${_controller.textValue.value.length} / $maxLength",
+                          "${_controller.contentValue.value.length} / $maxLengthContent",
                           style: TextStyle(
                             color: FarmusThemeData.dark.withOpacity(0.3),
                           ),
@@ -104,6 +126,19 @@ class _PostScreenState extends State<PostScreen> {
                       ),
                     ),
                   ],
+                ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Positioned(
+                child: GestureDetector(
+                  onTap: () {
+                    _getImageFromGallery();
+                  },
+                  child: CommunityPicture(
+                    image: "assets/image/image_example_community.png",
+                  ),
                 ),
               ),
             ],
