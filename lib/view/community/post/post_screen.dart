@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -5,7 +7,7 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/community/component/community_category.dart';
 import 'package:mojacknong_android/view/community/component/community_picture.dart';
-import 'package:mojacknong_android/view_model/controllers/community_detail_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/community_post_controller.dart';
 
 class PostScreen extends StatefulWidget {
   const PostScreen({Key? key}) : super(key: key);
@@ -18,15 +20,16 @@ final int maxLengthTitle = 20;
 final int maxLengthContent = 500;
 
 class _PostScreenState extends State<PostScreen> {
-  final CommunityDetailController _controller =
-      Get.put(CommunityDetailController());
+  final CommunityPostController _controller = Get.put(
+    CommunityPostController(),
+  );
   final ImagePicker _picker = ImagePicker();
+  void _getImageFromGallery(ImageSource source) async {
+    final XFile? pickedFile = await _picker.pickImage(source: source);
 
-  void _getImageFromGallery() async {
-    final XFile? pickedFile =
-        await _picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {}
+    if (pickedFile != null) {
+      _controller.setImageFile(File(pickedFile.path));
+    }
   }
 
   @override
@@ -35,7 +38,9 @@ class _PostScreenState extends State<PostScreen> {
       appBar: PrimaryAppBar(
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             child: const Text(
               "완료",
               style: TextStyle(
@@ -134,7 +139,7 @@ class _PostScreenState extends State<PostScreen> {
               Positioned(
                 child: GestureDetector(
                   onTap: () {
-                    _getImageFromGallery();
+                    _getImageFromGallery(ImageSource.gallery);
                   },
                   child: CommunityPicture(
                     image: "assets/image/image_example_community.png",
