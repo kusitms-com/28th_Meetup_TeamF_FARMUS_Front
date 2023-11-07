@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,6 +23,8 @@ class OnboardingController extends GetxController {
   final isSecond = RxBool(false);
 
   RxBool hasBoxesSelected = RxBool(false);
+
+  final image = Rxn<File>();
 
   @override
   void onInit() {
@@ -48,6 +52,10 @@ class OnboardingController extends GetxController {
         hasBoxesSelected.value = false;
       }
     });
+  }
+
+  void setImageFile(File file) {
+    image.value = file;
   }
 
   void selectBox1() {

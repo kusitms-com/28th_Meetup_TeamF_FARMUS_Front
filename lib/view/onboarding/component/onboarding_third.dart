@@ -29,8 +29,8 @@ class _OnboardingThird extends State<OnboardingThird> {
               _onboardingController.selectBox4();
             },
             child: SelectBox(
-              title: "홈파밍에 많은 시간을 쓸 수 있어요",
-              content: "1시간 이상",
+              title: "많은 시간을 홈파밍에 쓸 수 있어요",
+              content: "하루 1시간",
               isSelected: _onboardingController.isSelected4,
             ),
           ),
@@ -39,8 +39,8 @@ class _OnboardingThird extends State<OnboardingThird> {
               _onboardingController.selectBox5();
             },
             child: SelectBox(
-              title: "아침 저녁으로 홈파밍을 할 수 있어요",
-              content: "30분 이상",
+              title: "아침 저녁에는 홈파밍을 할 수 있어요",
+              content: "하루 10~30분",
               isSelected: _onboardingController.isSelected5,
             ),
           ),
@@ -49,8 +49,8 @@ class _OnboardingThird extends State<OnboardingThird> {
               _onboardingController.selectBox6();
             },
             child: SelectBox(
-              title: "하루 일과를 마치면시간이 촉박해요",
-              content: "30분 미만",
+              title: "바빠서 홈파밍을 할 시간이 별로 없어요",
+              content: "하루 10분",
               isSelected: _onboardingController.isSelected6,
             ),
           ),
