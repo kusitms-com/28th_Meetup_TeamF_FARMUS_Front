@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mojacknong_android/common/bouncing.dart';
+import 'package:mojacknong_android/view/community/component/community_comment_count.dart';
 import 'package:mojacknong_android/view/community/component/community_content.dart';
 import 'package:mojacknong_android/view/community/component/community_picture.dart';
 import 'package:mojacknong_android/view/community/component/community_profile.dart';
 import 'package:mojacknong_android/view/community/component/post_category.dart';
+import 'package:mojacknong_android/view/community/detail/detail_post_screen.dart';
 
 class CommunityFeed extends StatelessWidget {
   final String profileImage;
@@ -10,6 +13,7 @@ class CommunityFeed extends StatelessWidget {
   final String postTime;
   final String comment;
   final String postCategory;
+  final String title;
   final String content;
   final String image;
 
@@ -20,34 +24,62 @@ class CommunityFeed extends StatelessWidget {
     required this.postTime,
     required this.comment,
     required this.postCategory,
+    required this.title,
     required this.content,
     required this.image,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CommunityProfile(
-                  profileImage: profileImage,
-                  nickname: nickname,
-                  postTime: postTime,
-                  comment: comment),
-              PostCategory(category: postCategory),
-            ],
+    return Bouncing(
+      onPress: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return DetailPostScreen(
+                profileImage: profileImage,
+                nickname: nickname,
+                postTime: postTime,
+                postCategory: postCategory,
+                title: title,
+                content: content,
+                image: image,
+              );
+            },
           ),
-          CommunityContent(
-            content: content,
-          ),
-          CommunityPicture(
-            image: image,
-          ),
-        ],
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    CommunityProfile(
+                      profileImage: profileImage,
+                      nickname: nickname,
+                      postTime: postTime,
+                      comment: comment,
+                    ),
+                    CommunityCommentCount(comment: comment),
+                  ],
+                ),
+                PostCategory(category: postCategory),
+              ],
+            ),
+            CommunityContent(
+              title: title,
+              content: content,
+            ),
+            CommunityPicture(
+              image: image,
+            ),
+          ],
+        ),
       ),
     );
   }

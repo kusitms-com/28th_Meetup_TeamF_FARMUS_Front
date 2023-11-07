@@ -6,6 +6,7 @@ class CommunityFeedController extends GetxController {
   var postTime = "".obs;
   var comment = "".obs;
   var postCategory = "".obs;
+  var title = "".obs;
   var content = "".obs;
   var image = "".obs;
 
@@ -15,6 +16,7 @@ class CommunityFeedController extends GetxController {
     String postTime = "",
     String comment = "",
     String postCategory = "",
+    String title = "",
     String content = "",
     String image = "",
   }) {
@@ -23,6 +25,7 @@ class CommunityFeedController extends GetxController {
     this.postTime.value = postTime;
     this.comment.value = comment;
     this.postCategory.value = postCategory;
+    this.title.value = title;
     this.content.value = content;
     this.image.value = image;
   }
