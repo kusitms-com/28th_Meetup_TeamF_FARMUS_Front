@@ -7,9 +7,10 @@ import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controlle
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final BottomSheetController _controller = Get.put(BottomSheetController());
   final Widget? leading;
+  final String? title;
   final List<Widget>? actions;
 
-  PrimaryAppBar({this.leading, this.actions});
+  PrimaryAppBar({this.leading, this.title, this.actions});
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
@@ -27,6 +28,17 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
           Navigator.of(context).pop();
         },
       ),
+      title: title != null
+          ? Text(
+              title!,
+              style: TextStyle(
+                color: FarmusThemeData.dark,
+                fontFamily: "Pretendard",
+                fontSize: 16,
+              ),
+            )
+          : null,
+      centerTitle: true,
       actions: actions,
       elevation: 0,
       backgroundColor: FarmusThemeData.white,
