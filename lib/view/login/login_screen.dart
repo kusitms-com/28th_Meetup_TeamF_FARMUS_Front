@@ -2,10 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
+import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/repository/login_repository.dart';
 import 'package:mojacknong_android/view/login/app_interceptor.dart';
 import 'package:mojacknong_android/view/onboarding/onboarding_screen.dart';
@@ -41,46 +43,51 @@ class _LoginScreen extends State<LoginScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: CustomAppBar(),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Center(
-              child: GestureDetector(
-                child: Image.asset(
-                  "assets/image/logo_tree.png",
+        body: Container(
+          color: FarmusThemeData.green1,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 32,
+              ),
+              Center(
+                child: SvgPicture.asset(
+                  "assets/image/logo_tree.svg",
                   width: 128,
                   height: 128,
                 ),
               ),
-            ),
-            const SizedBox(height: 100),
-            Bouncing(
-              onPress: () {},
-              child: GestureDetector(
-                onTap: () {
-                  kakaoLogin();
-                },
-                child: Image.asset(
-                  "assets/image/kakao_login_large_narrow.png",
-                  width: 200,
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Bouncing(
-              onPress: () {},
-              child: GestureDetector(
-                onTap: () {
-                  googleLogin();
-                },
-                child: Image.asset(
-                  "assets/image/android_light_sq_SI@4x.png",
-                  width: 200,
-                ),
-              ),
-            ),
-          ],
+              Column(
+                children: [
+                  Bouncing(
+                    onPress: () {},
+                    child: GestureDetector(
+                      onTap: () {
+                        kakaoLogin();
+                      },
+                      child: SvgPicture.asset(
+                        "assets/image/kakao_login.svg",
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Bouncing(
+                    onPress: () {},
+                    child: GestureDetector(
+                      onTap: () {
+                        googleLogin();
+                      },
+                      child: SvgPicture.asset(
+                        "assets/image/google_login.svg",
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
