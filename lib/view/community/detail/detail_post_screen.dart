@@ -12,7 +12,7 @@ import 'package:mojacknong_android/view/community/component/post_category.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 class DetailPostScreen extends StatefulWidget {
-  final String profileImage;
+  final String? profileImage;
   final String nickname;
   final String postTime;
   final String postCategory;
@@ -22,7 +22,7 @@ class DetailPostScreen extends StatefulWidget {
 
   const DetailPostScreen({
     Key? key,
-    required this.profileImage,
+    this.profileImage,
     required this.nickname,
     required this.postTime,
     required this.postCategory,
@@ -72,7 +72,9 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
               Row(
                 children: [
                   DetailPostProfile(
-                    profileImage: widget.profileImage,
+                    profileImage: widget.profileImage != null
+                        ? widget.profileImage
+                        : null,
                     nickname: widget.nickname,
                     postTime: widget.postTime,
                   ),

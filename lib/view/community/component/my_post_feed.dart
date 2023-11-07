@@ -3,13 +3,10 @@ import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/view/community/component/community_comment_count.dart';
 import 'package:mojacknong_android/view/community/component/community_content.dart';
 import 'package:mojacknong_android/view/community/component/community_picture.dart';
-import 'package:mojacknong_android/view/community/component/community_profile.dart';
+import 'package:mojacknong_android/view/community/component/community_post_time.dart';
 import 'package:mojacknong_android/view/community/component/post_category.dart';
-import 'package:mojacknong_android/view/community/detail/detail_post_screen.dart';
 
-class CommunityFeed extends StatelessWidget {
-  final String profileImage;
-  final String nickname;
+class MyPostFeed extends StatelessWidget {
   final String postTime;
   final String comment;
   final String postCategory;
@@ -17,10 +14,8 @@ class CommunityFeed extends StatelessWidget {
   final String content;
   final String image;
 
-  CommunityFeed({
+  MyPostFeed({
     Key? key,
-    required this.profileImage,
-    required this.nickname,
     required this.postTime,
     required this.comment,
     required this.postCategory,
@@ -32,24 +27,7 @@ class CommunityFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Bouncing(
-      onPress: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return DetailPostScreen(
-                profileImage: profileImage,
-                nickname: nickname,
-                postTime: postTime,
-                postCategory: postCategory,
-                title: title,
-                content: content,
-                image: image,
-              );
-            },
-          ),
-        );
-      },
+      onPress: () {},
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -59,15 +37,14 @@ class CommunityFeed extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    CommunityProfile(
-                      profileImage: profileImage,
-                      nickname: nickname,
-                      postTime: postTime,
+                    PostCategory(category: postCategory),
+                    CommunityPostTime(postTime: postTime),
+                    SizedBox(
+                      width: 8,
                     ),
                     CommunityCommentCount(comment: comment),
                   ],
                 ),
-                PostCategory(category: postCategory),
               ],
             ),
             CommunityContent(

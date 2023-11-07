@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class DetailPostProfile extends StatelessWidget {
-  final String profileImage;
+  final String? profileImage;
   final String nickname;
   final String postTime;
 
   DetailPostProfile({
     Key? key,
-    required this.profileImage,
+    this.profileImage,
     required this.nickname,
     required this.postTime,
   }) : super(key: key);
@@ -21,7 +21,7 @@ class DetailPostProfile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
-            profileImage,
+            profileImage!,
             width: 44,
             height: 44,
           ),

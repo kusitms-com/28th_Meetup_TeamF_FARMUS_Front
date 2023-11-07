@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/community/component/community_post_time.dart';
 
 class CommunityProfile extends StatefulWidget {
   final String profileImage;
@@ -47,13 +48,8 @@ class _CommunityProfileState extends State<CommunityProfile> {
           const SizedBox(
             width: 8,
           ),
-          Text(
-            widget.postTime,
-            style: const TextStyle(
-              color: FarmusThemeData.grey2,
-              fontSize: 12,
-              fontFamily: "Pretendard",
-            ),
+          CommunityPostTime(
+            postTime: widget.postTime,
           ),
           const SizedBox(
             width: 8,
