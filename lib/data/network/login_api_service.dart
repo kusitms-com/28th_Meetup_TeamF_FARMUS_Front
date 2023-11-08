@@ -18,8 +18,8 @@ Dio authDio = Dio(
   ),
 );
 
-class ApiServices {
-  Future<bool> fetchKaKaoData(token) async {
+class LoginApiServices {
+  Future<String?> fetchKaKaoData(token) async {
     try {
       Response response = await dio.post(
         '/api/user/auth/kakao-login',
@@ -33,12 +33,16 @@ class ApiServices {
 
       final accessGoogleToken = await storage.read(key: 'accessToken');
       final refreshGoogleToken = await storage.read(key: 'refreshToken');
-      return true;
-      print("성공 \n액세스 : $accessGoogleToken \n리프레시 : $refreshGoogleToken");
+
+      if (response.data["early"] == false) {
+        return "earlyFalse";
+      } else if (response.data["early"] == true) {
+        return "earlyTrue";
+      }
     } on DioError catch (e) {
       print(e.message);
       print("실패");
-      return false;
+      return "false";
     }
   }
 

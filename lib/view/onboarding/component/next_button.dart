@@ -4,11 +4,12 @@ import 'package:mojacknong_android/common/primary_button.dart';
 
 class NextButton extends StatelessWidget {
   final void Function() onPressed;
-  // 텍스트 입력 값 여부
+  final String text;
   final bool enabled;
 
   const NextButton({
     Key? key,
+    required this.text,
     required this.onPressed,
     required this.enabled,
   }) : super(key: key);
@@ -18,7 +19,7 @@ class NextButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: PrimaryButton(
-        text: '다음',
+        text: text,
         onPressed: enabled ? onPressed : null,
         backgroundColor:
             enabled ? FarmusThemeData.brownButton : FarmusThemeData.grey4,

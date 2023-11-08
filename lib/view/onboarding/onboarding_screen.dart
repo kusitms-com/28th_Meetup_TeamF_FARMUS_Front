@@ -174,6 +174,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     Expanded(
                       child: NextButton(
+                        text: _currentPage == 5
+                            ? "시작하기"
+                            : _currentPage == 2 &&
+                                    !isBoxesSelectedCurrentPage2()
+                                ? "건너뛰기"
+                                : "다음",
                         onPressed: () => _handleButtonPress(true),
                         // 버튼 활성화 유무 결정
                         enabled: _currentPage == 1
@@ -182,8 +188,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 !_onboardingController
                                     .hasSpecialCharacters.value
                             : _currentPage == 2
+                                // 2페이지는 건너뛰기, 다음버튼으로 항상 활성화
+                                ? true
                                 // 박스 하나라도 선택하면 버튼 활성화
-                                ? isBoxesSelectedCurrentPage2()
                                 : _currentPage == 3
                                     ? isBoxesSelectedCurrentPage3()
                                     : _currentPage == 4

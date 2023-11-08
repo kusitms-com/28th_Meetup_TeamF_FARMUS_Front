@@ -10,6 +10,7 @@ import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/repository/login_repository.dart';
 import 'package:mojacknong_android/view/login/app_interceptor.dart';
+import 'package:mojacknong_android/view/main/main_screen.dart';
 import 'package:mojacknong_android/view/onboarding/onboarding_screen.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -136,9 +137,13 @@ class _LoginScreen extends State<LoginScreen> {
   fetchKaKaoData(token) {
     LoginRepository.kakaoLoginApi(token).then(
       (value) {
-        if (value) {
+        if (value == "earlyTrue") {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => OnboardingScreen()),
+          );
+        } else if (value == "earlyFalse") {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => MainScreen()),
           );
         }
       },
