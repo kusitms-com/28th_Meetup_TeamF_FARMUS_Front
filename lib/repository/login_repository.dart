@@ -3,11 +3,12 @@ import 'package:mojacknong_android/data/network/login_api_service.dart';
 class LoginRepository {
   static Future<dynamic> kakaoLoginApi(token) async {
     String? response = await LoginApiServices().fetchKaKaoData(token);
+    print(response);
     return response;
   }
 
   static Future<dynamic> googleLoginApi() async {
-    bool response = await LoginApiServices().getGoogleLogin();
+    String response = await LoginApiServices().getGoogleLogin();
     return response;
   }
 

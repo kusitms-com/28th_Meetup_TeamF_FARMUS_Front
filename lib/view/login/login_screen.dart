@@ -138,10 +138,13 @@ class _LoginScreen extends State<LoginScreen> {
     LoginRepository.kakaoLoginApi(token).then(
       (value) {
         if (value == "earlyTrue") {
+          print(value);
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => OnboardingScreen()),
           );
         } else if (value == "earlyFalse") {
+          print(value);
+
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => MainScreen()),
           );
@@ -151,13 +154,22 @@ class _LoginScreen extends State<LoginScreen> {
   }
 
   googleLogin() {
-    LoginRepository.googleLoginApi().then((value) {
-      if (value) {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => OnboardingScreen()),
-        );
-      }
-    });
+    LoginRepository.googleLoginApi().then(
+      (value) {
+        if (value == "earlyTrue") {
+          print(value);
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => OnboardingScreen()),
+          );
+        } else if (value == "earlyFalse") {
+          print(value);
+
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => MainScreen()),
+          );
+        }
+      },
+    );
   }
 
   reissue() {
