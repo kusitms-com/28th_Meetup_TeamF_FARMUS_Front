@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/repository/onboarding_repository.dart';
 import 'package:mojacknong_android/view_model/controllers/onboarding_controller.dart';
 
 class OnboardingFirst extends StatefulWidget {
@@ -17,23 +18,33 @@ class OnboardingFirst extends StatefulWidget {
 class _OnboardingFirstState extends State<OnboardingFirst> {
   final OnboardingController _controller = Get.put(OnboardingController());
   final ImagePicker _picker = ImagePicker();
+  String? _profileImage;
 
-  File? _selectedImage;
+  @override
+  void initState() {
+    super.initState();
+    _setInitialImage();
+  }
 
-  void _getImageFromGallery(ImageSource source) async {
-    final XFile? pickedFile = await _picker.pickImage(source: source);
-
-    if (pickedFile != null) {
+  Future<void> _setInitialImage() async {
+    String? profileImage = await getFirstProfileImage();
+    if (profileImage != null) {
       setState(() {
-        _selectedImage = File(pickedFile.path);
+        _profileImage = profileImage;
       });
-      _controller.setImageFile(File(pickedFile.path));
     }
   }
 
-  @override
-  void dispose() {
-    super.dispose();
+  Future<void> _getImageFromGallery() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _profileImage = pickedFile.path;
+      });
+      _controller.setImageFile(File(pickedFile.path));
+    }
   }
 
   @override
@@ -45,9 +56,7 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 30),
             Container(
               width: 150,
               height: 150,
@@ -55,20 +64,23 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
                 shape: BoxShape.circle,
               ),
               child: GestureDetector(
-                onTap: () {
-                  _getImageFromGallery(
-                    ImageSource.gallery,
-                  );
-                },
-                child: _selectedImage != null
+                onTap: _getImageFromGallery,
+                child: _profileImage != null
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(75),
-                        child: Image.file(
-                          _selectedImage!,
-                          width: 118,
-                          height: 118,
-                          fit: BoxFit.cover,
-                        ),
+                        child: _profileImage!.startsWith('http')
+                            ? Image.network(
+                                _profileImage!,
+                                width: 118,
+                                height: 118,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.file(
+                                File(_profileImage!),
+                                width: 118,
+                                height: 118,
+                                fit: BoxFit.cover,
+                              ),
                       )
                     : SvgPicture.asset(
                         "assets/image/ic_profile.svg",
@@ -77,9 +89,7 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
                       ),
               ),
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 30),
             const Align(
               alignment: Alignment.centerLeft,
               child: Padding(
@@ -136,16 +146,20 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
                     color: FarmusThemeData.red,
                   ),
                   contentPadding: const EdgeInsets.symmetric(
-                      vertical: 12.0, horizontal: 16.0),
+                    vertical: 12.0,
+                    horizontal: 16.0,
+                  ),
                 ),
               ),
             ),
-            SizedBox(
-              height: 80,
-            ),
+            SizedBox(height: 80),
           ],
         ),
       ),
     );
+  }
+
+  Future<String?> getFirstProfileImage() {
+    return OnboardingRepository.profileImageApi();
   }
 }

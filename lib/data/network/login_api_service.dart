@@ -27,9 +27,11 @@ class LoginApiServices {
       );
       print(response.data);
       await storage.write(
-          key: 'refreshToken', value: response.data["refreshToken"]);
+          key: 'refreshToken', value: response.data["data"]["refreshToken"]);
       await storage.write(
-          key: 'accessToken', value: response.data["accessToken"]);
+          key: 'accessToken', value: response.data["data"]["accessToken"]);
+
+      print(await storage.read(key: "accessToken"));
 
       if (response.data["data"]['early'] == false) {
         return "earlyFalse";
@@ -67,9 +69,9 @@ class LoginApiServices {
       );
       print(response.data);
       await storage.write(
-          key: 'refreshToken', value: response.data["refreshToken"]);
+          key: 'refreshToken', value: response.data["data"]["refreshToken"]);
       await storage.write(
-          key: 'accessToken', value: response.data["accessToken"]);
+          key: 'accessToken', value: response.data["data"]["accessToken"]);
 
       final accessGoogleToken = await storage.read(key: 'accessToken');
       final refreshGoogleToken = await storage.read(key: 'refreshToken');
