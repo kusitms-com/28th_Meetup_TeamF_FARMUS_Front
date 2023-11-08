@@ -54,7 +54,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
             children: [
               ...category.map(
                 (item) {
-                  return CommunityCategory(category: item);
+                  return CommunityCategory(
+                      feedController: feedController, category: item);
                 },
               ).toList(),
               const Expanded(
