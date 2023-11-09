@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mojacknong_android/repository/onboarding_repository.dart';
 import 'package:mojacknong_android/view/onboarding/component/select_box.dart';
 import 'package:mojacknong_android/view_model/controllers/onboarding_controller.dart';
 
@@ -13,6 +14,15 @@ class OnboardingSecond extends StatefulWidget {
 class _OnboardingSecond extends State<OnboardingSecond> {
   final OnboardingController _onboardingController =
       Get.put(OnboardingController());
+
+  List<String> motivation = [];
+
+  @override
+  void dispose() {
+    postMotivation();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,6 +37,7 @@ class _OnboardingSecond extends State<OnboardingSecond> {
           GestureDetector(
             onTap: () {
               _onboardingController.selectBox1();
+              updateMotivation();
             },
             child: SelectBox(
               title: "채솟값을 절약하고 싶어요",
@@ -37,6 +48,7 @@ class _OnboardingSecond extends State<OnboardingSecond> {
           GestureDetector(
             onTap: () {
               _onboardingController.selectBox2();
+              updateMotivation();
             },
             child: SelectBox(
               title: "신선하고 안전한 식재료를 얻고 싶어요",
@@ -47,6 +59,7 @@ class _OnboardingSecond extends State<OnboardingSecond> {
           GestureDetector(
             onTap: () {
               _onboardingController.selectBox3();
+              updateMotivation();
             },
             child: SelectBox(
               title: "스트레스를 해소하고 안정을 얻고 싶어요",
@@ -57,5 +70,29 @@ class _OnboardingSecond extends State<OnboardingSecond> {
         ],
       ),
     );
+  }
+
+  void updateMotivation() {
+    motivation = [];
+    if (_onboardingController.isSelected1.value) {
+      motivation.add("채소값 절약");
+    } else {
+      motivation.remove("채소값 절약");
+    }
+    if (_onboardingController.isSelected2.value) {
+      motivation.add("신선하고 안전한 식재료");
+    } else {
+      motivation.remove("신선하고 안전한 식재료");
+    }
+    if (_onboardingController.isSelected3.value) {
+      motivation.add("스트레스 해소 및 안정");
+    } else {
+      motivation.remove("스트레스 해소 및 안정");
+    }
+  }
+
+  Future<String> postMotivation() {
+    print(motivation);
+    return OnboardingRepository.postMotivation(motivation);
   }
 }

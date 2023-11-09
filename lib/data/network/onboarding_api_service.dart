@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -23,13 +24,20 @@ class OnboardingApiService {
   Future<String> postUserData(File? imageFile, String nickname) async {
     try {
       print(imageFile);
-      FormData formData = FormData.fromMap({
-        'file': imageFile != null
-            ? await MultipartFile.fromFile(imageFile.path,
-                filename: imageFile.path.split('/').last)
-            : null,
-        'nickName': nickname,
-      });
+      FormData formData;
+
+      if (imageFile != null) {
+        formData = FormData.fromMap({
+          'file': await MultipartFile.fromFile(imageFile.path,
+              filename: imageFile.path.split('/').last),
+          'nickName': nickname,
+        });
+      } else {
+        formData = FormData.fromMap({
+          'nickName': nickname,
+        });
+      }
+      print(formData.fields[0]);
 
       Response response = await ApiClient().dio.post(
             '/api/user/select-information',
@@ -37,7 +45,23 @@ class OnboardingApiService {
           );
 
       print(response.data);
-      return "";
+      return "성공";
+    } on DioException catch (e) {
+      print(e.message);
+      return "false";
+    }
+  }
+
+  Future<String> postMotivation(List<String> motivation) async {
+    try {
+      String motivationData = jsonEncode({"motivation": motivation});
+
+      print("동기 $motivationData");
+      Response response = await ApiClient()
+          .dio
+          .post("/api/user/on-boarding/motivation", data: motivationData);
+      print(response.data);
+      return "성공";
     } on DioException catch (e) {
       print(e.message);
       return "false";

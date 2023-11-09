@@ -11,10 +11,18 @@ class OnboardingRepository {
 
   static Future<String> postProfileApi(File? imageFile, String nickname) async {
     String response = "false";
+    print("프로필 $imageFile");
     if (imageFile != null) {
+      response = await OnboardingApiService().postUserData(imageFile, nickname);
+    } else {
       response = await OnboardingApiService().postUserData(imageFile, nickname);
     }
     print("프로필 이미지 보내기 $response");
+    return response;
+  }
+
+  static Future<String> postMotivation(List<String> motivation) async {
+    String response = await OnboardingApiService().postMotivation(motivation);
     return response;
   }
 }
