@@ -23,7 +23,13 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
   @override
   void initState() {
     super.initState();
-    _setInitialImage();
+    _setInitialImage(); // 초기 이미지 설정
+  }
+
+  @override
+  void dispose() {
+    postProfile(); // 프로필 업로드
+    super.dispose();
   }
 
   Future<void> _setInitialImage() async {
@@ -44,6 +50,10 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
         _profileImage = pickedFile.path;
       });
       _controller.setImageFile(File(pickedFile.path));
+    } else {
+      setState(() {
+        _profileImage = null;
+      });
     }
   }
 
@@ -160,6 +170,23 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
   }
 
   Future<String?> getFirstProfileImage() {
-    return OnboardingRepository.profileImageApi();
+    return OnboardingRepository.getProfileImageApi(); // 서버에서 프로필 이미지 가져오기
+  }
+
+  Future<void> postProfile() {
+    String nickname = _controller.controller.text;
+
+    if (_profileImage != null) {
+      if (!_profileImage!.startsWith('http')) {
+        print("프로필 보내기 !!!! $_profileImage");
+        return OnboardingRepository.postProfileApi(
+            File(_profileImage!), nickname); // 프로필 이미지와 닉네임 서버에 업로드
+      } else {
+        print("갤러리에서 사진을 선택하지 않았습니다.");
+        return OnboardingRepository.postProfileApi(null, nickname);
+      }
+    } else {}
+
+    return Future.value();
   }
 }
