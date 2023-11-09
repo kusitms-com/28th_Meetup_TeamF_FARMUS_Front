@@ -25,4 +25,10 @@ class OnboardingRepository {
     String response = await OnboardingApiService().postMotivation(motivation);
     return response;
   }
+
+  static Future<String> postLevel(int time, String skill) async {
+    print("$time, $skill");
+    String response = await OnboardingApiService().postLevel(time, skill);
+    return response;
+  }
 }

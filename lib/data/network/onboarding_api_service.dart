@@ -55,12 +55,32 @@ class OnboardingApiService {
   Future<String> postMotivation(List<String> motivation) async {
     try {
       String motivationData = jsonEncode({"motivation": motivation});
-
-      print("동기 $motivationData");
       Response response = await ApiClient()
           .dio
           .post("/api/user/on-boarding/motivation", data: motivationData);
       print(response.data);
+      return "성공";
+    } on DioException catch (e) {
+      print(e.message);
+      return "false";
+    }
+  }
+
+  Future<String> postLevel(int time, String skill) async {
+    try {
+      final Map<String, dynamic> data = {
+        "time": time,
+        "skill": skill,
+      };
+
+      String jsonData = jsonEncode(data);
+
+      Response response = await ApiClient()
+          .dio
+          .post("/api/user/on-boarding/level", data: jsonData);
+      print(response.data);
+
+      print(response.data["data"]["level"]);
       return "성공";
     } on DioException catch (e) {
       print(e.message);

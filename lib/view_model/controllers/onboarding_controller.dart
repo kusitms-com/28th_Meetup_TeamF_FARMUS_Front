@@ -24,6 +24,9 @@ class OnboardingController extends GetxController {
 
   RxBool hasBoxesSelected = RxBool(false);
 
+  var time = RxInt(0);
+  var skill = RxString("");
+
   final image = Rxn<File>();
 
   @override
@@ -74,18 +77,21 @@ class OnboardingController extends GetxController {
     isSelected4.value = true;
     isSelected5.value = false;
     isSelected6.value = false;
+    time.value = 0;
   }
 
   void selectBox5() {
     isSelected4.value = false;
     isSelected5.value = true;
     isSelected6.value = false;
+    time.value = 1;
   }
 
   void selectBox6() {
     isSelected4.value = false;
     isSelected5.value = false;
     isSelected6.value = true;
+    time.value = 2;
   }
 
   void selectBox7() {
@@ -93,6 +99,7 @@ class OnboardingController extends GetxController {
     isSelected8.value = false;
     isSelected9.value = false;
     isSelected10.value = false;
+    skill.value = "입문자";
   }
 
   void selectBox8() {
@@ -100,6 +107,7 @@ class OnboardingController extends GetxController {
     isSelected8.value = true;
     isSelected9.value = false;
     isSelected10.value = false;
+    skill.value = "초보자";
   }
 
   void selectBox9() {
@@ -107,6 +115,7 @@ class OnboardingController extends GetxController {
     isSelected8.value = false;
     isSelected9.value = true;
     isSelected10.value = false;
+    skill.value = "중급자";
   }
 
   void selectBox10() {
@@ -114,6 +123,7 @@ class OnboardingController extends GetxController {
     isSelected8.value = false;
     isSelected9.value = false;
     isSelected10.value = true;
+    skill.value = "고수";
   }
 
   @override

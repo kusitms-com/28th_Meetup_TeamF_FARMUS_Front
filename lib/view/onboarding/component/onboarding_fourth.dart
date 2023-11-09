@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mojacknong_android/repository/onboarding_repository.dart';
 import 'package:mojacknong_android/view/onboarding/component/select_box.dart';
 import 'package:mojacknong_android/view_model/controllers/onboarding_controller.dart';
 
 class OnboardingFourth extends StatefulWidget {
-  const OnboardingFourth({Key? key}) : super(key: key);
+  const OnboardingFourth({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _OnboardingFourth createState() => _OnboardingFourth();
@@ -12,6 +15,14 @@ class OnboardingFourth extends StatefulWidget {
 
 class _OnboardingFourth extends State<OnboardingFourth> {
   OnboardingController _onboardingController = Get.put(OnboardingController());
+  String skill = "";
+
+  @override
+  void dispose() {
+    postLevel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,5 +77,10 @@ class _OnboardingFourth extends State<OnboardingFourth> {
         ],
       ),
     );
+  }
+
+  Future<String> postLevel() {
+    return OnboardingRepository.postLevel(
+        _onboardingController.time.value, _onboardingController.skill.value);
   }
 }

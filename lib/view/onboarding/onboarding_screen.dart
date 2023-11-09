@@ -26,6 +26,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   String description = "";
   late Widget _currentWidget;
   bool isLastPage = false;
+  late int time;
 
   bool isBoxesSelectedCurrentPage2() {
     return _onboardingController.isSelected1.value ||

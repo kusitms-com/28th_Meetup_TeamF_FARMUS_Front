@@ -13,6 +13,9 @@ class OnboardingThird extends StatefulWidget {
 class _OnboardingThird extends State<OnboardingThird> {
   final OnboardingController _onboardingController =
       Get.put(OnboardingController());
+
+  late int time;
+
   @override
   Widget build(BuildContext context) {
     return Container(
