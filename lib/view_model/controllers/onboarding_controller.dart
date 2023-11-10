@@ -99,7 +99,7 @@ class OnboardingController extends GetxController {
     isSelected8.value = false;
     isSelected9.value = false;
     isSelected10.value = false;
-    skill.value = "입문자";
+    skill.value = "홈파밍 입문";
   }
 
   void selectBox8() {
@@ -107,7 +107,7 @@ class OnboardingController extends GetxController {
     isSelected8.value = true;
     isSelected9.value = false;
     isSelected10.value = false;
-    skill.value = "초보자";
+    skill.value = "홈파밍 초보";
   }
 
   void selectBox9() {
@@ -115,7 +115,7 @@ class OnboardingController extends GetxController {
     isSelected8.value = false;
     isSelected9.value = true;
     isSelected10.value = false;
-    skill.value = "중급자";
+    skill.value = "홈파밍 중급";
   }
 
   void selectBox10() {
@@ -123,7 +123,7 @@ class OnboardingController extends GetxController {
     isSelected8.value = false;
     isSelected9.value = false;
     isSelected10.value = true;
-    skill.value = "고수";
+    skill.value = "홈파밍 고수";
   }
 
   @override
