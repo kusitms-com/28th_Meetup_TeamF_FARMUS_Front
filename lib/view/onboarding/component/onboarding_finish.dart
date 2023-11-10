@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/repository/onboarding_repository.dart';
 
 class OnboardingFinish extends StatefulWidget {
   const OnboardingFinish({Key? key}) : super(key: key);
@@ -10,6 +11,12 @@ class OnboardingFinish extends StatefulWidget {
 }
 
 class _OnboardingFinishState extends State<OnboardingFinish> {
+  @override
+  void initState() {
+    super.initState();
+    patchComplete();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,5 +73,9 @@ class _OnboardingFinishState extends State<OnboardingFinish> {
         ],
       ),
     );
+  }
+
+  Future<String?> patchComplete() {
+    return OnboardingRepository.patchComplete();
   }
 }

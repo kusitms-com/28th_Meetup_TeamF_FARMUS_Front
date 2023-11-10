@@ -31,4 +31,9 @@ class OnboardingRepository {
     String response = await OnboardingApiService().postLevel(time, skill);
     return response;
   }
+
+  static Future<String> patchComplete() async {
+    String response = await OnboardingApiService().patchComplete();
+    return response;
+  }
 }
