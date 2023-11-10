@@ -21,16 +21,33 @@ class PrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Bouncing(
       onPress: () {},
-      child: SizedBox(
-        width: double.infinity,
-        height: 48,
-        child: ElevatedButton(
-          onPressed: onPressed,
-          child: Text(text),
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(backgroundColor),
-            foregroundColor: MaterialStateProperty.all(foregroundColor),
-            surfaceTintColor: MaterialStateProperty.all(surfaceTintColor),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+          width: double.infinity,
+          height: 48,
+          child: TextButton(
+            onPressed: onPressed,
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(backgroundColor),
+              foregroundColor: MaterialStateProperty.all(foregroundColor),
+              side: MaterialStateProperty.resolveWith(
+                (states) {
+                  return BorderSide(
+                    color: surfaceTintColor != null
+                        ? surfaceTintColor!
+                        : Colors.transparent,
+                    width: 1.0,
+                  );
+                },
+              ), // 테두리 두께 설정
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+            ),
+            child: Text(text),
           ),
         ),
       ),

@@ -1,23 +1,24 @@
-import 'package:mojacknong_android/data/network/api_service.dart';
+import 'package:mojacknong_android/data/network/login_api_service.dart';
 
 class LoginRepository {
   static Future<dynamic> kakaoLoginApi(token) async {
-    bool response = await ApiServices().fetchKaKaoData(token);
+    String? response = await LoginApiServices().fetchKaKaoData(token);
+    print(response);
     return response;
   }
 
   static Future<dynamic> googleLoginApi() async {
-    bool response = await ApiServices().getGoogleLogin();
+    String response = await LoginApiServices().getGoogleLogin();
     return response;
   }
 
   static Future<dynamic> reissueApi() async {
-    var response = await ApiServices().reissue();
+    var response = await LoginApiServices().reissue();
     return response;
   }
 
   static Future<dynamic> logoutApi() async {
-    var response = await ApiServices().logout();
+    var response = await LoginApiServices().logout();
     return response;
   }
 }

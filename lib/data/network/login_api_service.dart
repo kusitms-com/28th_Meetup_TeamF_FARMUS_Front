@@ -18,8 +18,8 @@ Dio authDio = Dio(
   ),
 );
 
-class ApiServices {
-  Future<bool> fetchKaKaoData(token) async {
+class LoginApiServices {
+  Future<String> fetchKaKaoData(token) async {
     try {
       Response response = await dio.post(
         '/api/user/auth/kakao-login',
@@ -27,22 +27,27 @@ class ApiServices {
       );
       print(response.data);
       await storage.write(
-          key: 'refreshToken', value: response.data["refreshToken"]);
+          key: 'refreshToken', value: response.data["data"]["refreshToken"]);
       await storage.write(
-          key: 'accessToken', value: response.data["accessToken"]);
+          key: 'accessToken', value: response.data["data"]["accessToken"]);
 
-      final accessGoogleToken = await storage.read(key: 'accessToken');
-      final refreshGoogleToken = await storage.read(key: 'refreshToken');
-      return true;
-      print("성공 \n액세스 : $accessGoogleToken \n리프레시 : $refreshGoogleToken");
+      print(await storage.read(key: "accessToken"));
+
+      if (response.data["data"]['early'] == false) {
+        return "earlyFalse";
+      } else if (response.data["data"]['early'] == true) {
+        return "earlyTrue";
+      } else {
+        return "false";
+      }
     } on DioError catch (e) {
       print(e.message);
       print("실패");
-      return false;
+      return "false";
     }
   }
 
-  Future<bool> getGoogleLogin() async {
+  Future<String> getGoogleLogin() async {
     print("구글 로그인 버튼 클릭");
 
     final GoogleSignInAccount? googleSignInAccount =
@@ -55,7 +60,7 @@ class ApiServices {
     return fetchGoogleData(googleSignInAuthentication.accessToken);
   }
 
-  Future<bool> fetchGoogleData(token) async {
+  Future<String> fetchGoogleData(token) async {
     try {
       print(token.toString());
       Response response = await dio.post(
@@ -64,18 +69,25 @@ class ApiServices {
       );
       print(response.data);
       await storage.write(
-          key: 'refreshToken', value: response.data["refreshToken"]);
+          key: 'refreshToken', value: response.data["data"]["refreshToken"]);
       await storage.write(
-          key: 'accessToken', value: response.data["accessToken"]);
+          key: 'accessToken', value: response.data["data"]["accessToken"]);
 
       final accessGoogleToken = await storage.read(key: 'accessToken');
       final refreshGoogleToken = await storage.read(key: 'refreshToken');
       print("성공 \n액세스 : $accessGoogleToken \n리프레시 : $refreshGoogleToken");
-      return true;
+
+      if (response.data["data"]['early'] == false) {
+        return "earlyFalse";
+      } else if (response.data["data"]['early'] == true) {
+        return "earlyTrue";
+      } else {
+        return "false";
+      }
     } on DioError catch (e) {
       print(e.message);
       print("실패");
-      return false;
+      return "false";
     }
   }
 

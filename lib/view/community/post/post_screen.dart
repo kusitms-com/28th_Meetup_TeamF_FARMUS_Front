@@ -20,9 +20,9 @@ final int maxLengthTitle = 20;
 final int maxLengthContent = 500;
 
 class _PostScreenState extends State<PostScreen> {
-  final CommunityPostController _controller = Get.put(
-    CommunityPostController(),
-  );
+  final CommunityPostController postController =
+      Get.put(CommunityPostController());
+
   final ImagePicker _picker = ImagePicker();
   File? _selectedImage;
 
@@ -33,9 +33,11 @@ class _PostScreenState extends State<PostScreen> {
       setState(() {
         _selectedImage = File(pickedFile.path);
       });
-      _controller.setImageFile(File(pickedFile.path));
+      postController.setImageFile(File(pickedFile.path));
     }
   }
+
+  late List<bool> isSelected = [false, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +68,7 @@ class _PostScreenState extends State<PostScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Row(
+                  Row(
                     children: [
                       Text(
                         "태그",
@@ -76,9 +78,42 @@ class _PostScreenState extends State<PostScreen> {
                           fontFamily: "Pretendard",
                         ),
                       ),
-                      CommunityCategory(category: "도와주세요"),
-                      CommunityCategory(category: "자랑할래요"),
-                      CommunityCategory(category: "정보나눔"),
+                      CommunityCategory(
+                        postController: postController,
+                        category: "도와주세요",
+                        isSelected: isSelected[0],
+                        onSelected: () {
+                          setState(() {
+                            // 선택된 카테고리의 isSelected 값을 변경
+                            isSelected = [true, false, false];
+                            postController.selectCategory1();
+                          });
+                        },
+                      ),
+                      CommunityCategory(
+                        postController: postController,
+                        category: "자랑할래요",
+                        isSelected: isSelected[1],
+                        onSelected: () {
+                          setState(() {
+                            // 선택된 카테고리의 isSelected 값을 변경
+                            isSelected = [false, true, false];
+                            postController.selectCategory2();
+                          });
+                        },
+                      ),
+                      CommunityCategory(
+                        postController: postController,
+                        category: "정보나눔",
+                        isSelected: isSelected[2],
+                        onSelected: () {
+                          setState(() {
+                            // 선택된 카테고리의 isSelected 값을 변경
+                            isSelected = [false, false, true];
+                            postController.selectCategory3();
+                          });
+                        },
+                      ),
                     ],
                   ),
                   TextFormField(
@@ -89,7 +124,7 @@ class _PostScreenState extends State<PostScreen> {
                       ),
                       counterText: "",
                       suffix: Obx(() => Text(
-                          "${_controller.titleValue.value.length} / $maxLengthTitle")),
+                          "${postController.titleValue.value.length} / $maxLengthTitle")),
                       suffixStyle: TextStyle(
                         color: FarmusThemeData.dark.withOpacity(0.3),
                       ),
@@ -101,7 +136,7 @@ class _PostScreenState extends State<PostScreen> {
                       ),
                     ),
                     maxLength: maxLengthTitle,
-                    onChanged: _controller.updateTitleValue,
+                    onChanged: postController.updateTitleValue,
                   ),
                   TextFormField(
                     maxLines: null,
@@ -115,7 +150,7 @@ class _PostScreenState extends State<PostScreen> {
                       enabledBorder: InputBorder.none,
                     ),
                     maxLength: maxLengthContent,
-                    onChanged: _controller.updateContentValue,
+                    onChanged: postController.updateContentValue,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
@@ -126,7 +161,7 @@ class _PostScreenState extends State<PostScreen> {
                         padding: const EdgeInsets.only(right: 8.0),
                         child: Obx(
                           () => Text(
-                            "${_controller.contentValue.value.length} / $maxLengthContent",
+                            "${postController.contentValue.value.length} / $maxLengthContent",
                             style: TextStyle(
                               color: FarmusThemeData.dark.withOpacity(0.3),
                             ),
