@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
+import 'package:mojacknong_android/model/community_posting.dart';
 import 'package:mojacknong_android/repository/community_repository.dart';
 import 'package:mojacknong_android/view/community/component/button_next_my_post.dart';
 import 'package:mojacknong_android/view/community/component/community_category.dart';
@@ -19,28 +20,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   List<String> category = <String>["도와주세요", "자랑할래요", "정보나눠요"];
 
-  List<Map<String, String>> dummyData = [
-    {
-      "profileImage": "assets/image/image_example_profile.png",
-      "nickname": "노준국",
-      "postTime": "11/6 12:18",
-      "comment": "0",
-      "postCategory": "도와주세요",
-      "title": "방울토마토가 자라지 않습니다..",
-      "content": "왜 안자라는 걸까요? 봐주실 분 구합니다.",
-      "image": "assets/image/image_example_community.png",
-    },
-    {
-      "profileImage": "assets/image/image_example_profile2.png",
-      "nickname": "감자",
-      "postTime": "11/6 12:18",
-      "comment": "0",
-      "postCategory": "자랑할래요",
-      "title": "25년 생에 처음으로",
-      "content": "새싹 발아에 성공했습니다. 감격스럽네요.. \n저는 이제 농약손이 아니에요 ^_____^",
-      "image": "assets/image/image_example_community2.png",
-    },
-  ];
+  List<CommunityPosting> communityPostings = [];
 
   @override
   void initState() {
@@ -81,18 +61,22 @@ class _CommunityScreenState extends State<CommunityScreen> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: dummyData.length,
+              itemCount: communityPostings.length,
               itemBuilder: (context, index) {
+                CommunityPosting posting = communityPostings[index];
                 feedController.setData(
-                  profileImage: dummyData[index]['profileImage']!,
-                  nickname: dummyData[index]['nickname']!,
-                  postTime: dummyData[index]['postTime']!,
-                  comment: dummyData[index]['comment']!,
-                  postCategory: dummyData[index]['postCategory']!,
-                  title: dummyData[index]['title']!,
-                  content: dummyData[index]['content']!,
-                  image: dummyData[index]['image']!,
+                  profileImage: posting.userImageUrl,
+                  nickname: posting.nickName,
+                  postTime: posting.createdAt,
+                  comment: posting.commentCount.toString(),
+                  postCategory: posting.tag,
+                  title: posting.title,
+                  content: posting.contents,
+                  image: posting.postingImage.isNotEmpty
+                      ? posting.postingImage[0]
+                      : "",
                 );
+
                 return CommunityFeed(
                   profileImage: feedController.profileImage.value,
                   nickname: feedController.nickname.value,
@@ -112,7 +96,11 @@ class _CommunityScreenState extends State<CommunityScreen> {
     );
   }
 
-  Future<String?> getWholePosting() {
-    return CommunityRepository.getWholePosting();
+  Future<void> getWholePosting() async {
+    List<CommunityPosting> postings =
+        await CommunityRepository.getWholePosting();
+    setState(() {
+      communityPostings = postings;
+    });
   }
 }

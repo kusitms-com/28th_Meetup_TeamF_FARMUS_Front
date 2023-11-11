@@ -15,10 +15,15 @@ class CommunityPicture extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: FarmusThemeData.background),
-        child: Image.asset(
-          image,
-          fit: BoxFit.fill,
-        ),
+        child: image.isEmpty
+            ? Image.asset(
+                "assets/image/image_example_community.png",
+                fit: BoxFit.fill,
+              )
+            : Image.network(
+                image,
+                fit: BoxFit.fill,
+              ),
       ),
     );
   }
