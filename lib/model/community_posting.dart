@@ -1,5 +1,3 @@
-class CommunityDataModel {}
-
 class CommunityPosting {
   final int userId;
   final String title;

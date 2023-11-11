@@ -1,10 +1,11 @@
 import 'package:mojacknong_android/data/network/login_api_service.dart';
+import 'package:mojacknong_android/model/farmus_user.dart';
 
 class LoginRepository {
-  static Future<dynamic> kakaoLoginApi(token) async {
-    String? response = await LoginApiServices().fetchKaKaoData(token);
-    print(response);
-    return response;
+  static Future<FarmusUser> kakaoLoginApi(token) async {
+    FarmusUser user = await LoginApiServices().fetchKaKaoData(token);
+    print("데이터데이터 $user");
+    return user;
   }
 
   static Future<dynamic> googleLoginApi() async {

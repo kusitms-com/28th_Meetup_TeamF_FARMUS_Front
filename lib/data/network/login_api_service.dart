@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mojacknong_android/model/farmus_user.dart';
 import 'package:mojacknong_android/res/app_url/app_url.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -19,31 +20,26 @@ Dio authDio = Dio(
 );
 
 class LoginApiServices {
-  Future<String> fetchKaKaoData(token) async {
+  Future<FarmusUser> fetchKaKaoData(token) async {
     try {
       Response response = await dio.post(
         '/api/user/auth/kakao-login',
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
-      print(response.data);
-      await storage.write(
-          key: 'refreshToken', value: response.data["data"]["refreshToken"]);
-      await storage.write(
-          key: 'accessToken', value: response.data["data"]["accessToken"]);
 
-      print(await storage.read(key: "accessToken"));
+      FarmusUser user = FarmusUser.fromJson(response.data["data"]);
+      await storage.write(key: "refreshToken", value: user.refreshToken);
+      await storage.write(key: 'accessToken', value: user.accessToken);
 
-      if (response.data["data"]['early'] == false) {
-        return "earlyFalse";
-      } else if (response.data["data"]['early'] == true) {
-        return "earlyTrue";
-      } else {
-        return "false";
-      }
-    } on DioError catch (e) {
+      return user;
+    } on DioException catch (e) {
       print(e.message);
       print("실패");
-      return "false";
+      return FarmusUser(
+        nickName: "",
+        refreshToken: "",
+        accessToken: "",
+      );
     }
   }
 

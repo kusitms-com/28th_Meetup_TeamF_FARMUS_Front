@@ -8,6 +8,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/model/farmus_user.dart';
 import 'package:mojacknong_android/repository/login_repository.dart';
 import 'package:mojacknong_android/view/login/app_interceptor.dart';
 import 'package:mojacknong_android/view/main/main_screen.dart';
@@ -36,6 +37,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreen extends State<LoginScreen> {
+  late FarmusUser user;
+
   @override
   Widget build(BuildContext context) {
     authDio.interceptors.add(AppInterceptor(authDio));
@@ -137,14 +140,17 @@ class _LoginScreen extends State<LoginScreen> {
   fetchKaKaoData(token) {
     LoginRepository.kakaoLoginApi(token).then(
       (value) {
-        if (value == "earlyTrue") {
-          print(value);
+        setState(() {
+          user = value;
+        });
+        print(value.early);
+        print(value.nickName);
+
+        if (value.early == true) {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => OnboardingScreen()),
           );
-        } else if (value == "earlyFalse") {
-          print(value);
-
+        } else {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => MainScreen()),
           );
