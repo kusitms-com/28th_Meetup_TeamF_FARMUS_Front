@@ -23,7 +23,7 @@ class OnboardingApiService {
 
   Future<String> postUserData(File? imageFile, String nickname) async {
     try {
-      print(imageFile);
+      print("이미지이미지 $imageFile");
       FormData formData;
 
       if (imageFile != null) {

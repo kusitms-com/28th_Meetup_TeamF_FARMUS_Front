@@ -34,9 +34,14 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
 
   Future<void> _setInitialImage() async {
     String? profileImage = await getFirstProfileImage();
-    if (profileImage != null) {
+    print(profileImage);
+    if (profileImage != "") {
       setState(() {
         _profileImage = profileImage;
+      });
+    } else {
+      setState(() {
+        _profileImage = null;
       });
     }
   }

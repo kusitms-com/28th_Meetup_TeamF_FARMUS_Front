@@ -25,10 +25,10 @@ class CommunityCategory extends StatefulWidget {
 }
 
 class _CommunityCategoryState extends State<CommunityCategory> {
-  late bool isSelected;
-  late bool isSelected1;
-  late bool isSelected2;
-  late bool isSelected3;
+  late bool isSelected = false;
+  late bool isSelected1 = false;
+  late bool isSelected2 = false;
+  late bool isSelected3 = false;
 
   @override
   void initState() {
@@ -56,17 +56,19 @@ class _CommunityCategoryState extends State<CommunityCategory> {
                 isSelected1 = true;
                 isSelected2 = false;
                 isSelected3 = false;
+                print("$isSelected1, $isSelected2, $isSelected3");
               } else if (widget.category == "자랑할래요") {
                 widget.postController!.selectCategory2();
-                isSelected1 = true;
+                isSelected1 = false;
                 isSelected2 = true;
                 isSelected3 = false;
-              } else if (widget.category == "정보나눔") {
+                print("$isSelected1, $isSelected2, $isSelected3");
+              } else if (widget.category == "정보나눠요") {
                 widget.postController!.selectCategory3();
                 isSelected1 = false;
                 isSelected2 = false;
                 isSelected3 = true;
-                isSelected3 = !isSelected3;
+                print("$isSelected1, $isSelected2, $isSelected3");
               }
             }
           }
@@ -79,7 +81,11 @@ class _CommunityCategoryState extends State<CommunityCategory> {
           decoration: BoxDecoration(
             color: isSelected
                 ? FarmusThemeData.category
-                : FarmusThemeData.background,
+                : isSelected1
+                    ? FarmusThemeData.category
+                    : isSelected2 || isSelected3
+                        ? FarmusThemeData.category
+                        : FarmusThemeData.background,
             borderRadius: BorderRadius.circular(30),
           ),
           child: Padding(

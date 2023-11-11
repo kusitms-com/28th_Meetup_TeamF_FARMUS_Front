@@ -104,7 +104,7 @@ class _PostScreenState extends State<PostScreen> {
                       ),
                       CommunityCategory(
                         postController: postController,
-                        category: "정보나눔",
+                        category: "정보나눠요",
                         isSelected: isSelected[2],
                         onSelected: () {
                           setState(() {

@@ -17,7 +17,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
   final CommunityFeedController feedController =
       Get.put(CommunityFeedController());
 
-  List<String> category = <String>["도와주세요", "자랑할래요", "정보나눔"];
+  List<String> category = <String>["도와주세요", "자랑할래요", "정보나눠요"];
 
   List<Map<String, String>> dummyData = [
     {
