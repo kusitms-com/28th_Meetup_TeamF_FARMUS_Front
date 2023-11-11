@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
+import 'package:mojacknong_android/repository/community_repository.dart';
 import 'package:mojacknong_android/view/community/component/button_next_my_post.dart';
 import 'package:mojacknong_android/view/community/component/community_category.dart';
 import 'package:mojacknong_android/view/community/component/community_feed.dart';
@@ -40,6 +41,12 @@ class _CommunityScreenState extends State<CommunityScreen> {
       "image": "assets/image/image_example_community2.png",
     },
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    getWholePosting();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,5 +104,9 @@ class _CommunityScreenState extends State<CommunityScreen> {
       ),
       floatingActionButton: FloatingButtonPost(),
     );
+  }
+
+  Future<String?> getWholePosting() {
+    return CommunityRepository.getWholePosting();
   }
 }
