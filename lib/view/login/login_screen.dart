@@ -159,17 +159,29 @@ class _LoginScreen extends State<LoginScreen> {
     );
   }
 
-  googleLogin() {
-    LoginRepository.googleLoginApi().then(
+  googleLogin() async {
+    print("구글 로그인 버튼 클릭");
+
+    final GoogleSignInAccount? googleSignInAccount =
+        await googleSignIn.signIn();
+
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount!.authentication;
+
+    print("구글 액세스 토큰 ${googleSignInAuthentication.accessToken}");
+    LoginRepository.googleLoginApi(googleSignInAuthentication.accessToken).then(
       (value) {
-        if (value == "earlyTrue") {
-          print(value);
+        setState(() {
+          user = value;
+        });
+        print("초기 로그인 ${value.early}");
+        print(value.nickName);
+
+        if (value.early == true) {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => OnboardingScreen()),
           );
-        } else if (value == "earlyFalse") {
-          print(value);
-
+        } else {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => MainScreen()),
           );

@@ -8,8 +8,8 @@ class LoginRepository {
     return user;
   }
 
-  static Future<dynamic> googleLoginApi() async {
-    String response = await LoginApiServices().getGoogleLogin();
+  static Future<FarmusUser> googleLoginApi(token) async {
+    FarmusUser response = await LoginApiServices().getGoogleLogin(token);
     return response;
   }
 
