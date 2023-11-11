@@ -28,7 +28,7 @@ class ButtonNextMyPost extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              '나의 글',
+              '내 글',
               style: TextStyle(
                 color: FarmusThemeData.primary,
                 fontSize: 14,

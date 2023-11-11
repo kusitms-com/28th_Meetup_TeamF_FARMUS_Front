@@ -59,6 +59,9 @@ class _CommunityScreenState extends State<CommunityScreen> {
           ),
           Row(
             children: [
+              SizedBox(
+                width: 10,
+              ),
               ...category.map(
                 (item) {
                   return CommunityCategory(
@@ -70,6 +73,9 @@ class _CommunityScreenState extends State<CommunityScreen> {
                   alignment: Alignment.centerRight,
                   child: ButtonNextMyPost(),
                 ),
+              ),
+              SizedBox(
+                width: 10,
               ),
             ],
           ),

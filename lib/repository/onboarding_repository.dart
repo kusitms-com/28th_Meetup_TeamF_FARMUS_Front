@@ -17,10 +17,9 @@ class OnboardingRepository {
       response = await OnboardingApiService().postUserData(imageFile, nickname);
       print("프로필 이미지 보내기 $response");
     } else {
-      response = await OnboardingApiService().postUserData(null, nickname);
+      response = await OnboardingApiService().postNickName(nickname);
       print("프로필 이미지 보내기^^^^ $response");
     }
-    print("프로필 이미지 보내기 $response");
     return response;
   }
 

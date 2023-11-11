@@ -56,6 +56,8 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
       });
       _controller.setImageFile(File(pickedFile.path));
     } else {
+      print("냥냥");
+
       setState(() {
         _profileImage = null;
       });
