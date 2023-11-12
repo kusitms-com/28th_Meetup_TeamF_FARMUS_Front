@@ -58,13 +58,17 @@ class CommunityApiService {
   Future<String> postPostingWrite(Posting posting) async {
     try {
       print("태그 ${posting.tag}");
+      print("태그 ${posting.file.first.path}");
 
       FormData formData;
       formData = FormData.fromMap({
         'title': posting.title,
         'contents': posting.contents,
         'tag': posting.tag,
-        'file': posting.file.first,
+        'file': [
+          await MultipartFile.fromFile(posting.file.first.path,
+              filename: posting.file.first.path.split('/').last),
+        ]
       });
       Response response = await ApiClient()
           .dio
