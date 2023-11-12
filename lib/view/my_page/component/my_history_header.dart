@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view/my_page/history/my_farm_history.dart';
+import 'package:mojacknong_android/view/my_page/history/my_vege_history.dart';
 
 class HistoryHeader extends StatelessWidget {
   final String historyType;
@@ -14,10 +14,10 @@ class HistoryHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 페이지 이동 함수
-    void _navigateToMyFarmHistoryPage() {
+    void _navigateToMyVegeHistoryPage() {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => const MyFarmHistory(),
+          builder: (context) => const MyVegeHistory(),
         ),
       );
     }
@@ -38,7 +38,7 @@ class HistoryHeader extends StatelessWidget {
               ),
               InkWell(
                 onTap:
-                    _navigateToMyFarmHistoryPage, // '더보기'를 탭하면 _navigateToNewPage 함수 실행
+                    _navigateToMyVegeHistoryPage, // '더보기'를 탭하면 _navigateToNewPage 함수 실행
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

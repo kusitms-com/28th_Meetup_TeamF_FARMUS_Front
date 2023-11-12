@@ -15,23 +15,22 @@ class MyPageAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 17.0),
+        padding: const EdgeInsets.only(left: 16.0, right: 16, top: 30.0),
         child: Row(
           children: [
             GestureDetector(
               onTap: onBackButtonPressed ?? () => Navigator.of(context).pop(),
               child: SvgPicture.asset(
-                'assets/image/ic_arrow_left.svg', // Replace with your asset path
+                'assets/image/ic_arrow_left.svg',
                 height: 24.0,
                 width: 24.0,
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 15),
             Expanded(
-              // Use Expanded to center the title in the remaining space
               child: Text(
                 title,
-                textAlign: TextAlign.center, // Center the text horizontally
+                textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
@@ -49,5 +48,5 @@ class MyPageAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(90);
 }

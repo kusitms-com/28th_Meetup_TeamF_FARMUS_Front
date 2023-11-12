@@ -28,7 +28,7 @@ class MyPageHome extends StatelessWidget {
           const MyPageHeader(name: '파머', date: '100'), // 사용자 정의 헤더를 여기에 넣습니다.
           const SizedBox(height: 12.0), // 필요한 공간을 추가합니다.
 
-          const HistoryHeader(historyType: "팜 히스토리"),
+          const HistoryHeader(historyType: "채소 히스토리"),
           const SizedBox(height: 12.0),
           Expanded(
             child: ListView(
@@ -54,7 +54,7 @@ class MyPageHome extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10.0),
-          const ChallengeHeader(historyType: "챌린지 히스토리"),
+          const ChallengeHeader(historyType: "팜클럽 히스토리"),
           const SizedBox(height: 12.0),
           Expanded(
             child: ListView(
