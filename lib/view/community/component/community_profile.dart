@@ -28,12 +28,19 @@ class _CommunityProfileState extends State<CommunityProfile> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            widget.profileImage,
-            width: 32,
-            height: 32,
-            fit: BoxFit.fill,
-          ),
+          widget.profileImage.isEmpty
+              ? Image.asset(
+                  "assets/image/image_example_profile2.png",
+                  width: 32,
+                  height: 32,
+                  fit: BoxFit.fill,
+                )
+              : Image.network(
+                  widget.profileImage,
+                  width: 32,
+                  height: 32,
+                  fit: BoxFit.fill,
+                ),
           const SizedBox(
             width: 8,
           ),
