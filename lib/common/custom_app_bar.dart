@@ -10,6 +10,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       actions: [],
       elevation: 0,
+      leading: const BackButton(
+        color: FarmusThemeData.black,
+      ),
       backgroundColor: FarmusThemeData.white,
     );
   }

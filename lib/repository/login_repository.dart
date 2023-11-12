@@ -1,23 +1,25 @@
-import 'package:mojacknong_android/data/network/api_service.dart';
+import 'package:mojacknong_android/data/network/login_api_service.dart';
+import 'package:mojacknong_android/model/farmus_user.dart';
 
 class LoginRepository {
-  static Future<dynamic> kakaoLoginApi(token) async {
-    bool response = await ApiServices().fetchKaKaoData(token);
-    return response;
+  static Future<FarmusUser> kakaoLoginApi(token) async {
+    FarmusUser user = await LoginApiServices().fetchKaKaoData(token);
+    print("데이터데이터 $user");
+    return user;
   }
 
-  static Future<dynamic> googleLoginApi() async {
-    bool response = await ApiServices().getGoogleLogin();
+  static Future<FarmusUser> googleLoginApi(token) async {
+    FarmusUser response = await LoginApiServices().getGoogleLogin(token);
     return response;
   }
 
   static Future<dynamic> reissueApi() async {
-    var response = await ApiServices().reissue();
+    var response = await LoginApiServices().reissue();
     return response;
   }
 
   static Future<dynamic> logoutApi() async {
-    var response = await ApiServices().logout();
+    var response = await LoginApiServices().logout();
     return response;
   }
 }

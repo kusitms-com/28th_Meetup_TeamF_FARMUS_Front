@@ -1,18 +1,19 @@
 import 'package:flutter/widgets.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/community/component/community_post_time.dart';
 
 class CommunityProfile extends StatefulWidget {
   final String profileImage;
   final String nickname;
   final String postTime;
-  final String comment;
+  final String? comment;
 
   const CommunityProfile({
     Key? key,
     required this.profileImage,
     required this.nickname,
     required this.postTime,
-    required this.comment,
+    this.comment,
   }) : super(key: key);
 
   @override
@@ -23,16 +24,23 @@ class _CommunityProfileState extends State<CommunityProfile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            widget.profileImage,
-            width: 32,
-            height: 32,
-            fit: BoxFit.fill,
-          ),
+          widget.profileImage.isEmpty
+              ? Image.asset(
+                  "assets/image/image_example_profile2.png",
+                  width: 32,
+                  height: 32,
+                  fit: BoxFit.fill,
+                )
+              : Image.network(
+                  widget.profileImage,
+                  width: 32,
+                  height: 32,
+                  fit: BoxFit.fill,
+                ),
           const SizedBox(
             width: 8,
           ),
@@ -47,35 +55,11 @@ class _CommunityProfileState extends State<CommunityProfile> {
           const SizedBox(
             width: 8,
           ),
-          Text(
-            widget.postTime,
-            style: const TextStyle(
-              color: FarmusThemeData.grey2,
-              fontSize: 12,
-              fontFamily: "Pretendard",
-            ),
+          CommunityPostTime(
+            postTime: widget.postTime,
           ),
           const SizedBox(
             width: 8,
-          ),
-          const Text(
-            "댓글",
-            style: TextStyle(
-              color: FarmusThemeData.grey2,
-              fontSize: 12,
-              fontFamily: "Pretendard",
-            ),
-          ),
-          const SizedBox(
-            width: 4,
-          ),
-          Text(
-            widget.comment,
-            style: const TextStyle(
-              color: FarmusThemeData.grey2,
-              fontSize: 12,
-              fontFamily: "Pretendard",
-            ),
           ),
         ],
       ),

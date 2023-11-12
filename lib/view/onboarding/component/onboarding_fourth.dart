@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mojacknong_android/repository/onboarding_repository.dart';
 import 'package:mojacknong_android/view/onboarding/component/select_box.dart';
 import 'package:mojacknong_android/view_model/controllers/onboarding_controller.dart';
 
 class OnboardingFourth extends StatefulWidget {
-  const OnboardingFourth({Key? key}) : super(key: key);
+  const OnboardingFourth({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _OnboardingFourth createState() => _OnboardingFourth();
@@ -12,6 +15,14 @@ class OnboardingFourth extends StatefulWidget {
 
 class _OnboardingFourth extends State<OnboardingFourth> {
   OnboardingController _onboardingController = Get.put(OnboardingController());
+  String skill = "";
+
+  @override
+  void dispose() {
+    postLevel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,8 +39,8 @@ class _OnboardingFourth extends State<OnboardingFourth> {
               _onboardingController.selectBox7();
             },
             child: SelectBox(
-              title: "초심자",
-              content: "홈파밍이 처음이에요",
+              title: "홈파밍 입문",
+              content: "홈파밍이 아예 처음이에요",
               isSelected: _onboardingController.isSelected7,
             ),
           ),
@@ -38,8 +49,8 @@ class _OnboardingFourth extends State<OnboardingFourth> {
               _onboardingController.selectBox8();
             },
             child: SelectBox(
-              title: "경험자",
-              content: "시도한 적은 있지만 성공하진 못했어요",
+              title: "홈파밍 초보",
+              content: "홈파밍을 해보긴 했지만 채소를 수확하진 못했어요",
               isSelected: _onboardingController.isSelected8,
             ),
           ),
@@ -48,7 +59,7 @@ class _OnboardingFourth extends State<OnboardingFourth> {
               _onboardingController.selectBox9();
             },
             child: SelectBox(
-              title: "중급자",
+              title: "홈파밍 중급",
               content: "작물을 잘 관리하고 재배하는 법을 알고 있어요",
               isSelected: _onboardingController.isSelected9,
             ),
@@ -58,13 +69,18 @@ class _OnboardingFourth extends State<OnboardingFourth> {
               _onboardingController.selectBox10();
             },
             child: SelectBox(
-              title: "고수",
-              content: "홈파밍 전문가 수준이에요",
+              title: "홈파밍 고수",
+              content: "집에서 키울 수 있는 모든 채소를 섭렵했어요",
               isSelected: _onboardingController.isSelected10,
             ),
           ),
         ],
       ),
     );
+  }
+
+  Future<String> postLevel() {
+    return OnboardingRepository.postLevel(
+        _onboardingController.time.value, _onboardingController.skill.value);
   }
 }

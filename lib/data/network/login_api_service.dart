@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mojacknong_android/model/farmus_user.dart';
 import 'package:mojacknong_android/res/app_url/app_url.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -18,68 +19,59 @@ Dio authDio = Dio(
   ),
 );
 
-class ApiServices {
-  Future<bool> fetchKaKaoData(token) async {
+class LoginApiServices {
+  Future<FarmusUser> fetchKaKaoData(token) async {
     try {
       Response response = await dio.post(
         '/api/user/auth/kakao-login',
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
-      print(response.data);
-      await storage.write(
-          key: 'refreshToken', value: response.data["refreshToken"]);
-      await storage.write(
-          key: 'accessToken', value: response.data["accessToken"]);
 
-      final accessGoogleToken = await storage.read(key: 'accessToken');
-      final refreshGoogleToken = await storage.read(key: 'refreshToken');
-      return true;
-      print("성공 \n액세스 : $accessGoogleToken \n리프레시 : $refreshGoogleToken");
-    } on DioError catch (e) {
+      FarmusUser user = FarmusUser.fromJson(response.data["data"]);
+      await storage.write(key: "refreshToken", value: user.refreshToken);
+      await storage.write(key: 'accessToken', value: user.accessToken);
+
+      return user;
+    } on DioException catch (e) {
       print(e.message);
       print("실패");
-      return false;
+      return FarmusUser(
+        nickName: "",
+        refreshToken: "",
+        accessToken: "",
+      );
     }
   }
 
-  Future<bool> getGoogleLogin() async {
-    print("구글 로그인 버튼 클릭");
-
-    final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
-
-    final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount!.authentication;
-
-    print("구글 액세스 토큰 ${googleSignInAuthentication.accessToken}");
-    return fetchGoogleData(googleSignInAuthentication.accessToken);
-  }
-
-  Future<bool> fetchGoogleData(token) async {
+  Future<FarmusUser> getGoogleLogin(token) async {
     try {
-      print(token.toString());
       Response response = await dio.post(
         '/api/user/auth/google-login',
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
       print(response.data);
-      await storage.write(
-          key: 'refreshToken', value: response.data["refreshToken"]);
-      await storage.write(
-          key: 'accessToken', value: response.data["accessToken"]);
+
+      FarmusUser user = FarmusUser.fromJson(response.data["data"]);
+      await storage.write(key: 'refreshToken', value: user.refreshToken);
+      await storage.write(key: 'accessToken', value: user.accessToken);
 
       final accessGoogleToken = await storage.read(key: 'accessToken');
       final refreshGoogleToken = await storage.read(key: 'refreshToken');
       print("성공 \n액세스 : $accessGoogleToken \n리프레시 : $refreshGoogleToken");
-      return true;
-    } on DioError catch (e) {
+
+      return user;
+    } on DioException catch (e) {
       print(e.message);
       print("실패");
-      return false;
+      return FarmusUser(
+        nickName: "",
+        refreshToken: "",
+        accessToken: "",
+      );
     }
   }
 
-  Future<String> reissue() async {
+  Future<FarmusUser> reissue() async {
     try {
       final token = await storage.read(key: 'refreshToken');
       print("토큰 $token");
@@ -93,19 +85,26 @@ class ApiServices {
       print(response.data);
       print("reissue 성공");
 
-      await storage.write(
-          key: "accessToken", value: response.data["accessToken"]);
+      FarmusUser user = FarmusUser.fromJson(response.data["data"]);
+      await storage.write(key: "accessToken", value: user.accessToken);
       final newAccessToken = await storage.read(key: 'accessToken');
       print("새 액세스 토큰 : $newAccessToken");
+
+      return user;
     } on DioError catch (e) {
       print(e.message);
       print(e.response);
       print("reissue 실패");
+
+      return FarmusUser(
+        nickName: "",
+        refreshToken: "",
+        accessToken: "",
+      );
     }
-    return "";
   }
 
-  Future<String> logout() async {
+  Future<FarmusUser> logout() async {
     try {
       final accessToken = await storage.read(key: 'accessToken');
 
@@ -119,21 +118,38 @@ class ApiServices {
           await storage.delete(key: "accessToken");
           await storage.delete(key: "refreshToken");
           print("로그아웃 성공");
-          return "success";
+
+          return FarmusUser(
+            nickName: "",
+            refreshToken: "",
+            accessToken: "",
+          );
         } else {
           print("로그아웃 실패 ${response.statusCode}");
-          return "failure";
+          return FarmusUser(
+            nickName: "",
+            refreshToken: "",
+            accessToken: "",
+          );
         }
       } else {
         print("로그아웃 실패 : 액세스 토큰 없음");
-        return "failure";
+        return FarmusUser(
+          nickName: "",
+          refreshToken: "",
+          accessToken: "",
+        );
       }
     } on DioError catch (e) {
       print("로그아웃 실패 : ${e.message}");
       if (e.response != null) {
         print("응답 : ${e.response}");
       }
-      return "failure";
+      return FarmusUser(
+        nickName: "",
+        refreshToken: "",
+        accessToken: "",
+      );
     }
   }
 }
