@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
+import 'package:mojacknong_android/model/posting.dart';
+import 'package:mojacknong_android/repository/community_repository.dart';
 import 'package:mojacknong_android/view/community/component/category_list.dart';
 import 'package:mojacknong_android/view_model/controllers/community_post_controller.dart';
 
@@ -48,6 +51,7 @@ class _PostScreenState extends State<PostScreen> {
           TextButton(
             onPressed: () {
               Navigator.pop(context);
+              postPostingWrite();
             },
             child: const Text(
               "완료",
@@ -193,5 +197,21 @@ class _PostScreenState extends State<PostScreen> {
         ],
       ),
     );
+  }
+
+  Future<String> postPostingWrite() async {
+    try {
+      Posting posting = Posting(
+        title: postController.titleValue.value,
+        contents: postController.contentValue.value,
+        tag: postController.selectedCategoryValue,
+        file: _selectedImage != null ? [_selectedImage!] : [],
+      );
+
+      return CommunityRepository.postPostingWrite(posting);
+    } on DioException catch (e) {
+      print("에러 ${e.message}");
+      return "실패";
+    }
   }
 }

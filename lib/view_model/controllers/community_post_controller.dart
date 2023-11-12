@@ -13,6 +13,16 @@ class CommunityPostController extends GetxController {
   final isSelected2 = RxBool(false);
   final isSelected3 = RxBool(false);
 
+  String get selectedCategoryValue {
+    if (isSelected1.value) {
+      return "도와주세요";
+    } else if (isSelected2.value) {
+      return "자랑할래요";
+    } else {
+      return "정보나눠요";
+    }
+  }
+
   var selectedCategory = "".obs;
 
   void selectCategory(String category) {
