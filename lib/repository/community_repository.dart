@@ -7,4 +7,10 @@ class CommunityRepository {
         await CommunityApiService().getWholePosting();
     return response;
   }
+
+  static Future<List<CommunityPosting>> getMyPosting() async {
+    List<CommunityPosting> response =
+        await CommunityApiService().getMyPosting();
+    return response;
+  }
 }

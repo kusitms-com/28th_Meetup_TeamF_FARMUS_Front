@@ -33,7 +33,7 @@ class MyPostFeed extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) {
               return DetailPostScreen(
-                profileImage: "assets/image/image_example_profile.png",
+                profileImage: "assets/image/ic_profile.svg",
                 nickname: "어쩌구",
                 postTime: postTime,
                 postCategory: postCategory,
