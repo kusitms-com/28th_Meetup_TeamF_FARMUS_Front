@@ -7,7 +7,7 @@ class MyPostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PrimaryAppBar(
-        title: "나의 게시글",
+        title: "내 글",
       ),
       body: SingleChildScrollView(
         child: Column(

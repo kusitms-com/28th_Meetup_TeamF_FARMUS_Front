@@ -12,8 +12,12 @@ class OnboardingApiService {
     try {
       Response response = await ApiClient().dio.get('/api/user/profileImage');
       print(response.data);
-      String profileImage = response.data["data"]["profileImage"];
-      return profileImage;
+      if (response.data["data"]["profileImage"] != null) {
+        String profileImage = response.data["data"]["profileImage"];
+        return profileImage;
+      } else {
+        return "";
+      }
     } on DioException catch (e) {
       print(e.message);
       print("온보딩실패");
@@ -21,9 +25,40 @@ class OnboardingApiService {
     }
   }
 
+  Future<String> postProfileImage(File imageFile) async {
+    try {
+      Response response = await ApiClient()
+          .dio
+          .post('/api/user/profileImage', data: imageFile.path);
+
+      print(response.data);
+      return "성공";
+    } on DioException catch (e) {
+      print(e.message);
+      return "실패";
+    }
+  }
+
+  Future<String> postNickName(String nickName) async {
+    try {
+      final Map<String, dynamic> data = {
+        "nickName": nickName,
+      };
+
+      Response response =
+          await ApiClient().dio.post('/api/user/nickname', data: data);
+
+      print(response.data);
+      return "성공";
+    } on DioException catch (e) {
+      print(e.message);
+      return "실패";
+    }
+  }
+
   Future<String> postUserData(File? imageFile, String nickname) async {
     try {
-      print(imageFile);
+      print("이미지이미지 $imageFile");
       FormData formData;
 
       if (imageFile != null) {
@@ -34,10 +69,12 @@ class OnboardingApiService {
         });
       } else {
         formData = FormData.fromMap({
+          'file': [],
           'nickName': nickname,
         });
+
+        print(formData.fields[0]);
       }
-      print(formData.fields[0]);
 
       Response response = await ApiClient().dio.post(
             '/api/user/select-information',

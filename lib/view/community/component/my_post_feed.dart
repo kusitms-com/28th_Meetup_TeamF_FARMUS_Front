@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/view/community/component/community_comment_count.dart';
 import 'package:mojacknong_android/view/community/component/community_content.dart';
 import 'package:mojacknong_android/view/community/component/community_picture.dart';
 import 'package:mojacknong_android/view/community/component/community_post_time.dart';
 import 'package:mojacknong_android/view/community/component/post_category.dart';
+import 'package:mojacknong_android/view/community/detail/detail_post_screen.dart';
 
 class MyPostFeed extends StatelessWidget {
   final String postTime;
@@ -26,8 +26,25 @@ class MyPostFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Bouncing(
-      onPress: () {},
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return DetailPostScreen(
+                profileImage: "assets/image/image_example_profile.png",
+                nickname: "어쩌구",
+                postTime: postTime,
+                postCategory: postCategory,
+                title: title,
+                content: content,
+                image: image,
+              );
+            },
+          ),
+        );
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

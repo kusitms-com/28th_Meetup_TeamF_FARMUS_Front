@@ -6,6 +6,7 @@ class OnboardingRepository {
   static Future<String> getProfileImageApi() async {
     String response = await OnboardingApiService().getProfileImage();
     print("프로필이미지 $response");
+
     return response;
   }
 
@@ -14,10 +15,11 @@ class OnboardingRepository {
     print("프로필 $imageFile");
     if (imageFile != null) {
       response = await OnboardingApiService().postUserData(imageFile, nickname);
+      print("프로필 이미지 보내기 $response");
     } else {
-      response = await OnboardingApiService().postUserData(imageFile, nickname);
+      response = await OnboardingApiService().postNickName(nickname);
+      print("프로필 이미지 보내기^^^^ $response");
     }
-    print("프로필 이미지 보내기 $response");
     return response;
   }
 

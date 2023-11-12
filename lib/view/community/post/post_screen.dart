@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
-import 'package:mojacknong_android/view/community/component/community_category.dart';
+import 'package:mojacknong_android/view/community/component/category_list.dart';
 import 'package:mojacknong_android/view_model/controllers/community_post_controller.dart';
 
 class PostScreen extends StatefulWidget {
@@ -64,7 +64,7 @@ class _PostScreenState extends State<PostScreen> {
         children: [
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -78,42 +78,10 @@ class _PostScreenState extends State<PostScreen> {
                           fontFamily: "Pretendard",
                         ),
                       ),
-                      CommunityCategory(
-                        postController: postController,
-                        category: "도와주세요",
-                        isSelected: isSelected[0],
-                        onSelected: () {
-                          setState(() {
-                            // 선택된 카테고리의 isSelected 값을 변경
-                            isSelected = [true, false, false];
-                            postController.selectCategory1();
-                          });
-                        },
+                      SizedBox(
+                        width: 8,
                       ),
-                      CommunityCategory(
-                        postController: postController,
-                        category: "자랑할래요",
-                        isSelected: isSelected[1],
-                        onSelected: () {
-                          setState(() {
-                            // 선택된 카테고리의 isSelected 값을 변경
-                            isSelected = [false, true, false];
-                            postController.selectCategory2();
-                          });
-                        },
-                      ),
-                      CommunityCategory(
-                        postController: postController,
-                        category: "정보나눔",
-                        isSelected: isSelected[2],
-                        onSelected: () {
-                          setState(() {
-                            // 선택된 카테고리의 isSelected 값을 변경
-                            isSelected = [false, false, true];
-                            postController.selectCategory3();
-                          });
-                        },
-                      ),
+                      CategoryList(),
                     ],
                   ),
                   TextFormField(

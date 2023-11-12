@@ -34,9 +34,14 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
 
   Future<void> _setInitialImage() async {
     String? profileImage = await getFirstProfileImage();
-    if (profileImage != null) {
+    print(profileImage);
+    if (profileImage != "") {
       setState(() {
         _profileImage = profileImage;
+      });
+    } else {
+      setState(() {
+        _profileImage = null;
       });
     }
   }
@@ -51,6 +56,8 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
       });
       _controller.setImageFile(File(pickedFile.path));
     } else {
+      print("냥냥");
+
       setState(() {
         _profileImage = null;
       });
@@ -185,8 +192,8 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
         print("갤러리에서 사진을 선택하지 않았습니다.");
         return OnboardingRepository.postProfileApi(null, nickname);
       }
-    } else {}
-
-    return Future.value();
+    } else {
+      return OnboardingRepository.postProfileApi(null, nickname);
+    }
   }
 }

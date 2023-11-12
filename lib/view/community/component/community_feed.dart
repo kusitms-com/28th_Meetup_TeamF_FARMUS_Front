@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/view/community/component/community_comment_count.dart';
 import 'package:mojacknong_android/view/community/component/community_content.dart';
 import 'package:mojacknong_android/view/community/component/community_picture.dart';
@@ -31,8 +30,8 @@ class CommunityFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Bouncing(
-      onPress: () {
+    return GestureDetector(
+      onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
