@@ -12,7 +12,7 @@ class FloatingButtonPost extends StatelessWidget {
     return Bouncing(
       onPress: () {},
       child: SizedBox(
-        width: 60,
+        width: 80,
         height: 60,
         child: OutlinedButton(
           onPressed: () {
@@ -39,11 +39,13 @@ class FloatingButtonPost extends StatelessWidget {
               ),
             ),
           ),
-          child: SvgPicture.asset(
-            "assets/image/ic_edit.svg",
-            color: FarmusThemeData.white,
-            height: 32,
-            width: 32,
+          child: Center(
+            child: SvgPicture.asset(
+              "assets/image/ic_edit.svg",
+              color: FarmusThemeData.white,
+              height: 32,
+              width: 32,
+            ),
           ),
         ),
       ),

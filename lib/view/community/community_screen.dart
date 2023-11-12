@@ -92,7 +92,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
           ),
         ],
       ),
-      floatingActionButton: FloatingButtonPost(),
+      floatingActionButton: const FloatingButtonPost(),
     );
   }
 
