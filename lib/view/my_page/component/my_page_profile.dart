@@ -42,12 +42,12 @@ class _MyProfilePageState extends State<MyProfilePage> {
               const SizedBox(height: 40),
               Center(
                 child: CircleAvatar(
-                  radius: 50,
+                  radius: 70,
                   backgroundColor: Colors.grey[300],
                   child: SvgPicture.asset(
                     'assets/image/ic_profile.svg',
-                    width: 90,
-                    height: 90,
+                    width: 180,
+                    height: 180,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -109,7 +109,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     fontSize: 12,
                     fontWeight: FontWeight.w500),
               ),
-              const SizedBox(height: 150),
+              const SizedBox(height: 250),
               Center(
                 child: TextButton(
                   style: TextButton.styleFrom(
