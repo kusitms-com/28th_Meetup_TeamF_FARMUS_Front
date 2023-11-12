@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:mojacknong_android/data/network/base_api_services.dart';
 import 'package:mojacknong_android/model/community_posting.dart';
 import 'package:mojacknong_android/model/posting.dart';
+import 'package:mojacknong_android/model/posting_comment.dart';
 
 class CommunityApiService {
   // 전체 게시글 조회
@@ -83,6 +84,32 @@ class CommunityApiService {
     } on DioException catch (e) {
       print("에러 ${e.message}");
       return "false";
+    }
+  }
+
+  // 게시글 상세 조회
+  Future<List<PostingComment>> getPostingComments(int postingId) async {
+    try {
+      Response response = await ApiClient()
+          .dio
+          .get("/api/community/comment/posting-comments/?posterId=$postingId");
+
+      if (response.statusCode == 200) {
+        List<dynamic> data = response.data['data']['postingCommentList'];
+        List<PostingComment> comments =
+            data.map((json) => PostingComment.fromJson(json)).toList();
+
+        print(data);
+        print(comments);
+
+        return comments;
+      } else {
+        print("서버 에러 ${response.statusCode}");
+        return [];
+      }
+    } on DioException catch (e) {
+      print(e.message);
+      return [];
     }
   }
 }

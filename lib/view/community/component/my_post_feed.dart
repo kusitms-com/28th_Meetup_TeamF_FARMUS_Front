@@ -7,6 +7,7 @@ import 'package:mojacknong_android/view/community/component/post_category.dart';
 import 'package:mojacknong_android/view/community/detail/detail_post_screen.dart';
 
 class MyPostFeed extends StatelessWidget {
+  final int postingId;
   final String postTime;
   final String comment;
   final String postCategory;
@@ -16,6 +17,7 @@ class MyPostFeed extends StatelessWidget {
 
   MyPostFeed({
     Key? key,
+    required this.postingId,
     required this.postTime,
     required this.comment,
     required this.postCategory,
@@ -33,6 +35,7 @@ class MyPostFeed extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) {
               return DetailPostScreen(
+                postingId: postingId,
                 profileImage: "assets/image/ic_profile.svg",
                 nickname: "어쩌구",
                 postTime: postTime,

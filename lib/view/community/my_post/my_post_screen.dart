@@ -28,6 +28,7 @@ class _MyPostScreenState extends State<MyPostScreen> {
         child: Column(
           children: myPostings.map((posting) {
             return MyPostFeed(
+              postingId: posting.postingId,
               postTime: posting.createdAt,
               comment: posting.commentCount.toString(),
               postCategory: posting.tag,

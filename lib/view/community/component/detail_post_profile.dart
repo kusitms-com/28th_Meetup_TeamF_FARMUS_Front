@@ -20,7 +20,7 @@ class DetailPostProfile extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
+          Image.network(
             profileImage!,
             width: 44,
             height: 44,

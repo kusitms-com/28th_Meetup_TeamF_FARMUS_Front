@@ -78,6 +78,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 );
 
                 return CommunityFeed(
+                  postingId: posting.postingId,
                   profileImage: feedController.profileImage.value,
                   nickname: feedController.nickname.value,
                   postTime: feedController.postTime.value,
@@ -99,6 +100,10 @@ class _CommunityScreenState extends State<CommunityScreen> {
   Future<void> getWholePosting() async {
     List<CommunityPosting> postings =
         await CommunityRepository.getWholePosting();
+
+    for (CommunityPosting posting in postings) {
+      print("Posting ID: ${posting.postingId}");
+    }
     setState(() {
       communityPostings = postings;
     });

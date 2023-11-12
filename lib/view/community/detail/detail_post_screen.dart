@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
@@ -12,6 +11,7 @@ import 'package:mojacknong_android/view/community/component/post_category.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 class DetailPostScreen extends StatefulWidget {
+  final int postingId;
   final String? profileImage;
   final String nickname;
   final String postTime;
@@ -22,6 +22,7 @@ class DetailPostScreen extends StatefulWidget {
 
   const DetailPostScreen({
     Key? key,
+    required this.postingId,
     this.profileImage,
     required this.nickname,
     required this.postTime,
@@ -55,7 +56,19 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
     return Scaffold(
       appBar: PrimaryAppBar(actions: [
         IconButton(
-          icon: SvgPicture.asset("assets/image/ic_more_vertical.svg"),
+          icon: (widget.profileImage != null && widget.profileImage!.isNotEmpty)
+              ? Image.network(
+                  widget.profileImage!,
+                  width: 32,
+                  height: 32,
+                  fit: BoxFit.fill,
+                )
+              : Image.asset(
+                  "assets/image/image_example_profile2.png",
+                  width: 32,
+                  height: 32,
+                  fit: BoxFit.fill,
+                ),
           onPressed: () {
             _controller.showCustomCupertinoActionSheet(context,
                 message: "글 메뉴",

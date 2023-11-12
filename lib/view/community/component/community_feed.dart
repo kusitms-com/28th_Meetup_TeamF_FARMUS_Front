@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mojacknong_android/model/posting_comment.dart';
+import 'package:mojacknong_android/repository/community_repository.dart';
 import 'package:mojacknong_android/view/community/component/community_comment_count.dart';
 import 'package:mojacknong_android/view/community/component/community_content.dart';
 import 'package:mojacknong_android/view/community/component/community_picture.dart';
@@ -7,6 +9,7 @@ import 'package:mojacknong_android/view/community/component/post_category.dart';
 import 'package:mojacknong_android/view/community/detail/detail_post_screen.dart';
 
 class CommunityFeed extends StatelessWidget {
+  final int postingId;
   final String profileImage;
   final String nickname;
   final String postTime;
@@ -18,6 +21,7 @@ class CommunityFeed extends StatelessWidget {
 
   CommunityFeed({
     Key? key,
+    required this.postingId,
     required this.profileImage,
     required this.nickname,
     required this.postTime,
@@ -32,11 +36,13 @@ class CommunityFeed extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        getPostingComments();
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
               return DetailPostScreen(
+                postingId: postingId,
                 profileImage: profileImage,
                 nickname: nickname,
                 postTime: postTime,
@@ -80,5 +86,10 @@ class CommunityFeed extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> getPostingComments() async {
+    List<PostingComment> comments =
+        await CommunityRepository.getPostingComments(12);
   }
 }
