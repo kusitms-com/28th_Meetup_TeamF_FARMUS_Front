@@ -61,8 +61,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
             ],
           ),
           Expanded(
-            child: Obx(
-              () => ListView.builder(
+            child: Obx(() {
+              return ListView.builder(
                 itemCount: _communityController.communityPostings.length,
                 itemBuilder: (context, index) {
                   CommunityPosting posting =
@@ -81,8 +81,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
                         : "",
                   );
                 },
-              ),
-            ),
+              );
+            }),
           ),
         ],
       ),
