@@ -21,10 +21,12 @@ class CommunityRepository {
     return response;
   }
 
-  static Future<CommunityDetail> getPostingDetails(int postingID) async {
+  static Future<CommunityDetail> getPostingDetails(
+      int postingId, int userId) async {
     CommunityDetail communityDetail =
-        await CommunityApiService().getPostingComments(postingID);
+        await CommunityApiService().getPostingComments(postingId, userId);
 
+    print("상세 글 데이터 ${communityDetail.postingCommentList?.first.nickName}");
     return CommunityDetail(
       wholePostingDto: communityDetail.wholePostingDto,
       postingCommentList: communityDetail.postingCommentList,

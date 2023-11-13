@@ -8,7 +8,7 @@ class WholePosting {
   final String createdAt;
   final int commentCount;
   final String nickName;
-  final String userImageUrl;
+  final String? userImageUrl;
 
   WholePosting({
     required this.userId,
@@ -20,7 +20,7 @@ class WholePosting {
     required this.createdAt,
     required this.commentCount,
     required this.nickName,
-    required this.userImageUrl,
+    this.userImageUrl,
   });
 
   factory WholePosting.fromJson(Map<String, dynamic> json) {

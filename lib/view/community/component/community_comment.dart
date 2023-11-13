@@ -34,8 +34,7 @@ class CommunityComment extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CommunityProfile(
-                  profileImage:
-                      profileImage ?? "assets/image/image_example_profile2.png",
+                  profileImage: profileImage,
                   nickname: nickname,
                   postTime: postTime,
                 ),

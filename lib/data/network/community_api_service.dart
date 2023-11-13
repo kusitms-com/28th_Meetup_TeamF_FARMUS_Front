@@ -87,27 +87,23 @@ class CommunityApiService {
     }
   }
 
-// 게시글 상세 조회
-  Future<CommunityDetail> getPostingComments(int posterId) async {
+  // 게시글 상세 조회
+  Future<CommunityDetail> getPostingComments(int posterId, int userId) async {
     try {
       Response response = await ApiClient().dio.get(
         "/api/community/comment/posting-comments",
-        queryParameters: {"posterId": 11, 'userId': 1},
+        queryParameters: {"posterId": posterId, 'userId': userId},
       );
 
+      print(response.data);
+
       if (response.statusCode == 200) {
-        // 데이터가 null이 아닌지 체크
-        if (response.data != null) {
-          // fromJson 함수를 사용하여 변환
-          CommunityDetail data = CommunityDetail.fromJson(response.data);
+        Map<String, dynamic> data = response.data['data'];
+        CommunityDetail communityDetail = CommunityDetail.fromJson(data);
 
-          print(data);
+        print("데이터 ${communityDetail.postingCommentList}");
 
-          return data;
-        } else {
-          print("데이터가 null입니다.");
-          throw Exception("Failed to load posting comments");
-        }
+        return communityDetail;
       } else {
         print("서버 에러 ${response.statusCode}");
         throw Exception("Failed to load posting comments");

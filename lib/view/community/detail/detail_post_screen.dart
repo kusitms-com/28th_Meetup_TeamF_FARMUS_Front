@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/model/community_detail.dart';
 import 'package:mojacknong_android/repository/community_repository.dart';
 import 'package:mojacknong_android/view/community/component/bottom_comment.dart';
+import 'package:mojacknong_android/view/community/component/community_comment.dart';
 import 'package:mojacknong_android/view/community/component/community_content.dart';
+import 'package:mojacknong_android/view/community/component/community_picture.dart';
+import 'package:mojacknong_android/view/community/component/detail_post_profile.dart';
 import 'package:mojacknong_android/view/community/component/post_category.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
@@ -23,23 +25,14 @@ class DetailPostScreen extends StatefulWidget {
 }
 
 class _DetailPostScreenState extends State<DetailPostScreen> {
-  final List<Widget> comments = [];
-  final BottomSheetController _controller = Get.put(BottomSheetController());
+  final BottomSheetController _controller = BottomSheetController();
+  late Future<CommunityDetail> _communityDetailFuture;
 
   @override
   void initState() {
     super.initState();
-    getPostingDetails();
-  }
-
-  Future<void> getPostingDetails() async {
-    try {
-      CommunityDetail response =
-          await CommunityRepository.getPostingDetails(12);
-      print(response);
-    } catch (e) {
-      print("에러 발생: $e");
-    }
+    _communityDetailFuture =
+        CommunityRepository.getPostingDetails(widget.postingId, 1);
   }
 
   @override
@@ -56,63 +49,165 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
           },
         ),
       ]),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(8.0, 0, 8.0, 100),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: PostCategory(
-                        category: "ㅋㅋㅋㅋ",
+      body: FutureBuilder<CommunityDetail>(
+        future: _communityDetailFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: const AlwaysStoppedAnimation<Color>(
+                  FarmusThemeData.brownButton,
+                ),
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Text("에러 발생: ${snapshot.error}");
+          } else {
+            CommunityDetail communityDetail = snapshot.data!;
+
+            if (communityDetail.postingCommentList == null ||
+                communityDetail.postingCommentList!.isEmpty) {
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(8.0, 0, 8.0, 100),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          DetailPostProfile(
+                            profileImage:
+                                communityDetail.wholePostingDto.postingImage,
+                            nickname:
+                                communityDetail.wholePostingDto.nickName ?? "",
+                            postTime:
+                                communityDetail.wholePostingDto.createdAt ?? "",
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: PostCategory(
+                                category: communityDetail.wholePostingDto.tag,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
+                      CommunityContent(
+                        title: communityDetail.wholePostingDto.title,
+                        content: communityDetail.wholePostingDto.contents,
+                      ),
+                      CommunityPicture(
+                        image:
+                            communityDetail.wholePostingDto.postingImage.first,
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          const SizedBox(width: 8),
+                          const Text(
+                            "댓글",
+                            style: TextStyle(
+                              color: FarmusThemeData.dark,
+                              fontSize: 16,
+                              fontFamily: "Pretendard",
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            "0",
+                            style: const TextStyle(
+                              color: FarmusThemeData.dark,
+                              fontSize: 16,
+                              fontFamily: "Pretendard",
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                    ],
+                  ),
+                ),
+              );
+            }
+
+            // If there are comments, display them
+            List<Widget> comments = communityDetail.postingCommentList
+                    ?.map((comment) => CommunityComment(
+                          profileImage: comment.userImageUrl,
+                          nickname: comment.nickName ?? "",
+                          postTime: comment.createdAt,
+                          commentContents: comment.commentContents,
+                        ))
+                    .toList() ??
+                [];
+
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(8.0, 0, 8.0, 100),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        DetailPostProfile(
+                          profileImage:
+                              communityDetail.wholePostingDto.postingImage,
+                          nickname:
+                              communityDetail.wholePostingDto.nickName ?? "",
+                          postTime:
+                              communityDetail.wholePostingDto.createdAt ?? "",
+                        ),
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: PostCategory(
+                              category: communityDetail.wholePostingDto.tag,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              CommunityContent(
-                title: "ㅋㅋㅋㅋ",
-                content: "ㅋㅋㅋㅋ",
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  const Text(
-                    "댓글",
-                    style: TextStyle(
-                      color: FarmusThemeData.dark,
-                      fontSize: 16,
-                      fontFamily: "Pretendard",
+                    CommunityContent(
+                      title: communityDetail.wholePostingDto.title,
+                      content: communityDetail.wholePostingDto.contents,
                     ),
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    comments.length.toString(),
-                    style: const TextStyle(
-                      color: FarmusThemeData.dark,
-                      fontSize: 16,
-                      fontFamily: "Pretendard",
+                    CommunityPicture(
+                      image: communityDetail.wholePostingDto.postingImage.first,
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        const SizedBox(width: 8),
+                        const Text(
+                          "댓글",
+                          style: TextStyle(
+                            color: FarmusThemeData.dark,
+                            fontSize: 16,
+                            fontFamily: "Pretendard",
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          communityDetail.postingCommentList != null &&
+                                  communityDetail.postingCommentList!.isNotEmpty
+                              ? communityDetail.postingCommentList!.length
+                                  .toString()
+                              : "0",
+                          style: const TextStyle(
+                            color: FarmusThemeData.dark,
+                            fontSize: 16,
+                            fontFamily: "Pretendard",
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ...comments,
+                  ],
+                ),
               ),
-              const SizedBox(
-                height: 8,
-              ),
-              ...comments,
-            ],
-          ),
-        ),
+            );
+          }
+        },
       ),
       bottomSheet: BottomComment(),
     );

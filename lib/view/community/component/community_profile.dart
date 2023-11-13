@@ -3,14 +3,14 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/community/component/community_post_time.dart';
 
 class CommunityProfile extends StatefulWidget {
-  final String profileImage;
+  final String? profileImage;
   final String nickname;
   final String postTime;
   final String? comment;
 
   const CommunityProfile({
     Key? key,
-    required this.profileImage,
+    this.profileImage,
     required this.nickname,
     required this.postTime,
     this.comment,
@@ -28,7 +28,7 @@ class _CommunityProfileState extends State<CommunityProfile> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          widget.profileImage.isEmpty
+          (widget.profileImage == null || widget.profileImage!.isEmpty)
               ? Image.asset(
                   "assets/image/image_example_profile2.png",
                   width: 32,
@@ -36,7 +36,7 @@ class _CommunityProfileState extends State<CommunityProfile> {
                   fit: BoxFit.fill,
                 )
               : Image.network(
-                  widget.profileImage,
+                  widget.profileImage!,
                   width: 32,
                   height: 32,
                   fit: BoxFit.fill,
