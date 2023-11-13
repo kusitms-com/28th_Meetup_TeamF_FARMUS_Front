@@ -28,6 +28,7 @@ class LoginApiServices {
       );
 
       FarmusUser user = FarmusUser.fromJson(response.data["data"]);
+      print(user.accessToken);
       await storage.write(key: "refreshToken", value: user.refreshToken);
       await storage.write(key: 'accessToken', value: user.accessToken);
 

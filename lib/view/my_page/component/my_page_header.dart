@@ -4,16 +4,18 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/my_page/component/my_page_profile.dart';
 
 class MyPageHeader extends StatelessWidget {
-  final String name;
-  final String date;
-
-  const MyPageHeader({
+  final String? name;
+  final int? date;
+  final String? imagePath;
+  
+  MyPageHeader({
     Key? key,
     required this.name,
     required this.date,
+    required this.imagePath,
   }) : super(key: key);
 
-  @override
+
   Widget build(BuildContext context) {
     void _navigateToMyProfilePage() {
       Navigator.of(context).push(
@@ -23,6 +25,8 @@ class MyPageHeader extends StatelessWidget {
       );
     }
 
+
+
     return Container(
       color: FarmusThemeData.green1,
       padding: const EdgeInsets.fromLTRB(16, 25, 0, 0),
@@ -30,13 +34,21 @@ class MyPageHeader extends StatelessWidget {
         child: Row(
           children: <Widget>[
             ClipOval(
-              child: SvgPicture.asset(
-                'assets/image/profile_example_mypage.svg',
+              child: imagePath != null
+                  ? Image.network(
+                imagePath!,
+                width: 64,
+                height: 64,
+                fit: BoxFit.cover,
+              )
+               : SvgPicture.asset(
+                'assets/image/profile_example_mypage.svg', // 기본 이미지 경로
                 width: 64,
                 height: 64,
                 fit: BoxFit.cover,
               ),
             ),
+
             const SizedBox(width: 15.0),
             Expanded(
               child: Column(
@@ -105,4 +117,24 @@ class MyPageHeader extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
+  }
+
+  bool userProfileSign(String userImageUrl){
+
+    if(userImageUrl == null){
+      return true;
+    }
+    return false;
+  }
+
+
+
+
 }
+
+
