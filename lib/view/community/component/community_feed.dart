@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/view/community/component/community_comment_count.dart';
 import 'package:mojacknong_android/view/community/component/community_content.dart';
 import 'package:mojacknong_android/view/community/component/community_picture.dart';
 import 'package:mojacknong_android/view/community/component/community_profile.dart';
 import 'package:mojacknong_android/view/community/component/post_category.dart';
 import 'package:mojacknong_android/view/community/detail/detail_post_screen.dart';
+import 'package:mojacknong_android/view_model/controllers/community_feed_controller.dart';
 
 class CommunityFeed extends StatelessWidget {
+  final int postingId;
   final String profileImage;
   final String nickname;
   final String postTime;
@@ -18,6 +21,7 @@ class CommunityFeed extends StatelessWidget {
 
   CommunityFeed({
     Key? key,
+    required this.postingId,
     required this.profileImage,
     required this.nickname,
     required this.postTime,
@@ -28,22 +32,22 @@ class CommunityFeed extends StatelessWidget {
     required this.image,
   }) : super(key: key);
 
+  final CommunityFeedController _communityController =
+      Get.put(CommunityFeedController());
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
               return DetailPostScreen(
-                profileImage: profileImage,
-                nickname: nickname,
-                postTime: postTime,
-                postCategory: postCategory,
-                title: title,
-                content: content,
-                image: image,
+                postingId: postingId,
+                onDetailScreenPopped: () {
+                  _communityController.getWholePosting();
+                },
               );
             },
           ),

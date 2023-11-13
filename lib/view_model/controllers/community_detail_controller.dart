@@ -6,4 +6,8 @@ class CommunityDetailController extends GetxController {
   void updateTextValue(String value) {
     textValue.value = value;
   }
+
+  void clearTextValue() {
+    textValue.value = "";
+  }
 }

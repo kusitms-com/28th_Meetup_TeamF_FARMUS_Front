@@ -11,6 +11,8 @@ class ApiClient {
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) async {
         String? accessToken = await storage.read(key: "accessToken");
+        print(accessToken);
+        print(1);
         if (accessToken != null) {
           options.headers["Authorization"] = "Bearer $accessToken";
         }

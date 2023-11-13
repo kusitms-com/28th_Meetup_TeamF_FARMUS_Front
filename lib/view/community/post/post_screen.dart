@@ -1,12 +1,16 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
+import 'package:mojacknong_android/model/posting.dart';
+import 'package:mojacknong_android/repository/community_repository.dart';
 import 'package:mojacknong_android/view/community/component/category_list.dart';
+import 'package:mojacknong_android/view_model/controllers/community_feed_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/community_post_controller.dart';
 
 class PostScreen extends StatefulWidget {
@@ -22,6 +26,9 @@ final int maxLengthContent = 500;
 class _PostScreenState extends State<PostScreen> {
   final CommunityPostController postController =
       Get.put(CommunityPostController());
+
+  final CommunityFeedController communityFeedController =
+      Get.put(CommunityFeedController());
 
   final ImagePicker _picker = ImagePicker();
   File? _selectedImage;
@@ -46,8 +53,14 @@ class _PostScreenState extends State<PostScreen> {
       appBar: PrimaryAppBar(
         actions: [
           TextButton(
-            onPressed: () {
-              Navigator.pop(context);
+            onPressed: () async {
+              // "완료" 버튼을 눌렀을 때 postPostingWrite를 호출하고 결과를 받음
+              String result = await postPostingWrite(context);
+
+              // postPostingWrite가 완료되면 Navigator.pop 실행
+              if (result == "성공") {
+                Navigator.pop(context);
+              }
             },
             child: const Text(
               "완료",
@@ -193,5 +206,30 @@ class _PostScreenState extends State<PostScreen> {
         ],
       ),
     );
+  }
+
+  Future<String> postPostingWrite(BuildContext context) async {
+    try {
+      Posting posting = Posting(
+        title: postController.titleValue.value,
+        contents: postController.contentValue.value,
+        tag: postController.selectedCategoryValue,
+        file: _selectedImage != null ? [_selectedImage!] : [],
+      );
+      String result = await CommunityRepository.postPostingWrite(posting);
+
+      if (result == "성공" && mounted) {
+        // CommunityScreen에서 전체 게시물을 다시 가져오기
+        await communityFeedController.getWholePosting();
+
+        // 게시가 성공하면 PostScreen을 네비게이션 스택에서 제거
+        Navigator.pop(context);
+      }
+
+      return "result";
+    } on DioError catch (e) {
+      print("에러 ${e.message}");
+      return "실패";
+    }
   }
 }
