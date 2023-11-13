@@ -36,13 +36,6 @@ class MyPostFeed extends StatelessWidget {
             builder: (context) {
               return DetailPostScreen(
                 postingId: postingId,
-                profileImage: "assets/image/ic_profile.svg",
-                nickname: "어쩌구",
-                postTime: postTime,
-                postCategory: postCategory,
-                title: title,
-                content: content,
-                image: image,
               );
             },
           ),

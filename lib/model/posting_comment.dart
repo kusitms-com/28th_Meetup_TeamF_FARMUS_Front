@@ -4,7 +4,7 @@ class PostingComment {
   final int commentCount;
   final String createdAt;
   final String commentContents;
-  final String nickName;
+  final String? nickName;
   final String? userImageUrl;
 
   PostingComment({
@@ -13,7 +13,7 @@ class PostingComment {
     required this.commentCount,
     required this.createdAt,
     required this.commentContents,
-    required this.nickName,
+    this.nickName,
     this.userImageUrl,
   });
 

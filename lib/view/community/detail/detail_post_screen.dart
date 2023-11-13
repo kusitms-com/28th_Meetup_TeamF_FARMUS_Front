@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
+import 'package:mojacknong_android/model/community_detail.dart';
+import 'package:mojacknong_android/repository/community_repository.dart';
 import 'package:mojacknong_android/view/community/component/bottom_comment.dart';
 import 'package:mojacknong_android/view/community/component/community_comment.dart';
 import 'package:mojacknong_android/view/community/component/community_content.dart';
@@ -12,24 +14,10 @@ import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controlle
 
 class DetailPostScreen extends StatefulWidget {
   final int postingId;
-  final String? profileImage;
-  final String nickname;
-  final String postTime;
-  final String postCategory;
-  final String title;
-  final String content;
-  final String image;
 
   const DetailPostScreen({
     Key? key,
     required this.postingId,
-    this.profileImage,
-    required this.nickname,
-    required this.postTime,
-    required this.postCategory,
-    required this.title,
-    required this.content,
-    required this.image,
   }) : super(key: key);
 
   @override
@@ -37,18 +25,20 @@ class DetailPostScreen extends StatefulWidget {
 }
 
 class _DetailPostScreenState extends State<DetailPostScreen> {
-  final List<Widget> comments = [];
-  final BottomSheetController _controller = Get.put(BottomSheetController());
+  final BottomSheetController _controller = BottomSheetController();
+  late Future<CommunityDetail> _communityDetailFuture;
 
-  _DetailPostScreenState() {
-    comments.addAll([
-      CommunityComment(),
-      CommunityComment(),
-      CommunityComment(),
-      CommunityComment(),
-      CommunityComment(),
-      CommunityComment(),
-    ]);
+  @override
+  void initState() {
+    super.initState();
+    _loadCommunityDetail();
+  }
+
+  Future<void> _loadCommunityDetail() async {
+    _communityDetailFuture =
+        CommunityRepository.getPostingDetails(widget.postingId, 1);
+    await _communityDetailFuture;
+    setState(() {});
   }
 
   @override
@@ -56,19 +46,7 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
     return Scaffold(
       appBar: PrimaryAppBar(actions: [
         IconButton(
-          icon: (widget.profileImage != null && widget.profileImage!.isNotEmpty)
-              ? Image.network(
-                  widget.profileImage!,
-                  width: 32,
-                  height: 32,
-                  fit: BoxFit.fill,
-                )
-              : Image.asset(
-                  "assets/image/image_example_profile2.png",
-                  width: 32,
-                  height: 32,
-                  fit: BoxFit.fill,
-                ),
+          icon: SvgPicture.asset("assets/image/ic_more_vertical.svg"),
           onPressed: () {
             _controller.showCustomCupertinoActionSheet(context,
                 message: "글 메뉴",
@@ -77,75 +55,111 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
           },
         ),
       ]),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(8.0, 0, 8.0, 100),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  DetailPostProfile(
-                    profileImage: widget.profileImage != null
-                        ? widget.profileImage
-                        : null,
-                    nickname: widget.nickname,
-                    postTime: widget.postTime,
-                  ),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: PostCategory(
-                        category: widget.postCategory,
-                      ),
+      body: FutureBuilder<CommunityDetail>(
+        future: _communityDetailFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: const AlwaysStoppedAnimation<Color>(
+                  FarmusThemeData.brownButton,
+                ),
+              ),
+            );
+          } else if (snapshot.hasData) {
+            CommunityDetail communityDetail = snapshot.data!;
+
+            List<Widget> comments = communityDetail.postingCommentList != null
+                ? communityDetail.postingCommentList!
+                    .map((comment) => CommunityComment(
+                          profileImage: comment.userImageUrl,
+                          nickname: comment.nickName ?? "",
+                          postTime: comment.createdAt,
+                          commentContents: comment.commentContents,
+                        ))
+                    .toList()
+                : [];
+
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(8.0, 0, 8.0, 100),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        DetailPostProfile(
+                          profileImage:
+                              communityDetail.wholePostingDto.postingImage,
+                          nickname:
+                              communityDetail.wholePostingDto.nickName ?? "",
+                          postTime:
+                              communityDetail.wholePostingDto.createdAt ?? "",
+                        ),
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: PostCategory(
+                              category: communityDetail.wholePostingDto.tag,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              CommunityContent(
-                title: widget.title,
-                content: widget.content,
-              ),
-              CommunityPicture(
-                image: widget.image,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  const Text(
-                    "댓글",
-                    style: TextStyle(
-                      color: FarmusThemeData.dark,
-                      fontSize: 16,
-                      fontFamily: "Pretendard",
+                    CommunityContent(
+                      title: communityDetail.wholePostingDto.title,
+                      content: communityDetail.wholePostingDto.contents,
                     ),
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    comments.length.toString(),
-                    style: const TextStyle(
-                      color: FarmusThemeData.dark,
-                      fontSize: 16,
-                      fontFamily: "Pretendard",
+                    CommunityPicture(
+                      image: communityDetail.wholePostingDto.postingImage.first,
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        const SizedBox(width: 8),
+                        const Text(
+                          "댓글",
+                          style: TextStyle(
+                            color: FarmusThemeData.dark,
+                            fontSize: 16,
+                            fontFamily: "Pretendard",
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          communityDetail.postingCommentList != null &&
+                                  communityDetail.postingCommentList!.isNotEmpty
+                              ? communityDetail.postingCommentList!.length
+                                  .toString()
+                              : "0",
+                          style: const TextStyle(
+                            color: FarmusThemeData.dark,
+                            fontSize: 16,
+                            fontFamily: "Pretendard",
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ...comments,
+                  ],
+                ),
               ),
-              const SizedBox(
-                height: 8,
-              ),
-              ...comments,
-            ],
-          ),
-        ),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error loading community details: ${snapshot.error}'),
+            );
+          } else {
+            return Center(
+              child: Text('No data available'),
+            );
+          }
+        },
       ),
-      bottomSheet: BottomComment(),
+      bottomSheet: BottomComment(
+        postingId: widget.postingId,
+        onCommentPosted: _loadCommunityDetail,
+      ),
     );
   }
 }

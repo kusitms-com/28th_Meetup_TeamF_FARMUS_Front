@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:mojacknong_android/data/network/base_api_services.dart';
+import 'package:mojacknong_android/model/community_detail.dart';
 import 'package:mojacknong_android/model/community_posting.dart';
 import 'package:mojacknong_android/model/posting.dart';
-import 'package:mojacknong_android/model/posting_comment.dart';
 
 class CommunityApiService {
   // 전체 게시글 조회
@@ -88,28 +90,56 @@ class CommunityApiService {
   }
 
   // 게시글 상세 조회
-  Future<List<PostingComment>> getPostingComments(int postingId) async {
+  Future<CommunityDetail> getPostingComments(int posterId, int userId) async {
     try {
-      Response response = await ApiClient()
-          .dio
-          .get("/api/community/comment/posting-comments/?posterId=$postingId");
+      Response response = await ApiClient().dio.get(
+        "/api/community/comment/posting-comments",
+        queryParameters: {"posterId": posterId, 'userId': userId},
+      );
+
+      print(response.data);
 
       if (response.statusCode == 200) {
-        List<dynamic> data = response.data['data']['postingCommentList'];
-        List<PostingComment> comments =
-            data.map((json) => PostingComment.fromJson(json)).toList();
+        Map<String, dynamic> data = response.data['data'];
+        CommunityDetail communityDetail = CommunityDetail.fromJson(data);
 
-        print(data);
-        print(comments);
+        print("데이터 ${communityDetail.postingCommentList}");
 
-        return comments;
+        return communityDetail;
       } else {
         print("서버 에러 ${response.statusCode}");
-        return [];
+        throw Exception("Failed to load posting comments");
+      }
+    } on DioError catch (e) {
+      print("에러 발생: $e");
+      throw Exception("Failed to load posting comments");
+    }
+  }
+
+  // 댓글 달기
+  Future<String> postCommentWrite(int postingId, String comment) async {
+    try {
+      final Map<String, dynamic> data = {
+        'postingId': postingId,
+        'comment': comment,
+      };
+      Response response = await ApiClient().dio.post(
+            "/api/community/comment/write",
+            data: jsonEncode(data),
+            options: Options(
+              headers: {'Content-Type': 'application/json'},
+            ),
+          );
+
+      if (response.statusCode == 200) {
+        print(response.data);
+        return "성공";
+      } else {
+        return "실패";
       }
     } on DioException catch (e) {
-      print(e.message);
-      return [];
+      print("에러 ${e.message}");
+      return "false";
     }
   }
 }

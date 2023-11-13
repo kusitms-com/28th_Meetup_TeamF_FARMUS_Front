@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/community/component/community_profile.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 class CommunityComment extends StatelessWidget {
-  final BottomSheetController _controller = Get.put(BottomSheetController());
+  final BottomSheetController _controller = BottomSheetController();
+
+  final String? profileImage;
+  final String nickname;
+  final String postTime;
+  final String commentContents;
+
+  CommunityComment({
+    Key? key,
+    this.profileImage,
+    required this.nickname,
+    required this.postTime,
+    required this.commentContents,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +33,10 @@ class CommunityComment extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const CommunityProfile(
-                  profileImage: "assets/image/image_example_profile2.png",
-                  nickname: "감자",
-                  postTime: "11/6 19:01",
+                CommunityProfile(
+                  profileImage: profileImage,
+                  nickname: nickname,
+                  postTime: postTime,
                 ),
                 Bouncing(
                   onPress: () {
@@ -43,8 +55,8 @@ class CommunityComment extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            const Text(
-              "그건 당신이 최선을 다하지 않아서가 아닐까요? ^_____^",
+            Text(
+              commentContents,
               style: TextStyle(
                 color: FarmusThemeData.dark,
                 fontFamily: "Pretendard",

@@ -4,7 +4,8 @@
     <application
         android:label="mojacknong_android"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        >
         <activity 
         android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
         android:exported="true">

@@ -2,9 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/repository/community_repository.dart';
 import 'package:mojacknong_android/view_model/controllers/community_detail_controller.dart';
 
 class BottomComment extends StatefulWidget {
+  final int postingId;
+  final VoidCallback? onCommentPosted;
+
+  const BottomComment({
+    Key? key,
+    required this.postingId,
+    this.onCommentPosted,
+  }) : super(key: key);
+
   @override
   State<BottomComment> createState() => _BottomCommentState();
 }
@@ -25,8 +35,10 @@ class _BottomCommentState extends State<BottomComment> {
               padding:
                   const EdgeInsets.only(left: 16.0, bottom: 16.0, right: 16.0),
               child: TextFormField(
+                key: UniqueKey(), // Key 추가
                 decoration: InputDecoration(
-                  hintText: '댓글을 입력하세요',
+                  hintText:
+                      _controller.textValue.value.isEmpty ? '댓글을 입력하세요' : '',
                   hintStyle: TextStyle(
                     color: FarmusThemeData.dark.withOpacity(0.3),
                   ),
@@ -43,7 +55,18 @@ class _BottomCommentState extends State<BottomComment> {
                     color: FarmusThemeData.dark.withOpacity(0.3),
                   ),
                   suffixIcon: IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      String? result = await postCommentWrite();
+                      if (result == "성공") {
+                        // 댓글이 성공적으로 추가된 경우 화면 갱신
+                        _.update();
+                        // 키보드 닫기
+                        FocusScope.of(context).unfocus();
+                        // 입력 창 초기화
+                        _controller.clearTextValue();
+                        widget.onCommentPosted?.call();
+                      }
+                    },
                     icon: SvgPicture.asset(
                       "assets/image/ic_arrow_up.svg",
                     ),
@@ -57,5 +80,10 @@ class _BottomCommentState extends State<BottomComment> {
         );
       },
     );
+  }
+
+  Future<String?> postCommentWrite() {
+    return CommunityRepository.postComment(
+        widget.postingId, _controller.textValue.value);
   }
 }
