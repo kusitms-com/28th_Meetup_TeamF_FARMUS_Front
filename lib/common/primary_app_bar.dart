@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final BottomSheetController _controller = Get.put(BottomSheetController());
   final Widget? leading;
   final String? title;
   final List<Widget>? actions;

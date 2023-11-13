@@ -39,7 +39,7 @@ class FarmclubInit extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 10,
+          height: 20,
         ),
       ],
     );
