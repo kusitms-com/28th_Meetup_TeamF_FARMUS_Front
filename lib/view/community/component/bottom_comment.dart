@@ -24,6 +24,8 @@ final int maxLength = 100;
 class _BottomCommentState extends State<BottomComment> {
   final CommunityDetailController _controller =
       Get.put(CommunityDetailController());
+  final TextEditingController _textEditingController = TextEditingController();
+  final Key _textFormFieldKey = UniqueKey(); // Key 추가
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +37,11 @@ class _BottomCommentState extends State<BottomComment> {
               padding:
                   const EdgeInsets.only(left: 16.0, bottom: 16.0, right: 16.0),
               child: TextFormField(
-                key: UniqueKey(), // Key 추가
+                key: _textFormFieldKey,
+                controller: _textEditingController,
                 decoration: InputDecoration(
                   hintText:
-                      _controller.textValue.value.isEmpty ? '댓글을 입력하세요' : '',
+                      _textEditingController.text.isEmpty ? '댓글을 입력하세요' : '',
                   hintStyle: TextStyle(
                     color: FarmusThemeData.dark.withOpacity(0.3),
                   ),
@@ -82,8 +85,18 @@ class _BottomCommentState extends State<BottomComment> {
     );
   }
 
-  Future<String?> postCommentWrite() {
-    return CommunityRepository.postComment(
+  Future<String?> postCommentWrite() async {
+    String? result = await CommunityRepository.postComment(
         widget.postingId, _controller.textValue.value);
+
+    if (result == "성공") {
+      // 댓글이 성공적으로 추가된 경우 화면 갱신
+      _controller.update();
+      // 텍스트 필드 초기화
+      _textEditingController.clear();
+      widget.onCommentPosted?.call();
+    }
+
+    return result;
   }
 }
