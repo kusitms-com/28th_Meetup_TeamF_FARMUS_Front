@@ -31,8 +31,14 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
   @override
   void initState() {
     super.initState();
+    _loadCommunityDetail();
+  }
+
+  Future<void> _loadCommunityDetail() async {
     _communityDetailFuture =
         CommunityRepository.getPostingDetails(widget.postingId, 1);
+    await _communityDetailFuture;
+    setState(() {});
   }
 
   @override
@@ -60,86 +66,19 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
                 ),
               ),
             );
-          } else if (snapshot.hasError) {
-            return Text("에러 발생: ${snapshot.error}");
-          } else {
+          } else if (snapshot.hasData) {
             CommunityDetail communityDetail = snapshot.data!;
 
-            if (communityDetail.postingCommentList == null ||
-                communityDetail.postingCommentList!.isEmpty) {
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(8.0, 0, 8.0, 100),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          DetailPostProfile(
-                            profileImage:
-                                communityDetail.wholePostingDto.postingImage,
-                            nickname:
-                                communityDetail.wholePostingDto.nickName ?? "",
-                            postTime:
-                                communityDetail.wholePostingDto.createdAt ?? "",
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.topRight,
-                              child: PostCategory(
-                                category: communityDetail.wholePostingDto.tag,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      CommunityContent(
-                        title: communityDetail.wholePostingDto.title,
-                        content: communityDetail.wholePostingDto.contents,
-                      ),
-                      CommunityPicture(
-                        image:
-                            communityDetail.wholePostingDto.postingImage.first,
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          const SizedBox(width: 8),
-                          const Text(
-                            "댓글",
-                            style: TextStyle(
-                              color: FarmusThemeData.dark,
-                              fontSize: 16,
-                              fontFamily: "Pretendard",
-                            ),
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            "0",
-                            style: const TextStyle(
-                              color: FarmusThemeData.dark,
-                              fontSize: 16,
-                              fontFamily: "Pretendard",
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                    ],
-                  ),
-                ),
-              );
-            }
-
-            // If there are comments, display them
-            List<Widget> comments = communityDetail.postingCommentList
-                    ?.map((comment) => CommunityComment(
+            List<Widget> comments = communityDetail.postingCommentList != null
+                ? communityDetail.postingCommentList!
+                    .map((comment) => CommunityComment(
                           profileImage: comment.userImageUrl,
                           nickname: comment.nickName ?? "",
                           postTime: comment.createdAt,
                           commentContents: comment.commentContents,
                         ))
-                    .toList() ??
-                [];
+                    .toList()
+                : [];
 
             return SingleChildScrollView(
               child: Padding(
@@ -205,6 +144,14 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
                   ],
                 ),
               ),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error loading community details: ${snapshot.error}'),
+            );
+          } else {
+            return Center(
+              child: Text('No data available'),
             );
           }
         },

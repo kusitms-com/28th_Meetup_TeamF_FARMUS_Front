@@ -23,13 +23,20 @@ class CommunityRepository {
 
   static Future<CommunityDetail> getPostingDetails(
       int postingId, int userId) async {
-    CommunityDetail communityDetail =
-        await CommunityApiService().getPostingComments(postingId, userId);
+    try {
+      CommunityDetail communityDetail =
+          await CommunityApiService().getPostingComments(postingId, userId);
 
-    print("상세 글 데이터 ${communityDetail.postingCommentList?.first.nickName}");
-    return CommunityDetail(
-      wholePostingDto: communityDetail.wholePostingDto,
-      postingCommentList: communityDetail.postingCommentList,
-    );
+      if (communityDetail.postingCommentList == null) {
+        return CommunityDetail(
+          wholePostingDto: communityDetail.wholePostingDto,
+        );
+      }
+
+      return communityDetail;
+    } catch (e) {
+      print("Error getting posting details: $e");
+      throw Exception("Failed to load posting details");
+    }
   }
 }
