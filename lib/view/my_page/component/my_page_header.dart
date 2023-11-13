@@ -6,13 +6,11 @@ import 'package:mojacknong_android/view/my_page/component/my_page_profile.dart';
 class MyPageHeader extends StatelessWidget {
   final String name;
   final String date;
-  //final String imagePath;
 
   const MyPageHeader({
     Key? key,
     required this.name,
     required this.date,
-    //required this.imagePath,
   }) : super(key: key);
 
   @override

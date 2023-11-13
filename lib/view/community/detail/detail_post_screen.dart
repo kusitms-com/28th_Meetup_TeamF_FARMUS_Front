@@ -1,35 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
+import 'package:mojacknong_android/model/community_detail.dart';
+import 'package:mojacknong_android/repository/community_repository.dart';
 import 'package:mojacknong_android/view/community/component/bottom_comment.dart';
-import 'package:mojacknong_android/view/community/component/community_comment.dart';
 import 'package:mojacknong_android/view/community/component/community_content.dart';
-import 'package:mojacknong_android/view/community/component/community_picture.dart';
-import 'package:mojacknong_android/view/community/component/detail_post_profile.dart';
 import 'package:mojacknong_android/view/community/component/post_category.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 class DetailPostScreen extends StatefulWidget {
   final int postingId;
-  final String? profileImage;
-  final String nickname;
-  final String postTime;
-  final String postCategory;
-  final String title;
-  final String content;
-  final String image;
 
   const DetailPostScreen({
     Key? key,
     required this.postingId,
-    this.profileImage,
-    required this.nickname,
-    required this.postTime,
-    required this.postCategory,
-    required this.title,
-    required this.content,
-    required this.image,
   }) : super(key: key);
 
   @override
@@ -40,15 +26,20 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
   final List<Widget> comments = [];
   final BottomSheetController _controller = Get.put(BottomSheetController());
 
-  _DetailPostScreenState() {
-    comments.addAll([
-      CommunityComment(),
-      CommunityComment(),
-      CommunityComment(),
-      CommunityComment(),
-      CommunityComment(),
-      CommunityComment(),
-    ]);
+  @override
+  void initState() {
+    super.initState();
+    getPostingDetails();
+  }
+
+  Future<void> getPostingDetails() async {
+    try {
+      CommunityDetail response =
+          await CommunityRepository.getPostingDetails(12);
+      print(response);
+    } catch (e) {
+      print("에러 발생: $e");
+    }
   }
 
   @override
@@ -56,19 +47,7 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
     return Scaffold(
       appBar: PrimaryAppBar(actions: [
         IconButton(
-          icon: (widget.profileImage != null && widget.profileImage!.isNotEmpty)
-              ? Image.network(
-                  widget.profileImage!,
-                  width: 32,
-                  height: 32,
-                  fit: BoxFit.fill,
-                )
-              : Image.asset(
-                  "assets/image/image_example_profile2.png",
-                  width: 32,
-                  height: 32,
-                  fit: BoxFit.fill,
-                ),
+          icon: SvgPicture.asset("assets/image/ic_more_vertical.svg"),
           onPressed: () {
             _controller.showCustomCupertinoActionSheet(context,
                 message: "글 메뉴",
@@ -84,29 +63,19 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
             children: [
               Row(
                 children: [
-                  DetailPostProfile(
-                    profileImage: widget.profileImage != null
-                        ? widget.profileImage
-                        : null,
-                    nickname: widget.nickname,
-                    postTime: widget.postTime,
-                  ),
                   Expanded(
                     child: Align(
                       alignment: Alignment.topRight,
                       child: PostCategory(
-                        category: widget.postCategory,
+                        category: "ㅋㅋㅋㅋ",
                       ),
                     ),
                   ),
                 ],
               ),
               CommunityContent(
-                title: widget.title,
-                content: widget.content,
-              ),
-              CommunityPicture(
-                image: widget.image,
+                title: "ㅋㅋㅋㅋ",
+                content: "ㅋㅋㅋㅋ",
               ),
               const SizedBox(
                 height: 16,
