@@ -31,6 +31,7 @@ class LoginApiServices {
       await storage.write(key: "refreshToken", value: user.refreshToken);
       await storage.write(key: 'accessToken', value: user.accessToken);
 
+      print(user);
       return user;
     } on DioException catch (e) {
       print(e.message);

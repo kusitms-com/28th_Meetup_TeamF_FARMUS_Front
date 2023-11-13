@@ -39,4 +39,10 @@ class CommunityRepository {
       throw Exception("Failed to load posting details");
     }
   }
+
+  static Future<String> postComment(int postingId, String comment) async {
+    String response =
+        await CommunityApiService().postCommentWrite(postingId, comment);
+    return response;
+  }
 }

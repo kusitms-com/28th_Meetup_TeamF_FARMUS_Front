@@ -156,7 +156,10 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
           }
         },
       ),
-      bottomSheet: BottomComment(),
+      bottomSheet: BottomComment(
+        postingId: widget.postingId,
+        onCommentPosted: _loadCommunityDetail,
+      ),
     );
   }
 }
