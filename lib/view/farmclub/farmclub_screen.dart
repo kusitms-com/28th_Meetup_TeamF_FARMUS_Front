@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/farmclub/component/farmclub_title.dart';
+import 'package:mojacknong_android/view/farmclub/component/my_farmclub_info.dart';
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_list.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_%20explore_screen.dart';
 
@@ -56,6 +58,14 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
             ),
           ),
           MyFarmclubList(),
+          SizedBox(
+            height: 16,
+          ),
+          FarmclubTitle(),
+          SizedBox(
+            height: 8,
+          ),
+          MyFarmclubInfo(),
         ],
       ),
     );

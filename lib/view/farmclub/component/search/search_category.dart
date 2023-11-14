@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view/farmclub/component/brown_category.dart';
+import 'package:mojacknong_android/view/farmclub/component/search/brown_category.dart';
 
 class SearchCategory extends StatelessWidget {
   final String title;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mojacknong_android/view/farmclub/component/recommned_farmclub.dart';
+import 'package:mojacknong_android/view/farmclub/component/explore/recommned_farmclub.dart';
 
 class RecommendFarmclubList extends StatefulWidget {
   @override

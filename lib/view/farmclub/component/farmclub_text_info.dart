@@ -9,6 +9,7 @@ class FarmclubTextInfo extends StatefulWidget {
   final String nowPerson;
   final String maxPerson;
   final String dday;
+  final bool isRecommend;
 
   FarmclubTextInfo({
     Key? key,
@@ -18,6 +19,7 @@ class FarmclubTextInfo extends StatefulWidget {
     required this.nowPerson,
     required this.maxPerson,
     required this.dday,
+    required this.isRecommend,
   }) : super(key: key);
 
   @override
@@ -39,17 +41,17 @@ class _FarmclubTextInfoState extends State<FarmclubTextInfo> {
                 widget.farmclubTitle,
                 style: FarmusThemeData.darkStyle16,
               ),
-              const SizedBox(
-                width: 8,
-              ),
-              SvgPicture.asset("assets/image/line_vertical_grey1.svg"),
-              const SizedBox(
-                width: 8,
-              ),
-              Text(
-                widget.vegetable,
-                style: FarmusThemeData.darkStyle13,
-              ),
+              if (widget.isRecommend == false)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child:
+                      SvgPicture.asset("assets/image/line_vertical_grey1.svg"),
+                ),
+              if (widget.isRecommend == false)
+                Text(
+                  widget.vegetable,
+                  style: FarmusThemeData.darkStyle13,
+                ),
             ],
           ),
           const SizedBox(
@@ -67,19 +69,7 @@ class _FarmclubTextInfoState extends State<FarmclubTextInfo> {
                 width: 8,
               ),
               Text(
-                widget.nowPerson,
-                style: FarmusThemeData.darkStyle13,
-              ),
-              Text(
-                "/",
-                style: FarmusThemeData.darkStyle13,
-              ),
-              Text(
-                widget.maxPerson,
-                style: FarmusThemeData.darkStyle13,
-              ),
-              Text(
-                "명",
+                "${widget.nowPerson}/${widget.maxPerson}명",
                 style: FarmusThemeData.darkStyle13,
               ),
             ],
@@ -92,15 +82,7 @@ class _FarmclubTextInfoState extends State<FarmclubTextInfo> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "시작한 지 ",
-                style: FarmusThemeData.grey1Style11,
-              ),
-              Text(
-                widget.dday,
-                style: FarmusThemeData.grey1Style11,
-              ),
-              Text(
-                "일째",
+                "시작한 지 ${widget.dday}일째",
                 style: FarmusThemeData.grey1Style11,
               ),
             ],

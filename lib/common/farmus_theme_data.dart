@@ -31,10 +31,29 @@ class FarmusThemeData {
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
 
+  static const TextStyle darkStyle13 = TextStyle(
+    color: FarmusThemeData.dark,
+    fontSize: 13,
+    fontFamily: "Pretendard",
+  );
+
+  static const TextStyle darkStyle14 = TextStyle(
+    color: FarmusThemeData.dark,
+    fontSize: 14,
+    fontFamily: "Pretendard",
+  );
+
   static const TextStyle darkStyle16 = TextStyle(
     color: FarmusThemeData.dark,
     fontSize: 16,
     fontFamily: "Pretendard",
+  );
+
+  static const TextStyle darkStyle18 = TextStyle(
+    color: FarmusThemeData.dark,
+    fontSize: 18,
+    fontFamily: "Pretendard",
+    fontWeight: FontWeight.w600,
   );
 
   static const TextStyle grey1Style11 = TextStyle(
@@ -57,12 +76,6 @@ class FarmusThemeData {
 
   static const TextStyle brownText13 = TextStyle(
     color: FarmusThemeData.brownText,
-    fontSize: 13,
-    fontFamily: "Pretendard",
-  );
-
-  static const TextStyle darkStyle13 = TextStyle(
-    color: FarmusThemeData.dark,
     fontSize: 13,
     fontFamily: "Pretendard",
   );
