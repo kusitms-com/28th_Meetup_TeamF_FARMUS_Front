@@ -3,7 +3,25 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class RecommendFarmclub extends StatefulWidget {
-  const RecommendFarmclub({Key? key}) : super(key: key);
+  final String farmclubImage;
+  final String vegetable;
+  final String farmclubTitle;
+  final String level;
+
+  final String nowPerson;
+  final String maxPerson;
+  final String dday;
+
+  RecommendFarmclub({
+    Key? key,
+    required this.vegetable,
+    required this.farmclubImage,
+    required this.farmclubTitle,
+    required this.level,
+    required this.nowPerson,
+    required this.maxPerson,
+    required this.dday,
+  }) : super(key: key);
 
   @override
   State<RecommendFarmclub> createState() => _RecommendFarmclubState();
@@ -51,7 +69,7 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
                   borderRadius: BorderRadius.circular(8.65),
                 ),
                 child: Image.asset(
-                  "assets/image/image_farmclub_green.png",
+                  widget.farmclubImage,
                   fit: BoxFit.fill,
                 ),
               ),
@@ -66,7 +84,7 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                   child: Text(
-                    "상추",
+                    widget.vegetable,
                     style: darkTextStyle,
                   ),
                 ),
@@ -81,7 +99,7 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "상추 좋아하세요",
+                widget.farmclubTitle,
                 style: textStyle,
               ),
               const SizedBox(
@@ -92,7 +110,7 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
                 width: 8,
               ),
               Text(
-                "상추",
+                widget.vegetable,
                 style: textStyle.copyWith(fontSize: 13),
               ),
             ],
@@ -103,14 +121,26 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
           Row(
             children: [
               Text(
-                "Easy",
+                widget.level,
                 style: brownTextStyle,
               ),
               const SizedBox(
                 width: 8,
               ),
               Text(
-                "5/8명",
+                widget.nowPerson,
+                style: darkTextStyle,
+              ),
+              Text(
+                "/",
+                style: darkTextStyle,
+              ),
+              Text(
+                widget.maxPerson,
+                style: darkTextStyle,
+              ),
+              Text(
+                "명",
                 style: darkTextStyle,
               ),
             ],
@@ -125,7 +155,7 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
                 style: greyTextStyle,
               ),
               Text(
-                "1",
+                widget.dday,
                 style: greyTextStyle,
               ),
               Text(
