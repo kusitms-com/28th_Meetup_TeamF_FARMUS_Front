@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_to_search.dart';
+import 'package:mojacknong_android/view/farmclub/component/recommend_farmclub_list.dart';
 
 class FarmclubExploreScreen extends StatefulWidget {
   const FarmclubExploreScreen({Key? key}) : super(key: key);
@@ -35,35 +36,41 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
         ],
       ),
       backgroundColor: FarmusThemeData.white,
-      body: const Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  "파머",
-                  style: TextStyle(
-                    color: FarmusThemeData.dark,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "Pretendard",
-                  ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 16,
+          ),
+          const Row(
+            children: [
+              SizedBox(
+                width: 16,
+              ),
+              Text(
+                "파머",
+                style: TextStyle(
+                  color: FarmusThemeData.dark,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: "Pretendard",
                 ),
-                Text(
-                  " 님을 위한",
-                  style: TextStyle(
-                    color: FarmusThemeData.dark,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "Pretendard",
-                  ),
-                )
-              ],
-            ),
-            Text(
+              ),
+              Text(
+                " 님을 위한",
+                style: TextStyle(
+                  color: FarmusThemeData.dark,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: "Pretendard",
+                ),
+              )
+            ],
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 16.0),
+            child: Text(
               "추천 팜클럽",
               style: TextStyle(
                 color: FarmusThemeData.dark,
@@ -72,8 +79,12 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
                 fontFamily: "Pretendard",
               ),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          RecommendFarmclubList(),
+        ],
       ),
     );
   }

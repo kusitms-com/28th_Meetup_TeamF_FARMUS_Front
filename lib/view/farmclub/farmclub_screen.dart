@@ -16,6 +16,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
+      backgroundColor: FarmusThemeData.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -25,7 +26,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "나의 팜클럽",
                     style: TextStyle(
                       color: FarmusThemeData.dark,
