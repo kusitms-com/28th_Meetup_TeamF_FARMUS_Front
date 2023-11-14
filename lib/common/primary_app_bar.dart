@@ -14,31 +14,33 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      leading: IconButton(
-        icon: SvgPicture.asset(
-          "assets/image/ic_arrow_left.svg",
-          height: 24,
-          width: 24,
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: SvgPicture.asset(
+            "assets/image/ic_arrow_left.svg",
+            height: 24,
+            width: 24,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
+        title: title != null
+            ? Text(
+                title!,
+                style: TextStyle(
+                  color: FarmusThemeData.dark,
+                  fontFamily: "Pretendard",
+                  fontSize: 16,
+                ),
+              )
+            : null,
+        centerTitle: true,
+        actions: actions,
+        elevation: 0,
+        backgroundColor: FarmusThemeData.white,
       ),
-      title: title != null
-          ? Text(
-              title!,
-              style: TextStyle(
-                color: FarmusThemeData.dark,
-                fontFamily: "Pretendard",
-                fontSize: 16,
-              ),
-            )
-          : null,
-      centerTitle: true,
-      actions: actions,
-      elevation: 0,
-      backgroundColor: FarmusThemeData.white,
     );
   }
 }
