@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_template.dart';
 import 'package:mojacknong_android/firebase_options.dart';
-import 'package:mojacknong_android/view/login/login_screen.dart';
+import 'package:mojacknong_android/view/main/main_screen.dart';
 
 Future<void> main() async {
   // 웹 환경에서 카카오 로그인을 정상적으로 완료하기 위함
@@ -22,7 +22,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       title: "Farmus",
-      home: const LoginScreen(),
+      home: const MainScreen(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'Pretendard'),
     ),
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
 Future<bool> fetchData() async {
   bool data = false;
 
-  await Future.delayed(Duration(seconds: 3), () {
+  await Future.delayed(const Duration(seconds: 3), () {
     data = true;
   });
 
