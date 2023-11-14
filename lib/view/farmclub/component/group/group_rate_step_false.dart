@@ -81,7 +81,7 @@ class _GroupRateStepFalseState extends State<GroupRateStepFalse> {
               color: FarmusThemeData.grey5,
             ),
             child: Text(
-              "step ${widget.step}",
+              "Step ${widget.step}",
               style: TextStyle(
                 color: FarmusThemeData.grey2,
                 fontSize: 12,

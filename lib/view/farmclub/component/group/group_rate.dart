@@ -26,7 +26,7 @@ class _GroupRateState extends State<GroupRate> {
                 width: 16,
               ),
               Text(
-                "그룹 달성률",
+                "팜클럽 현황",
                 style: FarmusThemeData.darkStyle12,
               ),
             ],
