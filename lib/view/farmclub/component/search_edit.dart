@@ -38,6 +38,7 @@ class SearchEdit extends StatelessWidget {
                   ),
                 ),
                 cursorColor: FarmusThemeData.grey1,
+                autofocus: true,
               ),
             ),
           ],
