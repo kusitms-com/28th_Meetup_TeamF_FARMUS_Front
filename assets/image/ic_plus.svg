@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M10.5 4.375V16.625M4.375 10.5H16.625" stroke="#FFFEFE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+=======
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 5V19M5 12H19" stroke="#1D1D1D" stroke-width="1.21875" stroke-linecap="round" stroke-linejoin="round"/>
+>>>>>>> 56c4a93 ([feat] : 작물 등록 첫 페이지 및 미션/루틴)
 </svg>
