@@ -46,7 +46,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 Future<bool> fetchData() async {
   bool data = false;
 
@@ -56,4 +55,3 @@ Future<bool> fetchData() async {
 
   return data;
 }
-
