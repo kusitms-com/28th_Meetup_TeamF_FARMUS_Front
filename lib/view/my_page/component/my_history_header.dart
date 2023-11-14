@@ -61,7 +61,7 @@ class HistoryHeader extends StatelessWidget {
           ),
         ),
         const Divider(
-          color: FarmusThemeData.grey2,
+          color: Color(0xFFD9D9D9),
           height: 1,
           thickness: 1,
           indent: 16.0,

@@ -7,14 +7,13 @@ class MyPageHeader extends StatelessWidget {
   final String? name;
   final int? date;
   final String? imagePath;
-  
+
   MyPageHeader({
     Key? key,
     required this.name,
     required this.date,
     required this.imagePath,
   }) : super(key: key);
-
 
   Widget build(BuildContext context) {
     void _navigateToMyProfilePage() {
@@ -25,95 +24,97 @@ class MyPageHeader extends StatelessWidget {
       );
     }
 
-
-
     return Container(
       color: FarmusThemeData.green1,
       padding: const EdgeInsets.fromLTRB(16, 25, 0, 0),
-      child: SafeArea(
-        child: Row(
-          children: <Widget>[
-            ClipOval(
-              child: imagePath != null
-                  ? Image.network(
-                imagePath!,
-                width: 64,
-                height: 64,
-                fit: BoxFit.cover,
-              )
-               : SvgPicture.asset(
-                'assets/image/profile_example_mypage.svg', // 기본 이미지 경로
-                width: 64,
-                height: 64,
-                fit: BoxFit.cover,
-              ),
-            ),
-
-            const SizedBox(width: 15.0),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      InkWell(
-                        onTap: _navigateToMyProfilePage,
-                        child: Row(
-                          children: [
-                            Text(
-                              '$name 님',
-                              style: const TextStyle(
-                                color: FarmusThemeData.dark,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(width: 4),
-                            SvgPicture.asset(
-                              "assets/image/arrow_right_mypage.svg",
-                            ),
-                          ],
-                        ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 16,
+          ),
+          Row(
+            children: <Widget>[
+              ClipOval(
+                child: imagePath != null
+                    ? Image.network(
+                        imagePath!,
+                        width: 64,
+                        height: 64,
+                        fit: BoxFit.cover,
+                      )
+                    : SvgPicture.asset(
+                        'assets/image/profile_example_mypage.svg', // 기본 이미지 경로
+                        width: 64,
+                        height: 64,
+                        fit: BoxFit.cover,
                       ),
-                    ],
+              ),
+              const SizedBox(width: 15.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        InkWell(
+                          onTap: _navigateToMyProfilePage,
+                          child: Row(
+                            children: [
+                              Text(
+                                '$name 님',
+                                style: const TextStyle(
+                                  color: FarmusThemeData.dark,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(width: 4),
+                              SvgPicture.asset(
+                                "assets/image/arrow_right_mypage.svg",
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      '팜어스와 함께한 지 D+$date',
+                      style: const TextStyle(
+                        fontFamily: "Pretendard-Semi-Bold",
+                        color: FarmusThemeData.primary,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  SvgPicture.asset(
+                    "assets/image/mypage_logo.svg",
+                    width: 85,
+                    height: 103,
                   ),
-                  Text(
-                    '팜어스와 함께한 지 D+$date',
-                    style: const TextStyle(
-                      fontFamily: "Pretendard-Semi-Bold",
-                      color: FarmusThemeData.primary,
-                      fontSize: 13,
+                  Positioned(
+                    top: 1,
+                    right: -5,
+                    child: IconButton(
+                      iconSize: 50,
+                      onPressed: () {
+                        // setting click 시 todo
+                      },
+                      icon: SvgPicture.asset(
+                        "assets/image/settings_icon.svg",
+                      ),
                     ),
                   ),
                 ],
               ),
-            ),
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                SvgPicture.asset(
-                  "assets/image/logo_tree.svg",
-                  width: 85,
-                  height: 103,
-                ),
-                Positioned(
-                  top: 1,
-                  right: -5,
-                  child: IconButton(
-                    iconSize: 50,
-                    onPressed: () {
-                      // setting click 시 todo
-                    },
-                    icon: SvgPicture.asset(
-                      "assets/image/settings_icon.svg",
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -124,17 +125,10 @@ class MyPageHeader extends StatelessWidget {
     throw UnimplementedError();
   }
 
-  bool userProfileSign(String userImageUrl){
-
-    if(userImageUrl == null){
+  bool userProfileSign(String userImageUrl) {
+    if (userImageUrl == null) {
       return true;
     }
     return false;
   }
-
-
-
-
 }
-
-
