@@ -5,8 +5,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/data/network/onboarding_api_service.dart';
 import 'package:mojacknong_android/repository/onboarding_repository.dart';
 import 'package:mojacknong_android/view_model/controllers/onboarding_controller.dart';
+import 'package:mojacknong_android/view_model/user_view_model.dart';
 
 class OnboardingFirst extends StatefulWidget {
   const OnboardingFirst({Key? key}) : super(key: key);
@@ -17,6 +19,8 @@ class OnboardingFirst extends StatefulWidget {
 
 class _OnboardingFirstState extends State<OnboardingFirst> {
   final OnboardingController _controller = Get.put(OnboardingController());
+  final UserViewModel _userViewModel =
+      Get.put(UserViewModel(OnboardingApiService()));
   final ImagePicker _picker = ImagePicker();
   String? _profileImage;
 
@@ -28,7 +32,7 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
 
   @override
   void dispose() {
-    postProfile(); // 프로필 업로드
+    _postProfile(); // 프로필 업로드
     super.dispose();
   }
 
@@ -180,16 +184,18 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
     return OnboardingRepository.getProfileImageApi(); // 서버에서 프로필 이미지 가져오기
   }
 
-  Future<void> postProfile() {
+  Future<void> _postProfile() {
     String nickname = _controller.controller.text;
 
     if (_profileImage != null) {
       if (!_profileImage!.startsWith('http')) {
         print("프로필 보내기 !!!! $_profileImage");
+        _userViewModel.setProfileData(File(_profileImage!), nickname);
         return OnboardingRepository.postProfileApi(
             File(_profileImage!), nickname); // 프로필 이미지와 닉네임 서버에 업로드
       } else {
         print("갤러리에서 사진을 선택하지 않았습니다.");
+        _userViewModel.setNickName(nickname);
         return OnboardingRepository.postProfileApi(null, nickname);
       }
     } else {
