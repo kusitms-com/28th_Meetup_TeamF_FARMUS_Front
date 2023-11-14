@@ -43,13 +43,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-Future<bool> fetchData() async {
-  bool data = false;
-
-  await Future.delayed(Duration(seconds: 3), () {
-    data = true;
-  });
-
-  return data;
-}

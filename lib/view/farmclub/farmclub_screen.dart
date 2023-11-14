@@ -6,7 +6,12 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_init.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_%20explore_screen.dart';
 
-class FarmclubScreen extends StatelessWidget {
+class FarmclubScreen extends StatefulWidget {
+  @override
+  State<FarmclubScreen> createState() => _FarmclubScreenState();
+}
+
+class _FarmclubScreenState extends State<FarmclubScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +39,7 @@ class FarmclubScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(
                           builder: (context) {
-                            return const FarmclubExploreScreen();
+                            return FarmclubExploreScreen();
                           },
                         ));
                       },

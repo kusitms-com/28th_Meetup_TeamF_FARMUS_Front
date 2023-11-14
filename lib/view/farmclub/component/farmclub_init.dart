@@ -36,7 +36,7 @@ class FarmclubInit extends StatelessWidget {
           onTap: () {
             Navigator.push(context, MaterialPageRoute(
               builder: (context) {
-                return const FarmclubExploreScreen();
+                return FarmclubExploreScreen();
               },
             ));
           },
