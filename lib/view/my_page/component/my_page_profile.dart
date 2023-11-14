@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view/my_page/component/my_page_bar.dart';
+import 'package:mojacknong_android/common/primary_app_bar.dart';
 
 class MyProfilePage extends StatefulWidget {
   const MyProfilePage({Key? key}) : super(key: key);
@@ -16,17 +16,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Replace the appBar property with a direct call to your custom app bar widget
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(
-            kToolbarHeight), // Set the height of the app bar
-        child: MyPageAppBar(
-          title: '프로필 수정',
-          onBackButtonPressed: () {
-            Navigator.of(context)
-                .pop(); // Custom action when the back button is pressed
-          },
-        ),
+      backgroundColor: FarmusThemeData.white,
+      appBar: PrimaryAppBar(
+        title: "프로필 수정",
       ),
       body: SingleChildScrollView(
         child: Padding(

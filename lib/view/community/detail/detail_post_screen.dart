@@ -14,10 +14,12 @@ import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controlle
 
 class DetailPostScreen extends StatefulWidget {
   final int postingId;
+  final VoidCallback? onDetailScreenPopped;
 
   const DetailPostScreen({
     Key? key,
     required this.postingId,
+    this.onDetailScreenPopped,
   }) : super(key: key);
 
   @override
@@ -55,6 +57,7 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
           },
         ),
       ]),
+      backgroundColor: FarmusThemeData.white,
       body: FutureBuilder<CommunityDetail>(
         future: _communityDetailFuture,
         builder: (context, snapshot) {
@@ -156,7 +159,13 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
           }
         },
       ),
-      bottomSheet: BottomComment(),
+      bottomSheet: BottomComment(
+        postingId: widget.postingId,
+        onCommentPosted: () {
+          _loadCommunityDetail();
+          widget.onDetailScreenPopped?.call();
+        },
+      ),
     );
   }
 }

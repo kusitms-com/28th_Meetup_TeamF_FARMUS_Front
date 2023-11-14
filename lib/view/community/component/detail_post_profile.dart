@@ -20,10 +20,13 @@ class DetailPostProfile extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.network(
-            profileImage.first,
-            width: 44,
-            height: 44,
+          ClipOval(
+            child: Image.network(
+              profileImage.first,
+              width: 44,
+              height: 44,
+              fit: BoxFit.fill,
+            ),
           ),
           const SizedBox(
             width: 12,

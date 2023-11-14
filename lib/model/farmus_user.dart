@@ -1,11 +1,13 @@
 class FarmusUser {
-  String refreshToken;
-  String accessToken;
+  String? refreshToken;
+  String? accessToken;
   String? nickName;
   bool? early;
   String? motivation;
   int? time;
   String? skill;
+  int? dday;
+  dynamic?  userImageUrl;
 
   FarmusUser({
     required this.refreshToken,
@@ -15,6 +17,8 @@ class FarmusUser {
     this.motivation,
     this.time,
     this.skill,
+    this.dday,
+    this.userImageUrl
   });
 
   factory FarmusUser.fromJson(Map<String, dynamic> json) {
@@ -25,6 +29,9 @@ class FarmusUser {
         early: json['early'],
         motivation: json['motivation'],
         time: json['time'],
-        skill: json["skill"]);
+        skill: json["skill"],
+        dday: json["dday"],
+        userImageUrl: json['userImageUrl']
+    );
   }
 }

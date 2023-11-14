@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:mojacknong_android/data/network/base_api_services.dart';
 import 'package:mojacknong_android/model/community_detail.dart';
@@ -111,6 +113,33 @@ class CommunityApiService {
     } on DioError catch (e) {
       print("에러 발생: $e");
       throw Exception("Failed to load posting comments");
+    }
+  }
+
+  // 댓글 달기
+  Future<String> postCommentWrite(int postingId, String comment) async {
+    try {
+      final Map<String, dynamic> data = {
+        'postingId': postingId,
+        'comment': comment,
+      };
+      Response response = await ApiClient().dio.post(
+            "/api/community/comment/write",
+            data: jsonEncode(data),
+            options: Options(
+              headers: {'Content-Type': 'application/json'},
+            ),
+          );
+
+      if (response.statusCode == 200) {
+        print(response.data);
+        return "성공";
+      } else {
+        return "실패";
+      }
+    } on DioException catch (e) {
+      print("에러 ${e.message}");
+      return "false";
     }
   }
 }

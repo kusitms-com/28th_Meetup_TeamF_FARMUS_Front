@@ -33,7 +33,6 @@ class ChallengeHeader extends StatelessWidget {
                 historyType,
                 style: const TextStyle(
                   fontSize: 17.0,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
               InkWell(
@@ -47,7 +46,6 @@ class ChallengeHeader extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12.0,
                         color: FarmusThemeData.grey1,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(width: 4), // 아이콘과 텍스트 사이의 간격
@@ -61,7 +59,7 @@ class ChallengeHeader extends StatelessWidget {
           ),
         ),
         const Divider(
-          color: FarmusThemeData.grey2,
+          color: Color(0xFFD9D9D9),
           height: 1,
           thickness: 1,
           indent: 16.0,

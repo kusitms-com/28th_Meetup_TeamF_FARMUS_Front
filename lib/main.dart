@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_template.dart';
+import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/firebase_options.dart';
 import 'package:mojacknong_android/view/main/main_screen.dart';
 
@@ -38,11 +39,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(),
+        backgroundColor: FarmusThemeData.white,
       ),
       theme: ThemeData(fontFamily: 'Pretendard', useMaterial3: true),
     );
   }
 }
+
 
 Future<bool> fetchData() async {
   bool data = false;
@@ -53,3 +56,4 @@ Future<bool> fetchData() async {
 
   return data;
 }
+

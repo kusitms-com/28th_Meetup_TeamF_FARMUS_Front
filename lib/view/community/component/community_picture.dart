@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class CommunityPicture extends StatelessWidget {
-  final String image;
+  final String? image;
 
   CommunityPicture({required this.image});
 
@@ -24,13 +24,13 @@ class CommunityPicture extends StatelessWidget {
 
   Widget _buildImage() {
     try {
-      return image.isEmpty
+      return image!.isEmpty
           ? Image.asset(
               "assets/image/image_example_community.png",
               fit: BoxFit.fill,
             )
           : Image.network(
-              image,
+              image!,
               fit: BoxFit.fill,
               loadingBuilder: (BuildContext context, Widget child,
                   ImageChunkEvent? loadingProgress) {
