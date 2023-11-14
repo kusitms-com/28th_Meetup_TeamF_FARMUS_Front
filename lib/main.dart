@@ -45,8 +45,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-<<<<<<< HEAD
-=======
 
 Future<bool> fetchData() async {
   bool data = false;
@@ -57,4 +55,3 @@ Future<bool> fetchData() async {
 
   return data;
 }
->>>>>>> 56c4a93 ([feat] : 작물 등록 첫 페이지 및 미션/루틴)
