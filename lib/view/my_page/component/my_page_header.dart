@@ -81,7 +81,6 @@ class MyPageHeader extends StatelessWidget {
                     Text(
                       '팜어스와 함께한 지 D+$date',
                       style: const TextStyle(
-                        fontFamily: "Pretendard-Semi-Bold",
                         color: FarmusThemeData.primary,
                         fontSize: 13,
                       ),

@@ -33,14 +33,13 @@ class MyPageAppBar extends StatelessWidget implements PreferredSizeWidget {
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             const Opacity(
               opacity: 0,
               child: Icon(Icons.arrow_back, size: 45.0),
-            ), //화살표 때문에 밀려난 공간 고려해서 가운데 정렬
+            ),
           ],
         ),
       ),

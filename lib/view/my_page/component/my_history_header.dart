@@ -33,7 +33,6 @@ class HistoryHeader extends StatelessWidget {
                 historyType,
                 style: const TextStyle(
                   fontSize: 17.0,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
               InkWell(
@@ -47,7 +46,6 @@ class HistoryHeader extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12.0,
                         color: FarmusThemeData.grey1,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(width: 4), // 아이콘과 텍스트 사이의 간격

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
+import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/model/community_posting.dart';
 import 'package:mojacknong_android/view/community/component/button_next_my_post.dart';
 import 'package:mojacknong_android/view/community/component/community_category.dart';
@@ -33,6 +34,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
+      backgroundColor: FarmusThemeData.white,
       body: Column(
         children: [
           SizedBox(

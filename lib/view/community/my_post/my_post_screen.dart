@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/model/community_posting.dart';
 import 'package:mojacknong_android/repository/community_repository.dart';
@@ -24,6 +25,7 @@ class _MyPostScreenState extends State<MyPostScreen> {
       appBar: PrimaryAppBar(
         title: "내 글",
       ),
+      backgroundColor: FarmusThemeData.white,
       body: SingleChildScrollView(
         child: Column(
           children: myPostings.map((posting) {
