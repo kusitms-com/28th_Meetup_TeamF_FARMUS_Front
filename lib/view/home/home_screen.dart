@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/home_custom_app_bar.dart';
 import 'package:mojacknong_android/view/home/component/home_divider.dart';
 import 'package:mojacknong_android/view/home/controller/home_content.dart';
@@ -20,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     print('Building HomeScreen');
     return Scaffold(
       appBar: const HomeCustomAppBar(),
+      backgroundColor: FarmusThemeData.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

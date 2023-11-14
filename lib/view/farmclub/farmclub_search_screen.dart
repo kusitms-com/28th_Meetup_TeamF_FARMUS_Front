@@ -56,14 +56,9 @@ class _FarmclubSearchScreenState extends State<FarmclubSearchScreen> {
               ),
               const SearchCategory(
                   title: "재배 난이도", categories: ["Easy", "Normal", "Hard"]),
-<<<<<<< HEAD
               const SearchCategory(
                   title: "팜클럽 상태", categories: ["준비 중", "진행 중"]),
               const Expanded(
-=======
-              SearchCategory(title: "팜클럽 상태", categories: ["준비 중", "진행 중"]),
-              Expanded(
->>>>>>> 1e6e0bd ([feat] : 나의 팜클럽 리스트 구현 (#34))
                 child: Center(
                   child: Text(
                     "팜클럽 이름, 채소 이름으로\n검색해보세요",

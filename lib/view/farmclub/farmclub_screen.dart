@@ -3,16 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-<<<<<<< HEAD
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title.dart';
 import 'package:mojacknong_android/view/farmclub/component/group_rate.dart';
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_info.dart';
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_list.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_explore_screen.dart';
-=======
-import 'package:mojacknong_android/view/farmclub/component/my_farmclub_list.dart';
-import 'package:mojacknong_android/view/farmclub/farmclub_%20explore_screen.dart';
->>>>>>> 1e6e0bd ([feat] : 나의 팜클럽 리스트 구현 (#34))
 
 class FarmclubScreen extends StatefulWidget {
   @override
@@ -64,7 +59,6 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
             ),
           ),
           MyFarmclubList(),
-<<<<<<< HEAD
           SizedBox(
             height: 16,
           ),
@@ -74,8 +68,6 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
           ),
           MyFarmclubInfo(),
           GroupRate(),
-=======
->>>>>>> 1e6e0bd ([feat] : 나의 팜클럽 리스트 구현 (#34))
         ],
       ),
     );
