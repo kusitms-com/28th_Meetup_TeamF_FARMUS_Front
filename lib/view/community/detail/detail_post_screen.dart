@@ -57,6 +57,7 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
           },
         ),
       ]),
+      backgroundColor: FarmusThemeData.white,
       body: FutureBuilder<CommunityDetail>(
         future: _communityDetailFuture,
         builder: (context, snapshot) {

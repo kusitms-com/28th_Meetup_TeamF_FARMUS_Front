@@ -50,6 +50,7 @@ class _PostScreenState extends State<PostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      backgroundColor: FarmusThemeData.white,
       appBar: PrimaryAppBar(
         actions: [
           TextButton(

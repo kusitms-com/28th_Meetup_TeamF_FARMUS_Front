@@ -7,13 +7,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      actions: [],
-      elevation: 0,
-      leading: const BackButton(
-        color: FarmusThemeData.black,
+    return Scaffold(
+      appBar: AppBar(
+        actions: [],
+        elevation: 0,
+        leading: const BackButton(
+          color: FarmusThemeData.black,
+        ),
+        backgroundColor: FarmusThemeData.white,
       ),
-      backgroundColor: FarmusThemeData.white,
     );
   }
 }

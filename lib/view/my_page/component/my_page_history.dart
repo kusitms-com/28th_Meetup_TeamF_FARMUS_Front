@@ -82,14 +82,12 @@ class _MyPageHistoryState extends State<MyPageHistory> {
                         TextSpan(
                           text: '${widget.name} | ',
                           style: const TextStyle(
-                            fontWeight: FontWeight.bold,
                             fontSize: 17,
                           ),
                         ),
                         TextSpan(
                           text: widget.nickname,
                           style: const TextStyle(
-                            fontWeight: FontWeight.bold,
                             fontSize: 13.0,
                           ),
                         ),

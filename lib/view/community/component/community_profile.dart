@@ -28,20 +28,30 @@ class _CommunityProfileState extends State<CommunityProfile> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          (widget.profileImage == null || widget.profileImage!.isEmpty)
-              ? Image.asset(
-                  "assets/image/image_example_profile2.png",
-                  width: 32,
-                  height: 32,
-                  fit: BoxFit.fill,
-                )
-              : Image.network(
-                  widget.profileImage!,
-                  width: 32,
-                  height: 32,
-                  fit: BoxFit.fill,
-                ),
-          const SizedBox(
+          ClipOval(
+            child: Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child:
+                  (widget.profileImage == null || widget.profileImage!.isEmpty)
+                      ? Image.asset(
+                          "assets/image/image_example_profile2.png",
+                          width: 32,
+                          height: 32,
+                          fit: BoxFit.fill,
+                        )
+                      : Image.network(
+                          widget.profileImage!,
+                          width: 32,
+                          height: 32,
+                          fit: BoxFit.fill,
+                        ),
+            ),
+          ),
+          SizedBox(
             width: 8,
           ),
           Text(
