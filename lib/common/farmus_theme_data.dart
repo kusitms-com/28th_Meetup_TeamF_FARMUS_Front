@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 class FarmusThemeData {
-  static final TextStyle darkTextStyle = TextStyle(
-    color: dark,
-    fontFamily: "Pretendard",
-  );
   static const Color dark = Color(0xFF1D1D1D);
 
   static const Color grey1 = Color(0xFF505050);
@@ -21,7 +17,7 @@ class FarmusThemeData {
 
   static const Color green1 = Color(0xFF4DCF76);
   static const Color green = Color(0xFFBDF69A);
-  static const Color greenLight = Color(0xFFDFF9BA);
+  static const Color greenLight = Color(0xFFEBFFE2);
   static const Color greenLight2 = Color(0xFFDAF3EB);
 
   static const Color brownText = Color(0xFFAD9782);
@@ -34,4 +30,34 @@ class FarmusThemeData {
 
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
+
+  static const TextStyle darkStyle16 = TextStyle(
+    color: FarmusThemeData.dark,
+    fontSize: 16,
+    fontFamily: "Pretendard",
+  );
+
+  static const TextStyle grey1Style11 = const TextStyle(
+    color: FarmusThemeData.grey1,
+    fontSize: 11,
+    fontFamily: "Pretendard",
+  );
+
+  static const TextStyle brownText13 = const TextStyle(
+    color: FarmusThemeData.brownText,
+    fontSize: 13,
+    fontFamily: "Pretendard",
+  );
+
+  static const TextStyle darkStyle13 = const TextStyle(
+    color: FarmusThemeData.dark,
+    fontSize: 13,
+    fontFamily: "Pretendard",
+  );
+
+  static const TextStyle green1Style14 = const TextStyle(
+    color: FarmusThemeData.green1,
+    fontSize: 14,
+    fontFamily: "Pretendard",
+  );
 }

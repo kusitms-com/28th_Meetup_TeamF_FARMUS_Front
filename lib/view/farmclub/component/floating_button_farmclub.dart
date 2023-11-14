@@ -11,8 +11,8 @@ class FloatingButtonFarmclub extends StatelessWidget {
     return Bouncing(
       onPress: () {},
       child: SizedBox(
-        width: 80,
-        height: 60,
+        width: 75,
+        height: 45,
         child: OutlinedButton(
           onPressed: () {},
           style: ButtonStyle(
@@ -33,8 +33,8 @@ class FloatingButtonFarmclub extends StatelessWidget {
             child: SvgPicture.asset(
               "assets/image/ic_plus.svg",
               color: FarmusThemeData.white,
-              height: 32,
-              width: 32,
+              height: 24,
+              width: 24,
             ),
           ),
         ),

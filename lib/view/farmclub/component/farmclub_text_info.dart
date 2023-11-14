@@ -25,30 +25,6 @@ class FarmclubTextInfo extends StatefulWidget {
 }
 
 class _FarmclubTextInfoState extends State<FarmclubTextInfo> {
-  final TextStyle textStyle = const TextStyle(
-    color: FarmusThemeData.dark,
-    fontSize: 16,
-    fontFamily: "Pretendard",
-  );
-
-  final TextStyle greyTextStyle = const TextStyle(
-    color: FarmusThemeData.grey1,
-    fontSize: 11,
-    fontFamily: "Pretendard",
-  );
-
-  final TextStyle brownTextStyle = const TextStyle(
-    color: FarmusThemeData.brownText,
-    fontSize: 13,
-    fontFamily: "Pretendard",
-  );
-
-  final TextStyle darkTextStyle = const TextStyle(
-    color: FarmusThemeData.dark,
-    fontSize: 13,
-    fontFamily: "Pretendard",
-  );
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,7 +37,7 @@ class _FarmclubTextInfoState extends State<FarmclubTextInfo> {
             children: [
               Text(
                 widget.farmclubTitle,
-                style: textStyle,
+                style: FarmusThemeData.darkStyle16,
               ),
               const SizedBox(
                 width: 8,
@@ -72,12 +48,12 @@ class _FarmclubTextInfoState extends State<FarmclubTextInfo> {
               ),
               Text(
                 widget.vegetable,
-                style: textStyle.copyWith(fontSize: 13),
+                style: FarmusThemeData.darkStyle13,
               ),
             ],
           ),
           const SizedBox(
-            height: 8,
+            height: 2,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -85,31 +61,31 @@ class _FarmclubTextInfoState extends State<FarmclubTextInfo> {
             children: [
               Text(
                 widget.level,
-                style: brownTextStyle,
+                style: FarmusThemeData.brownText13,
               ),
               const SizedBox(
                 width: 8,
               ),
               Text(
                 widget.nowPerson,
-                style: darkTextStyle,
+                style: FarmusThemeData.darkStyle13,
               ),
               Text(
                 "/",
-                style: darkTextStyle,
+                style: FarmusThemeData.darkStyle13,
               ),
               Text(
                 widget.maxPerson,
-                style: darkTextStyle,
+                style: FarmusThemeData.darkStyle13,
               ),
               Text(
                 "명",
-                style: darkTextStyle,
+                style: FarmusThemeData.darkStyle13,
               ),
             ],
           ),
           const SizedBox(
-            height: 8,
+            height: 2,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -117,15 +93,15 @@ class _FarmclubTextInfoState extends State<FarmclubTextInfo> {
             children: [
               Text(
                 "시작한 지 ",
-                style: greyTextStyle,
+                style: FarmusThemeData.grey1Style11,
               ),
               Text(
                 widget.dday,
-                style: greyTextStyle,
+                style: FarmusThemeData.grey1Style11,
               ),
               Text(
                 "일째",
-                style: greyTextStyle,
+                style: FarmusThemeData.grey1Style11,
               ),
             ],
           ),
