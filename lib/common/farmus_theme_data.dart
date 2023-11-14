@@ -15,10 +15,13 @@ class FarmusThemeData {
   static const Color category = Color(0xFF535353);
   static const Color primary = Color(0xFF184B36);
 
-  static const Color green1 = Color(0xFF4DCF76);
   static const Color green = Color(0xFFBDF69A);
+  static const Color green1 = Color(0xFF4DCF76);
+  static const Color green2 = Color(0xFF2CC167);
+
   static const Color greenLight = Color(0xFFEBFFE2);
   static const Color greenLight2 = Color(0xFFDAF3EB);
+  static const Color greenLight3 = Color(0xFFD8FDAA);
 
   static const Color brownText = Color(0xFFAD9782);
   static const Color brownButton = Color(0xFFBCAD96);
@@ -30,6 +33,12 @@ class FarmusThemeData {
 
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
+
+  static const TextStyle darkStyle12 = TextStyle(
+    color: FarmusThemeData.dark,
+    fontSize: 12,
+    fontFamily: "Pretendard",
+  );
 
   static const TextStyle darkStyle13 = TextStyle(
     color: FarmusThemeData.dark,
