@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/farmclub/component/farmclub_text_info.dart';
 
 class RecommendFarmclub extends StatefulWidget {
   final String farmclubImage;
@@ -28,30 +28,6 @@ class RecommendFarmclub extends StatefulWidget {
 }
 
 class _RecommendFarmclubState extends State<RecommendFarmclub> {
-  final TextStyle textStyle = const TextStyle(
-    color: FarmusThemeData.dark,
-    fontSize: 16,
-    fontFamily: "Pretendard",
-  );
-
-  final TextStyle greyTextStyle = const TextStyle(
-    color: FarmusThemeData.grey1,
-    fontSize: 11,
-    fontFamily: "Pretendard",
-  );
-
-  final TextStyle brownTextStyle = const TextStyle(
-    color: FarmusThemeData.brownText,
-    fontSize: 13,
-    fontFamily: "Pretendard",
-  );
-
-  final TextStyle darkTextStyle = const TextStyle(
-    color: FarmusThemeData.dark,
-    fontSize: 13,
-    fontFamily: "Pretendard",
-  );
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -85,7 +61,11 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                   child: Text(
                     widget.vegetable,
-                    style: darkTextStyle,
+                    style: TextStyle(
+                      color: FarmusThemeData.dark,
+                      fontSize: 13,
+                      fontFamily: "Pretendard",
+                    ),
                   ),
                 ),
               ),
@@ -94,76 +74,14 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
           const SizedBox(
             height: 12,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                widget.farmclubTitle,
-                style: textStyle,
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              SvgPicture.asset("assets/image/line_vertical_grey1.svg"),
-              const SizedBox(
-                width: 8,
-              ),
-              Text(
-                widget.vegetable,
-                style: textStyle.copyWith(fontSize: 13),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Row(
-            children: [
-              Text(
-                widget.level,
-                style: brownTextStyle,
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              Text(
-                widget.nowPerson,
-                style: darkTextStyle,
-              ),
-              Text(
-                "/",
-                style: darkTextStyle,
-              ),
-              Text(
-                widget.maxPerson,
-                style: darkTextStyle,
-              ),
-              Text(
-                "명",
-                style: darkTextStyle,
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Row(
-            children: [
-              Text(
-                "시작한 지 ",
-                style: greyTextStyle,
-              ),
-              Text(
-                widget.dday,
-                style: greyTextStyle,
-              ),
-              Text(
-                "일째",
-                style: greyTextStyle,
-              ),
-            ],
-          ),
+          FarmclubTextInfo(
+            vegetable: widget.vegetable,
+            farmclubTitle: widget.farmclubTitle,
+            level: widget.level,
+            nowPerson: widget.nowPerson,
+            maxPerson: widget.maxPerson,
+            dday: widget.dday,
+          )
         ],
       ),
     );

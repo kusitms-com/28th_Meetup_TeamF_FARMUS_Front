@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
-import 'package:mojacknong_android/view/community/component/floating_button_post.dart';
 import 'package:mojacknong_android/view/farmclub/component/brown_category.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_to_search.dart';
+import 'package:mojacknong_android/view/farmclub/component/farmclub.dart';
+import 'package:mojacknong_android/view/farmclub/component/floating_button_farmclub.dart';
 import 'package:mojacknong_android/view/farmclub/component/recommend_farmclub_list.dart';
 
 class FarmclubExploreScreen extends StatefulWidget {
@@ -150,12 +151,13 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
                 Divider(
                   color: FarmusThemeData.grey4,
                 ),
+                Farmclub(),
               ],
             ),
           )
         ],
       ),
-      floatingActionButton: const FloatingButtonPost(),
+      floatingActionButton: const FloatingButtonFarmclub(),
     );
   }
 }
