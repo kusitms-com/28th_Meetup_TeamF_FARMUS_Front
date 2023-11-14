@@ -81,6 +81,7 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
             nowPerson: widget.nowPerson,
             maxPerson: widget.maxPerson,
             dday: widget.dday,
+            isRecommend: true,
           )
         ],
       ),

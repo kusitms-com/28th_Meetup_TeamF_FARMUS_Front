@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
-import 'package:mojacknong_android/view/farmclub/component/brown_category.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_to_search.dart';
+import 'package:mojacknong_android/view/farmclub/component/explore/recommend_farmclub_list.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub.dart';
 import 'package:mojacknong_android/view/farmclub/component/floating_button_farmclub.dart';
-import 'package:mojacknong_android/view/farmclub/component/recommend_farmclub_list.dart';
+import 'package:mojacknong_android/view/farmclub/component/search/brown_category.dart';
+import 'package:mojacknong_android/view/farmclub/component/search/search_category.dart';
 
 class FarmclubExploreScreen extends StatelessWidget {
   const FarmclubExploreScreen({Key? key}) : super(key: key);
@@ -91,8 +92,28 @@ class FarmclubExploreScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                _buildCategoryRow("재배 난이도", ["Easy", "Normal", "Hard"]),
-                _buildCategoryRow("팜클럽 상태", ["준비 중", "진행 중"]),
+                Row(
+                  children: [],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 16,
+                    ),
+                    SearchCategory(
+                        title: "재배 난이도",
+                        categories: ["Easy", "Normal", "Hard"]),
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 16,
+                    ),
+                    SearchCategory(
+                        title: "팜클럽 상태", categories: ["준비 중", "진행 중"]),
+                  ],
+                ),
                 const Divider(
                   endIndent: 16,
                   indent: 16,
