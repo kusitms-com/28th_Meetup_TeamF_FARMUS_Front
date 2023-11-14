@@ -19,18 +19,18 @@ class MyFarmClubHistory extends StatelessWidget {
               children: const <Widget>[
                 MyPageHistory(
                   name: '상추 좋아하세요',
-                  nickname: '상추',
-                  date: '2023.10.01~2023.11.22',
+                  veggieName: '상추',
+                  period: '2023.10.01~2023.11.22',
                 ),
                 MyPageHistory(
                   name: '남아프리카공화국',
-                  nickname: '파프리카',
-                  date: '2023.06.27~현재',
+                  veggieName: '파프리카',
+                  period: '2023.06.27~현재',
                 ),
                 MyPageHistory(
                   name: '깨르륵깨르륵',
-                  nickname: '깻잎',
-                  date: '2023.05.03~현재',
+                  veggieName: '깻잎',
+                  period: '2023.05.03~현재',
                 ),
               ],
             ),

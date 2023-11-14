@@ -21,18 +21,18 @@ class MyVegeHistory extends StatelessWidget {
               children: const <Widget>[
                 MyPageHistory(
                   name: '상훈이',
-                  nickname: '상추',
-                  date: '2023.10.01~2023.11.22',
+                  veggieName: '상추',
+                  period: '2023.10.01~2023.11.22',
                 ),
                 MyPageHistory(
                   name: '먹쟁이토마토',
-                  nickname: '방울토마토',
-                  date: '2023.06.27~현재',
+                  veggieName: '방울토마토',
+                  period: '2023.06.27~현재',
                 ),
                 MyPageHistory(
                   name: '깨르륵',
-                  nickname: '깻잎',
-                  date: '2023.05.03~현재',
+                  veggieName: '깻잎',
+                  period: '2023.05.03~현재',
                 ),
               ],
             ),

@@ -3,7 +3,7 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 // 새로운 페이지를 위한 스텁(더미) 위젯
 class MyPageList extends StatelessWidget {
-  final String data; // 데이터 전달 예제
+  final String? data; // 데이터 전달 예제
 
   const MyPageList({Key? key, required this.data}) : super(key: key);
 
@@ -11,7 +11,7 @@ class MyPageList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(data), // AppBar에 데이터를 제목으로 사용
+        title: Text(data!), // AppBar에 데이터를 제목으로 사용
       ),
       body: Center(
         child: Text('New page with data: $data'),
@@ -21,15 +21,15 @@ class MyPageList extends StatelessWidget {
 }
 
 class MyPageHistory extends StatefulWidget {
-  final String name;
-  final String nickname;
-  final String date;
+  final String? name;
+  final String? veggieName;
+  final String? period;
 
   const MyPageHistory({
     Key? key,
     required this.name,
-    required this.nickname,
-    required this.date,
+    required this.veggieName,
+    required this.period,
   }) : super(key: key);
 
   @override
@@ -86,7 +86,7 @@ class _MyPageHistoryState extends State<MyPageHistory> {
                           ),
                         ),
                         TextSpan(
-                          text: widget.nickname,
+                          text: widget.veggieName,
                           style: const TextStyle(
                             fontSize: 13.0,
                           ),
@@ -96,7 +96,7 @@ class _MyPageHistoryState extends State<MyPageHistory> {
                   ),
                   const SizedBox(height: 12.0),
                   Text(
-                    widget.date,
+                    widget.period!,
                     style: const TextStyle(
                         color: FarmusThemeData.brownText // 색상 설정
                         ),
