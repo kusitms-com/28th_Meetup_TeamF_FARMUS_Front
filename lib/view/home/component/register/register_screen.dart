@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/home/component/register/customs/calender.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/register_app_bar.dart';
+import 'package:mojacknong_android/view/home/component/register/customs/register_button.dart';
+import 'package:mojacknong_android/view/home/component/register/nickname_vege.dart';
 import 'package:mojacknong_android/view/home/component/register/select_vege.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -16,41 +19,63 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       appBar: const RegiCustomAppBar(),
       backgroundColor: FarmusThemeData.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
         children: [
-          Container(
-            margin: const EdgeInsets.all(16),
-            child: const Text(
-              '등록할 채소를 선택해주세요',
-              style: TextStyle(
-                color: Colors.black, // 원하는 텍스트 색상으로 변경
-                fontSize: 14.0, // 원하는 텍스트 크기로 변경
-              ),
+          SingleChildScrollView(
+            padding: const EdgeInsets.only(bottom: 230),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(16),
+                  child: const Text(
+                    '등록할 채소를 선택해주세요',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14.0,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 320,
+                  child: RegisterVege(),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 16, right: 16, top: 16),
+                  child: const Text(
+                    '채소의 별명을 입력해주세요',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14.0,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 100,
+                  child: NickNameVege(),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 16, right: 16, top: 20),
+                  child: const Text(
+                    '키우기 시작한 날을 선택해주세요',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14.0,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const CustomCalendar(),
+              ],
             ),
           ),
-          const SizedBox(
-            height: 320, // Replace with the desired height
-            child: RegisterVege(),
-          ),
-          Container(
-            margin: const EdgeInsets.all(16),
-            child: const Text(
-              '채소의 별명을 입력해주세요',
-              style: TextStyle(
-                color: Colors.black, // 원하는 텍스트 색상으로 변경
-                fontSize: 14.0, // 원하는 텍스트 크기로 변경
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.all(16),
-            child: const Text(
-              '키우기 시작한 날을 선택해주세요',
-              style: TextStyle(
-                color: Colors.black, // 원하는 텍스트 색상으로 변경
-                fontSize: 14.0, // 원하는 텍스트 크기로 변경
-              ),
+          const Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: RegisterButton(
+              text: '등록하기',
+              onPressed: null,
             ),
           ),
         ],
