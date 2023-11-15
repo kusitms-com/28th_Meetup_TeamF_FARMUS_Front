@@ -23,14 +23,9 @@ class MyPageFarmHistory extends StatefulWidget {
 
 class _MyPageFarmHistoryState extends State<MyPageFarmHistory> {
   void _navigateToNewPage(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return MyFarmclubMissionScreen();
-        },
-      ),
-    );
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return MyFarmclubMissionScreen();
+    }));
   }
 
   @override
