@@ -8,6 +8,7 @@ import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_white.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_feed.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_title.dart';
+import 'package:mojacknong_android/view/farmclub/component/farmclub_content.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_init.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
@@ -89,6 +90,9 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                         SizedBox(
                           height: 8,
                         ),
+                        FarmclubContent(
+                            content:
+                                "상추를 치료해줄 사람 어디 없나. 저만 매번 실패하나요..\n이번에는 꼭 성공해서 얼른 상추쌈 싸먹어봐요!"),
                         MyFarmclubInfo(),
                         SizedBox(
                           height: 8,
