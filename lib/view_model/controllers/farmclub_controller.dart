@@ -6,6 +6,9 @@ class FarmclubController extends GetxController {
   RxBool hasSpecialCharacters = RxBool(false);
   RxBool hasInput = RxBool(false);
 
+  RxBool isSelectLike = RxBool(false);
+  RxInt like = 2.obs; // 초기 좋아요 수
+
   @override
   void onInit() {
     super.onInit();
