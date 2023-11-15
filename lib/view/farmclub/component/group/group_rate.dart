@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view/farmclub/component/group_rate_step.dart';
+import 'package:mojacknong_android/view/farmclub/component/group/group_rate_step_false.dart';
+import 'package:mojacknong_android/view/farmclub/component/group/group_rate_step_true.dart';
 
 class GroupRate extends StatefulWidget {
   const GroupRate({super.key});
@@ -39,16 +40,26 @@ class _GroupRateState extends State<GroupRate> {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 children: [
-                  GroupRateStep(),
-                  GroupRateStep(),
-                  GroupRateStep(),
-                  GroupRateStep(),
-                  GroupRateStep(),
-                  GroupRateStep(),
-                  GroupRateStep(),
-                  GroupRateStep(),
-                  GroupRateStep(),
-                  GroupRateStep(),
+                  GroupRateStepTrue(
+                    person: "1",
+                    step: "0",
+                  ),
+                  GroupRateStepFalse(
+                    person: "0",
+                    step: "1",
+                  ),
+                  GroupRateStepFalse(
+                    person: "3",
+                    step: "2",
+                  ),
+                  GroupRateStepFalse(
+                    person: "1",
+                    step: "3",
+                  ),
+                  GroupRateStepFalse(
+                    person: "2",
+                    step: "4",
+                  ),
                 ],
               ),
             ),

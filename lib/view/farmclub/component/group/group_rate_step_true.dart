@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
-class GroupRateStep extends StatefulWidget {
-  const GroupRateStep({super.key});
+class GroupRateStepTrue extends StatefulWidget {
+  final String person;
+  final String step;
+  const GroupRateStepTrue(
+      {super.key, required this.person, required this.step});
 
   @override
-  State<GroupRateStep> createState() => _GroupRateStepState();
+  State<GroupRateStepTrue> createState() => _GroupRateStepTrueState();
 }
 
-class _GroupRateStepState extends State<GroupRateStep> {
+class _GroupRateStepTrueState extends State<GroupRateStepTrue> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -50,7 +53,7 @@ class _GroupRateStepState extends State<GroupRateStep> {
                       width: 8,
                     ),
                     Text(
-                      "1명",
+                      "${widget.person}명",
                       style: TextStyle(
                         color: FarmusThemeData.primary,
                         fontSize: 14,
@@ -77,7 +80,7 @@ class _GroupRateStepState extends State<GroupRateStep> {
               color: FarmusThemeData.green2,
             ),
             child: Text(
-              "step 0",
+              "step ${widget.step}",
               style: TextStyle(
                 color: FarmusThemeData.primary,
                 fontSize: 12,

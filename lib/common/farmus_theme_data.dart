@@ -11,6 +11,8 @@ class FarmusThemeData {
 
   static const Color background = Color(0xFFF6F6F6);
   static const Color pictureBackground = Color(0xFFEFEFEF);
+  static const Color dividerBackground = Color(0xFFF5F5F5);
+  static const Color groupRateBackground = Color(0xFFE8E8E8);
 
   static const Color category = Color(0xFF535353);
   static const Color primary = Color(0xFF184B36);
@@ -58,6 +60,12 @@ class FarmusThemeData {
     fontFamily: "Pretendard",
   );
 
+  static const TextStyle darkStyle17 = TextStyle(
+    color: FarmusThemeData.dark,
+    fontSize: 17,
+    fontFamily: "Pretendard",
+  );
+
   static const TextStyle darkStyle18 = TextStyle(
     color: FarmusThemeData.dark,
     fontSize: 18,
@@ -89,8 +97,20 @@ class FarmusThemeData {
     fontFamily: "Pretendard",
   );
 
+  static const TextStyle brownText14 = TextStyle(
+    color: FarmusThemeData.brownText,
+    fontSize: 14,
+    fontFamily: "Pretendard",
+  );
+
   static const TextStyle green1Style14 = TextStyle(
     color: FarmusThemeData.green1,
+    fontSize: 14,
+    fontFamily: "Pretendard",
+  );
+
+  static const TextStyle whiteStyle14 = TextStyle(
+    color: FarmusThemeData.white,
     fontSize: 14,
     fontFamily: "Pretendard",
   );
