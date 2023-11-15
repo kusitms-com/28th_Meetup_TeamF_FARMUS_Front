@@ -1,10 +1,12 @@
+import 'dart:math';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/my_page/component/my_challenge_header.dart';
 import 'package:mojacknong_android/view/my_page/component/my_history_header.dart';
 import 'package:mojacknong_android/view/my_page/component/my_page_header.dart';
 import 'package:mojacknong_android/view/my_page/component/my_page_history.dart';
-
 import '../../model/farmus_user.dart';
 import '../../model/mypage_history.dart';
 import '../../repository/mypage_repository.dart';
@@ -30,13 +32,10 @@ class _MyPageScreenState extends State<MyPageScreen> {
                 return Text('Error: ${snapshot.error}');
               } else {
                 // 데이터가 성공적으로 도착한 경우
-            //    final data = snapshot.data;
+            //  final data = snapshot.data;
                 final List<dynamic> data = snapshot.data as List<dynamic>;
                 final FarmusUser? user = data[0] as FarmusUser?;
                 final MypageHistory? history = data[1] as MypageHistory?;
-
-                print(history?.veggieHistoryDetailList[0].image);
-                print(history?.farmClubHistoryDetailList[0].period);
 
 
                 return Column(children: <Widget>[
@@ -50,60 +49,72 @@ class _MyPageScreenState extends State<MyPageScreen> {
                   HistoryHeader(historyType: "채소 히스토리"),
                   const SizedBox(height: 12.0),
                   Expanded(
-                      child: ListView.builder(
+                    child: history?.veggieHistoryDetailList != null
+                        ? ListView.builder(
                       padding: const EdgeInsets.only(top: 4.0),
-                      itemCount: history?.veggieHistoryDetailList.length,
+                      itemCount: min(3, history!.veggieHistoryDetailList.length),
                       itemBuilder: (context, index) {
+                        final reversedIndex = history.veggieHistoryDetailList.length - index - 1;
                         return MyPageHistory(
-                        name: history?.veggieHistoryDetailList[index].name,
-                        veggieName: history?.veggieHistoryDetailList[index].veggieName,
-                        period: history?.veggieHistoryDetailList[index].period,
+                          name: history.veggieHistoryDetailList[reversedIndex].name,
+                          veggieName: history.veggieHistoryDetailList[reversedIndex].veggieName,
+                          period: history.veggieHistoryDetailList[reversedIndex].period,
+                          image: history.veggieHistoryDetailList[reversedIndex].image,
                         );
-                     },
-                   ),
-                ),
+                      },
+                    )
+                        : noData(),
+                  ),
+
+
 
                   const SizedBox(height: 10.0),
-                  const ChallengeHeader(historyType: "팜클럽 히스토리"),
+                  ChallengeHeader(historyType: "팜클럽 히스토리"),
                   const SizedBox(height: 12.0),
                   Expanded(
-                      child: ListView.builder(
+                    child: history?.farmClubHistoryDetailList != null
+                        ? ListView.builder(
                       padding: const EdgeInsets.only(top: 4.0),
-                      itemCount: history?.farmClubHistoryDetailList.length,
+                      itemCount: min(3, history!.farmClubHistoryDetailList.length),
                       itemBuilder: (context, index) {
+                        print(22);
+                        final reversedIndex = history.farmClubHistoryDetailList.length - index - 1;
                         return MyPageHistory(
-                        name: history?.farmClubHistoryDetailList[index].name,
-                        veggieName: history?.farmClubHistoryDetailList[index].veggieName,
-                        period: history?.farmClubHistoryDetailList[index].period,
-                    );
+                          name: history.farmClubHistoryDetailList[reversedIndex].name,
+                          veggieName: history.farmClubHistoryDetailList[reversedIndex].veggieName,
+                          period: history.farmClubHistoryDetailList[reversedIndex].period,
+                          image: history.farmClubHistoryDetailList[reversedIndex].image,
+                        );
                       },
-                      ),
-                          )
+                    )
+                        : noData(),
+                  ),
+
 
                 ]);
               }
-            }));
+            }
+            )
+    );
+  }
+
+  bool isCheckNull(List<dynamic>? list){
+    if(list!.isEmpty){
+
+      return true;
+
+    }
+    return false;
+  }
+
+  Center noData(){
+    return const Center(
+      child: Text("히스토리가 없습니다.")
+    );
   }
 
 
+
+
+
 }
-
-
-// children: const <Widget>[
-//   MyPageHistory(
-//     name: '상훈이',
-//     nickname: '상추',
-//     date: '2023.10.01~2023.11.22',
-//   ),
-//   MyPageHistory(
-//     name: '먹쟁이토마토',
-//     nickname: '방울토마토',
-//     date: '2023.06.27~현재',
-//   ),
-//   MyPageHistory(
-//     name: '깨르륵',
-//     nickname: '깻잎',
-//     date: '2023.05.03~현재',
-//   ),
-//   // 추가하려면 여기에 넣기
-// ],
