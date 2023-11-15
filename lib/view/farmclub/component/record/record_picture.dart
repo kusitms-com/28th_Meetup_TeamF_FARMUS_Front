@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
 
@@ -63,10 +64,13 @@ class _RecordPictureState extends State<RecordPicture> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SvgPicture.asset(
-                            controller.isSelectLike.value
-                                ? "assets/image/ic_like_true.svg"
-                                : "assets/image/ic_like_false.svg",
+                          Bouncing(
+                            onPress: () {},
+                            child: SvgPicture.asset(
+                              controller.isSelectLike.value
+                                  ? "assets/image/ic_like_true.svg"
+                                  : "assets/image/ic_like_false.svg",
+                            ),
                           ),
                           Text(
                             controller.like.value.toString(),

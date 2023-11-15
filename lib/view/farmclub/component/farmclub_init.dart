@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view/farmclub/component/explore/brown_button.dart';
+import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_explore_screen.dart';
 
 class FarmclubInit extends StatelessWidget {
@@ -32,19 +32,22 @@ class FarmclubInit extends StatelessWidget {
             ),
           ],
         ),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(
-              builder: (context) {
-                return FarmclubExploreScreen();
-              },
-            ));
-          },
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 70.0),
-            child: BrownButton(
-              text: "탐색하기",
-              enabled: true,
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return FarmclubExploreScreen();
+                },
+              ));
+            },
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 70.0),
+              child: ButtonBrown(
+                text: "탐색하기",
+                enabled: true,
+              ),
             ),
           ),
         ),

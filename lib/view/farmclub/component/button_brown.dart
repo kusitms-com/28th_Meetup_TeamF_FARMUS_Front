@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_button.dart';
 
-class BrownButton extends StatelessWidget {
+class ButtonBrown extends StatelessWidget {
   final String text;
   final bool enabled;
 
-  const BrownButton({
+  const ButtonBrown({
     Key? key,
     required this.text,
     required this.enabled,
@@ -15,7 +15,7 @@ class BrownButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(0.0),
       child: PrimaryButton(
         text: text,
         backgroundColor:
