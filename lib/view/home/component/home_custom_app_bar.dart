@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/home/component/register/register_screen.dart';
 
 class HomeCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeCustomAppBar({super.key});
@@ -30,9 +31,17 @@ class HomeCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const RegisterScreen(), // YourNewPage에 해당하는 새로운 페이지로 이동합니다.
+                    ),
+                  );
+                },
                 child: SvgPicture.asset(
-                  'assets/image/ic_plus.svg',
+                  'assets/image/ic_math-plus.svg',
                   width: 24,
                   height: 24,
                 ),

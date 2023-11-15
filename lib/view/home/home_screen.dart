@@ -14,8 +14,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isDataLoaded = true; // Set this to true when data is loaded
-
   @override
   Widget build(BuildContext context) {
     print('Building HomeScreen');
