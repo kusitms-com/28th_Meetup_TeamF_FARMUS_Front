@@ -3,6 +3,8 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/my_page/component/my_page_history.dart';
 
+import '../../../repository/mypage_repository.dart';
+
 class MyFarmClubHistory extends StatelessWidget {
   const MyFarmClubHistory({super.key});
 
@@ -11,32 +13,38 @@ class MyFarmClubHistory extends StatelessWidget {
     return Scaffold(
       appBar: PrimaryAppBar(title: "팜클럽 히스토리"),
       backgroundColor: FarmusThemeData.white,
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.only(top: 4.0),
-              children: const <Widget>[
-                MyPageHistory(
-                  name: '상추 좋아하세요',
-                  veggieName: '상추',
-                  period: '2023.10.01~2023.11.22',
-                ),
-                MyPageHistory(
-                  name: '남아프리카공화국',
-                  veggieName: '파프리카',
-                  period: '2023.06.27~현재',
-                ),
-                MyPageHistory(
-                  name: '깨르륵깨르륵',
-                  veggieName: '깻잎',
-                  period: '2023.05.03~현재',
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+      body: FutureBuilder(
+          future: MypageRepository.getHistoryApi(),
+          builder: (context, snapshot) {
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              print("화면 로딩 중");
+              return CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              // 에러가 발생한 경우
+              return Text('Error: ${snapshot.error}');
+            } else {
+              // 데이터가 성공적으로 도착한 경우
+
+              final data = snapshot.data;
+
+              return ListView.builder(
+                padding: const EdgeInsets.only(top: 4.0),
+                itemCount: data?.farmClubHistoryDetailList.length ?? 0,
+                itemBuilder: (context, index) {
+                  final reversedIndex = data!.farmClubHistoryDetailList.length - index - 1;
+                  return MyPageHistory(
+                    name: data.farmClubHistoryDetailList[reversedIndex].name,
+                    veggieName: data.farmClubHistoryDetailList[reversedIndex].veggieName,
+                    period: data.farmClubHistoryDetailList[reversedIndex].period,
+                    image: data.farmClubHistoryDetailList[reversedIndex].image,
+                  );
+                },
+              );
+
+            }
+          }
+      )
     );
   }
 }

@@ -24,12 +24,14 @@ class MyPageHistory extends StatefulWidget {
   final String? name;
   final String? veggieName;
   final String? period;
+  final String? image;
 
   const MyPageHistory({
     Key? key,
     required this.name,
     required this.veggieName,
     required this.period,
+    required this.image
   }) : super(key: key);
 
   @override
@@ -37,6 +39,8 @@ class MyPageHistory extends StatefulWidget {
 }
 
 class _MyPageHistoryState extends State<MyPageHistory> {
+
+
   void _navigateToNewPage(BuildContext context) {
     // `MaterialPageRoute`를 사용하여 새 페이지로 이동
     Navigator.of(context).push(MaterialPageRoute(
@@ -60,9 +64,10 @@ class _MyPageHistoryState extends State<MyPageHistory> {
               width: 64.0,
               height: 64.0,
               decoration: BoxDecoration(
-                image: const DecorationImage(
+                image: DecorationImage(
                   image: NetworkImage(
-                      'https://via.placeholder.com/150'), // 이미지 URL
+                      widget.image ?? ''
+                      ), // 이미지 URL
                   fit: BoxFit.cover, // 이미지가 컨테이너를 꽉 채우도록 설정
                 ),
                 borderRadius:
