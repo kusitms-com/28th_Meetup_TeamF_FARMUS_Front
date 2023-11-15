@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/calender.dart';
+import 'package:mojacknong_android/view/home/component/register/customs/dialog.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/register_app_bar.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/register_button.dart';
 import 'package:mojacknong_android/view/home/component/register/nickname_vege.dart';
@@ -69,13 +70,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
           ),
-          const Positioned(
+          Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             child: RegisterButton(
               text: '등록하기',
-              onPressed: null,
+              onPressed: () {
+                RegisterDialog.flutterDialog(context);
+              },
             ),
           ),
         ],
