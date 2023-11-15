@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/farmclub/component/around/bottom_sheet_farmclub_join.dart';
 
 class BottomSheetController extends GetxController {
   final isBottomSheetOpen = false.obs;
@@ -114,6 +116,16 @@ class BottomSheetController extends GetxController {
           ),
         ),
       ),
+    );
+  }
+
+  void showFarmclubJoinBottomSheet(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: FarmusThemeData.white,
+      builder: (BuildContext context) {
+        return BottomSheetFarmclubJoin();
+      },
     );
   }
 }

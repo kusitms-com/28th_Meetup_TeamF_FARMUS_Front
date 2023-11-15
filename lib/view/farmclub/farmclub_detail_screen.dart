@@ -10,6 +10,7 @@ import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_t
 import 'package:mojacknong_android/view/farmclub/component/farmclub_content.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_info.dart';
+import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 class FarmclubAroundScreen extends StatefulWidget {
   FarmclubAroundScreen({super.key});
@@ -19,6 +20,8 @@ class FarmclubAroundScreen extends StatefulWidget {
 }
 
 class _FarmclubAroundScreenState extends State<FarmclubAroundScreen> {
+  BottomSheetController _bottomSheetController = BottomSheetController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,6 +101,9 @@ class _FarmclubAroundScreenState extends State<FarmclubAroundScreen> {
         child: ButtonBrown(
           text: "팜클럽 가입하기",
           enabled: true,
+          onPress: () {
+            _bottomSheetController.showFarmclubJoinBottomSheet(context);
+          },
         ),
       ),
     );
