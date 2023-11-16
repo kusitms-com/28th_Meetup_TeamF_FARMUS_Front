@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bottom_sheet/bottom_sheet_farmclub_join.dart';
 import 'package:mojacknong_android/common/dialog/Dialog_join_farmclub.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/home/component/register/customs/Dialog_register_vege.dart';
 
 class BottomSheetController extends GetxController {
   void showActionSheetComment(
@@ -82,6 +83,18 @@ class BottomSheetController extends GetxController {
       barrierColor: FarmusThemeData.grey2,
       builder: (BuildContext context) {
         return DialogJoinFarmclub(
+          title: title,
+        );
+      },
+    );
+  }
+
+  void showRegisterDialog(BuildContext context, String title) {
+    showDialog<void>(
+      context: context,
+      barrierColor: FarmusThemeData.grey2,
+      builder: (BuildContext context) {
+        return DialogRegisterVege(
           title: title,
         );
       },
