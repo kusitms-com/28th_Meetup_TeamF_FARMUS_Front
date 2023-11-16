@@ -3,10 +3,16 @@ import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/farmclub/component/around/vegetable_list.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
+import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
 
 class BottomSheetFarmclubJoin extends StatefulWidget {
-  const BottomSheetFarmclubJoin({Key? key});
+  final String title;
+
+  const BottomSheetFarmclubJoin({
+    Key? key,
+    required this.title,
+  });
 
   @override
   State<BottomSheetFarmclubJoin> createState() =>
@@ -15,6 +21,7 @@ class BottomSheetFarmclubJoin extends StatefulWidget {
 
 class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
   final FarmclubController _farmclubController = Get.find();
+  BottomSheetController _bottomSheetController = BottomSheetController();
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +75,11 @@ class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
             text: "가입하기",
             enabled: _farmclubController.isCheck,
             onPress: () {
-              print("ㅎㅇㅎㅇㅎㅇㅇ");
+              if (Navigator.canPop(context)) {
+                Navigator.pop(context);
+
+                _bottomSheetController.showJoinDialog(context, widget.title);
+              }
             },
           ),
         ),

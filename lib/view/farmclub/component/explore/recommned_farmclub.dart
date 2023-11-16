@@ -40,7 +40,9 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return FarmclubAroundScreen();
+                return FarmclubAroundScreen(
+                  title: widget.farmclubTitle,
+                );
               },
             ),
           );

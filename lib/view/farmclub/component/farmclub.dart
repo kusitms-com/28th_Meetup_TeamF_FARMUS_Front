@@ -5,7 +5,12 @@ import 'package:mojacknong_android/view/farmclub/component/farmclub_text_info.da
 import 'package:mojacknong_android/view/farmclub/farmclub_detail_screen.dart';
 
 class Farmclub extends StatefulWidget {
-  const Farmclub({super.key});
+  final String title;
+
+  const Farmclub({
+    super.key,
+    required this.title,
+  });
 
   @override
   State<Farmclub> createState() => _FarmclubState();
@@ -22,7 +27,9 @@ class _FarmclubState extends State<Farmclub> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return FarmclubAroundScreen();
+                return FarmclubAroundScreen(
+                  title: widget.title,
+                );
               },
             ),
           );
@@ -42,7 +49,7 @@ class _FarmclubState extends State<Farmclub> {
               ),
               FarmclubTextInfo(
                 vegetable: "상추",
-                farmclubTitle: "상추 좋아하세요",
+                farmclubTitle: widget.title,
                 level: "Easy",
                 nowPerson: "5",
                 maxPerson: "8",

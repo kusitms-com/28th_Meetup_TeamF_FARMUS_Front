@@ -14,7 +14,12 @@ import 'package:mojacknong_android/view/farmclub/component/my_farmclub_info.dart
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 class FarmclubAroundScreen extends StatefulWidget {
-  FarmclubAroundScreen({super.key});
+  final String title;
+
+  FarmclubAroundScreen({
+    super.key,
+    required this.title,
+  });
 
   @override
   State<FarmclubAroundScreen> createState() => _FarmclubAroundScreenState();
@@ -30,7 +35,7 @@ class _FarmclubAroundScreenState extends State<FarmclubAroundScreen> {
         title: "둘러보기",
       ),
       backgroundColor: FarmusThemeData.white,
-      body: const Column(
+      body: Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
@@ -38,7 +43,7 @@ class _FarmclubAroundScreenState extends State<FarmclubAroundScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   FarmclubAroundTitle(
-                    title: "상추 좋아하세요",
+                    title: widget.title,
                   ),
                   FarmclubAroundVegetable(
                     vegetableImage: "assets/image/image_farmclub_blue.png",
@@ -103,7 +108,8 @@ class _FarmclubAroundScreenState extends State<FarmclubAroundScreen> {
           text: "팜클럽 가입하기",
           enabled: RxBool(true),
           onPress: () {
-            _bottomSheetController.showFarmclubJoinBottomSheet(context);
+            _bottomSheetController.showFarmclubJoinBottomSheet(
+                context, widget.title);
           },
         ),
       ),

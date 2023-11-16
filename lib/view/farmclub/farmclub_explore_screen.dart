@@ -133,7 +133,9 @@ class FarmclubExploreScreen extends StatelessWidget {
                       }
                       return Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Farmclub(),
+                        child: Farmclub(
+                          title: "상추 좋아하세요",
+                        ),
                       );
                     },
                   ),
