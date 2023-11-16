@@ -18,6 +18,7 @@ import 'package:mojacknong_android/view/farmclub/component/my_farmclub_list.dart
 import 'package:mojacknong_android/view/farmclub/component/record/record_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_profile.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_explore_screen.dart';
+import 'package:mojacknong_android/view/farmclub/farmclub_record_screen.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
 
 class FarmclubScreen extends StatefulWidget {
@@ -136,11 +137,23 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                         RecordPicture(
                           like: controller.like,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            "우리 상훈이가 쑥쑥 자라고 있네? 얼른 다 자라서 삼겹살이랑 쌈장 마늘 해서 상추쌈 싸먹고 싶다. 기대된다~~",
-                            style: FarmusThemeData.darkStyle14,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return FarmclubRecordScreen();
+                                },
+                              ),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              "우리 상훈이가 쑥쑥 자라고 있네? 얼른 다 자라서 삼겹살이랑 쌈장 마늘 해서 상추쌈 싸먹고 싶다. 기대된다~~",
+                              style: FarmusThemeData.darkStyle14,
+                            ),
                           ),
                         ),
                         SizedBox(

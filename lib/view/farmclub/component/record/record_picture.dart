@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/farmclub/farmclub_record_screen.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
 
 class RecordPicture extends StatefulWidget {
@@ -18,71 +19,97 @@ class _RecordPictureState extends State<RecordPicture> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Obx(
-        () => Container(
-          width: double.infinity,
-          height: 248,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-          child: Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  "assets/image/image_challenge1.png",
-                  fit: BoxFit.fill,
-                  width: double.infinity,
-                  height: double.infinity,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return FarmclubRecordScreen();
+            },
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Obx(
+          () => Container(
+            width: double.infinity,
+            height: 248,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    "assets/image/image_challenge1.png",
+                    fit: BoxFit.fill,
+                    width: double.infinity,
+                    height: double.infinity,
+                  ),
                 ),
-              ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      if (controller.isSelectLike.value) {
-                        // 좋아요 취소
-                        controller.isSelectLike.value = false;
-                        controller.like.value--;
-                      } else {
-                        // 좋아요
-                        controller.isSelectLike.value = true;
-                        controller.like.value++;
-                      }
-                    },
-                    child: Container(
-                      width: 51,
-                      height: 51,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: FarmusThemeData.white.withOpacity(0.3),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Bouncing(
-                            onPress: () {},
-                            child: SvgPicture.asset(
-                              controller.isSelectLike.value
-                                  ? "assets/image/ic_like_true.svg"
-                                  : "assets/image/ic_like_false.svg",
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        if (controller.isSelectLike.value) {
+                          // 좋아요 취소
+                          controller.isSelectLike.value = false;
+                          controller.like.value--;
+                        } else {
+                          // 좋아요
+                          controller.isSelectLike.value = true;
+                          controller.like.value++;
+                        }
+                      },
+                      child: Container(
+                        width: 51,
+                        height: 51,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: FarmusThemeData.white.withOpacity(0.3),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Bouncing(
+                              onPress: () {},
+                              child: Obx(() {
+                                return GestureDetector(
+                                  onTap: () {
+                                    // 좋아요 상태 변경 시 UI 업데이트
+                                    if (controller.isSelectLike.value) {
+                                      controller.isSelectLike.value = false;
+                                      controller.like.value--;
+                                    } else {
+                                      controller.isSelectLike.value = true;
+                                      controller.like.value++;
+                                    }
+                                  },
+                                  child: SvgPicture.asset(
+                                    controller.isSelectLike.value
+                                        ? "assets/image/ic_like_true.svg"
+                                        : "assets/image/ic_like_false.svg",
+                                  ),
+                                );
+                              }),
                             ),
-                          ),
-                          Text(
-                            controller.like.value.toString(),
-                            style: FarmusThemeData.darkStyle12,
-                          ),
-                        ],
+                            Text(
+                              controller.like.value.toString(),
+                              style: FarmusThemeData.darkStyle12,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
