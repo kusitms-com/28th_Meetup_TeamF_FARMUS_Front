@@ -38,8 +38,11 @@ class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
             style: FarmusThemeData.darkStyle14,
           ),
         ),
+        SizedBox(
+          height: 16,
+        ),
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Container(
             width: double.infinity,
             height: 140,
@@ -56,12 +59,21 @@ class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
             ),
           ),
         ),
+        SizedBox(
+          height: 16,
+        ),
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 24),
           child: ButtonBrown(
             text: "가입하기",
-            enabled: !_farmclubController.isCheck.value,
+            enabled: _farmclubController.isCheck,
+            onPress: () {
+              print("ㅎㅇㅎㅇㅎㅇㅇ");
+            },
           ),
+        ),
+        SizedBox(
+          height: 30,
         ),
       ],
     );

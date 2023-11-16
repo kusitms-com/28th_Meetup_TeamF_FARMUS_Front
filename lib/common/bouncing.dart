@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Bouncing extends StatefulWidget {
   final Widget child;
-  final VoidCallback? onPress;
+  final Function()? onPress;
 
   Bouncing({required this.child, Key? key, this.onPress}) : super(key: key);
 
@@ -44,11 +44,16 @@ class _BouncingState extends State<Bouncing>
       },
       onPointerUp: (PointerUpEvent event) {
         _controller.reverse();
-        widget.onPress!();
+        if (widget.onPress != null) {
+          widget.onPress!();
+        }
       },
-      child: Transform.scale(
-        scale: _scale,
-        child: widget.child,
+      child: GestureDetector(
+        onTap: widget.onPress,
+        child: Transform.scale(
+          scale: _scale,
+          child: widget.child,
+        ),
       ),
     );
   }

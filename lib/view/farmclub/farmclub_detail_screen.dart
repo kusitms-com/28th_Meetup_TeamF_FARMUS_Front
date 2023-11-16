@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/farmclub/component/around/farmclub_around_record.dart';
@@ -97,10 +98,10 @@ class _FarmclubAroundScreenState extends State<FarmclubAroundScreen> {
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.0),
         child: ButtonBrown(
           text: "팜클럽 가입하기",
-          enabled: true,
+          enabled: RxBool(true),
           onPress: () {
             _bottomSheetController.showFarmclubJoinBottomSheet(context);
           },

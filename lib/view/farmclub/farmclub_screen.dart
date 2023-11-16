@@ -156,7 +156,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: widget.isFarmclub
           ? Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
+              padding: EdgeInsets.symmetric(horizontal: 8),
               color: Colors.transparent,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -170,7 +170,10 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                   ),
                   Expanded(
                     flex: 2,
-                    child: ButtonBrown(text: "미션 인증하기", enabled: true),
+                    child: ButtonBrown(
+                      text: "미션 인증하기",
+                      enabled: RxBool(true),
+                    ),
                   ),
                 ],
               ),

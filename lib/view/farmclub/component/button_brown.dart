@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_button.dart';
 
 class ButtonBrown extends StatelessWidget {
   final String text;
-  final bool enabled;
-  final Function? onPress;
+  final RxBool enabled;
+  final Function()? onPress;
 
   const ButtonBrown({
     Key? key,
@@ -16,22 +18,28 @@ class ButtonBrown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (onPress != null) {
-          onPress!();
-        }
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(0.0),
-        child: PrimaryButton(
-          text: text,
-          backgroundColor:
-              enabled ? FarmusThemeData.brownButton : FarmusThemeData.grey4,
-          foregroundColor:
-              enabled ? FarmusThemeData.white : FarmusThemeData.grey2,
+    return Obx(() {
+      return Bouncing(
+        onPress: enabled.value ? onPress : null,
+        child: GestureDetector(
+          onTap: () {
+            if (onPress != null && enabled.value) {
+              onPress!();
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: PrimaryButton(
+              text: text,
+              backgroundColor: enabled.value
+                  ? FarmusThemeData.brownButton
+                  : FarmusThemeData.grey4,
+              foregroundColor:
+                  enabled.value ? FarmusThemeData.white : FarmusThemeData.grey2,
+            ),
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
