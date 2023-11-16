@@ -48,7 +48,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   "나의 팜클럽",
                   style: TextStyle(
                     color: FarmusThemeData.dark,
@@ -64,7 +64,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return FarmclubExploreScreen();
+                            return const FarmclubExploreScreen();
                           },
                         ),
                       );
@@ -83,53 +83,53 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 8,
                         ),
                         MyFarmclubList(),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
-                        FarmclubTitle(),
-                        SizedBox(
+                        const FarmclubTitle(),
+                        const SizedBox(
                           height: 8,
                         ),
-                        FarmclubContent(
+                        const FarmclubContent(
                             content:
                                 "상추를 치료해줄 사람 어디 없나. 저만 매번 실패하나요..\n이번에는 꼭 성공해서 얼른 상추쌈 싸먹어봐요!"),
-                        MyFarmclubInfo(),
-                        SizedBox(
+                        const MyFarmclubInfo(),
+                        const SizedBox(
                           height: 8,
                         ),
-                        GroupRate(),
-                        SizedBox(
+                        const GroupRate(),
+                        const SizedBox(
                           height: 16,
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 12,
                           color: FarmusThemeData.dividerBackground,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
-                        FarmclubTitleWithDivider(title: "함께 도전해요"),
+                        const FarmclubTitleWithDivider(title: "함께 도전해요"),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return FarmclubChallengeScreen();
+                                  return const FarmclubChallengeScreen();
                                 },
                               ),
                             );
                           },
-                          child: ChallengeStep(
+                          child: const ChallengeStep(
                             step: "0",
                             title: "준비물을 챙겨요",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         GestureDetector(
@@ -138,16 +138,16 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return FarmclubChallengeScreen();
+                                  return const FarmclubChallengeScreen();
                                 },
                               ),
                             );
                           },
-                          child: ChallengeHelp(
+                          child: const ChallengeHelp(
                             help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         GestureDetector(
@@ -156,23 +156,23 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return FarmclubChallengeScreen();
+                                    return const FarmclubChallengeScreen();
                                   },
                                 ),
                               );
                             },
-                            child: ChallengeFeed()),
-                        SizedBox(
+                            child: const ChallengeFeed()),
+                        const SizedBox(
                           height: 16,
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 12,
                           color: FarmusThemeData.dividerBackground,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
-                        FarmclubTitleWithDivider(title: "함께 기록해요"),
+                        const FarmclubTitleWithDivider(title: "함께 기록해요"),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -184,12 +184,12 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                               ),
                             );
                           },
-                          child: RecordProfile(
+                          child: const RecordProfile(
                             nickname: "파머",
                             postTime: "10/29 4:12",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
                         GestureDetector(
@@ -218,16 +218,16 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                               ),
                             );
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(16.0),
                             child: Text(
                               "우리 상훈이가 쑥쑥 자라고 있네? 얼른 다 자라서 삼겹살이랑 쌈장 마늘 해서 상추쌈 싸먹고 싶다. 기대된다~~",
                               style: FarmusThemeData.darkStyle14,
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 50,
+                        const SizedBox(
+                          height: 60,
                         ),
                       ],
                     ),
@@ -239,7 +239,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: widget.isFarmclub
           ? Container(
-              padding: EdgeInsets.symmetric(horizontal: 8),
+              padding: const EdgeInsets.all(8),
               color: Colors.transparent,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -254,7 +254,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return MyFarmclubMissionScreen();
+                                return const MyFarmclubMissionScreen();
                               },
                             ),
                           );
