@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mojacknong_android/common/bottom_sheet/bottom_sheet_farmclub_exit.dart';
 import 'package:mojacknong_android/common/bottom_sheet/bottom_sheet_farmclub_join.dart';
 import 'package:mojacknong_android/common/dialog/Dialog_join_farmclub.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
@@ -77,6 +78,16 @@ class BottomSheetController extends GetxController {
     );
   }
 
+  void showFarmclubExitBottomSheet(BuildContext context, String title) {
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: FarmusThemeData.white,
+      builder: (BuildContext context) {
+        return BottomSheetFarmclubExit();
+      },
+    );
+  }
+
   void showJoinDialog(BuildContext context, String title) {
     showDialog<void>(
       context: context,
@@ -84,6 +95,20 @@ class BottomSheetController extends GetxController {
       builder: (BuildContext context) {
         return DialogJoinFarmclub(
           title: title,
+          content: "팜클럽에 가입했어요",
+        );
+      },
+    );
+  }
+
+  void showAuthDialog(BuildContext context, String title, String content) {
+    showDialog<void>(
+      context: context,
+      barrierColor: FarmusThemeData.grey2,
+      builder: (BuildContext context) {
+        return DialogJoinFarmclub(
+          title: title,
+          content: content,
         );
       },
     );

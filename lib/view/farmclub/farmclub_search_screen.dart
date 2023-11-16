@@ -30,27 +30,30 @@ class _FarmclubSearchScreenState extends State<FarmclubSearchScreen> {
                 height: 16,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: SearchEdit(),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Bouncing(
-                      onPress: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Bouncing(
+                    onPress: () {},
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
                         child: Text(
                           "취소",
                           style: FarmusThemeData.grey1Style14,
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
               const SizedBox(

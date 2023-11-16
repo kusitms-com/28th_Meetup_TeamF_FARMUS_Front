@@ -127,4 +127,10 @@ class FarmusThemeData {
     fontSize: 14,
     fontFamily: "Pretendard",
   );
+
+  static const TextStyle redStyle = TextStyle(
+    color: FarmusThemeData.red,
+    fontSize: 14,
+    fontFamily: "Pretendard",
+  );
 }

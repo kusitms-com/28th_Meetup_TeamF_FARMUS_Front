@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/farmclub/farmclub_mission_feed_screen.dart';
 
 class ChallengeFeed extends StatefulWidget {
   const ChallengeFeed({super.key});
@@ -62,36 +63,48 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
               SizedBox(
                 height: 4,
               ),
-              Container(
-                width: double.infinity,
-                height: 98,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Stack(
-                    children: [
-                      Image.asset(
-                        "assets/image/image_challenge2.png",
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: double.infinity,
-                      ),
-                      Positioned.fill(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "더보기",
-                              style: FarmusThemeData.whiteStyle14,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return FarmclubMissionFeedScreen();
+                      },
+                    ),
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 98,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          "assets/image/image_challenge2.png",
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
+                        Positioned.fill(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.5),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "더보기",
+                                style: FarmusThemeData.whiteStyle14,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

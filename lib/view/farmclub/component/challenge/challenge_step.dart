@@ -5,12 +5,10 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 class ChallengeStep extends StatefulWidget {
   final String step;
   final String title;
+  final Color? color;
 
-  const ChallengeStep({
-    super.key,
-    required this.step,
-    required this.title,
-  });
+  const ChallengeStep(
+      {super.key, required this.step, required this.title, this.color});
 
   @override
   State<ChallengeStep> createState() => _ChallengeStepState();
@@ -28,7 +26,13 @@ class _ChallengeStepState extends State<ChallengeStep> {
             ),
             Text(
               "Step ${widget.step}",
-              style: FarmusThemeData.brownText14,
+              style: TextStyle(
+                fontFamily: "Pretendard",
+                fontSize: 14,
+                color: widget.color == null
+                    ? FarmusThemeData.brownText
+                    : widget.color,
+              ),
             ),
             SizedBox(
               width: 8,
