@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_explore_screen.dart';
@@ -42,11 +43,11 @@ class FarmclubInit extends StatelessWidget {
                 },
               ));
             },
-            child: const Padding(
+            child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 70.0),
               child: ButtonBrown(
                 text: "탐색하기",
-                enabled: true,
+                enabled: RxBool(true),
               ),
             ),
           ),

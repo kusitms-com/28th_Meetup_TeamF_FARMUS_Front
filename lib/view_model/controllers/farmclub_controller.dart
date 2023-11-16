@@ -9,6 +9,8 @@ class FarmclubController extends GetxController {
   RxBool isSelectLike = RxBool(false);
   RxInt like = 2.obs; // 초기 좋아요 수
 
+  RxBool isCheck = RxBool(false); // 추가
+
   @override
   void onInit() {
     super.onInit();
@@ -21,5 +23,9 @@ class FarmclubController extends GetxController {
         hasInput.value = false;
       }
     });
+  }
+
+  void toggleSelectCheck() {
+    isCheck.value = !isCheck.value;
   }
 }
