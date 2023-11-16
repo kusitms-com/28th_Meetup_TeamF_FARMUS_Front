@@ -39,12 +39,14 @@ class _FarmclubSearchScreenState extends State<FarmclubSearchScreen> {
                       Navigator.pop(context);
                     },
                     child: Bouncing(
-                      onPress: () {},
+                      onPress: () {
+                        Navigator.pop(context);
+                      },
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           "취소",
-                          style: FarmusThemeData.grey1Style11,
+                          style: FarmusThemeData.grey1Style14,
                         ),
                       ),
                     ),
