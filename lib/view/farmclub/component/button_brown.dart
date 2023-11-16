@@ -24,9 +24,10 @@ class ButtonBrown extends StatelessWidget {
           text: text,
           backgroundColor: enabled.value
               ? FarmusThemeData.brownButton
-              : FarmusThemeData.grey4,
+              : FarmusThemeData.grey3,
           foregroundColor:
-              enabled.value ? FarmusThemeData.white : FarmusThemeData.grey2,
+              enabled.value ? FarmusThemeData.white : FarmusThemeData.white,
+          onPressed: enabled.value ? onPress : null,
         ),
       );
     });
