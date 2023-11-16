@@ -8,6 +8,7 @@ class MyPageHeader extends StatelessWidget {
   final int? date;
   final String? imagePath;
 
+
   MyPageHeader({
     Key? key,
     required this.name,
