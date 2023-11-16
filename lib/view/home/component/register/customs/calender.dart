@@ -18,7 +18,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
   @override
   void initState() {
     super.initState();
-    // 언어 및 지역 설정 초기화
     initializeDateFormatting('ko_KR', null);
   }
 
@@ -69,16 +68,16 @@ class MyCustomCalendar extends StatelessWidget {
 
       onDaySelected: onDaySelected,
       calendarStyle: const CalendarStyle(
-        isTodayHighlighted: true,
+        isTodayHighlighted: false,
         selectedDecoration: BoxDecoration(
-          color: Colors.orange,
-          shape: BoxShape.circle,
-        ),
-        selectedTextStyle: TextStyle(color: Colors.white),
-        todayDecoration: BoxDecoration(
           color: FarmusThemeData.brownButton,
           shape: BoxShape.circle,
         ),
+        selectedTextStyle: TextStyle(color: Colors.white),
+        // todayDecoration: BoxDecoration(
+        //   color: FarmusThemeData.brownButton,
+        //   shape: BoxShape.circle,
+        // ),
         defaultDecoration: BoxDecoration(
           shape: BoxShape.circle,
         ),
