@@ -7,7 +7,7 @@ import 'package:mojacknong_android/view_model/controllers/farmclub_controller.da
 
 class RecordPicture extends StatefulWidget {
   final RxInt like;
-  const RecordPicture({super.key, required this.like});
+  RecordPicture({super.key, required this.like});
 
   @override
   State<RecordPicture> createState() => _RecordPictureState();

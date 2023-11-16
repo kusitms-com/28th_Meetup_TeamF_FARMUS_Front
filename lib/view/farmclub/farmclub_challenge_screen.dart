@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
+import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
+import 'package:mojacknong_android/view/farmclub/component/button_white.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_feed.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_help.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
+import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
 
 class FarmclubChallengeScreen extends StatefulWidget {
   const FarmclubChallengeScreen({Key? key}) : super(key: key);
@@ -93,7 +97,40 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
               },
             ),
             SizedBox(
-              height: 16,
+              height: 50,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Container(
+        padding: EdgeInsets.all(8),
+        color: Colors.transparent,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              flex: 1,
+              child: ButtonWhite(
+                  text: "내 미션",
+                  onPress: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return MyFarmclubMissionScreen();
+                        },
+                      ),
+                    );
+                  }),
+            ),
+            Expanded(
+              flex: 2,
+              child: ButtonBrown(
+                text: "미션 인증하기",
+                enabled: RxBool(true),
+              ),
             ),
           ],
         ),

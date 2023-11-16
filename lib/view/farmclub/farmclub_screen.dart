@@ -21,6 +21,7 @@ import 'package:mojacknong_android/view/farmclub/component/record/record_profile
 import 'package:mojacknong_android/view/farmclub/farmclub_challenge_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_explore_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_record_screen.dart';
+import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
 
 class FarmclubScreen extends StatefulWidget {
@@ -247,8 +248,17 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                   Expanded(
                     flex: 1,
                     child: ButtonWhite(
-                      text: "내 미션",
-                    ),
+                        text: "내 미션",
+                        onPress: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return MyFarmclubMissionScreen();
+                              },
+                            ),
+                          );
+                        }),
                   ),
                   Expanded(
                     flex: 2,
