@@ -7,7 +7,8 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_white.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_feed.dart';
-import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_title.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_help.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_content.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_init.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title.dart';
@@ -17,6 +18,7 @@ import 'package:mojacknong_android/view/farmclub/component/my_farmclub_info.dart
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_list.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_profile.dart';
+import 'package:mojacknong_android/view/farmclub/farmclub_challenge_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_explore_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_record_screen.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
@@ -110,15 +112,31 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                           height: 12,
                         ),
                         FarmclubTitleWithDivider(title: "함께 도전해요"),
-                        ChallengeTitle(
+                        ChallengeStep(
                           step: "0",
                           title: "준비물을 챙겨요",
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        ChallengeHelp(
                           help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
                         ),
                         SizedBox(
                           height: 16,
                         ),
-                        ChallengeFeed(),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return FarmclubChallengeScreen();
+                                  },
+                                ),
+                              );
+                            },
+                            child: ChallengeFeed()),
                         SizedBox(
                           height: 16,
                         ),

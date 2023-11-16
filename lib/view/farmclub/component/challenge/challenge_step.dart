@@ -3,23 +3,21 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_challenge_screen.dart';
 
-class ChallengeTitle extends StatefulWidget {
+class ChallengeStep extends StatefulWidget {
   final String step;
   final String title;
-  final String help;
 
-  const ChallengeTitle({
+  const ChallengeStep({
     super.key,
     required this.step,
     required this.title,
-    required this.help,
   });
 
   @override
-  State<ChallengeTitle> createState() => _ChallengeTitleState();
+  State<ChallengeStep> createState() => _ChallengeStepState();
 }
 
-class _ChallengeTitleState extends State<ChallengeTitle> {
+class _ChallengeStepState extends State<ChallengeStep> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -56,32 +54,6 @@ class _ChallengeTitleState extends State<ChallengeTitle> {
               Text(widget.title),
             ],
           ),
-          SizedBox(
-            height: 16,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Container(
-              alignment: Alignment.centerLeft,
-              width: double.infinity,
-              height: 45,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: FarmusThemeData.brown3),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 16,
-                  ),
-                  Text(
-                    "도움말   ${widget.help}",
-                    textAlign: TextAlign.start,
-                    style: FarmusThemeData.brownText13,
-                  ),
-                ],
-              ),
-            ),
-          )
         ],
       ),
     );
