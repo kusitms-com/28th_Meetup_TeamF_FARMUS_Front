@@ -38,7 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 320,
+                  height: 300,
                   child: RegisterVege(),
                 ),
                 Container(

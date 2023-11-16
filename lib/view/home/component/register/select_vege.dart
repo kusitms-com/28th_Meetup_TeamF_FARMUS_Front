@@ -61,8 +61,8 @@ class _RegisterVegeState extends State<RegisterVege> {
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
-          crossAxisSpacing: 8.0,
-          mainAxisSpacing: 8.0,
+          crossAxisSpacing: 6.0,
+          mainAxisSpacing: 12.0,
         ),
         itemCount: 6,
         itemBuilder: (BuildContext context, int index) {

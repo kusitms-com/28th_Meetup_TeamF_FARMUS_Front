@@ -22,40 +22,44 @@ class ImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double boxWidth = 108.0;
+    const double imageWidth = 75.0;
+
     return GestureDetector(
       onTap: () => onTap(),
       child: Stack(
         children: [
           Positioned(
-            left: 13,
+            left: 0,
+            right: 0,
             child: SvgPicture.asset(
               'assets/image/gray_box.svg',
-              width: 108,
-              height: 108,
+              width: boxWidth,
+              height: boxWidth,
             ),
           ),
           if (isSelected)
             Positioned(
-              left: 13,
+              left: 0,
+              right: 0,
               child: SvgPicture.asset(
                 'assets/image/selected_box.svg',
-                width: 108,
-                height: 108,
+                width: boxWidth,
+                height: boxWidth,
               ),
             ),
-          Positioned.fill(
-            bottom: 5,
+          Positioned(
             child: Center(
               child: isSelected
                   ? SvgPicture.asset(
                       colPath,
-                      width: 75,
-                      height: 75,
+                      width: imageWidth,
+                      height: imageWidth,
                     )
                   : SvgPicture.asset(
                       blackPath,
-                      width: 75,
-                      height: 75,
+                      width: imageWidth,
+                      height: imageWidth,
                     ),
             ),
           ),
