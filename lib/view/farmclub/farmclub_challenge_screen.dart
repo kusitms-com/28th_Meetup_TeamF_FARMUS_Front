@@ -8,6 +8,7 @@ import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_f
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_help.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
+import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
 
 class FarmclubChallengeScreen extends StatefulWidget {
@@ -130,6 +131,16 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
               child: ButtonBrown(
                 text: "미션 인증하기",
                 enabled: RxBool(true),
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return FarmclubAuthScreen();
+                      },
+                    ),
+                  );
+                },
               ),
             ),
           ],
