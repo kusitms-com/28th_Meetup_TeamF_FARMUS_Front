@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/calender.dart';
-import 'package:mojacknong_android/view/home/component/register/customs/dialog.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/register_app_bar.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/register_button.dart';
 import 'package:mojacknong_android/view/home/component/register/nickname_vege.dart';
 import 'package:mojacknong_android/view/home/component/register/select_vege.dart';
+import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -38,7 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 320,
+                  height: 300,
                   child: RegisterVege(),
                 ),
                 Container(
@@ -77,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: RegisterButton(
               text: '등록하기',
               onPressed: () {
-                RegisterDialog.flutterDialog(context);
+                BottomSheetController().showRegisterDialog(context, "상훈이");
               },
             ),
           ),
