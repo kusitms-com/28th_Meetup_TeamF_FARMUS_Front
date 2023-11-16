@@ -112,15 +112,39 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                           height: 12,
                         ),
                         FarmclubTitleWithDivider(title: "함께 도전해요"),
-                        ChallengeStep(
-                          step: "0",
-                          title: "준비물을 챙겨요",
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return FarmclubChallengeScreen();
+                                },
+                              ),
+                            );
+                          },
+                          child: ChallengeStep(
+                            step: "0",
+                            title: "준비물을 챙겨요",
+                          ),
                         ),
                         SizedBox(
                           height: 16,
                         ),
-                        ChallengeHelp(
-                          help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return FarmclubChallengeScreen();
+                                },
+                              ),
+                            );
+                          },
+                          child: ChallengeHelp(
+                            help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
+                          ),
                         ),
                         SizedBox(
                           height: 16,
@@ -148,12 +172,39 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                           height: 12,
                         ),
                         FarmclubTitleWithDivider(title: "함께 기록해요"),
-                        RecordProfile(nickname: "파머", postTime: "10/29 4:12"),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return FarmclubRecordScreen();
+                                },
+                              ),
+                            );
+                          },
+                          child: RecordProfile(
+                            nickname: "파머",
+                            postTime: "10/29 4:12",
+                          ),
+                        ),
                         SizedBox(
                           height: 12,
                         ),
-                        RecordPicture(
-                          like: controller.like,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return FarmclubRecordScreen();
+                                },
+                              ),
+                            );
+                          },
+                          child: RecordPicture(
+                            like: controller.like,
+                          ),
                         ),
                         GestureDetector(
                           onTap: () {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view/farmclub/farmclub_challenge_screen.dart';
 
 class ChallengeStep extends StatefulWidget {
   final String step;
@@ -20,42 +19,30 @@ class ChallengeStep extends StatefulWidget {
 class _ChallengeStepState extends State<ChallengeStep> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return FarmclubChallengeScreen();
-            },
-          ),
-        );
-      },
-      child: Column(
-        children: [
-          Row(
-            children: [
-              SizedBox(
-                width: 16,
-              ),
-              Text(
-                "Step ${widget.step}",
-                style: FarmusThemeData.brownText14,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              SvgPicture.asset(
-                "assets/image/line_vertical_grey1.svg",
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Text(widget.title),
-            ],
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(
+              width: 16,
+            ),
+            Text(
+              "Step ${widget.step}",
+              style: FarmusThemeData.brownText14,
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            SvgPicture.asset(
+              "assets/image/line_vertical_grey1.svg",
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Text(widget.title),
+          ],
+        ),
+      ],
     );
   }
 }
