@@ -10,10 +10,10 @@ class NewVegetableSelect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 400,
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, crossAxisSpacing: 8),
+            crossAxisCount: 2, crossAxisSpacing: 16),
         itemCount: 6,
         itemBuilder: (BuildContext context, int index) {
           final veggieKey =

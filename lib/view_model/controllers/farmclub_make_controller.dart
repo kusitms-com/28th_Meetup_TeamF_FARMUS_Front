@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FarmclubMakeController extends GetxController {
@@ -7,11 +8,30 @@ class FarmclubMakeController extends GetxController {
   RxMap veggieData = {}.obs;
   RxMap veggieLevel = {}.obs;
 
+  final TextEditingController controller = TextEditingController();
+  RxBool hasInput = RxBool(false);
+
+  final contentValue = "".obs;
+
   @override
   void onInit() {
     super.onInit();
+    initHasText();
     initializeVeggieData();
     initializeVeggieLevel();
+  }
+
+  void initHasText() {
+    // 텍스트 필드의 값이 변경될 때 호출되는 함수
+    controller.addListener(() {
+      final value = controller.text;
+      // 텍스트 필드에 값이 입력 되었는지 여부
+      if (value.isNotEmpty) {
+        hasInput.value = true;
+      } else {
+        hasInput.value = false;
+      }
+    });
   }
 
   // 선택된 이미지의 상태를 토글하고 다른 선택 상태를 해제하는 메서드
@@ -25,7 +45,7 @@ class FarmclubMakeController extends GetxController {
         isSelectedList[i] = false;
       }
     }
-    update();
+    update(); // 상태 업데이트
   }
 
   // 채소 데이터를 초기화하는 메서드
@@ -50,5 +70,9 @@ class FarmclubMakeController extends GetxController {
       'pepper': 'Hard',
       'tomato': 'Hard',
     });
+  }
+
+  void updateContentValue(String value) {
+    contentValue.value = value;
   }
 }

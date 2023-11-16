@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 
 class FarmclubController extends GetxController {
   final TextEditingController controller = TextEditingController();
-  RxBool hasSpecialCharacters = RxBool(false);
   RxBool hasInput = RxBool(false);
 
   RxBool isSelectLike = RxBool(false);

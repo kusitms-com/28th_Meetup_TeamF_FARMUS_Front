@@ -42,11 +42,16 @@ class _NewVegetableItemState extends State<NewVegetableItem> {
                 color: FarmusThemeData.pictureBackground,
               ),
               child: Container(
-                height: 150,
                 alignment: Alignment.center,
                 child: widget.isSelected
-                    ? SvgPicture.asset(widget.colPath)
-                    : SvgPicture.asset(widget.blackPath),
+                    ? SvgPicture.asset(
+                        widget.colPath,
+                        width: 80,
+                      )
+                    : SvgPicture.asset(
+                        widget.blackPath,
+                        width: 80,
+                      ),
               ),
             ),
           ),
