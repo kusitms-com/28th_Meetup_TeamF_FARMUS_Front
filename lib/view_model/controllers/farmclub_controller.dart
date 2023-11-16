@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,9 +19,14 @@ class FarmclubController extends GetxController {
 
   RxInt selectedTextBoxIndex = RxInt(0);
 
+  final contentValue = "".obs;
+  final image = Rxn<File>();
+  final isFormVaild = RxBool(false);
+
   @override
   void onInit() {
     super.onInit();
+
     controller.addListener(() {
       final value = controller.text;
       // 텍스트 필드에 값이 입력 되었는지 여부
@@ -29,6 +36,24 @@ class FarmclubController extends GetxController {
         hasInput.value = false;
       }
     });
+
+    ever(contentValue, (_) {
+      checkFormVaildity();
+    });
+
+    ever(image, (_) => checkFormVaildity());
+  }
+
+  void updateContentValue(String value) {
+    contentValue.value = value;
+  }
+
+  void setImageFile(File file) {
+    image.value = file;
+  }
+
+  void checkFormVaildity() {
+    isFormVaild.value = contentValue.isNotEmpty && image.value != null;
   }
 
   void toggleSelectCheck() {

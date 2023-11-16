@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
@@ -10,6 +9,7 @@ import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/model/posting.dart';
 import 'package:mojacknong_android/repository/community_repository.dart';
 import 'package:mojacknong_android/view/community/component/category_list.dart';
+import 'package:mojacknong_android/view/community/component/image_add.dart';
 import 'package:mojacknong_android/view_model/controllers/community_feed_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/community_post_controller.dart';
 
@@ -180,19 +180,8 @@ class _PostScreenState extends State<PostScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  SvgPicture.asset(
-                                    "assets/image/ic_camera.svg",
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  const Text(
-                                    "사진 추가하기",
-                                    style: TextStyle(
-                                      color: FarmusThemeData.grey2,
-                                      fontSize: 14,
-                                      fontFamily: "Pretendard",
-                                    ),
+                                  ImageAdd(
+                                    title: "사진 추가하기",
                                   ),
                                 ],
                               ),

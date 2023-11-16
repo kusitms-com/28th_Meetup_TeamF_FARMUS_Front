@@ -18,6 +18,7 @@ import 'package:mojacknong_android/view/farmclub/component/my_farmclub_info.dart
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_list.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_profile.dart';
+import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_challenge_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_explore_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_record_screen.dart';
@@ -253,6 +254,16 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                     child: ButtonBrown(
                       text: "미션 인증하기",
                       enabled: RxBool(true),
+                      onPress: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return FarmclubAuthScreen();
+                            },
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],

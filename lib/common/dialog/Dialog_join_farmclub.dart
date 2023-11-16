@@ -4,7 +4,10 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class DialogJoinFarmclub extends StatefulWidget {
   final String title;
-  const DialogJoinFarmclub({super.key, required this.title});
+  final String content;
+
+  const DialogJoinFarmclub(
+      {super.key, required this.title, required this.content});
 
   @override
   State<DialogJoinFarmclub> createState() => _DialogJoinFarmclubState();
@@ -56,7 +59,7 @@ class _DialogJoinFarmclubState extends State<DialogJoinFarmclub> {
                         width: 8,
                       ),
                       Text(
-                        "팜클럽에 가입했어요",
+                        widget.content,
                         style: FarmusThemeData.darkStyle16,
                       ),
                     ],

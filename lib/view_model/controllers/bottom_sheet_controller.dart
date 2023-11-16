@@ -95,6 +95,20 @@ class BottomSheetController extends GetxController {
       builder: (BuildContext context) {
         return DialogJoinFarmclub(
           title: title,
+          content: "팜클럽에 가입했어요",
+        );
+      },
+    );
+  }
+
+  void showAuthDialog(BuildContext context, String title, String content) {
+    showDialog<void>(
+      context: context,
+      barrierColor: FarmusThemeData.grey2,
+      builder: (BuildContext context) {
+        return DialogJoinFarmclub(
+          title: title,
+          content: content,
         );
       },
     );
