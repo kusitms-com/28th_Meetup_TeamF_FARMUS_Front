@@ -132,20 +132,8 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                         const SizedBox(
                           height: 16,
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return const FarmclubChallengeScreen();
-                                },
-                              ),
-                            );
-                          },
-                          child: const ChallengeHelp(
-                            help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
-                          ),
+                        ChallengeHelp(
+                          help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
                         ),
                         const SizedBox(
                           height: 16,
