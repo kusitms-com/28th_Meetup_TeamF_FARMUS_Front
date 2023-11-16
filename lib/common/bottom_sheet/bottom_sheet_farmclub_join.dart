@@ -10,7 +10,7 @@ class BottomSheetFarmclubJoin extends StatefulWidget {
   final String title;
 
   const BottomSheetFarmclubJoin({
-    Key? key,
+    super.key,
     required this.title,
   });
 
@@ -21,31 +21,31 @@ class BottomSheetFarmclubJoin extends StatefulWidget {
 
 class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
   final FarmclubController _farmclubController = Get.find();
-  BottomSheetController _bottomSheetController = BottomSheetController();
+  final BottomSheetController _bottomSheetController = BottomSheetController();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
-        Padding(
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: 32),
           child: Text("팜클럽 가입", style: FarmusThemeData.darkStyle18),
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
-        Padding(
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
             "팜클럽에서 함께 키울 나의 채소를 골라주세요",
             style: FarmusThemeData.darkStyle14,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 16,
         ),
         Padding(
@@ -59,18 +59,18 @@ class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
                 color: FarmusThemeData.grey4,
               ),
             ),
-            child: Column(
+            child: const Column(
               children: [
                 VegetableList(),
               ],
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 16,
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: ButtonBrown(
             text: "가입하기",
             enabled: _farmclubController.isCheck,
@@ -83,7 +83,7 @@ class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
             },
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
       ],

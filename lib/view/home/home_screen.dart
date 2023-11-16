@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/home_custom_app_bar.dart';
 import 'package:mojacknong_android/view/home/component/home_divider.dart';
 import 'package:mojacknong_android/view/home/controller/home_content.dart';
 import 'package:mojacknong_android/view/home/controller/home_swipe.dart';
-import 'package:mojacknong_android/view/home/detail/checkboxlist.dart';
+import 'package:mojacknong_android/view/home/detail/today_routine_list.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final FarmclubController controller = Get.put(FarmclubController());
   @override
   Widget build(BuildContext context) {
     print('Building HomeScreen');
@@ -63,13 +66,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           const SizedBox(height: 5),
-          const CheckboxList(
-            items: [
-              '물 갈아 주기',
-              '하루에 물 한 번 주기',
-              '하루에 물 두 번 주기',
-            ],
-          ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.only(left: 8),
+              children: const [
+                TodayRoutineList(text: "물 갈아 주기"),
+                TodayRoutineList(text: "하루에 물 한 번 주기"),
+                TodayRoutineList(text: "군것질 그만 하기"),
+                TodayRoutineList(text: "군것질 그만 하기"),
+              ],
+            ),
+          )
         ],
       ),
     );
