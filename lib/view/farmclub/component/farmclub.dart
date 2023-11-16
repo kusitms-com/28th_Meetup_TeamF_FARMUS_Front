@@ -57,7 +57,9 @@ class _FarmclubState extends State<Farmclub> {
                 isRecommend: false,
               ),
               Spacer(),
-              GreenButton(),
+              GreenButton(
+                title: widget.title,
+              ),
             ],
           ),
         ),

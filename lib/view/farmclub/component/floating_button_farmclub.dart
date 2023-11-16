@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/farmclub/farmclub_make_screen.dart';
 
 class FloatingButtonFarmclub extends StatelessWidget {
   const FloatingButtonFarmclub({Key? key}) : super(key: key);
@@ -14,7 +15,11 @@ class FloatingButtonFarmclub extends StatelessWidget {
         width: 75,
         height: 45,
         child: OutlinedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return FarmclubMakeScreen();
+            }));
+          },
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(
               FarmusThemeData.brownButton,
