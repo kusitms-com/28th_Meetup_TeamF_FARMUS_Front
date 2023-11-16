@@ -10,13 +10,13 @@ class HomeGreenBox extends StatelessWidget {
     const double adjust = 30.0;
     return Center(
       child: SizedBox(
-        width: 470, // 혹은 다른 적절한 너비
-        height: 380, // 혹은 다른 적절한 높이
+        width: 470,
+        height: 380,
         child: Stack(
-          alignment: Alignment.topCenter, // 배경 이미지를 중앙 정렬
+          alignment: Alignment.topCenter,
           children: [
             Positioned(
-              top: 0, // 상단에 위치
+              top: 0,
               child: SvgPicture.asset(
                 'assets/image/bigbox.svg',
               ),
