@@ -7,7 +7,7 @@ import 'package:mojacknong_android/view_model/controllers/farmclub_controller.da
 
 class RecordPicture extends StatefulWidget {
   final RxInt like;
-  const RecordPicture({super.key, required this.like});
+  RecordPicture({super.key, required this.like});
 
   @override
   State<RecordPicture> createState() => _RecordPictureState();
@@ -66,11 +66,25 @@ class _RecordPictureState extends State<RecordPicture> {
                         children: [
                           Bouncing(
                             onPress: () {},
-                            child: SvgPicture.asset(
-                              controller.isSelectLike.value
-                                  ? "assets/image/ic_like_true.svg"
-                                  : "assets/image/ic_like_false.svg",
-                            ),
+                            child: Obx(() {
+                              return GestureDetector(
+                                onTap: () {
+                                  // 좋아요 상태 변경 시 UI 업데이트
+                                  if (controller.isSelectLike.value) {
+                                    controller.isSelectLike.value = false;
+                                    controller.like.value--;
+                                  } else {
+                                    controller.isSelectLike.value = true;
+                                    controller.like.value++;
+                                  }
+                                },
+                                child: SvgPicture.asset(
+                                  controller.isSelectLike.value
+                                      ? "assets/image/ic_like_true.svg"
+                                      : "assets/image/ic_like_false.svg",
+                                ),
+                              );
+                            }),
                           ),
                           Text(
                             controller.like.value.toString(),

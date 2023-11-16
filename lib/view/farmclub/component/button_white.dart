@@ -4,13 +4,15 @@ import 'package:mojacknong_android/common/primary_button.dart';
 
 class ButtonWhite extends StatelessWidget {
   final String text;
-  const ButtonWhite({super.key, required this.text});
+  final Function()? onPress;
+
+  const ButtonWhite({super.key, required this.text, this.onPress});
 
   @override
   Widget build(BuildContext context) {
     return PrimaryButton(
       text: text,
-      onPressed: () {},
+      onPressed: onPress,
       backgroundColor: FarmusThemeData.white,
       foregroundColor: FarmusThemeData.brownButton,
       surfaceTintColor: FarmusThemeData.brownButton,

@@ -7,7 +7,8 @@ import 'package:mojacknong_android/view/farmclub/component/around/farmclub_aroun
 import 'package:mojacknong_android/view/farmclub/component/around/farmclub_around_vegetable.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_feed.dart';
-import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_title.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_help.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_content.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_info.dart';
@@ -70,9 +71,14 @@ class _FarmclubAroundScreenState extends State<FarmclubAroundScreen> {
                     height: 12,
                   ),
                   FarmclubTitleWithDivider(title: "함께 도전해요"),
-                  ChallengeTitle(
+                  ChallengeStep(
                     step: "0",
                     title: "준비물을 챙겨요",
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  ChallengeHelp(
                     help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
                   ),
                   SizedBox(
