@@ -3,29 +3,29 @@ import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub_make_controller.dart';
 
-class FarmclubMakeEdit extends StatefulWidget {
+class FarmclubMakeContent extends StatefulWidget {
   final String hintText;
 
-  const FarmclubMakeEdit({
+  const FarmclubMakeContent({
     Key? key,
     required this.hintText,
   }) : super(key: key);
 
   @override
-  State<FarmclubMakeEdit> createState() => _FarmclubMakeEditState();
+  State<FarmclubMakeContent> createState() => _FarmclubMakeContentState();
 }
 
-class _FarmclubMakeEditState extends State<FarmclubMakeEdit> {
+class _FarmclubMakeContentState extends State<FarmclubMakeContent> {
   FarmclubMakeController _controller = Get.put(FarmclubMakeController());
   final int maxLength = 20;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: _controller.nameController, // 사용할 컨트롤러 연결
-      maxLength: 20, // 최대 입력 글자수
+      controller: _controller.introController, // 사용할 컨트롤러 연결
+      maxLength: 50, // 최대 입력 글자수
       cursorColor: FarmusThemeData.grey2,
-      onChanged: _controller.updateTitleValue,
+      onChanged: _controller.updateContentValue,
 
       style: FarmusThemeData.darkStyle16,
       decoration: InputDecoration(
@@ -39,7 +39,7 @@ class _FarmclubMakeEditState extends State<FarmclubMakeEdit> {
         ),
         suffix: Obx(
           () => Text(
-            "${_controller.contentValue.value.length} / 20",
+            "${_controller.contentValue.value.length} / 50",
             style: TextStyle(
               color: FarmusThemeData.dark.withOpacity(0.3),
             ),

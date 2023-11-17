@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/farmclub/component/around/vegetable_list.dart';
+import 'package:mojacknong_android/view/farmclub/component/farmclub_make_content.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_make_edit.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_make_member.dart';
 import 'package:mojacknong_android/view/farmclub/component/new_vegetable_select.dart';
@@ -98,7 +99,7 @@ class _FarmclubMakeScreenState extends State<FarmclubMakeScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: FarmclubMakeEdit(
+              child: FarmclubMakeContent(
                 hintText: "",
               ),
             ),

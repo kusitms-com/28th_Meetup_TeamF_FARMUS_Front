@@ -15,8 +15,9 @@ class FarmclubMakeController extends GetxController {
   final TextEditingController memberController = TextEditingController();
   final TextEditingController introController = TextEditingController();
 
-  final contentValue = "".obs;
+  final titleValue = "".obs;
   final memberValue = "".obs;
+  final contentValue = "".obs;
 
   RxBool hasNameInput = RxBool(false);
   RxBool hasMemberInput = RxBool(false);
@@ -85,11 +86,15 @@ class FarmclubMakeController extends GetxController {
     });
   }
 
-  void updateContentValue(String value) {
-    contentValue.value = value;
+  void updateTitleValue(String value) {
+    titleValue.value = value;
   }
 
   void updateMemberValue(String value) {
     memberValue.value = value;
+  }
+
+  void updateContentValue(String value) {
+    contentValue.value = value;
   }
 }
