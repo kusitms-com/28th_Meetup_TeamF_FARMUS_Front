@@ -58,10 +58,7 @@ class _MissionRoutineScreenState extends State<MissionRoutineScreen> {
                           TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(
-                    height: 500,
-                    child: RoutineCalendar(selectedEvents: _selectedEvents),
-                  ),
+                  RoutineCalendar(selectedEvents: _selectedEvents),
                 ],
               ),
             ),

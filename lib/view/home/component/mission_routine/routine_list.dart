@@ -21,6 +21,12 @@ class _RoutineListItemState extends State<RoutineListItem> {
   bool isCombinedWidgetVisible = false;
   List<DisplayTextWidget> displayTextWidgets = [];
 
+  void _handleTextSubmission(String text) {
+    setState(() {
+      isCombinedWidgetVisible = false;
+    });
+  }
+
   double calculateVeggieTextWidth(String text, TextStyle style) {
     final textPainter = TextPainter(
       text: TextSpan(text: text, style: style),
@@ -110,6 +116,7 @@ class _RoutineListItemState extends State<RoutineListItem> {
                     text: text,
                   ),
                 );
+                isCombinedWidgetVisible = false;
               });
             },
           ),
