@@ -43,9 +43,9 @@ class _HomeFarmClubState extends State<HomeFarmClub> {
           return Align(
             alignment: Alignment.centerLeft,
             child: FarmClubListItem(
-              nickName: apiData[0],
-              stepNum: apiData[1], // Adjusted index
-              mission: apiData[2], // Adjusted index
+              veggieNickname: apiData[0],
+              routineId: apiData[1],
+              routineName: apiData[2],
               onTap: widget.onTap,
             ),
           );

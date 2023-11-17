@@ -1,48 +1,55 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class FarmClubListItem extends StatelessWidget {
-  final String nickName;
-  final String stepNum;
-  final String mission;
+  final String veggieNickname;
+  final String routineId;
+  final String routineName;
 
   final VoidCallback onTap;
 
   const FarmClubListItem({
     Key? key,
-    required this.nickName,
-    required this.stepNum,
-    required this.mission,
+    required this.veggieNickname,
+    required this.routineId,
+    required this.routineName,
     required this.onTap,
   }) : super(key: key);
 
-  double calculateContainerWidth(String text, BuildContext context) {
-    final textLength = text.length;
-    final screenWidth = MediaQuery.of(context).size.width;
+  double calculateTextWidth(String text, TextStyle style) {
+    final textPainter = TextPainter(
+      text: TextSpan(text: text, style: style),
+      maxLines: 1,
+      textDirection: TextDirection.ltr,
+    )..layout(minWidth: 0, maxWidth: double.infinity);
 
-    final minContainerWidth = screenWidth * 0.7;
-    final maxContainerWidth = screenWidth * 0.9;
-
-    return min(max(minContainerWidth, textLength * 10.0), maxContainerWidth);
+    return textPainter.width;
   }
 
   @override
   Widget build(BuildContext context) {
-    final containerWidth =
-        calculateContainerWidth(nickName + mission + stepNum, context);
-
+    const arrowRightWidth = 22.0;
+    final textWidth = calculateTextWidth(
+      '$veggieNickname  |  Step $routineId  $routineName',
+      const TextStyle(
+        fontSize: 16,
+        color: Colors.black,
+        fontFamily: 'Pretendard',
+        fontWeight: FontWeight.bold,
+      ),
+    );
+    print("textWidth: $textWidth");
+    print("textWidth: $textWidth + $arrowRightWidth + 20");
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: containerWidth,
+        width: textWidth + arrowRightWidth + 50, // 여유 공간 조절
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: const Color(0xffDCFFD4),
           borderRadius: BorderRadius.circular(10),
         ),
-        margin: const EdgeInsets.only(left: 20.0),
+        margin: const EdgeInsets.only(left: 20.0, right: 20, bottom: 16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -55,11 +62,10 @@ class FarmClubListItem extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.black,
-                        fontFamily: 'Pretendard',
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: nickName,
+                          text: veggieNickname,
                         ),
                         const TextSpan(
                           text: '  |  ',
@@ -75,14 +81,17 @@ class FarmClubListItem extends StatelessWidget {
                           ),
                         ),
                         TextSpan(
-                          text: '$stepNum  ',
+                          text: routineId,
                           style: const TextStyle(
                             color: Colors.grey,
-                            fontWeight: FontWeight.bold, // Add this line
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
+                        const TextSpan(
+                          text: '   ',
+                        ),
                         TextSpan(
-                          text: mission,
+                          text: routineName,
                         ),
                       ],
                     ),
@@ -90,6 +99,7 @@ class FarmClubListItem extends StatelessWidget {
                   SvgPicture.asset(
                     'assets/image/ic_arrow_right.svg',
                     color: Colors.black,
+                    width: arrowRightWidth,
                   ),
                 ],
               ),
