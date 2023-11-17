@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view/my_page/history/my_page_farm_history.dart';
+import 'package:mojacknong_android/view/my_page/history_vege_screen.dart';
 
 class MyPageVegeHistory extends StatefulWidget {
   final String? name;
@@ -18,13 +18,13 @@ class MyPageVegeHistory extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<MyPageVegeHistory> createState() => _MyPageHistoryState();
+  State<MyPageVegeHistory> createState() => _MyPageVegeHistoryState();
 }
 
-class _MyPageHistoryState extends State<MyPageVegeHistory> {
+class _MyPageVegeHistoryState extends State<MyPageVegeHistory> {
   void _navigateToNewPage(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => MyPageList(data: widget.name),
+      builder: (context) => HistoryVegeScreen(data: widget.name),
     ));
   }
 

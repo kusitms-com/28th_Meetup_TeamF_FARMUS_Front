@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
-import 'package:mojacknong_android/view/my_page/history/my_page_vege_history.dart';
+import 'package:mojacknong_android/view/my_page/history/my_page_farm_history.dart';
 
 import '../../../repository/mypage_repository.dart';
 
@@ -33,7 +33,7 @@ class MyFarmClubHistory extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final reversedIndex =
                         data!.farmClubHistoryDetailList.length - index - 1;
-                    return MyPageVegeHistory(
+                    return MyPageFarmHistory(
                       name: data.farmClubHistoryDetailList[reversedIndex].name,
                       veggieName: data
                           .farmClubHistoryDetailList[reversedIndex].veggieName,

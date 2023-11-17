@@ -5,6 +5,7 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/my_page/component/my_challenge_header.dart';
 import 'package:mojacknong_android/view/my_page/component/my_history_header.dart';
 import 'package:mojacknong_android/view/my_page/component/my_page_header.dart';
+import 'package:mojacknong_android/view/my_page/history/my_page_farm_history.dart';
 import 'package:mojacknong_android/view/my_page/history/my_page_vege_history.dart';
 
 import '../../model/farmus_user.dart';
@@ -94,7 +95,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                   history.farmClubHistoryDetailList.length -
                                       index -
                                       1;
-                              return MyPageVegeHistory(
+                              return MyPageFarmHistory(
                                 name: history
                                     .farmClubHistoryDetailList[reversedIndex]
                                     .name,

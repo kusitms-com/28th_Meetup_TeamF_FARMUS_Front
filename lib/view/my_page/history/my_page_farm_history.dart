@@ -1,33 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/common/primary_app_bar.dart';
+import 'package:mojacknong_android/view/my_page/history_farm_screen%20copy.dart';
 
-class MyPageList extends StatelessWidget {
-  final String? data;
-
-  const MyPageList({Key? key, required this.data}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PrimaryAppBar(
-        title: "채소 히스토리",
-      ),
-      body: Center(
-        child: Text('New page with data: $data'),
-      ),
-    );
-  }
-}
-
-class MyPageHistory extends StatefulWidget {
+class MyPageFarmHistory extends StatefulWidget {
   final String? name;
   final String? veggieName;
   final String? period;
   final String? image;
 
-  const MyPageHistory({
+  const MyPageFarmHistory({
     Key? key,
     required this.name,
     required this.veggieName,
@@ -36,13 +18,13 @@ class MyPageHistory extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<MyPageHistory> createState() => _MyPageHistoryState();
+  State<MyPageFarmHistory> createState() => _MyPageFarmHistoryState();
 }
 
-class _MyPageHistoryState extends State<MyPageHistory> {
+class _MyPageFarmHistoryState extends State<MyPageFarmHistory> {
   void _navigateToNewPage(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => MyPageList(data: widget.name),
+      builder: (context) => HistoryFarmScreen(data: widget.name),
     ));
   }
 
