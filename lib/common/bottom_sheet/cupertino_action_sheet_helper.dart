@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 class CupertinoActionSheetHelper {
+  BottomSheetController bottomSheetController = BottomSheetController();
+
   static void showActionSheetComment(
     BuildContext? context, {
     required String message,
@@ -104,15 +107,14 @@ class CupertinoActionSheetHelper {
 
   static void showCustomCupertinoActionSheet(
     BuildContext context, {
-    String? title,
     required String message,
     required List<String> options,
+    List<Function>? optionActions,
     required String cancelButtonText,
   }) {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => CupertinoActionSheet(
-        title: title != null ? Text(title) : null,
         message: Text(
           message,
           style: const TextStyle(
@@ -125,6 +127,9 @@ class CupertinoActionSheetHelper {
           options.length,
           (index) => CupertinoActionSheetAction(
             onPressed: () {
+              if (optionActions != null && optionActions.isNotEmpty) {
+                optionActions[index]();
+              }
               Navigator.pop(context);
             },
             child: Text(
@@ -159,6 +164,7 @@ class CupertinoActionSheetHelper {
     String? title,
     required String message,
     required List<String> options,
+    List<Function()>? optionActions,
     required String cancelButtonText,
   }) {
     showCupertinoModalPopup<void>(

@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
+import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/my_page_profile_controller.dart';
 
 class MyProfilePage extends StatefulWidget {
@@ -16,6 +20,22 @@ class MyProfilePage extends StatefulWidget {
 class _MyProfilePageState extends State<MyProfilePage> {
   String inputText = '';
   MyPageProfileController controller = Get.put(MyPageProfileController());
+  BottomSheetController bottomSheetController = BottomSheetController();
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> _pickImage() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      File selectedImage = File(pickedFile.path);
+
+      print("Selected Image Path: ${selectedImage.path}");
+
+      // 갤러리에서 선택한 파일을 사용하여 프로필 이미지 업데이트
+      controller.updateProfileImage(selectedImage.path);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +53,59 @@ class _MyProfilePageState extends State<MyProfilePage> {
               const SizedBox(height: 16),
               const SizedBox(height: 40),
               Center(
-                child: CircleAvatar(
-                  radius: 70,
-                  backgroundColor: Colors.grey[300],
-                  child: SvgPicture.asset(
-                    'assets/image/ic_profile.svg',
-                    width: 180,
-                    height: 180,
-                    fit: BoxFit.cover,
+                child: GestureDetector(
+                  onTap: () {
+                    bottomSheetController.showCustomCupertinoActionSheet(
+                      context,
+                      message: "프로필 사진",
+                      options: ["앨범에서 사진 선택", "기본 이미지로 변경"],
+                      optionsAction: [
+                        () {
+                          _pickImage();
+                        },
+                        () {
+                          setState(() {
+                            controller.profileImagePath.value =
+                                'assets/image/ic_profile.svg';
+                          });
+                          print("기본 이미지로 변경");
+                        },
+                      ],
+                      cancelButtonText: "취소",
+                    );
+                  },
+                  child: Obx(
+                    () {
+                      // SVG 이미지인 경우
+                      if (controller.profileImagePath.value.endsWith('.svg')) {
+                        return CircleAvatar(
+                          radius: 70,
+                          backgroundColor: Colors.grey[300],
+                          child: ClipOval(
+                            child: SvgPicture.asset(
+                              controller.profileImagePath.value,
+                              width: 180,
+                              height: 180,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      } else {
+                        // 일반 이미지인 경우
+                        return CircleAvatar(
+                          radius: 70,
+                          backgroundColor: Colors.grey[300],
+                          child: ClipOval(
+                            child: Image.file(
+                              File(controller.profileImagePath.value),
+                              width: 180,
+                              height: 180,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      }
+                    },
                   ),
                 ),
               ),
@@ -48,9 +113,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
               const Text(
                 " 닉네임",
                 style: TextStyle(
-                    color: FarmusThemeData.dark,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500),
+                  color: FarmusThemeData.dark,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               const SizedBox(height: 10),
               Obx(
@@ -109,16 +175,19 @@ class _MyProfilePageState extends State<MyProfilePage> {
       floatingActionButton: Column(
         children: [
           Expanded(
-              child: SizedBox(
-            height: 0,
-          )),
+            child: SizedBox(
+              height: 0,
+            ),
+          ),
           Divider(
             color: FarmusThemeData.grey4,
           ),
           ButtonBrown(
             text: "확인",
             enabled: controller.hasInput,
-            onPress: () {},
+            onPress: () {
+              Navigator.pop(context);
+            },
           ),
         ],
       ),

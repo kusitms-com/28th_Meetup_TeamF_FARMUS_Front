@@ -5,6 +5,7 @@ class MyPageProfileController extends GetxController {
   final TextEditingController textEditingController = TextEditingController();
   RxBool hasInput = RxBool(false);
   RxBool hasSpecialCharacters = RxBool(false);
+  RxString profileImagePath = "assets/image/ic_profile.svg".obs;
 
   final contentValue = "".obs;
 
@@ -37,5 +38,10 @@ class MyPageProfileController extends GetxController {
 
   void updateContentValue(String value) {
     contentValue.value = value;
+  }
+
+  // 프로필 이미지 업데이트
+  void updateProfileImage(String imagePath) {
+    profileImagePath.value = imagePath;
   }
 }
