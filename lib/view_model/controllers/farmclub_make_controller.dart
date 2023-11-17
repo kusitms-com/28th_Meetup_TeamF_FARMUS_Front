@@ -11,7 +11,16 @@ class FarmclubMakeController extends GetxController {
   final TextEditingController controller = TextEditingController();
   RxBool hasInput = RxBool(false);
 
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController memberController = TextEditingController();
+  final TextEditingController introController = TextEditingController();
+
   final contentValue = "".obs;
+  final memberValue = "".obs;
+
+  RxBool hasNameInput = RxBool(false);
+  RxBool hasMemberInput = RxBool(false);
+  RxBool hasIntroInput = RxBool(false);
 
   @override
   void onInit() {
@@ -22,15 +31,19 @@ class FarmclubMakeController extends GetxController {
   }
 
   void initHasText() {
-    // 텍스트 필드의 값이 변경될 때 호출되는 함수
-    controller.addListener(() {
-      final value = controller.text;
-      // 텍스트 필드에 값이 입력 되었는지 여부
-      if (value.isNotEmpty) {
-        hasInput.value = true;
-      } else {
-        hasInput.value = false;
-      }
+    nameController.addListener(() {
+      hasNameInput.value = nameController.text.isNotEmpty;
+      update();
+    });
+
+    memberController.addListener(() {
+      hasMemberInput.value = memberController.text.isNotEmpty;
+      update();
+    });
+
+    introController.addListener(() {
+      hasIntroInput.value = introController.text.isNotEmpty;
+      update();
     });
   }
 
@@ -74,5 +87,9 @@ class FarmclubMakeController extends GetxController {
 
   void updateContentValue(String value) {
     contentValue.value = value;
+  }
+
+  void updateMemberValue(String value) {
+    memberValue.value = value;
   }
 }

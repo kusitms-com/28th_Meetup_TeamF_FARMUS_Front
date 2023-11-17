@@ -3,29 +3,29 @@ import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub_make_controller.dart';
 
-class FarmclubMakeEdit extends StatefulWidget {
+class FarmclubMakeMember extends StatefulWidget {
   final String hintText;
 
-  const FarmclubMakeEdit({
+  const FarmclubMakeMember({
     Key? key,
     required this.hintText,
   }) : super(key: key);
 
   @override
-  State<FarmclubMakeEdit> createState() => _FarmclubMakeEditState();
+  State<FarmclubMakeMember> createState() => _FarmclubMakeMemberState();
 }
 
-class _FarmclubMakeEditState extends State<FarmclubMakeEdit> {
+class _FarmclubMakeMemberState extends State<FarmclubMakeMember> {
   FarmclubMakeController _controller = Get.put(FarmclubMakeController());
-  final int maxLength = 20;
+  final int maxLength = 2;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: _controller.controller, // 사용할 컨트롤러 연결
-      maxLength: 20, // 최대 입력 글자수
+      controller: _controller.memberController, // 사용할 컨트롤러 연결
+      maxLength: 2, // 최대 입력 글자수
       cursorColor: FarmusThemeData.grey2,
-      onChanged: _controller.updateContentValue,
+      onChanged: _controller.updateMemberValue,
 
       style: FarmusThemeData.darkStyle16,
       decoration: InputDecoration(
@@ -37,14 +37,7 @@ class _FarmclubMakeEditState extends State<FarmclubMakeEdit> {
           fontSize: 14,
           fontFamily: "Pretendard",
         ),
-        suffix: Obx(
-          () => Text(
-            "${_controller.contentValue.value.length} / 20",
-            style: TextStyle(
-              color: FarmusThemeData.dark.withOpacity(0.3),
-            ),
-          ),
-        ),
+
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: const BorderSide(

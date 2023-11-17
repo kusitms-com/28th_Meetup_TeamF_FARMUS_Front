@@ -3,6 +3,7 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/farmclub/component/around/vegetable_list.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_make_edit.dart';
+import 'package:mojacknong_android/view/farmclub/component/farmclub_make_member.dart';
 import 'package:mojacknong_android/view/farmclub/component/new_vegetable_select.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub_make_controller.dart';
 
@@ -67,7 +68,9 @@ class _FarmclubMakeScreenState extends State<FarmclubMakeScreen> {
             const SizedBox(
               height: 16,
             ),
-            FarmclubMakeEdit(),
+            FarmclubMakeEdit(
+              hintText: "클럽명 예시",
+            ),
             const SizedBox(
               height: 32,
             ),
@@ -78,13 +81,9 @@ class _FarmclubMakeScreenState extends State<FarmclubMakeScreen> {
             const SizedBox(
               height: 16,
             ),
-            Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: FarmusThemeData.grey4)),
-                child: VegetableList(
-                  isMake: true,
-                )),
+            FarmclubMakeMember(
+              hintText: "",
+            ),
             const SizedBox(
               height: 32,
             ),
@@ -96,12 +95,13 @@ class _FarmclubMakeScreenState extends State<FarmclubMakeScreen> {
               height: 16,
             ),
             Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: FarmusThemeData.grey4)),
-                child: VegetableList(
-                  isMake: true,
-                )),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: FarmclubMakeEdit(
+                hintText: "",
+              ),
+            ),
             const SizedBox(
               height: 32,
             ),
