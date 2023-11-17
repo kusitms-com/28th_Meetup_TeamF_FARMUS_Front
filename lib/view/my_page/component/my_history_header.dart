@@ -29,12 +29,7 @@ class HistoryHeader extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                historyType,
-                style: const TextStyle(
-                  fontSize: 17.0,
-                ),
-              ),
+              Text(historyType, style: FarmusThemeData.darkStyle17),
               InkWell(
                 onTap:
                     _navigateToMyVegeHistoryPage, // '더보기'를 탭하면 _navigateToNewPage 함수 실행

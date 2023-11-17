@@ -123,7 +123,7 @@ class _FarmclubMakeScreenState extends State<FarmclubMakeScreen> {
             color: FarmusThemeData.grey4,
           ),
           ButtonBrown(
-            text: "개설화기",
+            text: "개설하기",
             enabled: _controller.isFormVaild,
             onPress: () {},
           ),

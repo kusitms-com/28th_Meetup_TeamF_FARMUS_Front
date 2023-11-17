@@ -33,15 +33,16 @@ class BottomSheetController extends GetxController {
 
   void showCustomCupertinoActionSheet(
     BuildContext? context, {
-    String? title,
     required String message,
     required List<String> options,
+    List<Function()>? optionsAction,
     required String cancelButtonText,
   }) {
     CupertinoActionSheetHelper.showCustomCupertinoActionSheet(
       context!,
       message: message,
       options: options,
+      optionActions: optionsAction ?? [],
       cancelButtonText: cancelButtonText,
     );
   }

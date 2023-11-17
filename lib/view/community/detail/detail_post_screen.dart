@@ -53,6 +53,10 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
             _controller.showCustomCupertinoActionSheet(context,
                 message: "글 메뉴",
                 options: ["수정", "삭제", "URL 공유"],
+                optionsAction: [
+                  () {},
+                  () {},
+                ],
                 cancelButtonText: "취소");
           },
         ),
