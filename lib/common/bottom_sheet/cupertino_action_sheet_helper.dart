@@ -153,4 +153,56 @@ class CupertinoActionSheetHelper {
       ),
     );
   }
+
+  static void showCustomCupertinoActionRedSheet(
+    BuildContext context, {
+    String? title,
+    required String message,
+    required List<String> options,
+    required String cancelButtonText,
+  }) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => CupertinoActionSheet(
+        title: title != null ? Text(title) : null,
+        message: Text(
+          message,
+          style: const TextStyle(
+            color: FarmusThemeData.grey2,
+            fontSize: 12,
+            fontFamily: "Pretendard",
+          ),
+        ),
+        actions: List.generate(
+          options.length,
+          (index) => CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text(
+              options[index],
+              style: const TextStyle(
+                color: FarmusThemeData.dark,
+                fontSize: 14,
+                fontFamily: "Pretendard",
+              ),
+            ),
+          ),
+        ),
+        cancelButton: CupertinoActionSheetAction(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text(
+            cancelButtonText,
+            style: const TextStyle(
+              color: FarmusThemeData.dark,
+              fontSize: 14,
+              fontFamily: "Pretendard",
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }

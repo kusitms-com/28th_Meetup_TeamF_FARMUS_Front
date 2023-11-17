@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
+import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
+import 'package:mojacknong_android/view_model/controllers/my_page_profile_controller.dart';
 
 class MyProfilePage extends StatefulWidget {
   const MyProfilePage({Key? key}) : super(key: key);
@@ -12,6 +15,7 @@ class MyProfilePage extends StatefulWidget {
 
 class _MyProfilePageState extends State<MyProfilePage> {
   String inputText = '';
+  MyPageProfileController controller = Get.put(MyPageProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +30,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 32),
-              const Text(
-                '프로필 사진과 닉네임을 등록해주세요',
-                style: TextStyle(fontSize: 18.0),
-              ),
+              const SizedBox(height: 16),
               const SizedBox(height: 40),
               Center(
                 child: CircleAvatar(
@@ -53,79 +53,74 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 10),
-              SizedBox(
-                height: 42,
-                child: Stack(
-                  children: [
-                    TextField(
-                      decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide: BorderSide(color: FarmusThemeData.grey4),
-                        ),
-                        hintText: '이름을 입력해주세요',
-                        hintStyle: TextStyle(
-                            fontSize: 13, color: FarmusThemeData.grey3),
-                        contentPadding:
-                            EdgeInsets.only(left: 8, top: 5, right: 30),
-                        counterText: "", // counter 숨겨주고, maxLength까지만 입력가능하게
-                      ),
-                      maxLength: 10,
-                      onChanged: (text) {
-                        if (text.length <= 10) {
-                          setState(() {
-                            inputText = text;
-                          });
-                        }
-                      },
-                    ),
-                    Positioned(
-                      right: 8, // textfield 안 padding
-                      top: 12,
-                      child: Text(
-                        '${inputText.length}/10',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
-                        ),
+              Obx(
+                () => TextFormField(
+                  controller: controller.textEditingController,
+                  maxLength: 10,
+                  style: FarmusThemeData.darkStyle13,
+                  cursorColor: FarmusThemeData.dark,
+                  decoration: InputDecoration(
+                    hintText: "이름을 입력해주세요",
+                    hintStyle: FarmusThemeData.grey3Style13,
+                    errorText: controller.hasSpecialCharacters.value
+                        ? '특수문자는 입력할 수 없어요'
+                        : null,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(
+                        color: FarmusThemeData.grey4,
                       ),
                     ),
-                  ],
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(
+                        color: FarmusThemeData.grey4,
+                      ),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(
+                        color: FarmusThemeData.grey4,
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(
+                        color: FarmusThemeData.grey4,
+                      ),
+                    ),
+                    errorStyle: const TextStyle(
+                      color: FarmusThemeData.red,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 12.0,
+                      horizontal: 16.0,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
-              const Text(
-                " 특수문자는 입력할 수 없어요",
-                style: TextStyle(
-                    color: FarmusThemeData.red,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(height: 250),
-              Center(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: inputText.isEmpty
-                        ? const Color(0xffc5c5c5)
-                        : FarmusThemeData.brownButton,
-                    minimumSize:
-                        const Size(double.infinity, 50), // 버튼의 최소 크기 설정
-                  ),
-                  onPressed: inputText.isEmpty
-                      ? null
-                      : () {
-                          // 프로필 정보 저장 로직
-                        },
-                  child: const Text(
-                    '확인',
-                    style: TextStyle(fontSize: 14, color: Colors.white),
-                  ),
-                ),
-              ),
             ],
           ),
         ),
+      ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterFloat,
+      floatingActionButton: Column(
+        children: [
+          Expanded(
+              child: SizedBox(
+            height: 0,
+          )),
+          Divider(
+            color: FarmusThemeData.grey4,
+          ),
+          ButtonBrown(
+            text: "확인",
+            enabled: controller.hasInput,
+            onPress: () {},
+          ),
+        ],
       ),
     );
   }

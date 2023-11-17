@@ -104,6 +104,12 @@ class FarmusThemeData {
     fontFamily: "Pretendard",
   );
 
+  static const TextStyle grey3Style13 = TextStyle(
+    color: FarmusThemeData.grey3,
+    fontSize: 13,
+    fontFamily: "Pretendard",
+  );
+
   static const TextStyle brownText13 = TextStyle(
     color: FarmusThemeData.brownText,
     fontSize: 13,
