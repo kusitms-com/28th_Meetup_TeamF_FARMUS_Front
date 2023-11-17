@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
-class MyPageSettingText extends StatelessWidget {
+class MyPageSettingText extends StatefulWidget {
   final String text;
-  const MyPageSettingText({
-    super.key,
-    required this.text,
-  });
+  final Function()? onPress;
+
+  const MyPageSettingText({super.key, required this.text, this.onPress});
+
+  @override
+  State<MyPageSettingText> createState() => _MyPageSettingTextState();
+}
+
+class _MyPageSettingTextState extends State<MyPageSettingText> {
+  BottomSheetController controller = BottomSheetController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +26,13 @@ class MyPageSettingText extends StatelessWidget {
           SizedBox(
             height: 16,
           ),
-          Text(
-            text,
-            style: FarmusThemeData.darkStyle16,
-            textAlign: TextAlign.left,
+          GestureDetector(
+            onTap: widget.onPress != null ? widget.onPress : () {},
+            child: Text(
+              widget.text,
+              style: FarmusThemeData.darkStyle16,
+              textAlign: TextAlign.left,
+            ),
           ),
           SizedBox(
             height: 16,

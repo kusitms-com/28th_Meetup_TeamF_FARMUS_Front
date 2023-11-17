@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/my_page/component/my_page_setting_text.dart';
+import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
-class MyPageSettingScreen extends StatelessWidget {
+class MyPageSettingScreen extends StatefulWidget {
   const MyPageSettingScreen({super.key});
+
+  @override
+  State<MyPageSettingScreen> createState() => _MyPageSettingScreenState();
+}
+
+class _MyPageSettingScreenState extends State<MyPageSettingScreen> {
+  BottomSheetController _controller = Get.put(BottomSheetController());
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +45,7 @@ class MyPageSettingScreen extends StatelessWidget {
           SizedBox(
             height: 16,
           ),
-          const Divider(
+          Divider(
             thickness: 12,
             color: FarmusThemeData.dividerBackground,
           ),
@@ -45,6 +54,14 @@ class MyPageSettingScreen extends StatelessWidget {
           ),
           MyPageSettingText(
             text: "로그아웃",
+            onPress: () {
+              _controller.showActionSheetRedMessage(
+                context,
+                message: "로그아웃하시겠어요?",
+                confirmText: "로그아웃하기",
+                cancelButtonText: "취소",
+              );
+            },
           ),
           Divider(
             color: FarmusThemeData.grey4,
