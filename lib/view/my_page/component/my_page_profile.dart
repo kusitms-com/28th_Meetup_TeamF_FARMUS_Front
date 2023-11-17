@@ -110,13 +110,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
                 ),
               ),
               const SizedBox(height: 30),
-              const Text(
-                " 닉네임",
-                style: TextStyle(
-                  color: FarmusThemeData.dark,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                child: Text("닉네임", style: FarmusThemeData.darkStyle13),
               ),
               const SizedBox(height: 10),
               Obx(
@@ -174,12 +170,12 @@ class _MyProfilePageState extends State<MyProfilePage> {
           FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: Column(
         children: [
-          Expanded(
+          const Expanded(
             child: SizedBox(
               height: 0,
             ),
           ),
-          Divider(
+          const Divider(
             color: FarmusThemeData.grey4,
           ),
           ButtonBrown(
