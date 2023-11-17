@@ -53,4 +53,16 @@ class MypageApiService {
     return null;
   }
 
+
+  FutureOr<void> logout() async {
+    try {
+      await ApiClient().dio.get('/api/crop/history');
+
+    } on DioException catch (e) {
+      print(e.message);
+      print("로그인 실패");
+
+    }
+  }
+
 }
