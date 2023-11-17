@@ -35,7 +35,7 @@ class HomeBottomSheetController extends GetxController {
     BuildContext? context, {
     // required String message,
     required List<String> options,
-    List<Function()>? optionsAction,
+    List<VoidCallback>? optionsAction,
     required String cancelButtonText,
   }) {
     CupertinoActionSheetHelper.showCustomCupertinoActionSheet(

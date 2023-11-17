@@ -99,7 +99,6 @@ class CupertinoActionSheetHelper {
 
   static void showCustomCupertinoActionSheet(
     BuildContext context, {
-    // required String message,
     required List<String> options,
     List<Function>? optionActions,
     required String cancelButtonText,
@@ -107,14 +106,6 @@ class CupertinoActionSheetHelper {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => CupertinoActionSheet(
-        // message: Text(
-        //   message,
-        //   style: const TextStyle(
-        //     color: FarmusThemeData.grey2,
-        //     fontSize: 12,
-        //     fontFamily: "Pretendard",
-        //   ),
-        // ),
         actions: List.generate(
           options.length,
           (index) => CupertinoActionSheetAction(
