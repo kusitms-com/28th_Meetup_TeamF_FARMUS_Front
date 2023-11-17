@@ -28,7 +28,9 @@ class _NewVegetableItemState extends State<NewVegetableItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => widget.onTap(),
+      onTap: () {
+        widget.onTap();
+      },
       child: Column(
         children: [
           Expanded(

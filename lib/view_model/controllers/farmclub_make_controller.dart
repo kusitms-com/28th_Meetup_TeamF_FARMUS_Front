@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 class FarmclubMakeController extends GetxController {
   // 선택된 채소들의 상태를 저장하는 변수
   RxList<bool> isSelectedList = List.generate(6, (index) => false).obs;
+  RxInt selectedVeggieIndex = RxInt(-1);
 
   RxMap veggieData = {}.obs;
   RxMap veggieLevel = {}.obs;
@@ -23,12 +24,32 @@ class FarmclubMakeController extends GetxController {
   RxBool hasMemberInput = RxBool(false);
   RxBool hasIntroInput = RxBool(false);
 
+  final isFormVaild = RxBool(false);
+
   @override
   void onInit() {
     super.onInit();
     initHasText();
     initializeVeggieData();
     initializeVeggieLevel();
+
+    ever(titleValue, (_) {
+      checkFormVaildity();
+    });
+
+    ever(memberValue, (_) {
+      checkFormVaildity();
+    });
+
+    ever(contentValue, (_) {
+      checkFormVaildity();
+    });
+  }
+
+  // 선택된 채소의 인덱스를 업데이트하는 메서드
+  void updateSelectedVeggieIndex(int index) {
+    selectedVeggieIndex.value = index;
+    checkFormVaildity(); // 선택된 채소가 변경될 때마다 폼 유효성을 다시 확인
   }
 
   void initHasText() {
@@ -59,6 +80,8 @@ class FarmclubMakeController extends GetxController {
         isSelectedList[i] = false;
       }
     }
+    print(index);
+    updateSelectedVeggieIndex(index);
     update(); // 상태 업데이트
   }
 
@@ -96,5 +119,10 @@ class FarmclubMakeController extends GetxController {
 
   void updateContentValue(String value) {
     contentValue.value = value;
+  }
+
+  void checkFormVaildity() {
+    selectedVeggieIndex.value != null;
+    update(); // 추가: 상태 업데이트
   }
 }
