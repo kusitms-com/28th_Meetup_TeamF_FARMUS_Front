@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
+import 'package:mojacknong_android/view/home/component/register/controller/buttom_sheet_home.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
 
 class DisplayTextWidget extends StatefulWidget {
@@ -23,13 +23,14 @@ class DisplayTextWidget extends StatefulWidget {
 
 class _DisplayTextWidgetState extends State<DisplayTextWidget> {
   late FarmclubController _farmclubController;
-  late BottomSheetController _bottomSheetController = BottomSheetController();
+  late HomeBottomSheetController _homebottomSheetController =
+      HomeBottomSheetController();
 
   @override
   void initState() {
     super.initState();
     _farmclubController = FarmclubController();
-    _bottomSheetController = BottomSheetController();
+    _homebottomSheetController = HomeBottomSheetController();
   }
 
   @override
@@ -72,12 +73,10 @@ class _DisplayTextWidgetState extends State<DisplayTextWidget> {
                 onTap: widget.onKebabTapped ??
                     () {
                       print("Default Kebab Tapped!");
-                      _bottomSheetController.showActionSheetComment(
-                        context,
-                        message: "골라 골라?",
-                        cancelText: "취소",
-                        confirmText: "확인",
-                      );
+                      _homebottomSheetController.showCustomCupertinoActionSheet(
+                          context,
+                          options: ["주기 설정하기", "삭제하기"],
+                          cancelButtonText: "취소");
                     },
                 child: const Icon(Icons.more_vert,
                     size: 22, color: FarmusThemeData.dark),

@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bottom_sheet/bottom_sheet_farmclub_exit.dart';
 import 'package:mojacknong_android/common/bottom_sheet/bottom_sheet_farmclub_join.dart';
-import 'package:mojacknong_android/common/bottom_sheet/cupertino_action_sheet_helper.dart';
 import 'package:mojacknong_android/common/dialog/Dialog_join_farmclub.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/home/component/register/controller/home_cupertino_action_sheet_helper.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/Dialog_register_vege.dart';
 
-class BottomSheetController extends GetxController {
+class HomeBottomSheetController extends GetxController {
   void showActionSheetComment(
     BuildContext? context, {
     required String message,
     required String cancelText,
     required String confirmText,
   }) {
-<<<<<<< HEAD
     CupertinoActionSheetHelper.showActionSheetComment(context,
         message: message, cancelText: cancelText, confirmText: confirmText);
   }
@@ -30,62 +29,18 @@ class BottomSheetController extends GetxController {
         message: message,
         confirmText: confirmText,
         cancelText: cancelButtonText);
-=======
-    showCupertinoModalPopup<void>(
-      context: context!,
-      builder: (BuildContext context) => CupertinoActionSheet(
-        message: Text(
-          message,
-          style: const TextStyle(
-            color: FarmusThemeData.grey2,
-            fontSize: 12,
-            fontFamily: "Pretendard",
-          ),
-        ),
-        actions: <CupertinoActionSheetAction>[
-          CupertinoActionSheetAction(
-            isDestructiveAction: true,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text(
-              confirmText,
-              style: const TextStyle(
-                color: FarmusThemeData.dark,
-                fontSize: 14,
-                fontFamily: "Pretendard",
-              ),
-            ),
-          ),
-          CupertinoActionSheetAction(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text(
-              cancelText,
-              style: const TextStyle(
-                color: FarmusThemeData.dark,
-                fontSize: 14,
-                fontFamily: "Pretendard",
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
->>>>>>> ee34650 ([feat] : 미션/루틴 바텀 시트 변경 (#58))
   }
 
   void showCustomCupertinoActionSheet(
     BuildContext? context, {
-    required String message,
+    // required String message,
     required List<String> options,
     List<Function()>? optionsAction,
     required String cancelButtonText,
   }) {
     CupertinoActionSheetHelper.showCustomCupertinoActionSheet(
       context!,
-      message: message,
+      // message: message,
       options: options,
       optionActions: optionsAction ?? [],
       cancelButtonText: cancelButtonText,
