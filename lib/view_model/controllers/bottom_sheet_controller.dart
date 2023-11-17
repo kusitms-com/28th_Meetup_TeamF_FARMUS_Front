@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bottom_sheet/bottom_sheet_farmclub_exit.dart';
 import 'package:mojacknong_android/common/bottom_sheet/bottom_sheet_farmclub_join.dart';
+import 'package:mojacknong_android/common/bottom_sheet/cupertino_action_sheet_helper.dart';
 import 'package:mojacknong_android/common/dialog/Dialog_join_farmclub.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/Dialog_register_vege.dart';
@@ -14,48 +14,21 @@ class BottomSheetController extends GetxController {
     required String cancelText,
     required String confirmText,
   }) {
-    showCupertinoModalPopup<void>(
-      context: context!,
-      builder: (BuildContext context) => CupertinoActionSheet(
-        message: Text(
-          message,
-          style: const TextStyle(
-            color: FarmusThemeData.grey2,
-            fontSize: 12,
-            fontFamily: "Pretendard",
-          ),
-        ),
-        actions: <CupertinoActionSheetAction>[
-          CupertinoActionSheetAction(
-            isDestructiveAction: true,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text(
-              cancelText,
-              style: const TextStyle(
-                color: FarmusThemeData.dark,
-                fontSize: 14,
-                fontFamily: "Pretendard",
-              ),
-            ),
-          ),
-          CupertinoActionSheetAction(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text(
-              confirmText,
-              style: const TextStyle(
-                color: FarmusThemeData.dark,
-                fontSize: 14,
-                fontFamily: "Pretendard",
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+    CupertinoActionSheetHelper.showActionSheetComment(context,
+        message: message, cancelText: cancelText, confirmText: confirmText);
+  }
+
+  void showActionSheetRedMessage(
+    BuildContext? context, {
+    String? title,
+    required String message,
+    required String confirmText,
+    required String cancelButtonText,
+  }) {
+    CupertinoActionSheetHelper.showActionSheetRedMessage(context!,
+        message: message,
+        confirmText: confirmText,
+        cancelText: cancelButtonText);
   }
 
   void showCustomCupertinoActionSheet(
@@ -64,7 +37,14 @@ class BottomSheetController extends GetxController {
     required String message,
     required List<String> options,
     required String cancelButtonText,
-  }) {}
+  }) {
+    CupertinoActionSheetHelper.showCustomCupertinoActionSheet(
+      context!,
+      message: message,
+      options: options,
+      cancelButtonText: cancelButtonText,
+    );
+  }
 
   void showFarmclubJoinBottomSheet(BuildContext context, String title) {
     showModalBottomSheet<void>(

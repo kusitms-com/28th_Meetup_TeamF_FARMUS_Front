@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
 
 class BrownCategory extends StatefulWidget {
   final String category;
@@ -17,7 +19,7 @@ class BrownCategory extends StatefulWidget {
 }
 
 class _BrownCategoryState extends State<BrownCategory> {
-  late bool isSelected = false;
+  late bool isSelected;
 
   @override
   void initState() {
@@ -31,6 +33,7 @@ class _BrownCategoryState extends State<BrownCategory> {
       onPress: () {
         setState(() {
           isSelected = !isSelected;
+          Get.find<FarmclubController>().toggleSelectCategory();
         });
       },
       child: Padding(

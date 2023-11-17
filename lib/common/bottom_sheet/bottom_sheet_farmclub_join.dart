@@ -61,7 +61,9 @@ class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
             ),
             child: const Column(
               children: [
-                VegetableList(),
+                VegetableList(
+                  isMake: false,
+                ),
               ],
             ),
           ),
