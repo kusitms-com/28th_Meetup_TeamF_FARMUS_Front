@@ -92,6 +92,12 @@ class FarmusThemeData {
     fontFamily: "Pretendard",
   );
 
+  static const TextStyle grey1Style16 = TextStyle(
+    color: FarmusThemeData.grey1,
+    fontSize: 16,
+    fontFamily: "Pretendard",
+  );
+
   static const TextStyle grey2Style13 = TextStyle(
     color: FarmusThemeData.grey2,
     fontSize: 13,
@@ -101,6 +107,18 @@ class FarmusThemeData {
   static const TextStyle grey2Style14 = TextStyle(
     color: FarmusThemeData.grey2,
     fontSize: 14,
+    fontFamily: "Pretendard",
+  );
+
+  static const TextStyle grey3Style13 = TextStyle(
+    color: FarmusThemeData.grey3,
+    fontSize: 13,
+    fontFamily: "Pretendard",
+  );
+
+  static const TextStyle grey3Style17 = TextStyle(
+    color: FarmusThemeData.grey3,
+    fontSize: 17,
     fontFamily: "Pretendard",
   );
 

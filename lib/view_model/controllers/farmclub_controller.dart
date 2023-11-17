@@ -5,13 +5,13 @@ import 'package:get/get.dart';
 
 class FarmclubController extends GetxController {
   final TextEditingController controller = TextEditingController();
-  RxBool hasSpecialCharacters = RxBool(false);
   RxBool hasInput = RxBool(false);
 
   RxBool isSelectLike = RxBool(false);
   RxInt like = 2.obs; // 초기 좋아요 수
 
   RxBool isCheck = RxBool(false);
+  RxBool isCategory = RxBool(false);
   RxBool shouldExit = RxBool(false);
 
   RxBool isTextBox1Selected = RxBool(false);
@@ -57,6 +57,10 @@ class FarmclubController extends GetxController {
 
   void checkFormVaildity() {
     isFormVaild.value = contentValue.isNotEmpty && image.value != null;
+  }
+
+  void toggleSelectCategory() {
+    isCategory.value = !isCategory.value;
   }
 
   void toggleSelectCheck() {
