@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view/my_page/history_farm_screen.dart';
+import 'package:mojacknong_android/view/farmclub/farmclub_challenge_screen.dart';
 
 class MyPageFarmHistory extends StatefulWidget {
   final String? name;
@@ -23,9 +23,9 @@ class MyPageFarmHistory extends StatefulWidget {
 
 class _MyPageFarmHistoryState extends State<MyPageFarmHistory> {
   void _navigateToNewPage(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => HistoryFarmScreen(data: widget.name),
-    ));
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return FarmclubChallengeScreen();
+    }));
   }
 
   @override

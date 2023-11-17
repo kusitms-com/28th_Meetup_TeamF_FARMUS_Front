@@ -14,7 +14,7 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
+        const SizedBox(
           width: 16,
         ),
         Expanded(
@@ -37,7 +37,7 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 4,
         ),
         Expanded(
@@ -60,7 +60,7 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 4,
               ),
               GestureDetector(
@@ -69,7 +69,7 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return FarmclubMissionFeedScreen();
+                        return const FarmclubMissionFeedScreen();
                       },
                     ),
                   );
@@ -95,7 +95,7 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
                             decoration: BoxDecoration(
                               color: Colors.black.withOpacity(0.5),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 "더보기",
                                 style: FarmusThemeData.whiteStyle14,
@@ -111,7 +111,7 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 16,
         ),
       ],

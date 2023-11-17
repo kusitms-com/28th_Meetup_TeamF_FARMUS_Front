@@ -10,6 +10,7 @@ import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_s
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
 
 class FarmclubChallengeScreen extends StatefulWidget {
   const FarmclubChallengeScreen({Key? key}) : super(key: key);
@@ -20,6 +21,8 @@ class FarmclubChallengeScreen extends StatefulWidget {
 }
 
 class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
+  final FarmclubController farmclubController = Get.put(FarmclubController());
+
   @override
   Widget build(BuildContext context) {
     List<Map<String, String>> challengeSteps = [
@@ -38,8 +41,8 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            FarmclubTitleWithDivider(title: "완료한 Step"),
-            Row(
+            const FarmclubTitleWithDivider(title: "완료한 Step"),
+            const Row(
               children: [
                 SizedBox(
                   width: 16,
@@ -49,31 +52,31 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
-            FarmclubTitleWithDivider(title: "현재 Step"),
-            ChallengeStep(
+            const FarmclubTitleWithDivider(title: "현재 Step"),
+            const ChallengeStep(
               step: "0",
               title: "준비물을 챙겨요",
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
-            ChallengeHelp(
+            const ChallengeHelp(
               help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
-            ChallengeFeed(),
-            SizedBox(
+            const ChallengeFeed(),
+            const SizedBox(
               height: 16,
             ),
-            FarmclubTitleWithDivider(title: "다음 Step"),
+            const FarmclubTitleWithDivider(title: "다음 Step"),
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: challengeSteps.length - 1,
               itemBuilder: (context, index) {
                 return Column(
@@ -82,22 +85,22 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                       step: challengeSteps[index + 1]["step"]!,
                       title: challengeSteps[index + 1]["title"]!,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
-                    Divider(
+                    const Divider(
                       endIndent: 16,
                       indent: 16,
                       color: FarmusThemeData.grey4,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                   ],
                 );
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
           ],
@@ -105,7 +108,7 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         color: Colors.transparent,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -120,7 +123,7 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return MyFarmclubMissionScreen();
+                          return const MyFarmclubMissionScreen();
                         },
                       ),
                     );
@@ -136,7 +139,7 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return FarmclubAuthScreen();
+                        return const FarmclubAuthScreen();
                       },
                     ),
                   );
