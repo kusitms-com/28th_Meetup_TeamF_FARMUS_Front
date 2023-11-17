@@ -23,6 +23,9 @@ class FarmclubController extends GetxController {
   final image = Rxn<File>();
   final isFormVaild = RxBool(false);
 
+  var isCombinedWidgetVisible = true.obs;
+  String enteredText = '';
+
   @override
   void onInit() {
     super.onInit();
@@ -78,5 +81,10 @@ class FarmclubController extends GetxController {
     // 선택된 텍스트 박스에 따라 배경 색상 업데이트
     isTextBox1Selected.value = selectedTextBoxIndex.value == 0;
     isTextBox2Selected.value = selectedTextBoxIndex.value == 1;
+  }
+
+  void updateEnteredText(String text) {
+    enteredText = text;
+    isCombinedWidgetVisible.value = false;
   }
 }
