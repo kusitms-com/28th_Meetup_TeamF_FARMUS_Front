@@ -30,6 +30,15 @@ class MypageRepository {
     return Future.wait(futures);
   }
 
+  static Future<void> logoutApi() async {
+
+    await MypageApiService().logout();
+
+  }
+
+
+
+
 
 
 
