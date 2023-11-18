@@ -36,38 +36,42 @@ class _CommunityCategoryState extends State<CommunityCategory> {
   @override
   Widget build(BuildContext context) {
     return Bouncing(
-      onPress: () {
-        setState(() {
-          if (isSelected) {
-            if (widget.feedController != null) {
-              widget.feedController!.selectCategory(""); // 선택 해제
+      onPress: () {},
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            if (isSelected) {
+              if (widget.feedController != null) {
+                widget.feedController!.selectCategory(""); // 선택 해제
+              }
+            } else {
+              if (widget.feedController != null) {
+                widget.feedController!.selectCategory(widget.category); // 선택
+              }
             }
-          } else {
-            if (widget.feedController != null) {
-              widget.feedController!.selectCategory(widget.category); // 선택
-            }
-          }
-          isSelected = !isSelected;
-        });
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        child: Container(
-          decoration: BoxDecoration(
-            color: isSelected
-                ? FarmusThemeData.category
-                : FarmusThemeData.background,
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-            child: GestureDetector(
-              child: Text(
-                widget.category,
-                style: TextStyle(
-                  color:
-                      isSelected ? FarmusThemeData.white : FarmusThemeData.dark,
-                  fontWeight: FontWeight.w500,
+            isSelected = !isSelected;
+          });
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          child: Container(
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? FarmusThemeData.category
+                  : FarmusThemeData.background,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              child: GestureDetector(
+                child: Text(
+                  widget.category,
+                  style: TextStyle(
+                    color: isSelected
+                        ? FarmusThemeData.white
+                        : FarmusThemeData.dark,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),
