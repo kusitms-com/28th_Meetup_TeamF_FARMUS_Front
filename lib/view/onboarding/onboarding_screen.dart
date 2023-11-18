@@ -23,6 +23,7 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentPage = 1;
   String title = "안녕하세요! 먼저 프로필을 설정해주세요";
+
   String description = "";
   late Widget _currentWidget;
   bool isLastPage = false;
@@ -115,6 +116,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: CustomAppBar(),
+        backgroundColor: FarmusThemeData.white,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
