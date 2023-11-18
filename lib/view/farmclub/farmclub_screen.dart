@@ -51,11 +51,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
               children: [
                 const Text(
                   "나의 팜클럽",
-                  style: TextStyle(
-                    color: FarmusThemeData.dark,
-                    fontFamily: "Pretendard",
-                    fontSize: 16,
-                  ),
+                  style: FarmusThemeData.darkStyle16,
                 ),
                 Bouncing(
                   onPress: () {},

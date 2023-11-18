@@ -71,6 +71,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                       _communityController.communityPostings[index];
                   return CommunityFeed(
                     postingId: posting.postingId,
+                    userId: posting.userId,
                     profileImage: posting.userImageUrl,
                     nickname: posting.nickName,
                     postTime: posting.createdAt,

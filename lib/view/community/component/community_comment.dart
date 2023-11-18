@@ -39,7 +39,7 @@ class _CommunityCommentState extends State<CommunityComment> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CommunityProfile(
-                  profileImage: widget.profileImage,
+                  profileImage: widget.profileImage ?? "", // null이면 빈 문자열로 처리
                   nickname: widget.nickname,
                   postTime: widget.postTime,
                 ),
