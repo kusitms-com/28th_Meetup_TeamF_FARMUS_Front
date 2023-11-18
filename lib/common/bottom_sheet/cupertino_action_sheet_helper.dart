@@ -13,6 +13,7 @@ const storage = FlutterSecureStorage();
 class CupertinoActionSheetHelper {
   BottomSheetController bottomSheetController = BottomSheetController();
 
+
   static void showActionSheetComment(
     BuildContext? context, {
     required String message,
@@ -100,11 +101,13 @@ class CupertinoActionSheetHelper {
                   CupertinoPageRoute(
                       builder: (context) =>
                           const LoginScreen()), // NewScreen은 이동할 화면의 클래스
+
                 );
               } catch (error) {
                 // API 호출 중 오류 처리
                 print("API 호출 중 오류 발생: $error");
               } finally {
+
                 // API 호출 완료 후 액션 시트를 닫기
                 Navigator.pop(context);
               }
