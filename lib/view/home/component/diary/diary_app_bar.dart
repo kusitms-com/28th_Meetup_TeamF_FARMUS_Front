@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
-class RegiCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const RegiCustomAppBar({Key? key}) : super(key: key);
+class DiaryAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const DiaryAppBar({Key? key}) : super(key: key);
 
   @override
   Size get preferredSize => const Size.fromHeight(55);
@@ -12,7 +12,12 @@ class RegiCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: const [],
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset('assets/image/ic_onkebab.svg'),
+          ),
+        ],
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -26,7 +31,7 @@ class RegiCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             SizedBox(width: 105),
             Text(
-              '채소 등록',
+              '성장 일기',
               style: TextStyle(
                 color: FarmusThemeData.dark,
                 fontSize: 16,
