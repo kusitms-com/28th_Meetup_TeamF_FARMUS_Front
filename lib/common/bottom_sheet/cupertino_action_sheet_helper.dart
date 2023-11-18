@@ -220,34 +220,46 @@ class CupertinoActionSheetHelper {
                 ]),
           ),
         ),
-        cancelButton: CupertinoActionSheetAction(
-          onPressed: () {},
+        cancelButton: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(14),
+            color: Colors.black.withOpacity(0.2),
+          ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // 취소
-              GestureDetector(
-                onTap: () {},
-                child: Text(
-                  "취소",
-                  style: const TextStyle(
-                    color: FarmusThemeData.dark,
-                    fontSize: 14,
-                    fontFamily: "Pretendard",
+              Expanded(
+                flex: 5,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    color: Colors.white.withOpacity(0.8),
+                  ),
+                  child: CupertinoActionSheetAction(
+                    onPressed: () => Navigator.pop(context),
+                    isDestructiveAction: true,
+                    child: const Text(
+                      '취소',
+                      style: FarmusThemeData.darkStyle14,
+                    ),
                   ),
                 ),
               ),
-              SvgPicture.asset("assets/image/line_vertical_grey1.svg"),
-              // 탈퇴하기
-              GestureDetector(
-                onTap: () {},
-                child: Text(
-                  "탈퇴하기",
-                  style: const TextStyle(
-                    color: FarmusThemeData.dark,
-                    fontSize: 14,
-                    fontFamily: "Pretendard",
+              const SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                flex: 5,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    color: Colors.white.withOpacity(0.8),
+                  ),
+                  child: CupertinoActionSheetAction(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text(
+                      '탈퇴하기',
+                      style: FarmusThemeData.darkStyle14,
+                    ),
                   ),
                 ),
               ),
