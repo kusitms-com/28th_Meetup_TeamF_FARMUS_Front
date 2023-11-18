@@ -33,7 +33,7 @@ class _GroupRateStepTrueState extends State<GroupRateStepTrue> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "현재 step",
+                  "현재 Step",
                   style: TextStyle(
                     color: FarmusThemeData.greenLight3,
                     fontFamily: "Pretendard",
@@ -80,7 +80,7 @@ class _GroupRateStepTrueState extends State<GroupRateStepTrue> {
               color: FarmusThemeData.green2,
             ),
             child: Text(
-              "step ${widget.step}",
+              "Step ${widget.step}",
               style: TextStyle(
                 color: FarmusThemeData.primary,
                 fontSize: 12,

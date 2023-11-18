@@ -18,18 +18,14 @@ class _MyFarmclubListState extends State<MyFarmclubList> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             MyFarmclub(
-              isLast: false,
               myFarmclubImage: "assets/image/image_lettuce.png",
             ),
             MyFarmclub(
-              isLast: false,
               myFarmclubImage: "assets/image/image_welsh_onion.png",
             ),
             MyFarmclub(
-              isLast: false,
               myFarmclubImage: "assets/image/image_tomato.png",
             ),
-            MyFarmclub(isLast: true),
           ],
         ),
       ),
