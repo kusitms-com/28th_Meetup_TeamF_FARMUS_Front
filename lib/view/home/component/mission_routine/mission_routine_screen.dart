@@ -18,14 +18,14 @@ class _MissionRoutineScreenState extends State<MissionRoutineScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PrimaryAppBar(
+      appBar: const PrimaryAppBar(
         title: "미션/루틴",
       ),
       backgroundColor: FarmusThemeData.white,
       body: Column(
         children: [
           SizedBox(
-            height: 340,
+            height: 370,
             child: MissionRoutineCalendar(
               onDaySelected: (selectedDay, focusedDay, selectedEvents) {
                 setState(() {

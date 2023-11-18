@@ -43,7 +43,8 @@ class _DiaryCalendarState extends State<DiaryCalendar> {
         decoration: BoxDecoration(
           color: FarmusThemeData.background,
           border: Border.all(
-            color: Colors.black,
+            color:
+                _startDate == null ? Colors.black : FarmusThemeData.background,
           ),
           borderRadius: BorderRadius.circular(50),
         ),
@@ -51,13 +52,20 @@ class _DiaryCalendarState extends State<DiaryCalendar> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             _startDate == null
-                ? SvgPicture.asset('assets/image/ic_calendar.svg')
-                : SvgPicture.asset('assets/image/ic_calendar.svg'),
+                ? SvgPicture.asset(
+                    'assets/image/ic_calendar.svg',
+                    color: Colors.grey,
+                  )
+                : SvgPicture.asset(
+                    'assets/image/ic_calendar.svg',
+                    color: Colors.grey,
+                  ),
             const SizedBox(width: 8),
             Text(
               _startDate == null
-                  ? DateFormat('yyyy-MM-dd').format(DateTime.now())
-                  : ' ${DateFormat('yyyy-MM-dd').format(_startDate!)}',
+                  ? DateFormat('yyyy/MM/dd').format(DateTime.now())
+                  : ' ${DateFormat('yyyy/MM/dd').format(_startDate!)}',
+              style: const TextStyle(color: Colors.grey),
             ),
           ],
         ),
