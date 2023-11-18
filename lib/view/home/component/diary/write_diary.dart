@@ -7,7 +7,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/community/component/image_add.dart';
+import 'package:mojacknong_android/view/home/component/diary/diary_calendar.dart';
 import 'package:mojacknong_android/view/home/component/diary/diary_post_controller.dart';
+import 'package:mojacknong_android/view/home/component/mission_routine/custom_switch.dart';
 
 class WriteDiary extends StatefulWidget {
   const WriteDiary({Key? key}) : super(key: key);
@@ -28,6 +30,7 @@ class _WriteDiaryState extends State<WriteDiary> {
   final TextEditingController _contentController = TextEditingController();
   final ImagePicker _picker = ImagePicker();
   File? _selectedImage;
+  bool isSwitched = false;
 
   get communityFeedController => null;
 
@@ -91,24 +94,7 @@ class _WriteDiaryState extends State<WriteDiary> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Obx(
-                          () => Text(
-                            "${diaryPostController.contentValue.value.length} / $maxLengthContent",
-                            style: TextStyle(
-                              color: FarmusThemeData.dark.withOpacity(0.3),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  const DiaryCalendar(),
                   const SizedBox(
                     height: 16,
                   ),
@@ -143,27 +129,35 @@ class _WriteDiaryState extends State<WriteDiary> {
                                 ],
                               ),
                             )
-                          : null,
+                          : ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: Image.file(
+                                _selectedImage!,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
                     ),
                   ),
-                  TextFormField(
-                    controller: _contentController,
-                    maxLines: null,
-                    decoration: InputDecoration(
-                      hintText: '내용을 작성해주세요.',
-                      hintStyle: TextStyle(
-                        color: FarmusThemeData.dark.withOpacity(0.3),
+                  SizedBox(
+                    height: 230,
+                    child: TextFormField(
+                      controller: _contentController,
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        hintText: '내용을 작성해주세요.',
+                        hintStyle: TextStyle(
+                          color: FarmusThemeData.dark.withOpacity(0.3),
+                        ),
+                        counterText: "",
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
                       ),
-                      counterText: "",
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
+                      maxLength: maxLengthContent,
+                      onChanged: diaryPostController.updateContentValue,
                     ),
-                    maxLength: maxLengthContent,
-                    onChanged: diaryPostController.updateContentValue,
                   ),
-                  Positioned(
-                    right: 8.0,
-                    bottom: 8.0,
+                  Container(
+                    alignment: Alignment.bottomRight,
                     child: Obx(
                       () => Text(
                         "${diaryPostController.contentValue.value.length} / $maxLengthContent",
@@ -171,6 +165,41 @@ class _WriteDiaryState extends State<WriteDiary> {
                           color: FarmusThemeData.dark.withOpacity(0.3),
                         ),
                       ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Divider(
+                    color: Color(0xFFD9D9D9),
+                    height: 1,
+                    thickness: 1,
+                  ),
+                  const SizedBox(height: 25),
+                  Row(
+                    children: [
+                      const Text(
+                        "팜클럽에 공개하기",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w600),
+                      ),
+                      const Spacer(),
+                      CustomSwitch(
+                        value: isSwitched,
+                        onChanged: (value) {
+                          setState(() {
+                            isSwitched = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 25),
+                  const Align(
+                    alignment:
+                        Alignment.centerLeft, // Aligns the child to the left
+                    child: Text(
+                      "클럽 멤버들이 나의 일기를 읽고 좋아요를 남길 수 있어요",
+                      style:
+                          TextStyle(fontSize: 13, color: FarmusThemeData.grey1),
                     ),
                   ),
                 ],
