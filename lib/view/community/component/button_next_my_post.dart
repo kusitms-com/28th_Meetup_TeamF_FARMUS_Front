@@ -5,7 +5,7 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/community/my_post/my_post_screen.dart';
 
 class ButtonNextMyPost extends StatelessWidget {
-  const ButtonNextMyPost({
+  ButtonNextMyPost({
     Key? key,
   }) : super(key: key);
 

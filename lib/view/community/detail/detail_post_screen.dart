@@ -96,12 +96,15 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
                   children: [
                     Row(
                       children: [
-                        DetailPostProfile(
-                          profileImage:
-                              communityDetail.wholePostingDto.userImageUrl ??
-                                  "",
-                          nickname: communityDetail.wholePostingDto.nickName,
-                          postTime: communityDetail.wholePostingDto.createdAt,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: DetailPostProfile(
+                            profileImage:
+                                communityDetail.wholePostingDto.userImageUrl ??
+                                    "",
+                            nickname: communityDetail.wholePostingDto.nickName,
+                            postTime: communityDetail.wholePostingDto.createdAt,
+                          ),
                         ),
                         Expanded(
                           child: Align(

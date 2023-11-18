@@ -19,6 +19,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
       Get.put(CommunityFeedController());
 
   List<String> category = <String>["도와주세요", "자랑할래요", "정보나눠요"];
+
   @override
   void initState() {
     super.initState();
@@ -51,7 +52,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                       feedController: _communityController, category: item);
                 },
               ).toList(),
-              const Expanded(
+              Expanded(
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: ButtonNextMyPost(),
@@ -64,27 +65,58 @@ class _CommunityScreenState extends State<CommunityScreen> {
           ),
           Expanded(
             child: Obx(() {
-              return ListView.builder(
-                itemCount: _communityController.communityPostings.length,
-                itemBuilder: (context, index) {
-                  CommunityPosting posting =
-                      _communityController.communityPostings[index];
-                  return CommunityFeed(
-                    postingId: posting.postingId,
-                    userId: posting.userId,
-                    profileImage: posting.userImageUrl,
-                    nickname: posting.nickName,
-                    postTime: posting.createdAt,
-                    comment: posting.commentCount.toString(),
-                    postCategory: posting.tag,
-                    title: posting.title,
-                    content: posting.contents,
-                    image: posting.postingImage.isNotEmpty
-                        ? posting.postingImage[0]
-                        : "",
-                  );
-                },
-              );
+              final selectedCategories =
+                  _communityController.selectedCategories;
+
+              if (selectedCategories.isEmpty) {
+                return ListView.builder(
+                  itemCount: _communityController.communityPostings.length,
+                  itemBuilder: (context, index) {
+                    CommunityPosting posting =
+                        _communityController.communityPostings[index];
+                    return CommunityFeed(
+                      postingId: posting.postingId,
+                      userId: posting.userId,
+                      profileImage: posting.userImageUrl,
+                      nickname: posting.nickName,
+                      postTime: posting.createdAt,
+                      comment: posting.commentCount.toString(),
+                      postCategory: posting.tag,
+                      title: posting.title,
+                      content: posting.contents,
+                      image: posting.postingImage.isNotEmpty
+                          ? posting.postingImage[0]
+                          : "",
+                    );
+                  },
+                );
+              } else {
+                final filteredPostings = _communityController.communityPostings
+                    .where(
+                        (posting) => selectedCategories.contains(posting.tag))
+                    .toList();
+
+                return ListView.builder(
+                  itemCount: filteredPostings.length,
+                  itemBuilder: (context, index) {
+                    CommunityPosting posting = filteredPostings[index];
+                    return CommunityFeed(
+                      postingId: posting.postingId,
+                      userId: posting.userId,
+                      profileImage: posting.userImageUrl,
+                      nickname: posting.nickName,
+                      postTime: posting.createdAt,
+                      comment: posting.commentCount.toString(),
+                      postCategory: posting.tag,
+                      title: posting.title,
+                      content: posting.contents,
+                      image: posting.postingImage.isNotEmpty
+                          ? posting.postingImage[0]
+                          : "",
+                    );
+                  },
+                );
+              }
             }),
           ),
         ],

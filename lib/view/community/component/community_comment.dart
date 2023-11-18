@@ -29,57 +29,63 @@ class _CommunityCommentState extends State<CommunityComment> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CommunityProfile(
-                  profileImage: widget.profileImage ?? "", // null이면 빈 문자열로 처리
-                  nickname: widget.nickname,
-                  postTime: widget.postTime,
-                ),
-                Bouncing(
-                  onPress: () {},
-                  child: GestureDetector(
-                      onTap: () {
-                        _controller.showActionSheetComment(
-                          context,
-                          message: "댓글을 삭제하시겠어요?",
-                          cancelText: "취소",
-                          confirmText: "확인",
-                        );
-                      },
-                      child: SvgPicture.asset(
-                          "assets/image/ic_more_vertical.svg")),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(
-              widget.commentContents,
-              style: TextStyle(
-                color: FarmusThemeData.dark,
-                fontFamily: "Pretendard",
-                fontSize: 14,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CommunityProfile(
+                profileImage: widget.profileImage ?? "", // null이면 빈 문자열로 처리
+                nickname: widget.nickname,
+                postTime: widget.postTime,
               ),
-              textAlign: TextAlign.start,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            const Divider(
-              height: 1,
-              color: FarmusThemeData.grey3,
-            ),
-          ],
-        ),
+              Bouncing(
+                onPress: () {},
+                child: GestureDetector(
+                    onTap: () {
+                      _controller.showActionSheetComment(
+                        context,
+                        message: "댓글을 삭제하시겠어요?",
+                        cancelText: "취소",
+                        confirmText: "확인",
+                      );
+                    },
+                    child:
+                        SvgPicture.asset("assets/image/ic_more_vertical.svg")),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: 8,
+              ),
+              Text(
+                widget.commentContents,
+                style: TextStyle(
+                  color: FarmusThemeData.dark,
+                  fontFamily: "Pretendard",
+                  fontSize: 14,
+                ),
+                textAlign: TextAlign.start,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          const Divider(
+            height: 1,
+            indent: 8,
+            endIndent: 8,
+            color: FarmusThemeData.grey3,
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+        ],
       ),
     );
   }
