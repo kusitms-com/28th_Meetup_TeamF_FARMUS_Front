@@ -1,16 +1,17 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/community/component/community_post_time.dart';
 
 class CommunityProfile extends StatefulWidget {
-  final String? profileImage;
+  final String profileImage;
   final String nickname;
   final String postTime;
   final String? comment;
 
   const CommunityProfile({
     Key? key,
-    this.profileImage,
+    required this.profileImage,
     required this.nickname,
     required this.postTime,
     this.comment,
@@ -29,27 +30,19 @@ class _CommunityProfileState extends State<CommunityProfile> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ClipOval(
-            child: Container(
-              width: 32,
-              height: 32,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-              ),
-              child:
-                  (widget.profileImage == null || widget.profileImage!.isEmpty)
-                      ? Image.asset(
-                          "assets/image/image_example_profile2.png",
-                          width: 32,
-                          height: 32,
-                          fit: BoxFit.fill,
-                        )
-                      : Image.network(
-                          widget.profileImage!,
-                          width: 32,
-                          height: 32,
-                          fit: BoxFit.fill,
-                        ),
-            ),
+            child: widget.profileImage != ""
+                ? Image.network(
+                    widget.profileImage,
+                    width: 32,
+                    height: 32,
+                    fit: BoxFit.cover,
+                  )
+                : SvgPicture.asset(
+                    'assets/image/ic_profile.svg', // 기본 이미지 경로
+                    width: 32,
+                    height: 32,
+                    fit: BoxFit.cover,
+                  ),
           ),
           SizedBox(
             width: 8,

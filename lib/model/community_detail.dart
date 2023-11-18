@@ -3,11 +3,11 @@ import 'package:mojacknong_android/model/whole_posting.dart';
 
 class CommunityDetail {
   final WholePosting wholePostingDto;
-  final List<PostingComment> postingCommentList;
+  final List<PostingComment?> postingCommentList;
 
   CommunityDetail({
     required this.wholePostingDto,
-    List<PostingComment>? postingCommentList,
+    List<PostingComment?>? postingCommentList,
   }) : postingCommentList = postingCommentList ?? [];
 
   factory CommunityDetail.fromJson(Map<String, dynamic> json) {

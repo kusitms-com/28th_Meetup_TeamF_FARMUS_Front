@@ -8,6 +8,7 @@ import 'package:mojacknong_android/view/community/detail/detail_post_screen.dart
 
 class MyPostFeed extends StatelessWidget {
   final int postingId;
+  final int userId;
   final String postTime;
   final String comment;
   final String postCategory;
@@ -18,6 +19,7 @@ class MyPostFeed extends StatelessWidget {
   MyPostFeed({
     Key? key,
     required this.postingId,
+    required this.userId,
     required this.postTime,
     required this.comment,
     required this.postCategory,
@@ -36,6 +38,7 @@ class MyPostFeed extends StatelessWidget {
             builder: (context) {
               return DetailPostScreen(
                 postingId: postingId,
+                userId: userId,
               );
             },
           ),

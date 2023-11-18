@@ -10,6 +10,7 @@ import 'package:mojacknong_android/view_model/controllers/community_feed_control
 
 class CommunityFeed extends StatelessWidget {
   final int postingId;
+  final int userId;
   final String profileImage;
   final String nickname;
   final String postTime;
@@ -22,6 +23,7 @@ class CommunityFeed extends StatelessWidget {
   CommunityFeed({
     Key? key,
     required this.postingId,
+    required this.userId,
     required this.profileImage,
     required this.nickname,
     required this.postTime,
@@ -37,6 +39,8 @@ class CommunityFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(profileImage);
+
     return GestureDetector(
       onTap: () async {
         Navigator.push(
@@ -45,6 +49,7 @@ class CommunityFeed extends StatelessWidget {
             builder: (context) {
               return DetailPostScreen(
                 postingId: postingId,
+                userId: userId,
                 onDetailScreenPopped: () {
                   _communityController.getWholePosting();
                 },

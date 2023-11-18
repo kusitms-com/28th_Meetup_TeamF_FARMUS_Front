@@ -30,28 +30,32 @@ class _BrownCategoryState extends State<BrownCategory> {
   @override
   Widget build(BuildContext context) {
     return Bouncing(
-      onPress: () {
-        setState(() {
-          isSelected = !isSelected;
-          Get.find<FarmclubController>().toggleSelectCategory();
-        });
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: isSelected ? FarmusThemeData.brown2 : FarmusThemeData.grey5,
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-            child: GestureDetector(
-              child: Text(
-                widget.category,
-                style: TextStyle(
-                  color: FarmusThemeData.dark,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
+      onPress: () {},
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            isSelected = !isSelected;
+            Get.find<FarmclubController>().toggleSelectCategory();
+          });
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color:
+                  isSelected ? FarmusThemeData.brown2 : FarmusThemeData.grey5,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              child: GestureDetector(
+                child: Text(
+                  widget.category,
+                  style: TextStyle(
+                    color: FarmusThemeData.dark,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),

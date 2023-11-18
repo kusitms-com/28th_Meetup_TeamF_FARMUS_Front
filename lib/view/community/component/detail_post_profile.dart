@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
-class DetailPostProfile extends StatelessWidget {
-  final List<String> profileImage;
+class DetailPostProfile extends StatefulWidget {
+  final String? profileImage;
   final String nickname;
   final String postTime;
 
   DetailPostProfile({
     Key? key,
-    required this.profileImage,
+    this.profileImage,
     required this.nickname,
     required this.postTime,
   }) : super(key: key);
 
+  @override
+  State<DetailPostProfile> createState() => _DetailPostProfileState();
+}
+
+class _DetailPostProfileState extends State<DetailPostProfile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,12 +27,19 @@ class DetailPostProfile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ClipOval(
-            child: Image.network(
-              profileImage.first,
-              width: 44,
-              height: 44,
-              fit: BoxFit.fill,
-            ),
+            child: widget.profileImage != ""
+                ? Image.network(
+                    widget.profileImage!,
+                    width: 32,
+                    height: 32,
+                    fit: BoxFit.cover,
+                  )
+                : SvgPicture.asset(
+                    'assets/image/ic_profile.svg',
+                    width: 32,
+                    height: 32,
+                    fit: BoxFit.cover,
+                  ),
           ),
           const SizedBox(
             width: 12,
@@ -35,14 +48,14 @@ class DetailPostProfile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                nickname,
+                widget.nickname,
                 style: TextStyle(color: FarmusThemeData.dark, fontSize: 16),
               ),
               SizedBox(
                 height: 6,
               ),
               Text(
-                postTime,
+                widget.postTime,
                 style: TextStyle(color: FarmusThemeData.grey2, fontSize: 12),
               ),
             ],

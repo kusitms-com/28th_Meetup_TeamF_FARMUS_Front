@@ -43,6 +43,9 @@ class _OnboardingSecond extends State<OnboardingSecond> {
               title: "채솟값을 절약하고 싶어요",
               content: "물가가 올라서 집에서 직접 길러 먹으려고 해요",
               isSelected: _onboardingController.isSelected1,
+              selectBox: () {
+                _onboardingController.selectBox1();
+              },
             ),
           ),
           GestureDetector(
@@ -54,17 +57,22 @@ class _OnboardingSecond extends State<OnboardingSecond> {
               title: "신선하고 안전한 식재료를 얻고 싶어요",
               content: "직접 키워서 먹으면 안심이 될 것 같아요",
               isSelected: _onboardingController.isSelected2,
+              selectBox: () {
+                _onboardingController.selectBox2();
+              },
             ),
           ),
           GestureDetector(
             onTap: () {
-              _onboardingController.selectBox3();
               updateMotivation();
             },
             child: SelectBox(
               title: "스트레스를 해소하고 안정을 얻고 싶어요",
               content: "자라나는 채소를 보며 마음의 안정을 찾으려고 해요",
               isSelected: _onboardingController.isSelected3,
+              selectBox: () {
+                _onboardingController.selectBox3();
+              },
             ),
           ),
         ],

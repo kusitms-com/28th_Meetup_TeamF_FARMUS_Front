@@ -12,7 +12,7 @@ class CommunityFeedController extends GetxController {
   var content = "".obs;
   var image = "".obs;
 
-  var selectedCategory = "".obs;
+  var selectedCategories = <String>[].obs;
 
   var communityPostings = <CommunityPosting>[].obs;
 
@@ -38,7 +38,22 @@ class CommunityFeedController extends GetxController {
 
   // 카테고리 선택 메서드
   void selectCategory(String category) {
-    selectedCategory.value = category;
+    if (selectedCategories.contains(category)) {
+      // 이미 선택된 경우 해제
+      selectedCategories.remove(category);
+    } else {
+      // 선택되지 않은 경우 추가
+      selectedCategories.add(category);
+    }
+  }
+
+  void toggleCategory(String category) {
+    if (selectedCategories.contains(category)) {
+      selectedCategories.remove(category);
+    } else {
+      selectedCategories.add(category);
+    }
+    update();
   }
 
   Future<void> getWholePosting() async {

@@ -14,11 +14,13 @@ import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controlle
 
 class DetailPostScreen extends StatefulWidget {
   final int postingId;
+  final int userId;
   final VoidCallback? onDetailScreenPopped;
 
   const DetailPostScreen({
     Key? key,
     required this.postingId,
+    required this.userId,
     this.onDetailScreenPopped,
   }) : super(key: key);
 
@@ -38,7 +40,7 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
 
   Future<void> _loadCommunityDetail() async {
     _communityDetailFuture =
-        CommunityRepository.getPostingDetails(widget.postingId, 1);
+        CommunityRepository.getPostingDetails(widget.postingId, widget.userId);
     await _communityDetailFuture;
     setState(() {});
   }
@@ -79,7 +81,7 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
             List<Widget> comments = communityDetail.postingCommentList != null
                 ? communityDetail.postingCommentList!
                     .map((comment) => CommunityComment(
-                          profileImage: comment.userImageUrl,
+                          profileImage: comment!.userImageUrl,
                           nickname: comment.nickName ?? "",
                           postTime: comment.createdAt,
                           commentContents: comment.commentContents,
@@ -94,13 +96,15 @@ class _DetailPostScreenState extends State<DetailPostScreen> {
                   children: [
                     Row(
                       children: [
-                        DetailPostProfile(
-                          profileImage:
-                              communityDetail.wholePostingDto.postingImage,
-                          nickname:
-                              communityDetail.wholePostingDto.nickName ?? "",
-                          postTime:
-                              communityDetail.wholePostingDto.createdAt ?? "",
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: DetailPostProfile(
+                            profileImage:
+                                communityDetail.wholePostingDto.userImageUrl ??
+                                    "",
+                            nickname: communityDetail.wholePostingDto.nickName,
+                            postTime: communityDetail.wholePostingDto.createdAt,
+                          ),
                         ),
                         Expanded(
                           child: Align(

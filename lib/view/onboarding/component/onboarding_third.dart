@@ -35,6 +35,9 @@ class _OnboardingThird extends State<OnboardingThird> {
               title: "많은 시간을 홈파밍에 쓸 수 있어요",
               content: "하루 1시간",
               isSelected: _onboardingController.isSelected4,
+              selectBox: () {
+                _onboardingController.selectBox4();
+              },
             ),
           ),
           GestureDetector(
@@ -45,17 +48,18 @@ class _OnboardingThird extends State<OnboardingThird> {
               title: "아침 저녁에는 홈파밍을 할 수 있어요",
               content: "하루 10~30분",
               isSelected: _onboardingController.isSelected5,
+              selectBox: () {
+                _onboardingController.selectBox5();
+              },
             ),
           ),
-          GestureDetector(
-            onTap: () {
+          SelectBox(
+            title: "바빠서 홈파밍을 할 시간이 별로 없어요",
+            content: "하루 10분",
+            isSelected: _onboardingController.isSelected6,
+            selectBox: () {
               _onboardingController.selectBox6();
             },
-            child: SelectBox(
-              title: "바빠서 홈파밍을 할 시간이 별로 없어요",
-              content: "하루 10분",
-              isSelected: _onboardingController.isSelected6,
-            ),
           ),
         ],
       ),

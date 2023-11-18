@@ -34,44 +34,45 @@ class _OnboardingFourth extends State<OnboardingFourth> {
           const SizedBox(
             height: 32,
           ),
-          GestureDetector(
-            onTap: () {
+          SelectBox(
+            title: "홈파밍 입문",
+            content: "홈파밍이 아예 처음이에요",
+            isSelected: _onboardingController.isSelected7,
+            selectBox: () {
               _onboardingController.selectBox7();
             },
-            child: SelectBox(
-              title: "홈파밍 입문",
-              content: "홈파밍이 아예 처음이에요",
-              isSelected: _onboardingController.isSelected7,
-            ),
           ),
           GestureDetector(
-            onTap: () {
-              _onboardingController.selectBox8();
-            },
+            onTap: () {},
             child: SelectBox(
               title: "홈파밍 초보",
               content: "홈파밍을 해보긴 했지만 채소를 수확하진 못했어요",
               isSelected: _onboardingController.isSelected8,
+              selectBox: () {
+                _onboardingController.selectBox8();
+              },
             ),
           ),
           GestureDetector(
-            onTap: () {
-              _onboardingController.selectBox9();
-            },
+            onTap: () {},
             child: SelectBox(
               title: "홈파밍 중급",
               content: "작물을 잘 관리하고 재배하는 법을 알고 있어요",
               isSelected: _onboardingController.isSelected9,
+              selectBox: () {
+                _onboardingController.selectBox9();
+              },
             ),
           ),
           GestureDetector(
-            onTap: () {
-              _onboardingController.selectBox10();
-            },
+            onTap: () {},
             child: SelectBox(
               title: "홈파밍 고수",
               content: "집에서 키울 수 있는 모든 채소를 섭렵했어요",
               isSelected: _onboardingController.isSelected10,
+              selectBox: () {
+                _onboardingController.selectBox10();
+              },
             ),
           ),
         ],
