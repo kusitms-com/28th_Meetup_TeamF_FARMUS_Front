@@ -30,18 +30,17 @@ class _SwipeScreenState extends State<SwipeScreen> {
                 });
               },
               itemBuilder: (context, index) {
-                // 페이지에 따라 다른 위젯을 반환
-                if (index == 0) {
-                  return const HomeGreenBoxUser();
-                } else if (index == 1) {
-                  // 두 번째 페이지에 표시할 다른 위젯
-                  return const HomeGreenBoxUser2();
-                } else if (index == 2) {
-                  // 세 번째 페이지에 표시할 다른 위젯
-                  return const HomeGreenBoxUser2();
-                } else {
-                  return Container(); // 예외 처리를 위해 빈 컨테이너 반환
-                }
+                return GestureDetector(
+                  onTap: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const MissionRoutineScreen(),
+                    //   ),
+                    // );
+                  },
+                  child: buildPageWidget(index),
+                );
               },
             ),
           ),
@@ -50,6 +49,18 @@ class _SwipeScreenState extends State<SwipeScreen> {
         ],
       ),
     );
+  }
+
+  Widget buildPageWidget(int index) {
+    if (index == 0) {
+      return const HomeGreenBoxUser();
+    } else if (index == 1) {
+      return const HomeGreenBoxUser2();
+    } else if (index == 2) {
+      return const HomeGreenBoxUser2();
+    } else {
+      return Container();
+    }
   }
 
   Widget buildPageIndicator() {

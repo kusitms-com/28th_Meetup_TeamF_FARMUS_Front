@@ -7,10 +7,9 @@ class HomeScreenApiService {
     try {
       // Example data
       List<String> missions = [
-        '이은섭',
+        '상훈이',
         '2',
-        '상추 심고 물 주기',
-        // Add other missions
+        '상추가 너무너무',
       ];
 
       return missions;
