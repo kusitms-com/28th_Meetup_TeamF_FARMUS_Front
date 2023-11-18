@@ -9,6 +9,7 @@ class MyPageFarmHistory extends StatefulWidget {
   final String? period;
   final String? image;
 
+
   const MyPageFarmHistory({
     Key? key,
     required this.name,
@@ -22,6 +23,8 @@ class MyPageFarmHistory extends StatefulWidget {
 }
 
 class _MyPageFarmHistoryState extends State<MyPageFarmHistory> {
+
+
   void _navigateToNewPage(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return MyFarmclubMissionScreen();
@@ -73,7 +76,7 @@ class _MyPageFarmHistoryState extends State<MyPageFarmHistory> {
                     ],
                   ),
                   const SizedBox(height: 8.0),
-                  Text(widget.period!, style: FarmusThemeData.brownText13),
+                  Text('${widget.period}', style: FarmusThemeData.brownText13),
                 ],
               ),
             ),

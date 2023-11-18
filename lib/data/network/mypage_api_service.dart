@@ -7,6 +7,8 @@ import 'package:mojacknong_android/data/network/base_api_services.dart';
 import 'package:mojacknong_android/model/farmus_user.dart';
 
 import '../../model/mypage_history.dart';
+import '../../model/vege_history_detail.dart';
+import '../../view/my_page/history/my_page_vege_history.dart';
 
 const storage = FlutterSecureStorage();
 
@@ -65,4 +67,43 @@ class MypageApiService {
     }
   }
 
+
+  FutureOr<void> userDelete() async {
+    try {
+      await ApiClient().dio.delete('/api/user/delete');
+
+    } on DioException catch (e) {
+      print(e.message);
+      print("계정 삭제 실패");
+
+    }
+  }
+
+
+
+  FutureOr<VegeHistoryDetail?> vegeHistoryDetail(String detailId) async {
+    try {
+
+      Response response = await ApiClient().dio.get('/api/crop/history/detail/$detailId',
+
+      );
+
+      if (response.data["data"] != null) {
+
+        final vegeHistoryDetailData = VegeHistoryDetail.fromJson(response.data["data"]);
+
+            print(vegeHistoryDetailData);
+        return vegeHistoryDetailData;
+      }
+
+    } on DioException catch (e) {
+      print(e.message);
+      print("히스토리 디테일 조회 실패");
+
+    }
+    return null;
+  }
+
 }
+
+

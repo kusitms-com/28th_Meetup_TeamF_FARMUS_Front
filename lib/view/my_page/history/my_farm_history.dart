@@ -41,6 +41,7 @@ class MyFarmClubHistory extends StatelessWidget {
                           data.farmClubHistoryDetailList[reversedIndex].period,
                       image:
                           data.farmClubHistoryDetailList[reversedIndex].image,
+
                     );
                   },
                 );

@@ -4,6 +4,8 @@ import 'package:mojacknong_android/model/farmus_user.dart';
 
 import '../data/network/mypage_api_service.dart';
 import '../model/mypage_history.dart';
+import '../model/vege_history_detail.dart';
+import '../view/my_page/history/my_page_vege_history.dart';
 
 class MypageRepository {
 
@@ -35,6 +37,24 @@ class MypageRepository {
     await MypageApiService().logout();
 
   }
+
+  static Future<void> userDeleteApi() async {
+
+    await MypageApiService().userDelete();
+
+  }
+
+
+  static Future<VegeHistoryDetail?> vegeHistoryDetailApi(String detailId) async {
+
+    final reponse = await MypageApiService().vegeHistoryDetail(detailId);
+
+    return reponse;
+  }
+
+
+
+
 
 
 

@@ -3,11 +3,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/my_page/history_vege_screen.dart';
 
+import '../../../repository/mypage_repository.dart';
+
 class MyPageVegeHistory extends StatefulWidget {
   final String? name;
   final String? veggieName;
   final String? period;
   final String? image;
+  final String? detailId;
 
   const MyPageVegeHistory({
     Key? key,
@@ -15,16 +18,30 @@ class MyPageVegeHistory extends StatefulWidget {
     required this.veggieName,
     required this.period,
     required this.image,
+    required this.detailId
   }) : super(key: key);
 
   @override
   State<MyPageVegeHistory> createState() => _MyPageVegeHistoryState();
 }
 
+
+
+
 class _MyPageVegeHistoryState extends State<MyPageVegeHistory> {
+
+
+
+
   void _navigateToNewPage(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => HistoryVegeScreen(data: widget.name),
+      builder: (context) => HistoryVegeScreen(
+          detailId: widget.detailId,
+          name: widget.name,
+          veggieName: widget.veggieName,
+          period: widget.period,
+          image: widget.image,
+      ),
     ));
   }
 
@@ -73,7 +90,7 @@ class _MyPageVegeHistoryState extends State<MyPageVegeHistory> {
                     ],
                   ),
                   const SizedBox(height: 8.0),
-                  Text(widget.period!, style: FarmusThemeData.brownText13),
+                  Text('${widget.period}', style: FarmusThemeData.brownText13),
                 ],
               ),
             ),

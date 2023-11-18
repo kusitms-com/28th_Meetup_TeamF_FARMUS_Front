@@ -6,8 +6,15 @@ import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_s
 import 'package:mojacknong_android/view/farmclub/component/record/record_picture.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
 
+import '../community/component/community_picture.dart';
+
 class MyFarmclubMissionScreen extends StatefulWidget {
-  const MyFarmclubMissionScreen({super.key});
+
+  const MyFarmclubMissionScreen({
+    super.key,
+
+
+  });
 
   @override
   State<MyFarmclubMissionScreen> createState() =>
@@ -16,6 +23,10 @@ class MyFarmclubMissionScreen extends StatefulWidget {
 
 class _MyFarmclubMissionScreenState extends State<MyFarmclubMissionScreen> {
   final FarmclubController farmclubController = Get.put(FarmclubController());
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +57,8 @@ class _MyFarmclubMissionScreenState extends State<MyFarmclubMissionScreen> {
             SizedBox(
               height: 16,
             ),
-            RecordPicture(
-              like: 1.obs,
-            ),
+            CommunityPicture(image: 'sd',),
+
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(

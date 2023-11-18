@@ -23,6 +23,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
   BottomSheetController bottomSheetController = BottomSheetController();
   final ImagePicker _picker = ImagePicker();
 
+
+
+
   Future<void> _pickImage() async {
     final XFile? pickedFile =
         await _picker.pickImage(source: ImageSource.gallery);
