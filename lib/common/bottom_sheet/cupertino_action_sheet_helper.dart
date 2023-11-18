@@ -136,7 +136,7 @@ class CupertinoActionSheetHelper {
     );
   }
 
-  static void showCustomCupertinoActionSheet(
+  static void showUserDeleteCupertinoActionSheet(
     BuildContext context, {
     required String message,
     required List<String> options,
@@ -270,7 +270,7 @@ class CupertinoActionSheetHelper {
     );
   }
 
-  static void showUserDeleteCupertinoActionSheet(
+  static void showCustomCupertinoActionSheet(
     BuildContext context, {
     required String message,
     required List<String> options,
@@ -282,7 +282,11 @@ class CupertinoActionSheetHelper {
       builder: (BuildContext context) => CupertinoActionSheet(
         message: Text(
           message,
-          style: FarmusThemeData.darkStyle16,
+          style: const TextStyle(
+            color: FarmusThemeData.grey2,
+            fontSize: 12,
+            fontFamily: "Pretendard",
+          ),
         ),
         actions: List.generate(
           options.length,
