@@ -58,7 +58,7 @@ class HomeGreenBoxUser2 extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 215, // lettuce 이미지의 위치 조정
+                top: 215,
                 child: Center(
                   child: SvgPicture.asset(
                     'assets/image/pepper.svg',
