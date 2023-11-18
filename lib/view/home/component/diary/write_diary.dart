@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/community/component/image_add.dart';
+import 'package:mojacknong_android/view/home/component/diary/diary_post_controller.dart';
 
 class WriteDiary extends StatefulWidget {
   const WriteDiary({Key? key}) : super(key: key);
@@ -17,8 +20,8 @@ const int maxLengthTitle = 20;
 const int maxLengthContent = 500;
 
 class _WriteDiaryState extends State<WriteDiary> {
-  // final CommunityPostController postController =
-  //     Get.put(CommunityPostController());
+  final DiaryPostController diaryPostController =
+      Get.put(DiaryPostController());
 
   // final CommunityFeedController communityFeedController =
   //     Get.put(CommunityFeedController());
@@ -44,7 +47,7 @@ class _WriteDiaryState extends State<WriteDiary> {
       setState(() {
         _selectedImage = File(pickedFile.path);
       });
-      // postController.setImageFile(File(pickedFile.path));
+      diaryPostController.setImageFile(File(pickedFile.path));
     }
   }
 
@@ -62,7 +65,7 @@ class _WriteDiaryState extends State<WriteDiary> {
           TextButton(
             onPressed: () async {
               // "완료" 버튼을 눌렀을 때 postPostingWrite를 호출하고 결과를 받음
-              String result = "";
+              String result = await postPostingDiary(context);
 
               // postPostingWrite가 완료되면 Navigator.pop 실행
               if (result == "성공") {
@@ -88,24 +91,24 @@ class _WriteDiaryState extends State<WriteDiary> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(
-                  //       vertical: 16.0, horizontal: 8.0),
-                  //   child: Align(
-                  //     alignment: Alignment.bottomRight,
-                  //     child: Padding(
-                  //       padding: const EdgeInsets.only(right: 8.0),
-                  //       child: Obx(
-                  //         () => Text(
-                  //           "${postController.contentValue.value.length} / $maxLengthContent",
-                  //           style: TextStyle(
-                  //             color: FarmusThemeData.dark.withOpacity(0.3),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16.0, horizontal: 8.0),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Obx(
+                          () => Text(
+                            "${diaryPostController.contentValue.value.length} / $maxLengthContent",
+                            style: TextStyle(
+                              color: FarmusThemeData.dark.withOpacity(0.3),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                   const SizedBox(
                     height: 16,
                   ),
@@ -156,16 +159,19 @@ class _WriteDiaryState extends State<WriteDiary> {
                       enabledBorder: InputBorder.none,
                     ),
                     maxLength: maxLengthContent,
-                    buildCounter: (BuildContext context,
-                        {int? currentLength, bool? isFocused, int? maxLength}) {
-                      return Text(
-                        "$currentLength / $maxLength",
-                        style: const TextStyle(
-                          color: Colors
-                              .grey, // Adjust the color to match your design
+                    onChanged: diaryPostController.updateContentValue,
+                  ),
+                  Positioned(
+                    right: 8.0,
+                    bottom: 8.0,
+                    child: Obx(
+                      () => Text(
+                        "${diaryPostController.contentValue.value.length} / $maxLengthContent",
+                        style: TextStyle(
+                          color: FarmusThemeData.dark.withOpacity(0.3),
                         ),
-                      );
-                    },
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -175,31 +181,23 @@ class _WriteDiaryState extends State<WriteDiary> {
       ),
     );
   }
+
+  Future<String> postPostingDiary(BuildContext context) async {
+    try {
+      String result = "";
+
+      if (result == "성공") {
+        // CommunityScreen에서 전체 게시물을 다시 가져오기
+        //await communityFeedController.getWholePosting();
+
+        // 게시가 성공하면 PostScreen을 네비게이션 스택에서 제거
+        Navigator.pop(context);
+      }
+
+      return "result";
+    } on DioError catch (e) {
+      print("에러 ${e.message}");
+      return "실패";
+    }
+  }
 }
-
-//   Future<String> postPostingWrite(BuildContext context) async {
-//     try {
-//       Posting posting = Posting(
-//         title: postController.titleValue.value,
-//         contents: postController.contentValue.value,
-//         tag: postController.selectedCategoryValue,
-//         file: _selectedImage != null ? [_selectedImage!] : [],
-//       );
-//       String result = await CommunityRepository.postPostingWrite(posting);
-
-//       if (result == "성공" && mounted) {
-//         // CommunityScreen에서 전체 게시물을 다시 가져오기
-//         await communityFeedController.getWholePosting();
-
-//         // 게시가 성공하면 PostScreen을 네비게이션 스택에서 제거
-//         Navigator.pop(context);
-//       }
-
-//       return "result";
-//     } on DioError catch (e) {
-//       print("에러 ${e.message}");
-//       return "실패";
-//     }
-//   }
-// }
-

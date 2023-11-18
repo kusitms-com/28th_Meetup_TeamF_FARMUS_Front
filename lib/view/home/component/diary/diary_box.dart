@@ -37,12 +37,14 @@ class DiaryBox extends StatelessWidget {
           Positioned.fill(
             top: 142,
             bottom: 0,
-            child: SvgPicture.asset('assets/image/light_wave.svg'),
+            child: SvgPicture.asset('assets/image/light_wave.svg',
+                width: double.infinity, fit: BoxFit.fitWidth),
           ),
           Positioned.fill(
             top: 142,
             bottom: 0,
-            child: SvgPicture.asset('assets/image/dark_wave.svg'),
+            child: SvgPicture.asset('assets/image/dark_wave.svg',
+                width: double.infinity, fit: BoxFit.fitWidth),
           ),
           Positioned(
             top: 16,
