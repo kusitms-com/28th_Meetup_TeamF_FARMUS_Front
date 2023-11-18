@@ -38,6 +38,7 @@ class HistoryVegeScreen extends StatelessWidget {
               labelStyle: FarmusThemeData.darkStyle17,
               unselectedLabelStyle: FarmusThemeData.grey3Style17,
               indicatorColor: FarmusThemeData.dark,
+              indicatorSize: TabBarIndicatorSize.label,
             ),
             Expanded(
               child: TabBarView(

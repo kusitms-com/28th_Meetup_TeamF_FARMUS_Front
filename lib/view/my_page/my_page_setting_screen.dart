@@ -70,6 +70,12 @@ class _MyPageSettingScreenState extends State<MyPageSettingScreen> {
           ),
           MyPageSettingText(
             text: "탈퇴하기",
+            onPress: () {
+              _controller.showCustomCupertinoActionSheet(context,
+                  message: "팜어스를 탈퇴하시겠어요?",
+                  options: ["d"],
+                  cancelButtonText: "취소");
+            },
           ),
           Divider(
             color: FarmusThemeData.grey4,
