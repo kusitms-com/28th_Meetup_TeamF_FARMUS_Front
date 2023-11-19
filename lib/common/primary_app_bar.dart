@@ -7,10 +7,10 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final List<Widget>? actions;
 
-  PrimaryAppBar({this.leading, this.title, this.actions});
+  const PrimaryAppBar({super.key, this.leading, this.title, this.actions});
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: title != null
             ? Text(
                 title!,
-                style: TextStyle(
+                style: const TextStyle(
                   color: FarmusThemeData.dark,
                   fontFamily: "Pretendard",
                   fontSize: 16,

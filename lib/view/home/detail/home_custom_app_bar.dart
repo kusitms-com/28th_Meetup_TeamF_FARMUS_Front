@@ -17,7 +17,6 @@ class HomeCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(width: 70),
           Expanded(
             child: Center(
               child: SvgPicture.asset(

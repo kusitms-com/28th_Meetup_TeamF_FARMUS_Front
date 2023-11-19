@@ -10,7 +10,7 @@ class HomeContent extends StatefulWidget {
 }
 
 class _HomeContentState extends State<HomeContent> {
-  bool isDataLoaded = true;
+  bool isDataLoaded = true; //api 연동됐다고 가정
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class _HomeContentState extends State<HomeContent> {
               if (!isDataLoaded)
                 const Center(
                   child: Text(
-                    '아직 루틴을 등록하지 않았어요\n루틴을 등록해 내 채소를 건강하게 관리하세요!',
+                    '',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13, fontFamily: 'Pretendard'),
                   ),

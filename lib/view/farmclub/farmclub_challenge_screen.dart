@@ -13,7 +13,12 @@ import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 
 class FarmclubChallengeScreen extends StatefulWidget {
-  const FarmclubChallengeScreen({Key? key}) : super(key: key);
+  final String? detailId;
+  const FarmclubChallengeScreen({
+    Key? key,
+    required this.detailId
+
+  }) : super(key: key);
 
   @override
   State<FarmclubChallengeScreen> createState() =>
@@ -25,13 +30,13 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, String>> challengeSteps = [
-      {"step": "0", "title": "준비물을 챙겨요"},
-      {"step": "1", "title": "상추를 심어요"},
-      {"step": "2", "title": "새싹이 자라나요"},
-      {"step": "3", "title": "새싹이 자라나요"},
-      {"step": "4", "title": "새싹이 자라나요"},
-    ];
+    // List<Map<String, String>> challengeSteps = [
+    //   {"step": "0", "title": "준비물을 챙겨요"},
+    //   {"step": "1", "title": "상추를 심어요"},
+    //   {"step": "2", "title": "새싹이 자라나요"},
+    //   {"step": "3", "title": "새싹이 자라나요"},
+    //   {"step": "4", "title": "새싹이 자라나요"},
+    // ];
 
     return Scaffold(
       appBar: PrimaryAppBar(title: "함께 도전해요"),
@@ -57,7 +62,7 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
             ),
             const FarmclubTitleWithDivider(title: "현재 Step"),
             const ChallengeStep(
-              step: "0",
+              step: 0,
               title: "준비물을 챙겨요",
             ),
             const SizedBox(
@@ -69,37 +74,37 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
             const SizedBox(
               height: 16,
             ),
-            const ChallengeFeed(),
+            const ChallengeFeed(detailId: '',),
             const SizedBox(
               height: 16,
             ),
             const FarmclubTitleWithDivider(title: "다음 Step"),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: challengeSteps.length - 1,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    ChallengeStep(
-                      step: challengeSteps[index + 1]["step"]!,
-                      title: challengeSteps[index + 1]["title"]!,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    const Divider(
-                      endIndent: 16,
-                      indent: 16,
-                      color: FarmusThemeData.grey4,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                  ],
-                );
-              },
-            ),
+            // ListView.builder(
+            //   shrinkWrap: true,
+            //   physics: const NeverScrollableScrollPhysics(),
+            //   itemCount: challengeSteps.length - 1,
+            //   itemBuilder: (context, index) {
+            //     return Column(
+            //       children: [
+            //         ChallengeStep(
+            //           step: challengeSteps[index + 1]["step"]!,
+            //           title: challengeSteps[index + 1]["title"]!,
+            //         ),
+            //         const SizedBox(
+            //           height: 16,
+            //         ),
+            //         const Divider(
+            //           endIndent: 16,
+            //           indent: 16,
+            //           color: FarmusThemeData.grey4,
+            //         ),
+            //         const SizedBox(
+            //           height: 16,
+            //         ),
+            //       ],
+            //     );
+            //   },
+            // ),
             const SizedBox(
               height: 50,
             ),
@@ -123,7 +128,9 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const MyFarmclubMissionScreen();
+                          return  MyFarmclubMissionScreen(
+                            detailId: widget.detailId,
+                          );
                         },
                       ),
                     );

@@ -3,7 +3,11 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_mission_feed_screen.dart';
 
 class ChallengeFeed extends StatefulWidget {
-  const ChallengeFeed({super.key});
+  final String? detailId;
+  const ChallengeFeed({
+    super.key,
+    required this.detailId
+  });
 
   @override
   State<ChallengeFeed> createState() => _ChallengeFeedState();
@@ -69,7 +73,9 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return const FarmclubMissionFeedScreen();
+                        return  FarmclubMissionFeedScreen(
+                          detailId: widget.detailId,
+                        );
                       },
                     ),
                   );

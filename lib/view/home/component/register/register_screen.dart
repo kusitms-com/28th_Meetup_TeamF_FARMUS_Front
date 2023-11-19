@@ -5,6 +5,7 @@ import 'package:mojacknong_android/view/home/component/register/customs/register
 import 'package:mojacknong_android/view/home/component/register/customs/register_button.dart';
 import 'package:mojacknong_android/view/home/component/register/nickname_vege.dart';
 import 'package:mojacknong_android/view/home/component/register/select_vege.dart';
+import 'package:mojacknong_android/view/home/home_screen.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -76,8 +77,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
             right: 0,
             child: RegisterButton(
               text: '등록하기',
-              onPressed: () {
-                BottomSheetController().showRegisterDialog(context, "상훈이");
+              onPressed: () async {
+                BottomSheetController().showRegisterDialog(
+                    context, "상훈이"); //context에는 입력한 채소 별명이 떠야함
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const HomeScreen()), //home screen으로 가고 이때 작물이 존재하는 상태니, home screen에서 swipescreen호출
+                );
               },
             ),
           ),

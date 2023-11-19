@@ -48,12 +48,12 @@ class BottomSheetController extends GetxController {
   }
 
   void showUserDeleteCupertinoActionSheet(
-    BuildContext? context, {
-    required String message,
-    required List<String> options,
-    List<Function()>? optionsAction,
-    required String cancelButtonText,
-  }) {
+      BuildContext? context, {
+        required String message,
+        required List<String> options,
+        List<Function()>? optionsAction,
+        required String cancelButtonText,
+      }) {
     CupertinoActionSheetHelper.showUserDeleteCupertinoActionSheet(
       context!,
       message: message,

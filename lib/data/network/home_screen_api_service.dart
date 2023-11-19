@@ -9,7 +9,7 @@ class HomeScreenApiService {
       List<String> missions = [
         '상훈이',
         '2',
-        '상추가 너무너무',
+        '상추에 물 주고 사진 찍기',
       ];
 
       return missions;

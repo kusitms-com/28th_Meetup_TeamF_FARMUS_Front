@@ -140,18 +140,18 @@ class CupertinoActionSheetHelper {
   }
 
   static void showUserDeleteCupertinoActionSheet(
-    BuildContext context, {
-    required String message,
-    required List<String> options,
-    List<Function>? optionActions,
-    required String cancelButtonText,
-  }) {
+      BuildContext context, {
+        required String message,
+        required List<String> options,
+        List<Function>? optionActions,
+        required String cancelButtonText,
+      }) {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => CupertinoActionSheet(
         actions: List.generate(
           options.length,
-          (index) => CupertinoActionSheetAction(
+              (index) => CupertinoActionSheetAction(
             onPressed: () {
               if (optionActions != null && optionActions.isNotEmpty) {
                 optionActions[index]();
@@ -258,7 +258,33 @@ class CupertinoActionSheetHelper {
                     color: Colors.white.withOpacity(0.8),
                   ),
                   child: CupertinoActionSheetAction(
-                    onPressed: () => Navigator.pop(context),
+                      onPressed: () async {
+
+                        try {
+                          MypageRepository.userDeleteApi();
+
+                          await storage.delete(key: "refreshToken");
+                          await storage.delete(key: 'accessToken');
+
+                          print(await storage.read(key: "refreshToken"));
+                          print(await storage.read(key: "accessToken"));
+
+                          await Navigator.pushReplacement(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) =>
+                                const LoginScreen()), // NewScreen은 이동할 화면의 클래스
+                          );
+                        } catch (error) {
+                          print("API 호출 중 오류 발생: $error");
+                        } finally {
+
+                          // API 호출 완료 후 액션 시트를 닫기
+                          Navigator.pop(context);
+                        }
+
+                      },
+
                     child: const Text(
                       '탈퇴하기',
                       style: FarmusThemeData.darkStyle14,
@@ -296,6 +322,8 @@ class CupertinoActionSheetHelper {
           (index) => CupertinoActionSheetAction(
             onPressed: () {
               if (optionActions != null && optionActions.isNotEmpty) {
+
+
                 optionActions[index]();
               }
               Navigator.pop(context);

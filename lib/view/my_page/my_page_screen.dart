@@ -11,6 +11,8 @@ import 'package:mojacknong_android/view/my_page/history/my_page_vege_history.dar
 import '../../model/farmus_user.dart';
 import '../../model/mypage_history.dart';
 import '../../repository/mypage_repository.dart';
+import '../farmclub/my_farmclub_mission_screen.dart';
+import 'history_vege_screen.dart';
 
 class MyPageScreen extends StatefulWidget {
   @override
@@ -41,6 +43,10 @@ class _MyPageScreenState extends State<MyPageScreen> {
                 final FarmusUser? user = data[0] as FarmusUser?;
                 final MypageHistory? history = data[1] as MypageHistory?;
 
+                print( history?.veggieHistoryDetailList[0].detailId);
+
+
+
                 return Column(children: <Widget>[
                   MyPageHeader(
                       name: user?.nickName,
@@ -61,19 +67,24 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                   history.veggieHistoryDetailList.length -
                                       index -
                                       1;
-                              return MyPageVegeHistory(
-                                name: history
-                                    .veggieHistoryDetailList[reversedIndex]
-                                    .name,
-                                veggieName: history
-                                    .veggieHistoryDetailList[reversedIndex]
-                                    .veggieName,
-                                period: history
-                                    .veggieHistoryDetailList[reversedIndex]
-                                    .period,
-                                image: history
-                                    .veggieHistoryDetailList[reversedIndex]
-                                    .image,
+                              return GestureDetector(
+                                onTap: () {
+                                  HistoryVegeScreen(
+                                    name: history.veggieHistoryDetailList[reversedIndex].name,
+                                    veggieName: history.veggieHistoryDetailList[reversedIndex].veggieName,
+                                    period: history.veggieHistoryDetailList[reversedIndex].period,
+                                    image: history.veggieHistoryDetailList[reversedIndex].image,
+                                    detailId: history.veggieHistoryDetailList[reversedIndex].detailId,
+                                  );
+
+                                },
+                                child: MyPageVegeHistory(
+                                  name: history.veggieHistoryDetailList[reversedIndex].name,
+                                  veggieName: history.veggieHistoryDetailList[reversedIndex].veggieName,
+                                  period: history.veggieHistoryDetailList[reversedIndex].period,
+                                  image: history.veggieHistoryDetailList[reversedIndex].image,
+                                  detailId: history.veggieHistoryDetailList[reversedIndex].detailId,
+                                ),
                               );
                             },
                           )
@@ -90,25 +101,40 @@ class _MyPageScreenState extends State<MyPageScreen> {
                             itemCount: min(
                                 3, history!.farmClubHistoryDetailList.length),
                             itemBuilder: (context, index) {
-                              print(22);
+
                               final reversedIndex =
                                   history.farmClubHistoryDetailList.length -
                                       index -
                                       1;
-                              return MyPageFarmHistory(
-                                name: history
-                                    .farmClubHistoryDetailList[reversedIndex]
-                                    .name,
-                                veggieName: history
-                                    .farmClubHistoryDetailList[reversedIndex]
-                                    .veggieName,
-                                period: history
-                                    .farmClubHistoryDetailList[reversedIndex]
-                                    .period,
-                                image: history
-                                    .farmClubHistoryDetailList[reversedIndex]
-                                    .image,
+                              return GestureDetector(
+
+                                onTap: () {
+                                  MyFarmclubMissionScreen(
+                                    detailId: history
+                                        .farmClubHistoryDetailList[reversedIndex]
+                                        .detailId,
+                                  );
+                                },
+                                child: MyPageFarmHistory(
+                                  name: history
+                                      .farmClubHistoryDetailList[reversedIndex]
+                                      .name,
+                                  veggieName: history
+                                      .farmClubHistoryDetailList[reversedIndex]
+                                      .veggieName,
+                                  period: history
+                                      .farmClubHistoryDetailList[reversedIndex]
+                                      .period,
+                                  image: history
+                                      .farmClubHistoryDetailList[reversedIndex]
+                                      .image,
+                                  detailId: history
+                                      .farmClubHistoryDetailList[reversedIndex]
+                                      .detailId,
+
+                                )
                               );
+
                             },
                           )
                         : noData(),

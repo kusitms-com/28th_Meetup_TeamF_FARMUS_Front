@@ -11,7 +11,7 @@ class FarmclubHelp extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ChallengeStep(
-          step: "0",
+          step: 0,
           title: "준비물을 챙겨요",
           color: FarmusThemeData.dark,
         ),

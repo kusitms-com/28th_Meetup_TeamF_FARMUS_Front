@@ -37,33 +37,46 @@ class DiaryBox extends StatelessWidget {
           Positioned.fill(
             top: 142,
             bottom: 0,
-            child: SvgPicture.asset('assets/image/light_wave.svg'),
+            child: SvgPicture.asset('assets/image/light_wave.svg',
+                width: double.infinity, fit: BoxFit.fitWidth),
           ),
           Positioned.fill(
             top: 142,
             bottom: 0,
-            child: SvgPicture.asset('assets/image/dark_wave.svg'),
+            child: SvgPicture.asset('assets/image/dark_wave.svg',
+                width: double.infinity, fit: BoxFit.fitWidth),
           ),
           Positioned(
             top: 16,
             left: 16,
             child: SizedBox(
-              width: 105,
+              width: 106,
               height: 35,
               child: Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
                   color: const Color(0xffE8FAD0),
                   borderRadius: BorderRadius.circular(11),
                 ),
-                child: Center(
-                  child: Text(
-                    '$nickname D+$age',
-                    style: const TextStyle(
-                      color: FarmusThemeData.primary,
-                      fontSize: 15,
-                    ),
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: '$nickname ',
+                        style: const TextStyle(
+                          color: FarmusThemeData.primary,
+                          fontSize: 15,
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'D+$age',
+                        style: const TextStyle(
+                          color: FarmusThemeData.primary,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

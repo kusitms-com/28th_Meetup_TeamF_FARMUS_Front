@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/data/network/home_screen_api_service.dart';
-import 'package:mojacknong_android/view/home/controller/home_club_list_item.dart';
+import 'package:mojacknong_android/view/home/detail/home_club_list_item.dart';
 
 class HomeFarmClub extends StatefulWidget {
   final Future<String> nameFuture;

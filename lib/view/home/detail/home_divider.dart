@@ -16,13 +16,13 @@ class HomeDivider extends StatelessWidget {
           child: SizedBox(
             height: 36,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
                   '미션/루틴',
                   style: TextStyle(
                     fontSize: 17,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 const Spacer(),

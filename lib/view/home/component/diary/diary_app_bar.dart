@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/home/component/diary/edit_vege_info.dart';
+import 'package:mojacknong_android/view/home/component/register/controller/buttom_sheet_home.dart';
 
-class DiaryAppBar extends StatelessWidget implements PreferredSizeWidget {
+class DiaryAppBar extends StatefulWidget implements PreferredSizeWidget {
   const DiaryAppBar({Key? key}) : super(key: key);
 
   @override
+  State<DiaryAppBar> createState() => _DiaryAppBarState();
+
+  @override
   Size get preferredSize => const Size.fromHeight(55);
+}
+
+class _DiaryAppBarState extends State<DiaryAppBar> {
+  late final HomeBottomSheetController _homebottomSheetController =
+      HomeBottomSheetController();
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +24,26 @@ class DiaryAppBar extends StatelessWidget implements PreferredSizeWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              print("Default Kebab Tapped!");
+              _homebottomSheetController.showCustomCupertinoActionSheet(
+                context,
+                options: ["채소 정보 수정하기", "채소 삭제하기"],
+                cancelButtonText: "취소",
+                optionsAction: [
+                  () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const EditVegeInfo()),
+                    );
+                  },
+                  () {
+                    // "삭제하기" 옵션은 여기에 구현하기
+                  },
+                ],
+              );
+            },
             icon: SvgPicture.asset('assets/image/ic_onkebab.svg'),
           ),
         ],

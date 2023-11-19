@@ -36,11 +36,10 @@ class MyVegeHistory extends StatelessWidget {
                         data!.veggieHistoryDetailList.length - index - 1;
                     return MyPageVegeHistory(
                       name: data.veggieHistoryDetailList[reversedIndex].name,
-                      veggieName: data
-                          .veggieHistoryDetailList[reversedIndex].veggieName,
-                      period:
-                          data.veggieHistoryDetailList[reversedIndex].period,
+                      veggieName: data.veggieHistoryDetailList[reversedIndex].veggieName,
+                      period: data.veggieHistoryDetailList[reversedIndex].period,
                       image: data.veggieHistoryDetailList[reversedIndex].image,
+                      detailId: data.veggieHistoryDetailList[reversedIndex].detailId,
                     );
                   },
                 );

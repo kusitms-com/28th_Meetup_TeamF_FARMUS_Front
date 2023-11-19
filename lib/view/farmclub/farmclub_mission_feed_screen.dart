@@ -12,7 +12,12 @@ import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
 
 class FarmclubMissionFeedScreen extends StatefulWidget {
-  const FarmclubMissionFeedScreen({super.key});
+  final String? detailId;
+
+  const FarmclubMissionFeedScreen({
+    super.key,
+    required this.detailId
+  });
 
   @override
   State<FarmclubMissionFeedScreen> createState() =>
@@ -56,7 +61,7 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                   SizedBox(
                     height: 16,
                   ),
-                  ChallengeStep(step: "0", title: "준비물을 챙겨요"),
+                  ChallengeStep(step: 0, title: "준비물을 챙겨요"),
                   SizedBox(
                     height: 16,
                   ),
@@ -93,7 +98,10 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const MyFarmclubMissionScreen();
+                          return MyFarmclubMissionScreen(
+                            detailId: widget.detailId,
+
+                          );
                         },
                       ),
                     );

@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class ChallengeStep extends StatefulWidget {
-  final String step;
-  final String title;
+  final int? step;
+  final String? title;
   final Color? color;
 
   const ChallengeStep(
@@ -43,7 +43,7 @@ class _ChallengeStepState extends State<ChallengeStep> {
             SizedBox(
               width: 8,
             ),
-            Text(widget.title),
+            Text("${widget.title}"),
           ],
         ),
       ],

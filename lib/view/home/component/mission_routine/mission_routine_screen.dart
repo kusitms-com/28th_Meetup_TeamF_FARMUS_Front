@@ -3,7 +3,7 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/home/component/mission_routine/mission_routine_calendar.dart';
 import 'package:mojacknong_android/view/home/component/mission_routine/routine_calendar.dart';
-import 'package:mojacknong_android/view/home/controller/home_content.dart';
+import 'package:mojacknong_android/view/home/detail/home_content.dart';
 
 class MissionRoutineScreen extends StatefulWidget {
   const MissionRoutineScreen({Key? key}) : super(key: key);
@@ -18,14 +18,14 @@ class _MissionRoutineScreenState extends State<MissionRoutineScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PrimaryAppBar(
+      appBar: const PrimaryAppBar(
         title: "미션/루틴",
       ),
       backgroundColor: FarmusThemeData.white,
       body: Column(
         children: [
           SizedBox(
-            height: 340,
+            height: 370,
             child: MissionRoutineCalendar(
               onDaySelected: (selectedDay, focusedDay, selectedEvents) {
                 setState(() {
