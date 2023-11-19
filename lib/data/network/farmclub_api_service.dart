@@ -2,8 +2,34 @@ import 'package:dio/dio.dart';
 import 'package:mojacknong_android/data/network/base_api_services.dart';
 import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/model/farmclub_info_model.dart';
+import 'package:mojacknong_android/model/farmclub_mine.dart';
 
 class FarmclubApiService {
+  // 나의 팜클럽 조회
+  Future<List<FarmclubMine>> getFarmclub() async {
+    try {
+      Response response = await ApiClient().dio.get("/api/farmclub");
+
+      if (response.statusCode == 200) {
+        print(response.data["data"]);
+        List<dynamic> dataList = response.data['data'];
+        List<FarmclubMine> farmclubmineList =
+        dataList.map((data) => FarmclubMine.fromJson(data)).toList();
+
+        print(farmclubmineList);
+
+        return farmclubmineList;
+      } else {
+        // 오류 발생 시 빈 리스트 반환
+        return [];
+      }
+    } on DioException catch (e) {
+      print(e.message);
+      throw "${e.message}";
+    }
+  }
+
+  // 팜클럽 목록 조회
   Future<List<FarmclubInfoModel>> postFarmclubSearch({
     required List<String> difficulties,
     required String status,
@@ -52,6 +78,8 @@ class FarmclubApiService {
     }
   }
 
+
+  // 팜클럽 정보 조회
   Future<FarmclubDetail> getFarmclubDetail(String challengeId) async {
     try {
       print("challengeId  $challengeId");

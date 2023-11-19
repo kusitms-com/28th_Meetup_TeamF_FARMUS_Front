@@ -10,7 +10,7 @@ import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_s
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 
 class FarmclubChallengeScreen extends StatefulWidget {
   final String? detailId;
@@ -26,7 +26,7 @@ class FarmclubChallengeScreen extends StatefulWidget {
 }
 
 class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
-  final FarmclubController farmclubController = Get.put(FarmclubController());
+  final FarmclubEtcController farmclubController = Get.put(FarmclubEtcController());
 
   @override
   Widget build(BuildContext context) {

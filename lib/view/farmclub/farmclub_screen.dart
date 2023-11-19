@@ -35,7 +35,13 @@ class FarmclubScreen extends StatefulWidget {
 }
 
 class _FarmclubScreenState extends State<FarmclubScreen> {
-  final FarmclubController controller = Get.put(FarmclubController());
+  FarmclubController controller = Get.put(FarmclubController());
+
+  @override
+  void initState() {
+    super.initState();
+    controller.getMyFarmclub();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +100,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                         const FarmclubContent(
                             content:
                                 "상추를 치료해줄 사람 어디 없나. 저만 매번 실패하나요..\n이번에는 꼭 성공해서 얼른 상추쌈 싸먹어봐요!"),
-                        MyFarmclubInfo(
+                        const MyFarmclubInfo(
                             level: "level",
                             now: "now",
                             max: "max",
@@ -120,7 +126,9 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return const FarmclubChallengeScreen(detailId: '',);
+                                  return const FarmclubChallengeScreen(
+                                    detailId: '',
+                                  );
                                 },
                               ),
                             );
@@ -133,7 +141,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                         const SizedBox(
                           height: 16,
                         ),
-                        ChallengeHelp(
+                        const ChallengeHelp(
                           help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
                         ),
                         const SizedBox(
@@ -145,12 +153,16 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return const FarmclubChallengeScreen(detailId: '',);
+                                    return const FarmclubChallengeScreen(
+                                      detailId: '',
+                                    );
                                   },
                                 ),
                               );
                             },
-                            child: const ChallengeFeed(detailId: '',)),
+                            child: const ChallengeFeed(
+                              detailId: '',
+                            )),
                         const SizedBox(
                           height: 16,
                         ),
@@ -243,7 +255,9 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return const MyFarmclubMissionScreen(detailId: '',);
+                                return const MyFarmclubMissionScreen(
+                                  detailId: '',
+                                );
                               },
                             ),
                           );
@@ -259,7 +273,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return FarmclubAuthScreen();
+                              return const FarmclubAuthScreen();
                             },
                           ),
                         );

@@ -4,7 +4,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/mission_routine/cycle_setting.dart';
 import 'package:mojacknong_android/view/home/component/register/controller/buttom_sheet_home.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 
 class DisplayTextWidget extends StatefulWidget {
   final TextEditingController textFieldController;
@@ -23,7 +23,7 @@ class DisplayTextWidget extends StatefulWidget {
 }
 
 class _DisplayTextWidgetState extends State<DisplayTextWidget> {
-  late FarmclubController _farmclubController;
+  late FarmclubEtcController _farmclubController;
   late HomeBottomSheetController _homebottomSheetController =
       HomeBottomSheetController();
 
@@ -37,7 +37,7 @@ class _DisplayTextWidgetState extends State<DisplayTextWidget> {
   @override
   void initState() {
     super.initState();
-    _farmclubController = FarmclubController();
+    _farmclubController = FarmclubEtcController();
     _homebottomSheetController = HomeBottomSheetController();
   }
 
