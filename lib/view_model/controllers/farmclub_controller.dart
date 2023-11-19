@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mojacknong_android/data/network/farmclub_api_service.dart';
+import 'package:mojacknong_android/model/farmclub_info_model.dart';
 
 class FarmclubController extends GetxController {
   final TextEditingController controller = TextEditingController();
@@ -25,6 +27,13 @@ class FarmclubController extends GetxController {
 
   var isCombinedWidgetVisible = true.obs;
   String enteredText = '';
+  FarmclubApiService _farmclubApiService = FarmclubApiService();
+  RxList<String> difficulties = <String>[].obs;
+  RxString selectedStatus = "".obs;
+  RxString selectedKeyword = "".obs;
+
+  // 선택한 카테고리 정보 저장
+  RxString selectedCategory = "".obs;
 
   @override
   void onInit() {
@@ -90,5 +99,53 @@ class FarmclubController extends GetxController {
   void updateEnteredText(String text) {
     enteredText = text;
     isCombinedWidgetVisible.value = false;
+  }
+
+  // 선택한 카테고리 업데이트 메서드
+  void updateSelectedCategory(String category) {
+    selectedCategory.value = category;
+  }
+
+  // difficulties 업데이트 메서드
+  void updateDifficulties(List<String> updatedDifficulties) {
+    difficulties.assignAll(updatedDifficulties);
+  }
+
+  // status 업데이트 메서드
+  void updateStatus(String updatedStatus) {
+    selectedStatus.value = updatedStatus;
+  }
+
+  // keyword 업데이트 메서드
+  void updateKeyword(String updatedKeyword) {
+    selectedKeyword.value = updatedKeyword;
+  }
+
+  // API 요청 메서드
+  Future<void> getFarmclubData(
+    List<String> difficulties,
+    String status,
+    String keyword,
+  ) async {
+    try {
+      // FarmclubApiService의 메서드를 활용하여 데이터를 가져온다.
+      final List<FarmclubInfoModel> farmclubList =
+          await _farmclubApiService.getFarmclub(
+        difficulties: difficulties,
+        status: selectedStatus.value,
+        keyword: selectedKeyword.value,
+      );
+
+      // 가져온 데이터를 처리하는 로직 추가
+    } catch (error) {
+      // 오류 처리 로직 추가
+      print('Error fetching farmclub data: $error');
+    }
+  }
+
+  // 검색 버튼이 눌렸을 때 실행되는 메서드
+  void onSearchButtonPressed() {
+    // FarmclubController의 메서드를 호출하여 API 요청
+    getFarmclubData(["Easy"], "준비 중", "바밧");
   }
 }

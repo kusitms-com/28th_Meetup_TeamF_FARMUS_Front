@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/farmclub/component/search/search_category.dart';
 import 'package:mojacknong_android/view/farmclub/component/search/search_edit.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
 
 class FarmclubSearchScreen extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class FarmclubSearchScreen extends StatefulWidget {
 }
 
 class _FarmclubSearchScreenState extends State<FarmclubSearchScreen> {
+  FarmclubController _controller = Get.put(FarmclubController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +37,9 @@ class _FarmclubSearchScreenState extends State<FarmclubSearchScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: SearchEdit(),
+                    child: SearchEdit(onSubmitted: () {
+                      _controller.getFarmclubData(["Normal"], "All", "바밧");
+                    }),
                   ),
                   SizedBox(
                     width: 8,
@@ -59,10 +64,9 @@ class _FarmclubSearchScreenState extends State<FarmclubSearchScreen> {
               const SizedBox(
                 height: 16,
               ),
-              const SearchCategory(
+              SearchCategory(
                   title: "재배 난이도", categories: ["Easy", "Normal", "Hard"]),
-              const SearchCategory(
-                  title: "팜클럽 상태", categories: ["준비 중", "진행 중"]),
+              SearchCategory(title: "팜클럽 상태", categories: ["준비 중", "진행 중"]),
               const Expanded(
                 child: Center(
                   child: Text(
