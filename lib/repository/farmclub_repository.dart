@@ -8,21 +8,33 @@ class FarmclubRepository {
     String status,
     String keyword,
   ) async {
-    List<FarmclubInfoModel> response =
-        await FarmclubApiService().postFarmclubSearch(
-      difficulties: difficulties,
-      status: status,
-      keyword: keyword,
-    );
+    try {
+      List<FarmclubInfoModel> response =
+          await FarmclubApiService().postFarmclubSearch(
+        difficulties: difficulties,
+        status: status,
+        keyword: keyword,
+      );
 
-    return response;
+      return response;
+    } catch (e) {
+      print("Error in postFarmclub: $e");
+      throw "Error in postFarmclub: $e";
+    }
   }
 
-  static Future<FarmclubDetail> getFarmclubDetail(
-    String id,
-  ) async {
-    FarmclubDetail response = await FarmclubApiService().getFarmclubDetail(id);
+  static Future<FarmclubDetail?> getFarmclubDetail(String id) async {
+    try {
+      print("challengeId  $id");
 
-    return response;
+      FarmclubDetail? response =
+          await FarmclubApiService().getFarmclubDetail(id);
+      print("FarmclubDetail~!@!: $response");
+
+      return response;
+    } catch (e) {
+      print("에러! getFarmclubDetail: $e");
+      throw "에러! getFarmclubDetail: $e";
+    }
   }
 }

@@ -9,8 +9,8 @@ class FarmclubDetailController extends GetxController {
   void getFarmclubDetail(String challengeId) async {
     try {
       isLoading(true);
-
-      FarmclubDetail farmclubData =
+      print("1111 $farmclubInfo");
+      FarmclubDetail? farmclubData =
           await FarmclubRepository.getFarmclubDetail(challengeId);
 
       farmclubInfo.value = farmclubData;

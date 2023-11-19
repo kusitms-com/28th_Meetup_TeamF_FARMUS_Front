@@ -21,10 +21,10 @@ class FarmclubDetailScreen extends StatefulWidget {
   final String title;
 
   FarmclubDetailScreen({
-    super.key,
+    Key? key,
     required this.id,
     required this.title,
-  });
+  }) : super(key: key);
 
   @override
   State<FarmclubDetailScreen> createState() =>
@@ -35,6 +35,18 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
   BottomSheetController _bottomSheetController = BottomSheetController();
   FarmclubDetailController _detailController =
       Get.put(FarmclubDetailController());
+
+  @override
+  void initState() {
+    super.initState();
+    _detailController.getFarmclubDetail(widget.id.toString());
+  }
+
+  @override
+  void dispose() {
+    _detailController.onClose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +70,7 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
           } else {
             // 데이터가 없는 경우 표시할 UI
             return Center(
-              child: Text('No data available'),
+              child: Text('데이터가 없습니다'),
             );
           }
         }
@@ -103,7 +115,12 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
                 SizedBox(
                   height: 8,
                 ),
-                MyFarmclubInfo(),
+                MyFarmclubInfo(
+                  level: farmclubInfo.difficulty,
+                  now: farmclubInfo.currentUser.toString(),
+                  max: farmclubInfo.maxUser.toString(),
+                  status: farmclubInfo.status.toString(),
+                ),
                 SizedBox(
                   height: 16,
                 ),
@@ -116,14 +133,14 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
                 ),
                 FarmclubTitleWithDivider(title: "함께 도전해요"),
                 ChallengeStep(
-                  step: farmclubInfo.stepNum.toString(),
-                  title: farmclubInfo.stepName,
+                  step: "0",
+                  title: "stepname",
                 ),
                 SizedBox(
                   height: 16,
                 ),
                 ChallengeHelp(
-                  help: farmclubInfo.stepTip,
+                  help: "ㅋㅋ",
                 ),
                 SizedBox(
                   height: 16,

@@ -54,6 +54,7 @@ class FarmclubApiService {
 
   Future<FarmclubDetail> getFarmclubDetail(String challengeId) async {
     try {
+      print("challengeId  $challengeId");
       // API 호출
       Response response = await ApiClient().dio.get(
             "/api/farmclub/$challengeId",
@@ -63,13 +64,13 @@ class FarmclubApiService {
       if (response.statusCode == 200) {
         // 성공적으로 응답받은 경우
         print(response.data['data']);
-        return response.data;
+        return FarmclubDetail.fromJson(response.data['data']);
       } else {
         // 응답이 실패한 경우
         throw "${response.statusCode}";
       }
     } on DioException catch (e) {
-      // DioException 예외 처리
+      // DioError 예외 처리
       print(e.message);
       throw "${e.message}";
     }

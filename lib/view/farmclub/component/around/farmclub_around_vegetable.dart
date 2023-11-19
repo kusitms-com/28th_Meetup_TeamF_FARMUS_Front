@@ -25,7 +25,7 @@ class FarmclubAroundVegetable extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.65),
-              child: Image.asset(vegetableImage),
+              child: Image.network(vegetableImage),
             ),
           ),
           SizedBox(
