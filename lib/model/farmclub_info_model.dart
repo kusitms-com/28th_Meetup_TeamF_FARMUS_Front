@@ -20,6 +20,10 @@ class FarmclubInfoModel {
   });
 
   factory FarmclubInfoModel.fromJson(Map<String, dynamic> json) {
+    List<FarmclubInfoModel> convertData(List<dynamic> dataList) {
+      return dataList.map((data) => FarmclubInfoModel.fromJson(data)).toList();
+    }
+
     return FarmclubInfoModel(
       challengeId: json['challengeId'] ?? 0,
       veggieName: json['veggieName'] ?? "",
@@ -32,4 +36,3 @@ class FarmclubInfoModel {
     );
   }
 }
-

@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mojacknong_android/data/network/farmclub_api_service.dart';
 import 'package:mojacknong_android/model/farmclub_info_model.dart';
+import 'package:mojacknong_android/repository/farmclub_repository.dart';
 
 class FarmclubController extends GetxController {
   final TextEditingController controller = TextEditingController();
@@ -24,10 +24,11 @@ class FarmclubController extends GetxController {
   final contentValue = "".obs;
   final image = Rxn<File>();
   final isFormVaild = RxBool(false);
+  RxList<FarmclubInfoModel> farmclubList = <FarmclubInfoModel>[].obs;
 
   var isCombinedWidgetVisible = true.obs;
+
   String enteredText = '';
-  FarmclubApiService _farmclubApiService = FarmclubApiService();
   RxList<String> difficulties = <String>[].obs;
   RxString selectedStatus = "".obs;
   RxString selectedKeyword = "".obs;
@@ -98,7 +99,6 @@ class FarmclubController extends GetxController {
 
   void updateEnteredText(String text) {
     enteredText = text;
-    isCombinedWidgetVisible.value = false;
   }
 
   // 선택한 카테고리 업데이트 메서드
@@ -121,31 +121,72 @@ class FarmclubController extends GetxController {
     selectedKeyword.value = updatedKeyword;
   }
 
-  // API 요청 메서드
-  Future<void> getFarmclubData(
+  // 선택한 키워드 업데이트 메서드
+  void updateSelectedKeyword(String keyword) {
+    selectedKeyword.value = keyword;
+  }
+
+  void updateCombinedWidgetVisible(String keyword) {
+    isCombinedWidgetVisible.value = false;
+  }
+
+  Future<List<FarmclubInfoModel>> getFarmclubData(
     List<String> difficulties,
     String status,
     String keyword,
   ) async {
     try {
-      // FarmclubApiService의 메서드를 활용하여 데이터를 가져온다.
-      final List<FarmclubInfoModel> farmclubList =
-          await _farmclubApiService.getFarmclub(
-        difficulties: difficulties,
-        status: selectedStatus.value,
-        keyword: selectedKeyword.value,
+      print("zzcz");
+      List<FarmclubInfoModel> responseData =
+          await FarmclubRepository.getFarmclub(
+        difficulties,
+        status,
+        selectedKeyword.value,
       );
 
-      // 가져온 데이터를 처리하는 로직 추가
+      // RxList 갱신
+      farmclubList.clear();
+      farmclubList.addAll(responseData);
+
+      return responseData;
     } catch (error) {
       // 오류 처리 로직 추가
       print('Error fetching farmclub data: $error');
+      throw error;
     }
   }
 
-  // 검색 버튼이 눌렸을 때 실행되는 메서드
-  void onSearchButtonPressed() {
+  Future<void> onSearchButtonPressed() async {
     // FarmclubController의 메서드를 호출하여 API 요청
-    getFarmclubData(["Easy"], "준비 중", "바밧");
+    try {
+      // selectedStatus의 값이 비어있으면 "All"로 설정
+      final status =
+          selectedStatus.value.isNotEmpty ? selectedStatus.value : "All";
+
+      // FarmclubApiService의 getFarmclub 호출
+      final data = await getFarmclubData(
+        difficulties,
+        status,
+        selectedKeyword.value,
+      );
+
+      // 출력
+      for (FarmclubInfoModel infoModel in farmclubList) {
+        print("Challenge ID: ${infoModel.challengeId}");
+        print("Veggie Name: ${infoModel.veggieName}");
+        print("Challenge Name: ${infoModel.challengeName}");
+        print("Image: ${infoModel.image}");
+        print("Difficulty: ${infoModel.difficulty}");
+        print("Max User: ${infoModel.maxUser}");
+        print("Current User: ${infoModel.currentUser}");
+        print("Status: ${infoModel.status}");
+        print("--------------------");
+      }
+
+      print('팜클럽 데이터 $data');
+    } catch (error) {
+      // 에러 처리 로직 추가
+      print('Error in onSearchButtonPressed: $error');
+    }
   }
 }

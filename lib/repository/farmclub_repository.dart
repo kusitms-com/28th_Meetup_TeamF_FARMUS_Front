@@ -3,15 +3,16 @@ import 'package:mojacknong_android/model/farmclub_info_model.dart';
 
 class FarmclubRepository {
   static Future<List<FarmclubInfoModel>> getFarmclub(
-    List<String>? difficulties,
-    String? status,
-    String? keyword,
+    List<String> difficulties,
+    String status,
+    String keyword,
   ) async {
     List<FarmclubInfoModel> response = await FarmclubApiService().getFarmclub(
       difficulties: difficulties,
       status: status,
       keyword: keyword,
     );
+
     return response;
   }
 }

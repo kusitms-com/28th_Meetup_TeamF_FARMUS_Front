@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/model/farmclub_info_model.dart';
+import 'package:mojacknong_android/view/farmclub/component/farmclub.dart';
 import 'package:mojacknong_android/view/farmclub/component/search/search_category.dart';
 import 'package:mojacknong_android/view/farmclub/component/search/search_edit.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
@@ -14,6 +16,27 @@ class FarmclubSearchScreen extends StatefulWidget {
 
 class _FarmclubSearchScreenState extends State<FarmclubSearchScreen> {
   FarmclubController _controller = Get.put(FarmclubController());
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      // 렌더링 후에 호출되는 코드
+      _controller.updateSelectedKeyword("");
+
+      // 초기 상태에서의 메시지를 표시하기 위한 조건 추가
+      if (_controller.farmclubList.isEmpty) {
+        _controller.isCombinedWidgetVisible.value = true;
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.farmclubList.clear();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +61,8 @@ class _FarmclubSearchScreenState extends State<FarmclubSearchScreen> {
                 children: [
                   Expanded(
                     child: SearchEdit(onSubmitted: () {
-                      _controller.getFarmclubData(["Normal"], "All", "바밧");
+                      _controller.onSearchButtonPressed();
+                      _controller.updateCombinedWidgetVisible("");
                     }),
                   ),
                   SizedBox(
@@ -66,16 +90,47 @@ class _FarmclubSearchScreenState extends State<FarmclubSearchScreen> {
               ),
               SearchCategory(
                   title: "재배 난이도", categories: ["Easy", "Normal", "Hard"]),
-              SearchCategory(title: "팜클럽 상태", categories: ["준비 중", "진행 중"]),
-              const Expanded(
-                child: Center(
-                  child: Text(
-                    "팜클럽 이름, 채소 이름으로\n검색해보세요",
-                    textAlign: TextAlign.center,
-                    style: FarmusThemeData.grey2Style14,
-                  ),
+              SearchCategory(
+                title: "팜클럽 상태",
+                categories: ["준비 중", "진행 중"],
+              ),
+              Expanded(
+                child: Obx(
+                  () {
+                    return _controller.isCombinedWidgetVisible.value
+                        ? Center(
+                            child: Text(
+                              '팜클럽 이름, 채소 이름으로\n검색해보세요',
+                              textAlign: TextAlign.center,
+                              style: FarmusThemeData.grey2Style14,
+                            ),
+                          )
+                        : _controller.farmclubList.isEmpty
+                            ? Center(
+                                child: Text(
+                                  '검색 결과가 없습니다.',
+                                  style: FarmusThemeData.grey2Style14,
+                                ),
+                              )
+                            : ListView.builder(
+                                itemCount: _controller.farmclubList.length,
+                                itemBuilder: (context, index) {
+                                  FarmclubInfoModel data =
+                                      _controller.farmclubList[index];
+                                  return Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 4),
+                                        child: Farmclub(title: data.veggieName),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                  },
                 ),
-              )
+              ),
             ],
           ),
         ),
