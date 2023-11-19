@@ -72,16 +72,19 @@ class MyCustomCalendar extends StatelessWidget {
           color: FarmusThemeData.brownButton,
           shape: BoxShape.circle,
         ),
-        selectedTextStyle: TextStyle(color: Colors.white),
-        // todayDecoration: BoxDecoration(
-        //   color: FarmusThemeData.brownButton,
-        //   shape: BoxShape.circle,
-        // ),
+        selectedTextStyle: TextStyle(color: FarmusThemeData.white),
+        todayDecoration: BoxDecoration(
+          color: FarmusThemeData.brownButton,
+          shape: BoxShape.circle,
+        ),
+
         defaultDecoration: BoxDecoration(
           shape: BoxShape.circle,
         ),
       ),
+
       headerStyle: const HeaderStyle(
+        titleTextStyle: FarmusThemeData.darkStyle14,
         formatButtonVisible: false,
         titleCentered: true,
         formatButtonShowsNext: false,

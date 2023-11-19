@@ -46,10 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   const Text(
                     '미션/루틴',
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: FarmusThemeData.darkStyle17
+
                   ),
                   const Spacer(),
                   InkWell(

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mojacknong_android/view/home/detail/home_content.dart';
 import 'package:mojacknong_android/view/home/detail/today_routine_list.dart';
 
+import '../../common/farmus_theme_data.dart';
+
 class HomeWithVege extends StatelessWidget {
   const HomeWithVege({Key? key}) : super(key: key);
 
@@ -14,10 +16,7 @@ class HomeWithVege extends StatelessWidget {
           padding: EdgeInsets.only(left: 20),
           child: Text(
             "팜클럽 미션",
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-            ),
+            style: FarmusThemeData.darkStyle14
           ),
         ),
         const SizedBox(height: 5),

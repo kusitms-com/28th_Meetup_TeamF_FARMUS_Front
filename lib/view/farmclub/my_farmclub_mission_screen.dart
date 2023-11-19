@@ -81,12 +81,17 @@ class _MyFarmclubMissionScreenState extends State<MyFarmclubMissionScreen> {
                   ),
                   CommunityPicture(image: snapshot.data?.farmClubHistoryList[index].postImage),
 
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      "${snapshot.data?.farmClubHistoryList[index].content}",
-                      style: FarmusThemeData.darkStyle14,
-                    ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          "${snapshot.data?.farmClubHistoryList[index].content}",
+                          style: FarmusThemeData.darkStyle14,
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 16,
