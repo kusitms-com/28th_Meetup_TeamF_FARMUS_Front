@@ -19,7 +19,7 @@ class WriteDiary extends StatefulWidget {
 }
 
 const int maxLengthTitle = 20;
-const int maxLengthContent = 500;
+const int maxLengthContent = 300;
 
 class _WriteDiaryState extends State<WriteDiary> {
   final DiaryPostController diaryPostController =
@@ -37,9 +37,9 @@ class _WriteDiaryState extends State<WriteDiary> {
   @override
   void initState() {
     super.initState();
-    // TextEditingController에 리스너 추가하여 상태를 업데이트합니다.
+
     _contentController.addListener(() {
-      setState(() {}); // 화면을 새로고침하여 글자 수를 업데이트합니다.
+      setState(() {}); // 화면을 새로고침 글자 수를 업데이트
     });
   }
 
@@ -67,13 +67,12 @@ class _WriteDiaryState extends State<WriteDiary> {
         actions: [
           TextButton(
             onPressed: () async {
-              // "완료" 버튼을 눌렀을 때 postPostingWrite를 호출하고 결과를 받음
-              String result = await postPostingDiary(context);
+              // String result = await postPostingDiary(context);
 
-              // postPostingWrite가 완료되면 Navigator.pop 실행
-              if (result == "성공") {
-                Navigator.pop(context);
-              }
+              // // postPostingWrite가 완료되면 Navigator.pop 실행
+              // if (result == "성공") {
+              Navigator.pop(context);
+              // }
             },
             child: const Text(
               "완료",

@@ -43,6 +43,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
             ),
           ),
           Expanded(
+            //만약 일기 썼던 데이터가 없으면 empty_card.dart의 EmptyCard() 호출
             child: ListView(
               padding: const EdgeInsets.only(top: 4.0),
               children: const [

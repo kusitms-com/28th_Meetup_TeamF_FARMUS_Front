@@ -23,7 +23,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    print('달력 생성');
     return MyCustomCalendar(
       focusedDay: _focusedDay,
       selectedDay: _selectedDay,
@@ -33,9 +32,9 @@ class _CustomCalendarState extends State<CustomCalendar> {
             _selectedDay = selectedDay;
             _focusedDay = focusedDay;
           });
-          // 선택된 날짜 정보 출력
+          // 선택된 날짜 정보 콘솔 출력을 확인가능
           print(
-              'Selected Day: ${DateFormat('yyyy-MM-dd').format(selectedDay)}');
+              'Selected Day: ${DateFormat('yyyy/MM/dd').format(selectedDay)}');
         }
       },
     );

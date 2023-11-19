@@ -26,13 +26,19 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
+          //HomeDivider()은 항상 있는 것
+          //작물이 있으면 SwipeScreen() 호출 후 팜클럽미션, 오늘의 루틴 모드 호출
+          //작물이 없으면 home_green_box.dart의 HomeGreenBox()  home_no_data.dart의 HomeNoDataWidget() 호출
+          Container(
             height: 390,
-            child: SwipeScreen(),
+            color: FarmusThemeData.white,
+            child: const SwipeScreen(),
+            // child: const HomeGreenBox(),
           ),
           const SizedBox(height: 10),
           const HomeDivider(),
           const SizedBox(height: 10),
+          // const HomeNoDataWidget(), // 작물 없을 때 호출
           const Padding(
             padding: EdgeInsets.only(left: 20),
             child: Text(

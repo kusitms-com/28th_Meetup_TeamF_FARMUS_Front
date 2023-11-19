@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/home_green_box_user.dart';
-import 'package:mojacknong_android/view/home/component/home_green_box_user2.dart';
 
 class SwipeScreen extends StatefulWidget {
   const SwipeScreen({Key? key}) : super(key: key);
@@ -18,6 +17,7 @@ class _SwipeScreenState extends State<SwipeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: FarmusThemeData.white,
       body: Column(
         children: [
           Expanded(
@@ -55,9 +55,9 @@ class _SwipeScreenState extends State<SwipeScreen> {
     if (index == 0) {
       return const HomeGreenBoxUser();
     } else if (index == 1) {
-      return const HomeGreenBoxUser2();
+      return const HomeGreenBoxUser();
     } else if (index == 2) {
-      return const HomeGreenBoxUser2();
+      return const HomeGreenBoxUser();
     } else {
       return Container();
     }
