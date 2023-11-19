@@ -9,7 +9,7 @@ import 'package:mojacknong_android/view/community/component/image_add.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 
 class FarmclubAuthScreen extends StatefulWidget {
   const FarmclubAuthScreen({super.key});

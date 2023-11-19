@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_search_controller.dart';
 
 class SearchEdit extends StatefulWidget {
   final Function()? onSubmitted;
@@ -17,7 +17,7 @@ class SearchEdit extends StatefulWidget {
 }
 
 class _SearchEditState extends State<SearchEdit> {
-  FarmclubController _controller = Get.put(FarmclubController());
+  FarmclubSearchController _controller = Get.put(FarmclubSearchController());
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +55,7 @@ class _SearchEditState extends State<SearchEdit> {
                 cursorColor: FarmusThemeData.grey1,
                 autofocus: true,
                 onSubmitted: (String value) {
-                  print("gg");
-
                   if (widget.onSubmitted != null) {
-                    print("gg!!!!");
-
                     widget.onSubmitted!();
                   }
                 },

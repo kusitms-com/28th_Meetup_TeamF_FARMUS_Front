@@ -7,7 +7,7 @@ import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub.dart';
 import 'package:mojacknong_android/view/farmclub/component/search/search_category.dart';
 import 'package:mojacknong_android/view/farmclub/component/search/search_edit.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_search_controller.dart';
 
 class FarmclubSearchScreen extends StatefulWidget {
   @override
@@ -15,7 +15,7 @@ class FarmclubSearchScreen extends StatefulWidget {
 }
 
 class _FarmclubSearchScreenState extends State<FarmclubSearchScreen> {
-  FarmclubController _controller = Get.put(FarmclubController());
+  FarmclubSearchController _controller = Get.put(FarmclubSearchController());
 
   @override
   void initState() {
@@ -122,7 +122,15 @@ class _FarmclubSearchScreenState extends State<FarmclubSearchScreen> {
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 4),
-                                        child: Farmclub(title: data.veggieName),
+                                        child: Farmclub(
+                                            id: data.challengeId,
+                                            title: data.challengeName,
+                                            vaggie: data.veggieName,
+                                            currentUser: data.challengeId,
+                                            image: data.image,
+                                            level: data.difficulty,
+                                            maxUser: data.maxUser,
+                                            status: data.status),
                                       ),
                                     ],
                                   );

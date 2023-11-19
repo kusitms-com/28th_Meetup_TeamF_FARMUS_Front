@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/view/farmclub/component/new_vegetable_item.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub_make_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_make_controller.dart';
 
 class NewVegetableSelect extends StatelessWidget {
   final FarmclubMakeController farmclubMakeController =

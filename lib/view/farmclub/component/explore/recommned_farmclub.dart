@@ -10,8 +10,8 @@ class RecommendFarmclub extends StatefulWidget {
   final String farmclubTitle;
   final String level;
 
-  final String nowPerson;
-  final String maxPerson;
+  final int nowPerson;
+  final int maxPerson;
   final String dday;
 
   RecommendFarmclub({
@@ -40,7 +40,8 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return FarmclubAroundScreen(
+                return FarmclubDetailScreen(
+                  id: 0,
                   title: widget.farmclubTitle,
                 );
               },
@@ -99,6 +100,7 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
                 maxPerson: widget.maxPerson,
                 dday: widget.dday,
                 isRecommend: true,
+                status: "",
               )
             ],
           ),

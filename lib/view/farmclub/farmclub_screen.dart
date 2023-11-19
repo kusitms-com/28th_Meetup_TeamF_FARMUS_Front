@@ -23,7 +23,7 @@ import 'package:mojacknong_android/view/farmclub/farmclub_challenge_screen.dart'
 import 'package:mojacknong_android/view/farmclub/farmclub_explore_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_record_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 
 class FarmclubScreen extends StatefulWidget {
   bool isFarmclub;

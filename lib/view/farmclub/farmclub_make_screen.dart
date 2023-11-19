@@ -7,7 +7,7 @@ import 'package:mojacknong_android/view/farmclub/component/farmclub_make_content
 import 'package:mojacknong_android/view/farmclub/component/farmclub_make_edit.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_make_member.dart';
 import 'package:mojacknong_android/view/farmclub/component/new_vegetable_select.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub_make_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_make_controller.dart';
 
 class FarmclubMakeScreen extends StatefulWidget {
   const FarmclubMakeScreen({super.key});
