@@ -4,9 +4,10 @@ import 'package:mojacknong_android/view/home/component/register/customs/calender
 import 'package:mojacknong_android/view/home/component/register/customs/register_app_bar.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/register_button.dart';
 import 'package:mojacknong_android/view/home/component/register/nickname_vege.dart';
-import 'package:mojacknong_android/view/home/component/register/select_vege.dart';
 import 'package:mojacknong_android/view/home/home_screen.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
+
+import '../../../farmclub/component/new_vegetable_select.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -32,24 +33,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   margin: const EdgeInsets.all(16),
                   child: const Text(
                     '등록할 채소를 선택해주세요',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14.0,
-                    ),
+                    style: FarmusThemeData.darkStyle14,
                   ),
                 ),
-                const SizedBox(
-                  height: 300,
-                  child: RegisterVege(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: NewVegetableSelect(),
                 ),
+
                 Container(
                   margin: const EdgeInsets.only(left: 16, right: 16, top: 16),
                   child: const Text(
                     '채소의 별명을 입력해주세요',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14.0,
-                    ),
+                    style: FarmusThemeData.darkStyle14,
                   ),
                 ),
                 const SizedBox(
@@ -60,10 +56,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   margin: const EdgeInsets.only(left: 16, right: 16, top: 20),
                   child: const Text(
                     '키우기 시작한 날을 선택해주세요',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14.0,
-                    ),
+                    style: FarmusThemeData.darkStyle14,
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -72,7 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
           Positioned(
-            bottom: 0,
+            bottom: 8,
             left: 0,
             right: 0,
             child: RegisterButton(
@@ -89,6 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 );
               },
             ),
+
           ),
         ],
       ),

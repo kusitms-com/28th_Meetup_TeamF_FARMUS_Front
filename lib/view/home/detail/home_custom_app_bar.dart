@@ -35,7 +35,7 @@ class HomeCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          const RegisterScreen(), // YourNewPage에 해당하는 새로운 페이지로 이동합니다.
+                          const RegisterScreen(),
                     ),
                   );
                 },

@@ -20,7 +20,7 @@ class _NickNameVegeState extends State<NickNameVege> {
           children: <Widget>[
             TextField(
               decoration: InputDecoration(
-                hintText: '채소 별명 예시',
+                hintText: '채소',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15.0),
                   borderSide: const BorderSide(

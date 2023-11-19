@@ -3,7 +3,18 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class MyFarmclubInfo extends StatefulWidget {
-  const MyFarmclubInfo({super.key});
+  final String level;
+  final String now;
+  final String max;
+  final String status;
+
+  const MyFarmclubInfo({
+    super.key,
+    required this.level,
+    required this.now,
+    required this.max,
+    required this.status,
+  });
 
   @override
   State<MyFarmclubInfo> createState() => _MyFarmclubInfoState();
@@ -31,7 +42,7 @@ class _MyFarmclubInfoState extends State<MyFarmclubInfo> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "재배 난이도\nEasy",
+                "재배 난이도\n${widget.level}",
                 textAlign: TextAlign.center,
                 style: FarmusThemeData.darkStyle13,
               ),
@@ -39,18 +50,24 @@ class _MyFarmclubInfoState extends State<MyFarmclubInfo> {
                 "assets/image/line_vertical_grey1.svg",
               ),
               Text(
-                "멤버 수\n5/8명",
+                "멤버 수\n${widget.now}/${widget.max}명",
                 textAlign: TextAlign.center,
                 style: FarmusThemeData.darkStyle13,
               ),
               SvgPicture.asset(
                 "assets/image/line_vertical_grey1.svg",
               ),
+
+              widget.status != "-1" ?
               Text(
-                "팜클럽 상태\nD+1",
+                "팜클럽 상태\nD+${widget.status}",
                 textAlign: TextAlign.center,
                 style: FarmusThemeData.darkStyle13,
-              ),
+              ) :Text(
+                "준비 중",
+                textAlign: TextAlign.center,
+                style: FarmusThemeData.darkStyle13,
+              ) ,
             ],
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
+import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/view/farmclub/component/around/farmclub_around_record.dart';
 import 'package:mojacknong_android/view/farmclub/component/around/farmclub_around_title.dart';
 import 'package:mojacknong_android/view/farmclub/component/around/farmclub_around_vegetable.dart';
@@ -13,21 +14,39 @@ import 'package:mojacknong_android/view/farmclub/component/farmclub_content.dart
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_info.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_detail_controller.dart';
 
-class FarmclubAroundScreen extends StatefulWidget {
+class FarmclubDetailScreen extends StatefulWidget {
+  final int id;
   final String title;
 
-  FarmclubAroundScreen({
-    super.key,
+  FarmclubDetailScreen({
+    Key? key,
+    required this.id,
     required this.title,
-  });
+  }) : super(key: key);
 
   @override
-  State<FarmclubAroundScreen> createState() => _FarmclubAroundScreenState();
+  State<FarmclubDetailScreen> createState() =>
+      _FarmclubDetailScreenScreenState();
 }
 
-class _FarmclubAroundScreenState extends State<FarmclubAroundScreen> {
+class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
   BottomSheetController _bottomSheetController = BottomSheetController();
+  FarmclubDetailController _detailController =
+      Get.put(FarmclubDetailController());
+
+  @override
+  void initState() {
+    super.initState();
+    _detailController.getFarmclubDetail(widget.id.toString());
+  }
+
+  @override
+  void dispose() {
+    _detailController.onClose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,76 +55,26 @@ class _FarmclubAroundScreenState extends State<FarmclubAroundScreen> {
         title: "둘러보기",
       ),
       backgroundColor: FarmusThemeData.white,
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  FarmclubAroundTitle(
-                    title: widget.title,
-                  ),
-                  FarmclubAroundVegetable(
-                    vegetableImage: "assets/image/image_farmclub_blue.png",
-                    vegetable: "상추",
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  FarmclubContent(
-                      content:
-                          "상추를 치료해줄 사람 어디 없나. 저만 매번 실패하나요..\n이번에는 꼭 성공해서 얼른 상추쌈 싸먹어봐요!"),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  MyFarmclubInfo(),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Divider(
-                    thickness: 12,
-                    color: FarmusThemeData.dividerBackground,
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  FarmclubTitleWithDivider(title: "함께 도전해요"),
-                  ChallengeStep(
-                    step: 0,
-                    title: "준비물을 챙겨요",
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  ChallengeHelp(
-                    help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  ChallengeFeed(detailId: '',),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Divider(
-                    thickness: 12,
-                    color: FarmusThemeData.dividerBackground,
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  FarmclubTitleWithDivider(title: "함께 기록해요"),
-                  FarmclubAroundRecord(),
-                  SizedBox(
-                    height: 100,
-                  ),
-                ],
-              ),
+      body: Obx(() {
+        if (_detailController.isLoading.value) {
+          // 로딩 중일 때 표시할 UI
+          return Center(
+            child: CircularProgressIndicator(
+              color: FarmusThemeData.brown,
             ),
-          ),
-        ],
-      ),
+          );
+        } else {
+          // 로딩이 완료된 경우 표시할 UI
+          if (_detailController.farmclubInfo.value != null) {
+            return buildFarmclubDetailUI(_detailController.farmclubInfo.value!);
+          } else {
+            // 데이터가 없는 경우 표시할 UI
+            return Center(
+              child: Text('데이터가 없습니다'),
+            );
+          }
+        }
+      }),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: Padding(
@@ -119,6 +88,84 @@ class _FarmclubAroundScreenState extends State<FarmclubAroundScreen> {
           },
         ),
       ),
+    );
+  }
+
+  Widget buildFarmclubDetailUI(FarmclubDetail farmclubInfo) {
+    return Column(
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FarmclubAroundTitle(
+                  title: farmclubInfo.challengeName,
+                ),
+                FarmclubAroundVegetable(
+                  vegetableImage: farmclubInfo.veggieImage,
+                  vegetable: farmclubInfo.veggieName,
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                FarmclubContent(
+                  content: farmclubInfo.challengeDescription,
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                MyFarmclubInfo(
+                  level: farmclubInfo.difficulty,
+                  now: farmclubInfo.currentUser.toString(),
+                  max: farmclubInfo.maxUser.toString(),
+                  status: farmclubInfo.status.toString(),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Divider(
+                  thickness: 12,
+                  color: FarmusThemeData.dividerBackground,
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                FarmclubTitleWithDivider(title: "함께 도전해요"),
+                ChallengeStep(
+                  step: 0,
+                  title: "stepname",
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                ChallengeHelp(
+                  help: "ㅋㅋ",
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                ChallengeFeed(detailId: "",),
+                SizedBox(
+                  height: 16,
+                ),
+                Divider(
+                  thickness: 12,
+                  color: FarmusThemeData.dividerBackground,
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                FarmclubTitleWithDivider(title: "함께 기록해요"),
+                FarmclubAroundRecord(),
+                SizedBox(
+                  height: 100,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

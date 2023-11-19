@@ -4,7 +4,7 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_picture.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 
 import '../../repository/mypage_repository.dart';
 import '../community/component/community_picture.dart';
@@ -81,12 +81,17 @@ class _MyFarmclubMissionScreenState extends State<MyFarmclubMissionScreen> {
                   ),
                   CommunityPicture(image: snapshot.data?.farmClubHistoryList[index].postImage),
 
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      "${snapshot.data?.farmClubHistoryList[index].content}",
-                      style: FarmusThemeData.darkStyle14,
-                    ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          "${snapshot.data?.farmClubHistoryList[index].content}",
+                          style: FarmusThemeData.darkStyle14,
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 16,

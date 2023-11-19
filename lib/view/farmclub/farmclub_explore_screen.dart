@@ -1,15 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
+import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_to_search.dart';
 import 'package:mojacknong_android/view/farmclub/component/explore/recommend_farmclub_list.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub.dart';
 import 'package:mojacknong_android/view/farmclub/component/floating_button_farmclub.dart';
 import 'package:mojacknong_android/view/farmclub/component/search/brown_category.dart';
 import 'package:mojacknong_android/view/farmclub/component/search/search_category.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_search_controller.dart';
 
-class FarmclubExploreScreen extends StatelessWidget {
+class FarmclubExploreScreen extends StatefulWidget {
   const FarmclubExploreScreen({Key? key}) : super(key: key);
+
+  @override
+  State<FarmclubExploreScreen> createState() => _FarmclubExploreScreenState();
+}
+
+class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
+  FarmclubSearchController _searchController =
+      Get.put(FarmclubSearchController());
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.getFarmclubData([], "All", "");
+  }
+
+  @override
+  void dispose() {
+    _searchController.farmclubList.clear();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,9 +116,6 @@ class FarmclubExploreScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Row(
-                  children: [],
-                ),
-                Row(
                   children: [
                     SizedBox(
                       width: 16,
@@ -120,22 +140,41 @@ class FarmclubExploreScreen extends StatelessWidget {
                   color: FarmusThemeData.grey4,
                 ),
                 Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: 7,
-                    itemBuilder: (context, index) {
-                      if (index == 6) {
-                        // 마지막 아이템에 빈 컨테이너를 추가하여
-                        // 플로팅 버튼이 가려지는 현상 방지
-                        return Container(
-                          height: 40,
-                        );
-                      }
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Farmclub(
-                          title: "상추 좋아하세요",
-                        ),
+                  child: Obx(
+                    () {
+                      final farmclubList = _searchController.farmclubList;
+
+                      return ListView.builder(
+                        itemCount: farmclubList.length + 1,
+                        itemBuilder: (context, index) {
+                          if (index == farmclubList.length) {
+                            // 마지막 아이템에 빈 컨테이너를 추가하여
+                            // 플로팅 버튼이 가려지는 현상 방지
+                            return Container(
+                              height: 40,
+                            );
+                          }
+
+                          FarmclubInfoModel data = farmclubList[index];
+                          return Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                child: Farmclub(
+                                  id: data.challengeId,
+                                  title: data.challengeName,
+                                  vaggie: data.veggieName,
+                                  currentUser: data.challengeId,
+                                  image: data.image,
+                                  level: data.difficulty,
+                                  maxUser: data.maxUser,
+                                  status: data.status,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
                       );
                     },
                   ),

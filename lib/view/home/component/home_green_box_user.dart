@@ -46,11 +46,7 @@ class HomeGreenBoxUser extends StatelessWidget {
                         ),
                         Text(
                           '파머 D+11',
-                          style: TextStyle(
-                            color: FarmusThemeData.dark,
-                            fontFamily: "Pretendard",
-                            fontSize: 13,
-                          ),
+                          style: FarmusThemeData.darkStyle13
                         ),
                         SizedBox(
                           height: 20,
