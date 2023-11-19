@@ -22,7 +22,7 @@ class _NickNameVegeState extends State<NickNameVege> {
               decoration: InputDecoration(
                 hintText: '채소 별명 예시',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+                  borderRadius: BorderRadius.circular(15.0),
                   borderSide: const BorderSide(
                     color: FarmusThemeData.grey4,
                   ),

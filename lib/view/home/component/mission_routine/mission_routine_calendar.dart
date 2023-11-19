@@ -52,6 +52,8 @@ class _MissionRoutineCalendarState extends State<MissionRoutineCalendar> {
             firstDay: DateTime.utc(2023, 1, 1),
             lastDay: DateTime.utc(2025, 12, 31),
             headerVisible: false,
+            rowHeight: 52.0,
+            daysOfWeekHeight: 48.0,
             focusedDay: _focusedDay,
             selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
             onDaySelected: (selectedDay, focusedDay) {

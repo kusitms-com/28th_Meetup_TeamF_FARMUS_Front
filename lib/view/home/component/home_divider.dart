@@ -22,7 +22,7 @@ class HomeDivider extends StatelessWidget {
                   '미션/루틴',
                   style: TextStyle(
                     fontSize: 17,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const Spacer(),

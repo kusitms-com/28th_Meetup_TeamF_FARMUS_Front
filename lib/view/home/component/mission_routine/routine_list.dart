@@ -109,7 +109,9 @@ class _RoutineListItemState extends State<RoutineListItem> {
           CombinedWidget(
             textFieldController: TextEditingController(),
             onTextSubmitted: (text) {
+              //루틴 새로 입력하면
               setState(() {
+                // 여기서displaytextwidget 호출
                 displayTextWidgets.add(
                   DisplayTextWidget(
                     textFieldController: TextEditingController(text: text),

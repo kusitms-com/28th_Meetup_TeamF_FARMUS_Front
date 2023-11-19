@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
-class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
+class WriteAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
   final String? title;
   final List<Widget>? actions;
 
-  const PrimaryAppBar({super.key, this.leading, this.title, this.actions});
+  const WriteAppBar({super.key, this.leading, this.title, this.actions});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -37,7 +37,22 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
               )
             : null,
         centerTitle: true,
-        actions: actions,
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text(
+              "완료",
+              style: TextStyle(
+                color: FarmusThemeData.grey3,
+                fontFamily: "Pretendard",
+                fontSize: 16,
+              ),
+            ),
+          ),
+          ...(actions ?? []),
+        ],
         elevation: 0,
         backgroundColor: FarmusThemeData.white,
       ),
