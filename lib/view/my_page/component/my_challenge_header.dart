@@ -6,9 +6,11 @@ import 'package:mojacknong_android/view/my_page/history/my_farm_history.dart';
 class ChallengeHeader extends StatelessWidget {
   final String historyType;
 
+
   const ChallengeHeader({
     Key? key,
     required this.historyType,
+
   }) : super(key: key);
 
   @override

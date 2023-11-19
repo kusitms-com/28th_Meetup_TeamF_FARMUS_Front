@@ -43,6 +43,10 @@ class _MyPageScreenState extends State<MyPageScreen> {
                 final FarmusUser? user = data[0] as FarmusUser?;
                 final MypageHistory? history = data[1] as MypageHistory?;
 
+                print( history?.veggieHistoryDetailList[0].detailId);
+
+
+
                 return Column(children: <Widget>[
                   MyPageHeader(
                       name: user?.nickName,
@@ -106,22 +110,27 @@ class _MyPageScreenState extends State<MyPageScreen> {
 
                                 onTap: () {
                                   MyFarmclubMissionScreen(
-
+                                    detailId: history
+                                        .farmClubHistoryDetailList[reversedIndex]
+                                        .detailId,
                                   );
                                 },
                                 child: MyPageFarmHistory(
-                                name: history
-                                    .farmClubHistoryDetailList[reversedIndex]
-                                    .name,
-                                veggieName: history
-                                    .farmClubHistoryDetailList[reversedIndex]
-                                    .veggieName,
-                                period: history
-                                    .farmClubHistoryDetailList[reversedIndex]
-                                    .period,
-                                image: history
-                                    .farmClubHistoryDetailList[reversedIndex]
-                                    .image,
+                                  name: history
+                                      .farmClubHistoryDetailList[reversedIndex]
+                                      .name,
+                                  veggieName: history
+                                      .farmClubHistoryDetailList[reversedIndex]
+                                      .veggieName,
+                                  period: history
+                                      .farmClubHistoryDetailList[reversedIndex]
+                                      .period,
+                                  image: history
+                                      .farmClubHistoryDetailList[reversedIndex]
+                                      .image,
+                                  detailId: history
+                                      .farmClubHistoryDetailList[reversedIndex]
+                                      .detailId,
 
                                 )
                               );

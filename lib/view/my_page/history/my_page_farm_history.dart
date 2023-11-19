@@ -8,6 +8,7 @@ class MyPageFarmHistory extends StatefulWidget {
   final String? veggieName;
   final String? period;
   final String? image;
+  final String? detailId;
 
 
   const MyPageFarmHistory({
@@ -16,6 +17,7 @@ class MyPageFarmHistory extends StatefulWidget {
     required this.veggieName,
     required this.period,
     required this.image,
+    required this.detailId
   }) : super(key: key);
 
   @override
@@ -27,7 +29,9 @@ class _MyPageFarmHistoryState extends State<MyPageFarmHistory> {
 
   void _navigateToNewPage(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return MyFarmclubMissionScreen();
+      return MyFarmclubMissionScreen(detailId: widget.detailId,
+
+      );
     }));
   }
 

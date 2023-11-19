@@ -38,6 +38,7 @@ class _HistoryVegeScreenState extends State<HistoryVegeScreen> {
     super.initState();
 
     detailId = widget.detailId!; // 'widget.detailId'로 초기화
+    print(detailId);
 
     // 이곳에서 필요한 초기화 작업 수행
     // MypageRepository.vegeHistoryDetailApi(detailId);
@@ -65,7 +66,7 @@ class _HistoryVegeScreenState extends State<HistoryVegeScreen> {
             return Text('Error: ${snapshot.error}');
             } else {
 
-            print(snapshot.data?.farmResult);
+
 
 
             return Column(
@@ -117,7 +118,7 @@ class _HistoryVegeScreenState extends State<HistoryVegeScreen> {
 
 
                           // 두 번째 탭에 표시될 화면
-                          if (!snapshot.data!.farmResult.isEmpty)
+                          if (snapshot.data?.farmResult != null && !snapshot.data!.farmResult.isEmpty)
                             DiaryPicture(
                               dateTime: snapshot.data!.farmResult["dateTime"],
                               content: snapshot.data!.farmResult["content"],

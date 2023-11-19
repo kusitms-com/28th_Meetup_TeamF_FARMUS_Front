@@ -3,6 +3,7 @@
 import 'package:mojacknong_android/model/farmus_user.dart';
 
 import '../data/network/mypage_api_service.dart';
+import '../model/farm_club_history_detail.dart';
 import '../model/mypage_history.dart';
 import '../model/vege_history_detail.dart';
 import '../view/my_page/history/my_page_vege_history.dart';
@@ -48,6 +49,14 @@ class MypageRepository {
   static Future<VegeHistoryDetail?> vegeHistoryDetailApi(String detailId) async {
 
     final reponse = await MypageApiService().vegeHistoryDetail(detailId);
+
+    return reponse;
+  }
+
+
+  static Future<FarmClubHistoryDetail?> farmClubHistoryApi(String detailId) async {
+
+    final reponse = await MypageApiService().farmClubHistory(detailId);
 
     return reponse;
   }

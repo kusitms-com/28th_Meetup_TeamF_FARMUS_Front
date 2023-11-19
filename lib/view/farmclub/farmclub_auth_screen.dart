@@ -50,7 +50,7 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
           const SizedBox(
             height: 8,
           ),
-          const ChallengeStep(step: "0", title: "준비물을 챙겨요"),
+          const ChallengeStep(step: 0, title: "준비물을 챙겨요"),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: GestureDetector(
