@@ -85,7 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          const HomeScreen()), //home screen으로 가고 이때 작물이 존재하는 상태니, home screen에서 swipescreen호출(주석)
+                          const HomeScreen()), //home screen으로 가고 이때 작물이 존재하는 상태니, home screen에서 swipescreen호출
                 );
               },
             ),

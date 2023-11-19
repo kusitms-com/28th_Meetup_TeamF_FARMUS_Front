@@ -43,7 +43,7 @@ class FarmClubListItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: textWidth + arrowRightWidth + 50, // 여유 공간 조절
+        width: textWidth + arrowRightWidth + 50,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: const Color(0xffDCFFD4),

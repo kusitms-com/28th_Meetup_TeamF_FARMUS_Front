@@ -35,7 +35,7 @@ class _SwipeScreenState extends State<SwipeScreen> {
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(
-                    //     builder: (context) => const MissionRoutineScreen(),
+                    //     builder: (context) => const DiaryScreen(),
                     //   ),
                     // );
                   },
@@ -44,7 +44,6 @@ class _SwipeScreenState extends State<SwipeScreen> {
               },
             ),
           ),
-          const SizedBox(height: 10),
           buildPageIndicator(),
         ],
       ),
