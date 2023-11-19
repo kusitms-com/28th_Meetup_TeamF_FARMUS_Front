@@ -116,13 +116,13 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return const FarmclubChallengeScreen();
+                                  return const FarmclubChallengeScreen(detailId: '',);
                                 },
                               ),
                             );
                           },
                           child: const ChallengeStep(
-                            step: "0",
+                            step: 0,
                             title: "준비물을 챙겨요",
                           ),
                         ),
@@ -141,12 +141,12 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return const FarmclubChallengeScreen();
+                                    return const FarmclubChallengeScreen(detailId: '',);
                                   },
                                 ),
                               );
                             },
-                            child: const ChallengeFeed()),
+                            child: const ChallengeFeed(detailId: '',)),
                         const SizedBox(
                           height: 16,
                         ),
@@ -239,7 +239,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return const MyFarmclubMissionScreen();
+                                return const MyFarmclubMissionScreen(detailId: '',);
                               },
                             ),
                           );

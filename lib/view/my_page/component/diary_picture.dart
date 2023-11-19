@@ -2,8 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class DiaryPicture extends StatefulWidget {
+  final String? dateTime;
+  final String? content;
+  final String? postImage;
+
+
+
+
   DiaryPicture({
     super.key,
+    required this.postImage,
+    required this.content,
+    required this.dateTime
   });
 
   @override
@@ -27,8 +37,8 @@ class _DiaryPictureState extends State<DiaryPicture> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Image.asset(
-              "assets/image/image_example_community2.png",
+            child: Image.network(
+              '${widget.postImage}',
               fit: BoxFit.fill,
             ),
           ),
@@ -36,14 +46,14 @@ class _DiaryPictureState extends State<DiaryPicture> {
             height: 16,
           ),
           Text(
-            "오늘 상훈이 새싹이 났다!! 야호",
+            '${widget.content}',
             style: FarmusThemeData.darkStyle14,
           ),
           SizedBox(
             height: 8,
           ),
           Text(
-            "10/29 3:40",
+            '${widget.dateTime}',
             style: FarmusThemeData.grey2Style13,
           ),
           SizedBox(
@@ -54,3 +64,4 @@ class _DiaryPictureState extends State<DiaryPicture> {
     );
   }
 }
+
