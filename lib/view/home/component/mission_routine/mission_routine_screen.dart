@@ -3,7 +3,7 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/home/component/mission_routine/mission_routine_calendar.dart';
 import 'package:mojacknong_android/view/home/component/mission_routine/routine_calendar.dart';
-import 'package:mojacknong_android/view/home/controller/home_content.dart';
+import 'package:mojacknong_android/view/home/detail/home_content.dart';
 
 class MissionRoutineScreen extends StatefulWidget {
   const MissionRoutineScreen({Key? key}) : super(key: key);
