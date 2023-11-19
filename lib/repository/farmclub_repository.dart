@@ -9,6 +9,7 @@ class FarmclubRepository {
   static Future<List<FarmclubMine>> getFarmclub() async {
     try {
       List<FarmclubMine> response = await FarmclubApiService().getFarmclub();
+      print("레포 ${response.runtimeType}");
 
       return response;
     } catch (e) {

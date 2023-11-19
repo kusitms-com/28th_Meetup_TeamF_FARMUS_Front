@@ -81,15 +81,16 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
             ),
           ),
           Expanded(
-            child: widget.isFarmclub
-                ? SingleChildScrollView(
+            child: controller.myFarmclubState != []
+          ? SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
                           height: 8,
                         ),
-                        MyFarmclubList(),
+                        MyFarmclubList(farmclubData: controller.myFarmclubState),
+
                         const SizedBox(
                           height: 16,
                         ),
@@ -236,10 +237,10 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                 : FarmclubInit(),
           ),
         ],
-      ),
+      ) ,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: widget.isFarmclub
-          ? Container(
+      floatingActionButton: controller.myFarmclubState != []
+        ? Container(
               padding: const EdgeInsets.all(8),
               color: Colors.transparent,
               child: Row(
