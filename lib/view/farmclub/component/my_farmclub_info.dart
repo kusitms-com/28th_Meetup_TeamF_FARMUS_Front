@@ -57,11 +57,17 @@ class _MyFarmclubInfoState extends State<MyFarmclubInfo> {
               SvgPicture.asset(
                 "assets/image/line_vertical_grey1.svg",
               ),
+
+              widget.status != "-1" ?
               Text(
                 "팜클럽 상태\nD+${widget.status}",
                 textAlign: TextAlign.center,
                 style: FarmusThemeData.darkStyle13,
-              ),
+              ) :Text(
+                "준비 중",
+                textAlign: TextAlign.center,
+                style: FarmusThemeData.darkStyle13,
+              ) ,
             ],
           ),
         ),

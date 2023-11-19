@@ -133,7 +133,7 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
                 ),
                 FarmclubTitleWithDivider(title: "함께 도전해요"),
                 ChallengeStep(
-                  step: "0",
+                  step: 0,
                   title: "stepname",
                 ),
                 SizedBox(
@@ -145,7 +145,7 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
                 SizedBox(
                   height: 16,
                 ),
-                ChallengeFeed(),
+                ChallengeFeed(detailId: "",),
                 SizedBox(
                   height: 16,
                 ),
