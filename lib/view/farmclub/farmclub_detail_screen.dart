@@ -39,7 +39,9 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
   @override
   void initState() {
     super.initState();
-    _detailController.getFarmclubDetail(widget.id.toString());
+    Future.delayed(Duration.zero, () {
+      _detailController.getFarmclubDetail(widget.id.toString());
+    });
   }
 
   @override
@@ -145,7 +147,9 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
                 SizedBox(
                   height: 16,
                 ),
-                ChallengePicture(detailId: "",),
+                ChallengePicture(
+                  detailId: "",
+                ),
                 SizedBox(
                   height: 16,
                 ),

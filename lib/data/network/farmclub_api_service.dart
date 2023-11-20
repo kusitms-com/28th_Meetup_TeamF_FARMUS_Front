@@ -200,16 +200,15 @@ class FarmclubApiService {
     }
   }
 
-  // 나의 팜클럽 조회
-  Future<List<FarmclubRecommend>> getFarmclubRecommendation() async {
+  Future<List<FarmclubInfoModel>> getFarmclubRecommendation() async {
     try {
       Response response = await ApiClient().dio.get("/api/farmclub/recommendation");
 
       if (response.statusCode == 200) {
         print(response.data["data"]);
         List<dynamic> dataList = response.data['data'];
-        List<FarmclubRecommend> farmclubRecommend =
-        dataList.map((data) => FarmclubRecommend.fromJson(data)).toList();
+        List<FarmclubInfoModel> farmclubRecommend =
+        dataList.map((data) => FarmclubInfoModel.fromJson(data)).toList();
 
         print(farmclubRecommend);
 

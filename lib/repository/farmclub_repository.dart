@@ -103,9 +103,9 @@ class FarmclubRepository {
   }
 
   // 추천 팜클럽 조회
-  static Future<List<FarmclubRecommend>> getFarmclubRecommend() async {
+  static Future<List<FarmclubInfoModel>> getFarmclubRecommend() async {
     try {
-      List<FarmclubRecommend> response = await FarmclubApiService().getFarmclubRecommendation();
+      List<FarmclubInfoModel> response = await FarmclubApiService().getFarmclubRecommendation();
       print("레포 ${response.runtimeType}");
 
       return response;
