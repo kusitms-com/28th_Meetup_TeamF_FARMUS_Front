@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
 
 import '../../../model/farmclub_detail.dart';
 import '../../../model/farmclub_mine.dart';
@@ -12,11 +13,11 @@ class FarmclubController extends GetxController {
   RxInt like = 2.obs; // 초기 좋아요 수
 
   RxBool isLoading = true.obs;
-  Rx<FarmclubDetail?> farmclubInfo = Rx<FarmclubDetail?>(null);
+  Rx<FarmclubMineDetail?> farmclubInfo = Rx<FarmclubMineDetail?>(null);
 
   RxInt selectedFarmclubIndex = RxInt(0);
 
-  void updateSelectedFarmclub(int index) {
+  void updateSelectedFarmclub(int index) async {
     if (index >= 0 && index < myFarmclubState.length) {
       // 새로운 팜클럽 선택
       selectedFarmclubIndex.value = index;
@@ -41,8 +42,8 @@ class FarmclubController extends GetxController {
   void getFarmclubDetail(String challengeId) async {
     try {
       isLoading(true);
-      FarmclubDetail? farmclubData =
-          await FarmclubRepository.getFarmclubDetail(challengeId);
+      FarmclubMineDetail? farmclubData =
+          await FarmclubRepository.getFarmclubMineDetail(challengeId);
 
       farmclubInfo.value = farmclubData;
     } catch (error) {

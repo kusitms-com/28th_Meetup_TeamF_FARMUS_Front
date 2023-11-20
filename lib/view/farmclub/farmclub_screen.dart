@@ -26,6 +26,8 @@ import 'package:mojacknong_android/view/farmclub/farmclub_record_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 
+import '../../model/farmclub_mine_detail.dart';
+
 class FarmclubScreen extends StatefulWidget {
   bool isFarmclub;
 
@@ -84,6 +86,9 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
           Expanded(
             child: controller.myFarmclubState != []
                 ? Obx(() {
+                    final FarmclubMineDetail? farmclubInfo =
+                        controller.farmclubInfo.value;
+
                     print("myFarmclubState: ${controller.myFarmclubState}");
 
                     return SingleChildScrollView(
@@ -99,28 +104,24 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                             height: 16,
                           ),
                           FarmclubTitle(
-                            title: controller.farmclubInfo.value!.challengeName,
-                            veggie: controller.farmclubInfo.value!.veggieName,
+                            title: farmclubInfo!.challengeName,
+                            veggie: farmclubInfo!.veggieName,
                           ),
                           const SizedBox(
                             height: 8,
                           ),
                           FarmclubContent(
-                              content: controller
-                                  .farmclubInfo.value!.challengeDescription),
+                              content: farmclubInfo.challengeDescription),
                           MyFarmclubInfo(
-                            level: controller.farmclubInfo.value!.difficulty,
-                            now: controller.farmclubInfo.value!.currentUser
-                                .toString(),
-                            max: controller.farmclubInfo.value!.maxUser
-                                .toString(),
-                            status: controller.farmclubInfo.value!.status
-                                .toString(),
+                            level: farmclubInfo.difficulty,
+                            now: farmclubInfo.currentUser.toString(),
+                            max: farmclubInfo.maxUser.toString(),
+                            status: farmclubInfo.status.toString(),
                           ),
                           const SizedBox(
                             height: 8,
                           ),
-                          const GroupRate(),
+                          GroupRate(farmclubInfo: farmclubInfo),
                           const SizedBox(
                             height: 16,
                           ),
@@ -145,9 +146,9 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                                 ),
                               );
                             },
-                            child: const ChallengeStep(
-                              step: 0,
-                              title: "준비물을 챙겨요",
+                            child: ChallengeStep(
+                              step: farmclubInfo.stepNum,
+                              title: farmclubInfo.stepName,
                             ),
                           ),
                           const SizedBox(

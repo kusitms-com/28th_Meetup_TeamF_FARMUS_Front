@@ -53,8 +53,6 @@ class _MyFarmclubState extends State<MyFarmclub> {
                           : widget.myFarmclubImage,
                       // 여기에서 이미지를 선택하거나 그레이 이미지로 선택하도록 수정
                       fit: BoxFit.fill,
-                      color: widget.isSelected ? null : Colors.grey,
-                      colorBlendMode: BlendMode.saturation,
                     ),
                   )
                 : null,

@@ -3,6 +3,7 @@ import 'package:mojacknong_android/data/network/base_api_services.dart';
 import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/model/farmclub_mine.dart';
+import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
 
 class FarmclubApiService {
   // 나의 팜클럽 조회
@@ -78,8 +79,32 @@ class FarmclubApiService {
     }
   }
 
+  // 가입한 팜클럽 정보 조회
+  Future<FarmclubMineDetail> getFarmclubMineDetail(String challengeId) async {
+    try {
+      print("challengeId  $challengeId");
+      // API 호출
+      Response response = await ApiClient().dio.get(
+        "/api/farmclub/$challengeId",
+      );
 
-  // 팜클럽 정보 조회
+      // 응답 상태 코드 확인
+      if (response.statusCode == 200) {
+        // 성공적으로 응답받은 경우
+        print(response.data['data']);
+        return FarmclubMineDetail.fromJson(response.data['data']);
+      } else {
+        // 응답이 실패한 경우
+        throw "${response.statusCode}";
+      }
+    } on DioException catch (e) {
+      // DioError 예외 처리
+      print(e.message);
+      throw "${e.message}";
+    }
+  }
+
+  // 가입하지 않은 팜클럽 정보 조회
   Future<FarmclubDetail> getFarmclubDetail(String challengeId) async {
     try {
       print("challengeId  $challengeId");

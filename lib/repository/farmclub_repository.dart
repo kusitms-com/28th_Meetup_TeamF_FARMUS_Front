@@ -2,6 +2,7 @@ import 'package:mojacknong_android/data/network/farmclub_api_service.dart';
 import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/model/farmclub_mine.dart';
+import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
 
 class FarmclubRepository {
 
@@ -46,7 +47,21 @@ class FarmclubRepository {
 
       FarmclubDetail? response =
       await FarmclubApiService().getFarmclubDetail(id);
-      print("FarmclubDetail~!@!: $response");
+
+      return response;
+    } catch (e) {
+      print("에러! getFarmclubDetail: $e");
+      throw "에러! getFarmclubDetail: $e";
+    }
+  }
+
+  // 내 팜클럽 정보 조회
+  static Future<FarmclubMineDetail?> getFarmclubMineDetail(String id) async {
+    try {
+      print("challengeId  $id");
+
+      FarmclubMineDetail? response =
+      await FarmclubApiService().getFarmclubMineDetail(id);
 
       return response;
     } catch (e) {
