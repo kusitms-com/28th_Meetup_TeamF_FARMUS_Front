@@ -37,6 +37,7 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
   @override
   Widget build(BuildContext context) {
     _exploreController.getFarmclubData();
+    _exploreController.getFarmclubRecommend();
 
     return Scaffold(
       appBar: PrimaryAppBar(

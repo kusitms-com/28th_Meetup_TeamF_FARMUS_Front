@@ -5,6 +5,7 @@ import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/model/farmclub_mine.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
+import 'package:mojacknong_android/model/farmclub_recommend.dart';
 
 import '../model/farmclub_mission_response.dart';
 
@@ -100,4 +101,18 @@ class FarmclubRepository {
       throw "레포 에러 $e";
     }
   }
+
+  // 추천 팜클럽 조회
+  static Future<List<FarmclubRecommend>> getFarmclubRecommend() async {
+    try {
+      List<FarmclubRecommend> response = await FarmclubApiService().getFarmclubRecommendation();
+      print("레포 ${response.runtimeType}");
+
+      return response;
+    } catch (e) {
+      print("레포 에러 $e");
+      throw "레포 에러 $e";
+    }
+  }
+
 }
