@@ -9,6 +9,7 @@ import 'package:mojacknong_android/view/farmclub/component/farmclub.dart';
 import 'package:mojacknong_android/view/farmclub/component/floating_button_farmclub.dart';
 import 'package:mojacknong_android/view/farmclub/component/search/brown_category.dart';
 import 'package:mojacknong_android/view/farmclub/component/search/search_category.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_explore_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_search_controller.dart';
 
 class FarmclubExploreScreen extends StatefulWidget {
@@ -19,23 +20,24 @@ class FarmclubExploreScreen extends StatefulWidget {
 }
 
 class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
-  FarmclubSearchController _searchController =
-      Get.put(FarmclubSearchController());
+  FarmclubExploreController _exploreController =
+      Get.put(FarmclubExploreController());
 
   @override
   void initState() {
     super.initState();
-    _searchController.getFarmclubData([], "All", "");
   }
 
   @override
   void dispose() {
-    _searchController.farmclubList.clear();
+    _exploreController.farmclubList.clear();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    _exploreController.getFarmclubData();
+
     return Scaffold(
       appBar: PrimaryAppBar(
         actions: [
@@ -142,7 +144,7 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
                 Expanded(
                   child: Obx(
                     () {
-                      final farmclubList = _searchController.farmclubList;
+                      final farmclubList = _exploreController.farmclubList;
 
                       return ListView.builder(
                         itemCount: farmclubList.length + 1,
@@ -185,28 +187,6 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
         ],
       ),
       floatingActionButton: const FloatingButtonFarmclub(),
-    );
-  }
-
-  Widget _buildCategoryRow(String title, List<String> categories) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(
-          width: 16,
-        ),
-        Text(
-          title,
-          style: const TextStyle(
-            color: FarmusThemeData.grey1,
-            fontFamily: "Pretendard",
-            fontWeight: FontWeight.w600,
-            fontSize: 13,
-          ),
-        ),
-        const SizedBox(width: 8),
-        ...categories.map((category) => BrownCategory(category: category)),
-      ],
     );
   }
 }

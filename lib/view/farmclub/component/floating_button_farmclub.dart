@@ -17,7 +17,7 @@ class FloatingButtonFarmclub extends StatelessWidget {
         child: OutlinedButton(
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return FarmclubMakeScreen();
+              return const FarmclubMakeScreen();
             }));
           },
           style: ButtonStyle(
