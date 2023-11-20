@@ -4,14 +4,9 @@ import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_white.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_feed.dart';
-import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_init.dart';
-import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_picture.dart';
-import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_help.dart';
-import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_content.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_init.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title.dart';
@@ -21,12 +16,8 @@ import 'package:mojacknong_android/view/farmclub/component/my_farmclub_info.dart
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_list.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_feed.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_init.dart';
-import 'package:mojacknong_android/view/farmclub/component/record/record_picture.dart';
-import 'package:mojacknong_android/view/farmclub/component/record/record_profile.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
-import 'package:mojacknong_android/view/farmclub/farmclub_challenge_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_explore_screen.dart';
-import 'package:mojacknong_android/view/farmclub/farmclub_record_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 
@@ -203,7 +194,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return const FarmclubAuthScreen();
+                              return FarmclubAuthScreen(farmclubData: controller.myFarmclubState);
                             },
                           ),
                         );

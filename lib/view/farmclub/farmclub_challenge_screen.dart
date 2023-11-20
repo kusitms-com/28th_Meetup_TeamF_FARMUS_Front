@@ -14,11 +14,9 @@ import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_
 
 class FarmclubChallengeScreen extends StatefulWidget {
   final String? detailId;
-  const FarmclubChallengeScreen({
-    Key? key,
-    required this.detailId
 
-  }) : super(key: key);
+  const FarmclubChallengeScreen({Key? key, required this.detailId})
+      : super(key: key);
 
   @override
   State<FarmclubChallengeScreen> createState() =>
@@ -26,7 +24,8 @@ class FarmclubChallengeScreen extends StatefulWidget {
 }
 
 class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
-  final FarmclubEtcController farmclubController = Get.put(FarmclubEtcController());
+  final FarmclubEtcController farmclubController =
+      Get.put(FarmclubEtcController());
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +73,9 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
             const SizedBox(
               height: 16,
             ),
-            const ChallengePicture(detailId: '',),
+            const ChallengePicture(
+              detailId: '',
+            ),
             const SizedBox(
               height: 16,
             ),
@@ -128,7 +129,7 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return  MyFarmclubMissionScreen(
+                          return MyFarmclubMissionScreen(
                             detailId: widget.detailId,
                           );
                         },
@@ -141,16 +142,7 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
               child: ButtonBrown(
                 text: "미션 인증하기",
                 enabled: RxBool(true),
-                onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const FarmclubAuthScreen();
-                      },
-                    ),
-                  );
-                },
+                onPress: () {},
               ),
             ),
           ],

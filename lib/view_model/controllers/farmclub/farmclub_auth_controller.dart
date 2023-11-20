@@ -6,9 +6,13 @@ import '../../../model/farmclub_mission_response.dart';
 import '../../../repository/farmclub_repository.dart';
 
 class FarmclubAuthController extends GetxController {
+  RxInt registrationId = 0.obs;
   final contentValue = "".obs;
   final image = Rxn<File>();
   final isFormValid = RxBool(false);
+  Rx<FarmclubMissionData?> farmclubMission = Rx<FarmclubMissionData?>(null);
+
+
 
   @override
   void onInit() {
@@ -38,7 +42,10 @@ class FarmclubAuthController extends GetxController {
     try {
       FarmclubMissionResponse response = await FarmclubRepository.postFarmclubMission(registrationId, content, image);
 
-      print(response);
+      print("꺅갹 ${response.data.step}");
+
+      farmclubMission.value = response.data;
+
     } catch (e) {
       print("오류: $e");
     }

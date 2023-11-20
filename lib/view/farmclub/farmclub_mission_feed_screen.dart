@@ -113,14 +113,7 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                 text: "미션 인증하기",
                 enabled: RxBool(true),
                 onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return FarmclubAuthScreen();
-                      },
-                    ),
-                  );
+
                 },
               ),
             ),
