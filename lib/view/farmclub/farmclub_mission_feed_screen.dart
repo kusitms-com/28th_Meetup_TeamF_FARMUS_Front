@@ -76,7 +76,7 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                   SizedBox(
                     height: 16,
                   ),
-                  ChallengeStep(step: 0, title: "준비물을 챙겨요"),
+                  ChallengeStep(step: widget.stepNum.toInt(), title: "준비물을 챙겨요"),
                   SizedBox(
                     height: 16,
                   ),
