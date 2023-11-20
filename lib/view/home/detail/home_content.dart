@@ -5,7 +5,19 @@ import 'package:mojacknong_android/view/home/component/home_farmclub.dart';
 import '../../../common/farmus_theme_data.dart';
 
 class HomeContent extends StatefulWidget {
-  const HomeContent({Key? key}) : super(key: key);
+  final int? challengeId;
+  final String? veggieNickname;
+  final int? stepNum;
+  final String? stepName;
+  final String? color;
+  const HomeContent({
+    Key? key,
+    required this.challengeId,
+    required this.veggieNickname,
+    required this.stepNum,
+    required this.stepName,
+    required this.color
+  }) : super(key: key);
 
   @override
   State<HomeContent> createState() => _HomeContentState();
@@ -38,9 +50,9 @@ class _HomeContentState extends State<HomeContent> {
             children: [
               if (isDataLoaded)
                 HomeFarmClub(
-                  nameFuture: Future.value(apiData[0]),
-                  missionFuture: Future.value(apiData[2]),
-                  numFuture: Future.value(apiData[1]),
+                  veggieNickname: widget.veggieNickname,
+                  stepName: widget.stepName,
+                  stepNum: widget.stepNum,
                   onTap: () {},
                 ),
               const SizedBox(height: 10),

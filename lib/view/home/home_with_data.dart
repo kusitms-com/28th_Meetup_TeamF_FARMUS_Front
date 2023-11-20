@@ -3,9 +3,20 @@ import 'package:mojacknong_android/view/home/detail/home_content.dart';
 import 'package:mojacknong_android/view/home/detail/today_routine_list.dart';
 
 import '../../common/farmus_theme_data.dart';
+import '../../model/current_mission_list.dart';
+import '../../model/my_vege_routine_list.dart';
 
 class HomeWithVege extends StatelessWidget {
-  const HomeWithVege({Key? key}) : super(key: key);
+
+  CurrentMissionList? currentMissionList;
+  MyVegeRoutineList? myVegeRoutineList;
+
+
+   HomeWithVege({
+    Key? key,
+    required this.currentMissionList,
+    required this.myVegeRoutineList
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +32,19 @@ class HomeWithVege extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         Expanded(
-          child: ListView(
+          child: ListView.builder(
             padding: const EdgeInsets.only(top: 4.0),
-            children: const [
-              HomeContent(),
-              HomeContent(),
-              HomeContent(),
-            ],
+            itemCount: currentMissionList?.missions.length,
+            itemBuilder: (context, index) {
+              return HomeContent(
+                challengeId: currentMissionList?.missions[index].challengeId,
+                veggieNickname: currentMissionList?.missions[index].veggieNickname,
+                stepNum: currentMissionList?.missions[index].stepNum,
+                stepName: currentMissionList?.missions[index].stepName,
+                color: currentMissionList?.missions[index].color,
+
+              );
+            },
           ),
         ),
         const SizedBox(height: 20),
@@ -43,14 +60,14 @@ class HomeWithVege extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         Expanded(
-          child: ListView(
-            padding: const EdgeInsets.only(left: 8),
-            children: const [
-              TodayRoutineList(text: "물 갈아 주기"),
-              TodayRoutineList(text: "하루에 물 한 번 주기"),
-              TodayRoutineList(text: "군것질 그만 하기"),
-              TodayRoutineList(text: "군것질 그만 하기"),
-            ],
+          child: ListView.builder(
+            padding: const EdgeInsets.only(top: 4.0),
+            itemCount: currentMissionList?.missions.length,
+            itemBuilder: (context, index) {
+              return TodayRoutineList(
+                  text: "군것질 그만 하기"
+              );
+            },
           ),
         ),
       ],

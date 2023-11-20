@@ -34,10 +34,14 @@ class _TodayRoutineListState extends State<TodayRoutineList> {
 
   @override
   Widget build(BuildContext context) {
-    print("루틴 체크 박스");
+   // print("루틴 체크 박스");
     return SizedBox(
       height: 47, // Adjust the height as needed
       child: ListTile(
+          // decoration: BoxDecoration(
+          //   color: const Color(0xffDCFFD4),
+          //   borderRadius: BorderRadius.circular(10),
+          // )
         title: Row(
           children: [
             GestureDetector(

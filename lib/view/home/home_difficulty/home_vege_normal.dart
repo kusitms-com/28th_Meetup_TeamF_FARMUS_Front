@@ -4,7 +4,8 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/register/register_screen.dart';
 
 class HomeVegeNormal extends StatelessWidget {
-  const HomeVegeNormal({Key? key}) : super(key: key);
+  final String? name;
+  const HomeVegeNormal({Key? key, this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +45,11 @@ class HomeVegeNormal extends StatelessWidget {
                     fontSize: 20),
               ),
             ),
-            const Positioned(
+           Positioned(
               top: 90,
               left: 40,
               child: Text(
-                '파머 님께 추천하는 채소예요\n채소를 등록하고 홈파밍을 시작해볼까요?',
+                '${name}' +'님께 추천하는 채소예요\n채소를 등록하고 홈파밍을 시작해볼까요?',
                 style: TextStyle(
                     color: FarmusThemeData.dark,
                     fontFamily: "Pretendard",

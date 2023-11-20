@@ -47,9 +47,9 @@ class _MissionRoutineScreenState extends State<MissionRoutineScreen> {
                           TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  const HomeContent(),
-                  const HomeContent(),
-                  const HomeContent(),
+                  const HomeContent(challengeId: null, veggieNickname: '', stepNum: null, stepName: '', color: '',),
+                  const HomeContent(challengeId: null, veggieNickname: '', stepNum: null, stepName: '', color: '',),
+                  const HomeContent(challengeId: null, veggieNickname: '', stepNum: null, stepName: '', color: '',),
                   const Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Text(

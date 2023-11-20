@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/home_green_box_user.dart';
 
+import '../../../model/my_vege_list.dart';
+import '../component/diary/diary_screen.dart';
+
 class SwipeScreen extends StatefulWidget {
-  const SwipeScreen({Key? key}) : super(key: key);
+  final MyVegeList? myVegeList;
+  const SwipeScreen({
+    Key? key,
+    required this.myVegeList
+  }) : super(key: key);
 
   @override
   _SwipeScreenState createState() => _SwipeScreenState();
@@ -11,7 +18,7 @@ class SwipeScreen extends StatefulWidget {
 
 class _SwipeScreenState extends State<SwipeScreen> {
   final PageController _pageController = PageController();
-  final List<String> _pageContents = ['Page 1', 'Page 2', 'Page 3'];
+ // final List<String> _pageContents = ['Page 1', 'Page 2', 'Page 3'];
   int _currentPage = 0;
 
   @override
@@ -23,7 +30,7 @@ class _SwipeScreenState extends State<SwipeScreen> {
           Expanded(
             child: PageView.builder(
               controller: _pageController,
-              itemCount: _pageContents.length,
+              itemCount: widget.myVegeList?.diaryPostList.length,
               onPageChanged: (int page) {
                 setState(() {
                   _currentPage = page;
@@ -32,12 +39,12 @@ class _SwipeScreenState extends State<SwipeScreen> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const DiaryScreen(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DiaryScreen(),
+                      ),
+                    );
                   },
                   child: buildPageWidget(index),
                 );
@@ -50,23 +57,23 @@ class _SwipeScreenState extends State<SwipeScreen> {
     );
   }
 
-  Widget buildPageWidget(int index) {
-    if (index == 0) {
-      return const HomeGreenBoxUser();
-    } else if (index == 1) {
-      return const HomeGreenBoxUser();
-    } else if (index == 2) {
-      return const HomeGreenBoxUser();
-    } else {
-      return Container();
-    }
+  Widget buildPageWidget(index) {
+
+      return  HomeGreenBoxUser(
+        userNickName: widget.myVegeList?.userNickname,
+        id: widget.myVegeList?.diaryPostList[index].id,
+        nickname: widget.myVegeList?.diaryPostList[index].nickname,
+        image: widget.myVegeList?.diaryPostList[index].image,
+        age: widget.myVegeList?.diaryPostList[index].age
+      );
+
   }
 
   Widget buildPageIndicator() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
-        _pageContents.length,
+        widget.myVegeList!.diaryPostList.length,
         (index) => buildIndicator(index),
       ),
     );
