@@ -6,21 +6,23 @@ class FarmclubTextInfo extends StatefulWidget {
   final String vegetable;
   final String farmclubTitle;
   final String level;
-  final String nowPerson;
-  final String maxPerson;
-  final String dday;
+  final int nowPerson;
+  final int maxPerson;
+  final String? dday;
+  final String status;
   final bool isRecommend;
 
-  FarmclubTextInfo({
-    Key? key,
-    required this.vegetable,
-    required this.farmclubTitle,
-    required this.level,
-    required this.nowPerson,
-    required this.maxPerson,
-    required this.dday,
-    required this.isRecommend,
-  }) : super(key: key);
+  FarmclubTextInfo(
+      {Key? key,
+      required this.vegetable,
+      required this.farmclubTitle,
+      required this.level,
+      required this.nowPerson,
+      required this.maxPerson,
+      this.dday,
+      required this.isRecommend,
+      required this.status})
+      : super(key: key);
 
   @override
   State<FarmclubTextInfo> createState() => _FarmclubTextInfoState();
@@ -81,10 +83,15 @@ class _FarmclubTextInfoState extends State<FarmclubTextInfo> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "시작한 지 ${widget.dday}일째",
-                style: FarmusThemeData.grey1Style11,
-              ),
+              widget.status != "준비 중"
+                  ? Text(
+                      "시작한 지 ${widget.dday}일째",
+                      style: FarmusThemeData.grey1Style11,
+                    )
+                  : Text(
+                      widget.status,
+                      style: FarmusThemeData.grey1Style11,
+                    ),
             ],
           ),
         ],

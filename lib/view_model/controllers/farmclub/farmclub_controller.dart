@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mojacknong_android/model/farmclub_info_model.dart';
 
 class FarmclubController extends GetxController {
   final TextEditingController controller = TextEditingController();
@@ -22,9 +23,17 @@ class FarmclubController extends GetxController {
   final contentValue = "".obs;
   final image = Rxn<File>();
   final isFormVaild = RxBool(false);
+  RxList<FarmclubInfoModel> farmclubList = <FarmclubInfoModel>[].obs;
 
   var isCombinedWidgetVisible = true.obs;
+
   String enteredText = '';
+  RxList<String> difficulties = <String>[].obs;
+  RxString selectedStatus = "".obs;
+  RxString selectedKeyword = "".obs;
+
+  // 선택한 카테고리 정보 저장
+  RxString selectedCategory = "".obs;
 
   @override
   void onInit() {
@@ -89,6 +98,20 @@ class FarmclubController extends GetxController {
 
   void updateEnteredText(String text) {
     enteredText = text;
-    isCombinedWidgetVisible.value = false;
+  }
+
+  // 선택한 카테고리 업데이트 메서드
+  void updateSelectedCategory(String category) {
+    selectedCategory.value = category;
+  }
+
+  // difficulties 업데이트 메서드
+  void updateDifficulties(List<String> updatedDifficulties) {
+    difficulties.assignAll(updatedDifficulties);
+  }
+
+  // status 업데이트 메서드
+  void updateStatus(String updatedStatus) {
+    selectedStatus.value = updatedStatus;
   }
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mojacknong_android/data/network/home_screen_api_service.dart';
 import 'package:mojacknong_android/view/home/component/home_farmclub.dart';
 
+import '../../../common/farmus_theme_data.dart';
+
 class HomeContent extends StatefulWidget {
   const HomeContent({Key? key}) : super(key: key);
 
@@ -47,7 +49,7 @@ class _HomeContentState extends State<HomeContent> {
                   child: Text(
                     '',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 13, fontFamily: 'Pretendard'),
+                    style:  FarmusThemeData.darkStyle13,
                   ),
                 ),
             ],

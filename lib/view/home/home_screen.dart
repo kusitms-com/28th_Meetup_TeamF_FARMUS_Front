@@ -6,7 +6,7 @@ import 'package:mojacknong_android/view/home/component/mission_routine/mission_r
 import 'package:mojacknong_android/view/home/detail/home_custom_app_bar.dart';
 import 'package:mojacknong_android/view/home/detail/home_swipe.dart';
 import 'package:mojacknong_android/view/home/home_with_data.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -46,10 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   const Text(
                     '미션/루틴',
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: FarmusThemeData.darkStyle17
+
                   ),
                   const Spacer(),
                   InkWell(

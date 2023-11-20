@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mojacknong_android/data/network/farmclub_api_service.dart';
 
 class FarmclubMakeController extends GetxController {
   // 선택된 채소들의 상태를 저장하는 변수
@@ -25,6 +26,8 @@ class FarmclubMakeController extends GetxController {
   RxBool hasIntroInput = RxBool(false);
 
   final isFormVaild = RxBool(false);
+
+  final FarmclubApiService _farmclubApiService = FarmclubApiService();
 
   @override
   void onInit() {
