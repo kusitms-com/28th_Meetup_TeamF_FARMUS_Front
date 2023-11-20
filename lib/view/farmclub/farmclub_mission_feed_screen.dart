@@ -9,7 +9,6 @@ import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_h
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/mission_feed.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_mission_controller.dart';
 
 class FarmclubMissionFeedScreen extends StatefulWidget {
@@ -85,9 +84,13 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                   SizedBox(
                     height: 8,
                   ),
-                  MissionFeed(),
-                  MissionFeed(),
-                  MissionFeed(),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: _farmclubMissionController.farmclubMissionList
+                          .map((mission) => MissionFeed(mission: mission))
+                          .toList(),
+                    ),
+                  ),
                   SizedBox(
                     height: 70,
                   ),
