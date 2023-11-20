@@ -5,7 +5,14 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 class FarmclubTitle extends StatefulWidget {
-  const FarmclubTitle({super.key});
+  final String? title;
+  final String? veggie;
+
+  const FarmclubTitle({
+    super.key,
+    required this.title,
+    required this.veggie,
+  });
 
   @override
   State<FarmclubTitle> createState() => _FarmclubTitleState();
@@ -23,8 +30,8 @@ class _FarmclubTitleState extends State<FarmclubTitle> {
         children: [
           Row(
             children: [
-              const Text(
-                "상추 좋아하세요",
+               Text(
+                widget.title!,
                 style: FarmusThemeData.darkStyle18,
               ),
               const SizedBox(
@@ -34,8 +41,8 @@ class _FarmclubTitleState extends State<FarmclubTitle> {
               const SizedBox(
                 width: 8,
               ),
-              const Text(
-                "상추",
+               Text(
+                widget.veggie!,
                 style: FarmusThemeData.darkStyle13,
               ),
               const Spacer(),

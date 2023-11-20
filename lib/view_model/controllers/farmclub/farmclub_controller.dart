@@ -11,10 +11,8 @@ class FarmclubController extends GetxController {
   RxBool isSelectLike = RxBool(false);
   RxInt like = 2.obs; // 초기 좋아요 수
 
-
   RxBool isLoading = true.obs;
   Rx<FarmclubDetail?> farmclubInfo = Rx<FarmclubDetail?>(null);
-
 
   RxInt selectedFarmclubIndex = RxInt(0);
 
@@ -23,7 +21,7 @@ class FarmclubController extends GetxController {
       // 새로운 팜클럽 선택
       selectedFarmclubIndex.value = index;
       selectedFarmclubIndex.refresh();
-
+      getFarmclubDetail(myFarmclubState.value[index].challengeId.toString());
       print(selectedFarmclubIndex.value);
     }
   }
@@ -32,6 +30,7 @@ class FarmclubController extends GetxController {
   void getMyFarmclub() async {
     try {
       List<FarmclubMine> myFarmclubs = await FarmclubRepository.getFarmclub();
+      getFarmclubDetail(myFarmclubs[0].challengeId.toString());
 
       myFarmclubState.value = myFarmclubs;
     } catch (e) {
@@ -42,9 +41,8 @@ class FarmclubController extends GetxController {
   void getFarmclubDetail(String challengeId) async {
     try {
       isLoading(true);
-      print("1111 $farmclubInfo");
       FarmclubDetail? farmclubData =
-      await FarmclubRepository.getFarmclubDetail(challengeId);
+          await FarmclubRepository.getFarmclubDetail(challengeId);
 
       farmclubInfo.value = farmclubData;
     } catch (error) {
