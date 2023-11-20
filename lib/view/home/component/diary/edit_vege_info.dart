@@ -16,7 +16,7 @@ class _EditVegeInfoState extends State<EditVegeInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const EditVegeAppBar(),
+      appBar: const EditAppBar(title: '채소 정보'),
       backgroundColor: FarmusThemeData.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

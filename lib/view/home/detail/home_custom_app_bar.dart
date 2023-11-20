@@ -12,49 +12,49 @@ class HomeCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      actions: const [],
       elevation: 0,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      title: Stack(
         children: [
-          Expanded(
-            child: Center(
-              child: SvgPicture.asset(
-                'assets/image/logo_farmus.svg',
-                width: 88,
-                height: 19,
-              ),
+          Align(
+            alignment: Alignment.center,
+            child: SvgPicture.asset(
+              'assets/image/logo_farmus.svg',
+              width: 88,
+              height: 19,
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const RegisterScreen(), // YourNewPage에 해당하는 새로운 페이지로 이동합니다.
-                    ),
-                  );
-                },
-                child: SvgPicture.asset(
-                  'assets/image/ic_math-plus.svg',
-                  width: 24,
-                  height: 24,
+          Align(
+            alignment: Alignment.centerRight,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterScreen(),
+                      ),
+                    );
+                  },
+                  child: SvgPicture.asset(
+                    'assets/image/ic_math-plus.svg',
+                    width: 24,
+                    height: 24,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 16),
-              InkWell(
-                onTap: () {},
-                child: SvgPicture.asset(
-                  'assets/image/ic_alarm.svg',
-                  width: 24,
-                  height: 24,
+                const SizedBox(width: 16),
+                InkWell(
+                  onTap: () {},
+                  child: SvgPicture.asset(
+                    'assets/image/ic_alarm.svg',
+                    width: 24,
+                    height: 24,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
