@@ -67,7 +67,7 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
                 ),
               );
             },
-            child: widget.farmclubInfo.stepImages != [] ? ChallengePicture(
+            child: widget.farmclubInfo.stepImages.isNotEmpty ? ChallengePicture(
               detailId: '',
             ) : ChallengeInit()),
       ],

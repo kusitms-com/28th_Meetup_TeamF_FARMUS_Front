@@ -136,7 +136,7 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
             ),
             ButtonBrown(
               text: "업로드하기",
-              enabled: _authController.isFormVaild,
+              enabled: _authController.isFormValid,
               onPress: () {
                 _authController.postFarmclubMission("7", _authController.contentValue.toString(), _authController.image.value!);
                 Navigator.pop(context);

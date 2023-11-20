@@ -7,7 +7,7 @@ import '../../../repository/farmclub_repository.dart';
 class FarmclubAuthController extends GetxController {
   final contentValue = "".obs;
   final image = Rxn<File>();
-  final isFormVaild = RxBool(false);
+  final isFormValid = RxBool(false);
 
   @override
   void onInit() {
@@ -29,11 +29,10 @@ class FarmclubAuthController extends GetxController {
   }
 
   void checkFormVaildity() {
-    isFormVaild.value = contentValue.isNotEmpty && image.value != null;
+    isFormValid.value = contentValue.isNotEmpty && image.value != null;
   }
 
 
-  // 나의 팜클럽 조회
   void postFarmclubMission(String registrationId, String content, File image) async {
     try {
       String response = await FarmclubRepository.postFarmclubMission(registrationId, content, image);

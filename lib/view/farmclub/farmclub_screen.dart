@@ -150,7 +150,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                             height: 12,
                           ),
                           const FarmclubTitleWithDivider(title: "함께 기록해요"),
-                          farmclubInfo.diaries != []
+                          farmclubInfo.diaries.isNotEmpty
                               ? RecordFeed(farmclubInfo: farmclubInfo)
                               : RecordInit(),
                           const SizedBox(
