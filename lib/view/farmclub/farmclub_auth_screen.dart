@@ -9,6 +9,7 @@ import 'package:mojacknong_android/view/community/component/image_add.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_auth_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 
 class FarmclubAuthScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class FarmclubAuthScreen extends StatefulWidget {
 }
 
 class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
-  FarmclubEtcController farmclubController = Get.put(FarmclubEtcController());
+  FarmclubAuthController _authController = Get.put(FarmclubAuthController());
   BottomSheetController bottomSheetController =
       Get.put(BottomSheetController());
 
@@ -35,7 +36,7 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
       });
     }
 
-    farmclubController.image.value = _selectedImage;
+    _authController.image.value = _selectedImage;
   }
 
   @override
@@ -100,7 +101,7 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
                 enabledBorder: InputBorder.none,
               ),
               maxLength: 50,
-              onChanged: farmclubController.updateContentValue,
+              onChanged: _authController.updateContentValue,
             ),
           ),
         ],
@@ -124,7 +125,7 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: Obx(
                     () => Text(
-                      "${farmclubController.contentValue.value.length} / 50",
+                      "${_authController.contentValue.value.length} / 50",
                       style: TextStyle(
                         color: FarmusThemeData.dark.withOpacity(0.3),
                       ),
@@ -135,8 +136,9 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
             ),
             ButtonBrown(
               text: "업로드하기",
-              enabled: farmclubController.isFormVaild,
+              enabled: _authController.isFormVaild,
               onPress: () {
+                _authController.postFarmclubMission("7", _authController.contentValue.toString(), _authController.image.value!);
                 Navigator.pop(context);
                 bottomSheetController.showAuthDialog(
                     context, "상추 좋아하세요", "Step 0을 완료했어요");

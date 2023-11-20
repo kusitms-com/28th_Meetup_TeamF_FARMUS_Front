@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:mojacknong_android/data/network/base_api_services.dart';
 import 'package:mojacknong_android/model/farmclub_detail.dart';
@@ -160,16 +163,33 @@ class FarmclubApiService {
     }
   }
 
-  // 미션 게시글 생성
   Future<String> postFarmclubMission({
     required String registrationId,
     required String content,
-    required String image,
+    required File image,
   }) async {
     try {
+      // content를 JSON 형태로 변환
+      Map<String, dynamic> contentMap = {
+        "registrationId": registrationId,
+        "content": content,
+      };
+
+      FormData formData = FormData.fromMap({
+        'content': jsonEncode(contentMap),  // content를 JSON 형태로 추가
+        'image': await MultipartFile.fromFile(
+          image.path,
+          filename: image.path.split('/').last,
+        ),
+      });
+
       Response response = await ApiClient().dio.post(
-            "/api/farmclub/mission",
-          );
+        "/api/farmclub/mission",
+        data: formData,
+        options: Options(
+          headers: {'Content-Type': 'multipart/form-data'},
+        ),
+      );
 
       // 응답 상태 코드 확인
       if (response.statusCode == 201) {
@@ -180,9 +200,10 @@ class FarmclubApiService {
         // 응답이 실패한 경우
         throw "${response.statusCode}";
       }
-    } on DioException catch (e) {
+    } on DioError catch (e) {
       print(e.message);
       throw "${e.message}";
     }
   }
+
 }

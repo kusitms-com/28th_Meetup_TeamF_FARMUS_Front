@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:mojacknong_android/data/network/farmclub_api_service.dart';
 import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/model/farmclub_info_model.dart';
@@ -74,6 +76,20 @@ class FarmclubRepository {
   static Future<String> postRegister(String challengeId, String veggieId) async {
     try {
       String response = await FarmclubApiService().postRegister(challengeId: challengeId, veggieId: veggieId);
+      print("레포 ${response}");
+
+      return response;
+    } catch (e) {
+      print("레포 에러 $e");
+      throw "레포 에러 $e";
+    }
+  }
+
+
+  static Future<String> postFarmclubMission(String registrationId, String content, File image) async {
+    try {
+      String response = await FarmclubApiService().postFarmclubMission(registrationId: registrationId, content: content, image: image);
+
       print("레포 ${response}");
 
       return response;

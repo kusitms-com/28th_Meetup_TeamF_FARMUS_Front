@@ -17,9 +17,6 @@ class FarmclubEtcController extends GetxController {
 
   RxInt selectedTextBoxIndex = RxInt(0);
 
-  final contentValue = "".obs;
-  final image = Rxn<File>();
-  final isFormVaild = RxBool(false);
   RxList<FarmclubInfoModel> farmclubList = <FarmclubInfoModel>[].obs;
 
   var isCombinedWidgetVisible = true.obs;
@@ -45,24 +42,6 @@ class FarmclubEtcController extends GetxController {
         hasInput.value = false;
       }
     });
-
-    ever(contentValue, (_) {
-      checkFormVaildity();
-    });
-
-    ever(image, (_) => checkFormVaildity());
-  }
-
-  void updateContentValue(String value) {
-    contentValue.value = value;
-  }
-
-  void setImageFile(File file) {
-    image.value = file;
-  }
-
-  void checkFormVaildity() {
-    isFormVaild.value = contentValue.isNotEmpty && image.value != null;
   }
 
   void toggleSelectCategory() {
