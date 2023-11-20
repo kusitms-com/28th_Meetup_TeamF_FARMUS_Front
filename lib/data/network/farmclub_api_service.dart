@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -7,7 +6,7 @@ import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/model/farmclub_mine.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
-import 'package:mojacknong_android/model/farmclub_recommend.dart';
+import 'package:mojacknong_android/model/farmclub_mission.dart';
 
 import '../../model/farmclub_mission_response.dart';
 
@@ -176,14 +175,14 @@ class FarmclubApiService {
       FormData formData = FormData.fromMap({
         "registrationId": registrationId.toString(),
         "content": content,
-        "image": await MultipartFile.fromFile(image.path, filename: "image.png"),
+        "image":
+            await MultipartFile.fromFile(image.path, filename: "image.png"),
       });
 
       Response response = await ApiClient().dio.post(
-        "/api/farmclub/mission",
-        data: formData,
-
-      );
+            "/api/farmclub/mission",
+            data: formData,
+          );
 
       // 응답 상태 코드 확인
       if (response.statusCode == 200) {
@@ -200,15 +199,17 @@ class FarmclubApiService {
     }
   }
 
+  // 추천 조회
   Future<List<FarmclubInfoModel>> getFarmclubRecommendation() async {
     try {
-      Response response = await ApiClient().dio.get("/api/farmclub/recommendation");
+      Response response =
+          await ApiClient().dio.get("/api/farmclub/recommendation");
 
       if (response.statusCode == 200) {
         print(response.data["data"]);
         List<dynamic> dataList = response.data['data'];
         List<FarmclubInfoModel> farmclubRecommend =
-        dataList.map((data) => FarmclubInfoModel.fromJson(data)).toList();
+            dataList.map((data) => FarmclubInfoModel.fromJson(data)).toList();
 
         print(farmclubRecommend);
 
@@ -223,4 +224,33 @@ class FarmclubApiService {
     }
   }
 
+  // 미션 목록 조회
+  Future<List<FarmclubMission>> getFarmclubMission(
+    int challengeId,
+    int stepNum,
+  ) async {
+    try {
+      Response response = await ApiClient().dio.get(
+        "/api/farmclub/recommendation",
+        queryParameters: {"challengeId": challengeId, 'stepNum': stepNum},
+      );
+
+      if (response.statusCode == 200) {
+        print(response.data["data"]);
+        List<dynamic> dataList = response.data['data'];
+        List<FarmclubMission> farmclubMission =
+            dataList.map((data) => FarmclubMission.fromJson(data)).toList();
+
+        print(farmclubMission);
+
+        return farmclubMission;
+      } else {
+        // 오류 발생 시 빈 리스트 반환
+        return [];
+      }
+    } on DioException catch (e) {
+      print(e.message);
+      throw "${e.message}";
+    }
+  }
 }

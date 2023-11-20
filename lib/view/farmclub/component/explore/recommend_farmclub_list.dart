@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/model/farmclub_info_model.dart';
-import 'package:mojacknong_android/model/farmclub_recommend.dart';
 import 'package:mojacknong_android/view/farmclub/component/explore/recommned_farmclub.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_explore_controller.dart';
 
