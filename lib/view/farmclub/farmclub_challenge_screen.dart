@@ -68,9 +68,7 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
             const SizedBox(
               height: 16,
             ),
-            const ChallengePicture(
-              detailId: '',
-            ),
+            const ChallengePicture(),
             const SizedBox(
               height: 16,
             ),

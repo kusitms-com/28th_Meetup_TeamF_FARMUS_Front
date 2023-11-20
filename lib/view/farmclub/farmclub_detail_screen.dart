@@ -149,10 +149,9 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
                 SizedBox(
                   height: 16,
                 ),
-                farmclubInfo.stepImages.isNotEmpty ?
-                ChallengePicture(
-                  detailId: "",
-                ) : Center(child: ChallengeInit()),
+                farmclubInfo.stepImages.isNotEmpty
+                    ? ChallengePicture()
+                    : Center(child: ChallengeInit()),
                 SizedBox(
                   height: 16,
                 ),

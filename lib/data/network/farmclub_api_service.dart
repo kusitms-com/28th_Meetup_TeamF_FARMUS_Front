@@ -223,23 +223,27 @@ class FarmclubApiService {
       throw "${e.message}";
     }
   }
-
-  // 미션 목록 조회
+// 미션 목록 조회
   Future<List<FarmclubMission>> getFarmclubMission(
-    int challengeId,
-    int stepNum,
-  ) async {
+      int challengeId,
+      int stepNum,
+      ) async {
+    print(challengeId);
+    print(stepNum);
     try {
       Response response = await ApiClient().dio.get(
-        "/api/farmclub/recommendation",
+        "/api/farmclub/mission/",
         queryParameters: {"challengeId": challengeId, 'stepNum': stepNum},
       );
 
+      print(response.data);
+
       if (response.statusCode == 200) {
+        print("성공티비");
         print(response.data["data"]);
         List<dynamic> dataList = response.data['data'];
         List<FarmclubMission> farmclubMission =
-            dataList.map((data) => FarmclubMission.fromJson(data)).toList();
+        dataList.map((data) => FarmclubMission.fromJson(data)).toList();
 
         print(farmclubMission);
 
@@ -253,4 +257,5 @@ class FarmclubApiService {
       throw "${e.message}";
     }
   }
+
 }
