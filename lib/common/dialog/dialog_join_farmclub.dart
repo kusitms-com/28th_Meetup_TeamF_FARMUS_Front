@@ -36,11 +36,16 @@ class _DialogJoinFarmclubState extends State<DialogJoinFarmclub> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 30,
+                  Center(
+                    child: SizedBox(
+                      height: 30,
+                    ),
                   ),
                   widget.image != null
-                      ? Image.asset(widget.image)
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image.network(widget.image),
+                        )
                       : SvgPicture.asset(
                           "assets/image/ic_lettuce_blue.svg",
                         ),

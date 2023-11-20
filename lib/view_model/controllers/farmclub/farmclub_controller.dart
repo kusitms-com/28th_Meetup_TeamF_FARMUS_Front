@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
 
-import '../../../model/farmclub_detail.dart';
 import '../../../model/farmclub_mine.dart';
 import '../../../repository/farmclub_repository.dart';
 
@@ -23,7 +22,7 @@ class FarmclubController extends GetxController {
       selectedFarmclubIndex.value = index;
       selectedFarmclubIndex.refresh();
       getFarmclubDetail(myFarmclubState.value[index].challengeId.toString());
-      print(selectedFarmclubIndex.value);
+      print("gggg ${selectedFarmclubIndex.value}");
     }
   }
 
@@ -31,7 +30,7 @@ class FarmclubController extends GetxController {
   void getMyFarmclub() async {
     try {
       List<FarmclubMine> myFarmclubs = await FarmclubRepository.getFarmclub();
-      getFarmclubDetail(myFarmclubs[0].challengeId.toString());
+      getFarmclubDetail(myFarmclubs[selectedFarmclubIndex.toInt()].challengeId.toString());
 
       myFarmclubState.value = myFarmclubs;
     } catch (e) {
@@ -46,6 +45,7 @@ class FarmclubController extends GetxController {
           await FarmclubRepository.getFarmclubMineDetail(challengeId);
 
       farmclubInfo.value = farmclubData;
+
     } catch (error) {
       // 오류 처리 로직 추가
       print('Error in getFarmclubDetail: $error');

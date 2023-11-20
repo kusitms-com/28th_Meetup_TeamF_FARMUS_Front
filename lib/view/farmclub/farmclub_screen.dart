@@ -19,7 +19,10 @@ import 'package:mojacknong_android/view/farmclub/component/record/record_init.da
 import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_explore_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
+import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_auth_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_make_controller.dart';
 
 import '../../model/farmclub_mine_detail.dart';
 
@@ -34,6 +37,7 @@ class FarmclubScreen extends StatefulWidget {
 
 class _FarmclubScreenState extends State<FarmclubScreen> {
   FarmclubController controller = Get.put(FarmclubController());
+  FarmclubAuthController _authController = Get.put(FarmclubAuthController());
 
   @override
   void initState() {
@@ -189,15 +193,22 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                     child: ButtonBrown(
                       text: "미션 인증하기",
                       enabled: RxBool(true),
-                      onPress: () {
-                        Navigator.push(
+                      onPress: () async {
+                        await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return FarmclubAuthScreen(farmclubData: controller.myFarmclubState);
+                              return FarmclubAuthScreen(
+                                  farmclubData: controller.myFarmclubState);
                             },
                           ),
                         );
+
+                        // 업로드 성공 후 새로고침
+                        if (_authController.missionUploaded.value) {
+                          _authController.missionUploaded.value = false; // 초기화
+                          super.initState(); // FarmclubScreen 새로고침
+                        }
                       },
                     ),
                   ),
@@ -206,5 +217,10 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
             )
           : null,
     );
+  }
+
+  @override
+  void didUpdateWidget(FarmclubScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
   }
 }

@@ -38,7 +38,7 @@ class GroupRate extends StatelessWidget {
               child: Row(
                 children: [
                   for (int i = 0; i < personValues.length; i++)
-                    (personValues[i] == '1')
+                    (i == farmclubInfo.stepNum)
                         ? GroupRateStepTrue(person: personValues[i], step: i.toString())
                         : GroupRateStepFalse(person: personValues[i], step: i.toString()),
                 ],

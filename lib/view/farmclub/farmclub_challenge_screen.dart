@@ -10,6 +10,7 @@ import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_s
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
+import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 
 class FarmclubChallengeScreen extends StatefulWidget {
@@ -26,6 +27,8 @@ class FarmclubChallengeScreen extends StatefulWidget {
 class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
   final FarmclubEtcController farmclubController =
       Get.put(FarmclubEtcController());
+
+  final BottomSheetController _bottomSheetController = BottomSheetController();
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +145,10 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
               child: ButtonBrown(
                 text: "미션 인증하기",
                 enabled: RxBool(true),
-                onPress: () {},
+                onPress: () {
+                  _bottomSheetController.showMissionFinishDialog(context);
+
+                },
               ),
             ),
           ],
@@ -150,4 +156,5 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
       ),
     );
   }
+
 }
