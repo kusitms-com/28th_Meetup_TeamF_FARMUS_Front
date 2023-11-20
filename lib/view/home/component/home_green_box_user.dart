@@ -4,7 +4,18 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/diary/diary_screen.dart';
 
 class HomeGreenBoxUser extends StatelessWidget {
-  const HomeGreenBoxUser({Key? key}) : super(key: key);
+  final String? userNickName;
+  final int? id;
+  final String? nickname;
+  final String? image;
+  final int? age;
+  const HomeGreenBoxUser({
+    Key? key,
+    this.userNickName,
+    this.id,
+    this.nickname,
+    this.image,
+    this.age}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,21 +49,21 @@ class HomeGreenBoxUser extends StatelessWidget {
                   right: 0,
                   child: Container(
                     alignment: Alignment.topLeft,
-                    child: const Column(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
                           height: 36,
                         ),
                         Text(
-                          '파머 D+11',
+                          '${nickname}' +"+" +"${age}",
                           style: FarmusThemeData.darkStyle13
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         Text(
-                          '파머 님의 사랑으로\n오늘도 쑥쑥 자라는 중',
+                           '${userNickName}' +'님의 사랑으로\n오늘도 쑥쑥 자라는 중',
                           style: TextStyle(
                             color: FarmusThemeData.dark,
                             fontFamily: "Pretendard-Semi-Bold",
@@ -64,10 +75,11 @@ class HomeGreenBoxUser extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: 190,
+                  top: 200,
                   child: Center(
-                    child: SvgPicture.asset(
-                      'assets/image/lettuce1.svg',
+                    child: Image.network(
+                      '${image}',
+                      height: 100,
                     ),
                   ),
                 ),

@@ -6,6 +6,15 @@ import 'package:mojacknong_android/view/home/component/mission_routine/mission_r
 import 'package:mojacknong_android/view/home/detail/home_custom_app_bar.dart';
 import 'package:mojacknong_android/view/home/detail/home_swipe.dart';
 import 'package:mojacknong_android/view/home/home_with_data.dart';
+import '../../model/current_mission_list.dart';
+import '../../model/my_vege_list.dart';
+import '../../model/my_vege_routine_list.dart';
+import '../../repository/homescreen_repository.dart';
+import '../../view_model/controllers/farmclub/farmclub_controller.dart';
+import 'home_difficulty/home_vege_difficult.dart';
+import 'home_difficulty/home_vege_easy.dart';
+import 'home_difficulty/home_vege_normal.dart';
+import 'home_without_vege.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,23 +29,88 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     print('Building HomeScreen');
-    return Scaffold(
+    return  Scaffold(
       appBar: const HomeCustomAppBar(),
       backgroundColor: FarmusThemeData.white,
-      body: Column(
+      body: FutureBuilder(
+        future: HomeScreenRepository.getHomePageData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            print("화면 로딩 중");
+            return const Center(
+              child: CircularProgressIndicator(
+                color: FarmusThemeData.background,
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+
+
+            final List<dynamic> data = snapshot.data as List<dynamic>;
+            final MyVegeList? myVegeList  = data[0] as MyVegeList?;
+            final CurrentMissionList? currentMissionList = data[1] as CurrentMissionList?;
+            final MyVegeRoutineList? myVegeRoutineList = data[2] as MyVegeRoutineList?;
+
+            print(myVegeList?.level);
+
+
+            if(myVegeList!.diaryPostList.isEmpty){
+              return setView(levelSign(myVegeList.level, myVegeList.userNickname), HomeWithoutVege());
+            }
+            return setView( SwipeScreen(
+              myVegeList: myVegeList,
+
+            ),
+                HomeWithVege( currentMissionList: currentMissionList,
+              myVegeRoutineList: myVegeRoutineList,
+
+            ));
+
+
+
+          }
+        },
+      ),
+    );
+
+
+  }
+
+
+
+
+
+  Widget levelSign(String? level, String? nickName){
+
+    if(level == "EASY"){
+      return HomeVegeEasy(
+        name: nickName,
+      );
+    }else if(level == "NORMAL"){
+      return HomeVegeNormal(
+        name: nickName,
+      );
+    }else if(level == "HARD"){
+      return HomeVegeDif(
+        name: nickName,
+      );
+    }
+
+    return HomeVegeEasy();
+  }
+
+  SingleChildScrollView setView<T extends Widget>(T isVegeClass, T noTextClass) {
+    return SingleChildScrollView(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //HomeDivider()부분은 항상 존재
-          //작물이 있으면 SwipeScreen() 호출 후, home_with_vege.dart의 HomeWithVege() 호출
-          //작물이 없으면 home_difficulty파일에 있는 난이도 별 class 호출 후, home_with_vege.dart의 HomeWithoutVege() 호출
           Container(
             height: 390,
             color: FarmusThemeData.white,
-            child: const SwipeScreen(),
-            // child: const HomeVegeEasy(),
+            child: isVegeClass,
           ),
           const SizedBox(height: 10),
-          // 아래 위젯은 home_divider.dart에 있음
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SizedBox(
@@ -46,8 +120,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   const Text(
                     '미션/루틴',
-                    style: FarmusThemeData.darkStyle17
-
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   const Spacer(),
                   InkWell(
@@ -55,7 +131,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MissionRoutineScreen()),
+                          builder: (context) =>
+                          const MissionRoutineScreen(),
+                        ),
                       );
                     },
                     child: SizedBox(
@@ -82,13 +160,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-
           const SizedBox(height: 10),
-
-          const Expanded(child: HomeWithVege()) // 작물 있을 때 호출
-          //const Expanded(child: HomeWithoutVege()) //작물 없을 때 호출
+          SizedBox(height: 300, child: noTextClass),
+          const SizedBox(height: 20),
         ],
       ),
     );
+
+
+
+
+
+
   }
 }

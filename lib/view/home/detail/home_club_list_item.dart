@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class FarmClubListItem extends StatelessWidget {
-  final String veggieNickname;
-  final String routineId;
-  final String routineName;
+  final String? veggieNickname;
+  final int? routineId;
+  final String? routineName;
 
   final VoidCallback onTap;
 
@@ -81,7 +81,7 @@ class FarmClubListItem extends StatelessWidget {
                           ),
                         ),
                         TextSpan(
-                          text: routineId,
+                          text: '${routineId}',
                           style: const TextStyle(
                             color: Colors.grey,
                             fontWeight: FontWeight.bold,

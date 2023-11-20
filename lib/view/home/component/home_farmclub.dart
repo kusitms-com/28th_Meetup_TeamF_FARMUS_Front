@@ -3,16 +3,16 @@ import 'package:mojacknong_android/data/network/home_screen_api_service.dart';
 import 'package:mojacknong_android/view/home/detail/home_club_list_item.dart';
 
 class HomeFarmClub extends StatefulWidget {
-  final Future<String> nameFuture;
-  final Future<String> numFuture;
-  final Future<String> missionFuture;
+  final String? veggieNickname;
+  final int? stepNum;
+  final String? stepName;
   final VoidCallback onTap;
 
   const HomeFarmClub({
     Key? key,
-    required this.nameFuture,
-    required this.missionFuture,
-    required this.numFuture,
+    required this.veggieNickname,
+    required this.stepName,
+    required this.stepNum,
     required this.onTap,
   }) : super(key: key);
 
@@ -43,9 +43,9 @@ class _HomeFarmClubState extends State<HomeFarmClub> {
           return Align(
             alignment: Alignment.centerLeft,
             child: FarmClubListItem(
-              veggieNickname: apiData[0],
-              routineId: apiData[1],
-              routineName: apiData[2],
+              veggieNickname: widget.veggieNickname,
+              routineId: widget.stepNum,
+              routineName: widget.stepName,
               onTap: widget.onTap,
             ),
           );
