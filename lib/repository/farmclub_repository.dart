@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:mojacknong_android/data/network/farmclub_api_service.dart';
 import 'package:mojacknong_android/model/farmclub_detail.dart';
+import 'package:mojacknong_android/model/farmclub_diary.dart';
 import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/model/farmclub_mine.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
@@ -129,6 +130,24 @@ class FarmclubRepository {
           await FarmclubApiService().getFarmclubMission(
         challengeId,
         stepNum,
+      );
+      print("레포 ${response.runtimeType}");
+
+      return response;
+    } catch (e) {
+      print("레포 에러 $e");
+      throw "레포 에러 $e";
+    }
+  }
+
+  // 일기 목록 조회
+  static Future<List<FarmclubDiary>> getFarmclubDiary(
+      int challengeId,
+      ) async {
+    try {
+      List<FarmclubDiary> response =
+      await FarmclubApiService().getFarmclubDiary(
+        challengeId,
       );
       print("레포 ${response.runtimeType}");
 
