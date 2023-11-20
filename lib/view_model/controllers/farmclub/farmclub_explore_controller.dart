@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/model/farmclub_recommend.dart';
 
 import '../../../model/farmclub_info_model.dart';
@@ -6,7 +7,7 @@ import '../../../repository/farmclub_repository.dart';
 
 class FarmclubExploreController extends GetxController {
   RxList<FarmclubInfoModel> farmclubList = <FarmclubInfoModel>[].obs;
-  RxList<FarmclubRecommend> farmclubRecommendList = <FarmclubRecommend>[].obs;
+  RxList<FarmclubInfoModel> farmclubRecommendList = <FarmclubInfoModel>[].obs;
 
   Future<List<FarmclubInfoModel>> getFarmclubData() async {
     try {
@@ -29,9 +30,9 @@ class FarmclubExploreController extends GetxController {
     }
   }
 
-  Future<List<FarmclubRecommend>> getFarmclubRecommend() async {
+  Future<List<FarmclubInfoModel>> getFarmclubRecommend() async {
     try {
-      List<FarmclubRecommend> responseData =
+      List<FarmclubInfoModel> responseData =
       await FarmclubRepository.getFarmclubRecommend();
 
       // RxList 갱신
