@@ -159,4 +159,30 @@ class FarmclubApiService {
       throw "${e.message}";
     }
   }
+
+  // 미션 게시글 생성
+  Future<String> postFarmclubMission({
+    required String registrationId,
+    required String content,
+    required String image,
+  }) async {
+    try {
+      Response response = await ApiClient().dio.post(
+            "/api/farmclub/mission",
+          );
+
+      // 응답 상태 코드 확인
+      if (response.statusCode == 201) {
+        // 성공적으로 응답받은 경우
+        print(response.data['data']);
+        return response.data;
+      } else {
+        // 응답이 실패한 경우
+        throw "${response.statusCode}";
+      }
+    } on DioException catch (e) {
+      print(e.message);
+      throw "${e.message}";
+    }
+  }
 }

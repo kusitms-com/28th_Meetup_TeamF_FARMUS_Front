@@ -8,6 +8,8 @@ import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_white.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_feed.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_init.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_help.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_content.dart';
@@ -17,6 +19,8 @@ import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_d
 import 'package:mojacknong_android/view/farmclub/component/group/group_rate.dart';
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_info.dart';
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_list.dart';
+import 'package:mojacknong_android/view/farmclub/component/record/record_feed.dart';
+import 'package:mojacknong_android/view/farmclub/component/record/record_init.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_profile.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
@@ -90,6 +94,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                         controller.farmclubInfo.value;
 
                     print("myFarmclubState: ${controller.myFarmclubState}");
+                    print("myFarmclubState: ${farmclubInfo?.diaries}");
 
                     return SingleChildScrollView(
                       child: Column(
@@ -133,49 +138,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                             height: 12,
                           ),
                           const FarmclubTitleWithDivider(title: "함께 도전해요"),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return const FarmclubChallengeScreen(
-                                      detailId: '',
-                                    );
-                                  },
-                                ),
-                              );
-                            },
-                            child: ChallengeStep(
-                              step: farmclubInfo.stepNum,
-                              title: farmclubInfo.stepName,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          const ChallengeHelp(
-                            help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
-                          ),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return const FarmclubChallengeScreen(
-                                        detailId: '',
-                                      );
-                                    },
-                                  ),
-                                );
-                              },
-                              child: const ChallengeFeed(
-                                detailId: '',
-                              )),
+                          ChallengeFeed(farmclubInfo: farmclubInfo),
                           const SizedBox(
                             height: 16,
                           ),
@@ -187,58 +150,11 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                             height: 12,
                           ),
                           const FarmclubTitleWithDivider(title: "함께 기록해요"),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return FarmclubRecordScreen();
-                                  },
-                                ),
-                              );
-                            },
-                            child: const RecordProfile(
-                              nickname: "파머",
-                              postTime: "10/29 4:12",
-                            ),
-                          ),
+                          farmclubInfo.diaries != []
+                              ? RecordFeed(farmclubInfo: farmclubInfo)
+                              : RecordInit(),
                           const SizedBox(
                             height: 12,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return FarmclubRecordScreen();
-                                  },
-                                ),
-                              );
-                            },
-                            child: RecordPicture(
-                              like: controller.like,
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return FarmclubRecordScreen();
-                                  },
-                                ),
-                              );
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: Text(
-                                "우리 상훈이가 쑥쑥 자라고 있네? 얼른 다 자라서 삼겹살이랑 쌈장 마늘 해서 상추쌈 싸먹고 싶다. 기대된다~~",
-                                style: FarmusThemeData.darkStyle14,
-                              ),
-                            ),
                           ),
                           const SizedBox(
                             height: 60,

@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view/farmclub/farmclub_mission_feed_screen.dart';
+import 'package:get/get.dart';
+import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_init.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_picture.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
+
+import '../../farmclub_challenge_screen.dart';
+import 'challenge_help.dart';
+import 'challenge_step.dart';
 
 class ChallengeFeed extends StatefulWidget {
-  final String? detailId;
+  final FarmclubMineDetail farmclubInfo;
+
   const ChallengeFeed({
     super.key,
-    required this.detailId
+    required this.farmclubInfo,
   });
 
   @override
@@ -14,112 +22,54 @@ class ChallengeFeed extends StatefulWidget {
 }
 
 class _ChallengeFeedState extends State<ChallengeFeed> {
+
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        const SizedBox(
-          width: 16,
-        ),
-        Expanded(
-          flex: 2,
-          child: Container(
-            width: double.infinity,
-            height: 200,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: FarmusThemeData.background,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                "assets/image/image_challenge1.png",
-                fit: BoxFit.fill,
-                width: double.infinity,
-                height: double.infinity,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(
-          width: 4,
-        ),
-        Expanded(
-          flex: 1,
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity,
-                height: 98,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    "assets/image/image_example_community2.png",
-                    fit: BoxFit.fill,
-                    width: double.infinity,
-                    height: double.infinity,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return  FarmclubMissionFeedScreen(
-                          detailId: widget.detailId,
-                        );
-                      },
-                    ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return const FarmclubChallengeScreen(
+                    detailId: '',
                   );
                 },
-                child: Container(
-                  width: double.infinity,
-                  height: 98,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          "assets/image/image_challenge2.png",
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
-                        Positioned.fill(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.5),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "더보기",
-                                style: FarmusThemeData.whiteStyle14,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
               ),
-            ],
+            );
+          },
+          child: ChallengeStep(
+            step: widget.farmclubInfo.stepNum,
+            title: widget.farmclubInfo.stepName,
           ),
         ),
         const SizedBox(
-          width: 16,
+          height: 16,
         ),
+        const ChallengeHelp(
+          help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const FarmclubChallengeScreen(
+                      detailId: '',
+                    );
+                  },
+                ),
+              );
+            },
+            child: widget.farmclubInfo.stepImages != [] ? ChallengePicture(
+              detailId: '',
+            ) : ChallengeInit()),
       ],
     );
   }

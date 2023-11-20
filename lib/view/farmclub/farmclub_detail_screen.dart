@@ -7,7 +7,7 @@ import 'package:mojacknong_android/view/farmclub/component/around/farmclub_aroun
 import 'package:mojacknong_android/view/farmclub/component/around/farmclub_around_title.dart';
 import 'package:mojacknong_android/view/farmclub/component/around/farmclub_around_vegetable.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
-import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_feed.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_help.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_content.dart';
@@ -145,7 +145,7 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
                 SizedBox(
                   height: 16,
                 ),
-                ChallengeFeed(detailId: "",),
+                ChallengePicture(detailId: "",),
                 SizedBox(
                   height: 16,
                 ),
