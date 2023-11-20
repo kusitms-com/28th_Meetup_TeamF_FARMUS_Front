@@ -2,10 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/data/network/farmclub_api_service.dart';
 
+import 'package:get/get.dart';
+
 class FarmclubMakeController extends GetxController {
   // 선택된 채소들의 상태를 저장하는 변수
   RxList<bool> isSelectedList = List.generate(6, (index) => false).obs;
   RxInt selectedVeggieIndex = RxInt(-1);
+  RxBool isLoading = RxBool(true);
+
+  RxBool isMemberValid = RxBool(true); // 추가
+  final RegExp _numberRegExp = RegExp(r'^[3-9]$|^1[0-9]$|^20$'); // 추가
+
+  RxBool isCheck = RxBool(false);
 
   RxMap veggieData = {}.obs;
   RxMap veggieLevel = {}.obs;
@@ -25,16 +33,16 @@ class FarmclubMakeController extends GetxController {
   RxBool hasMemberInput = RxBool(false);
   RxBool hasIntroInput = RxBool(false);
 
-  final isFormVaild = RxBool(false);
-
-  final FarmclubApiService _farmclubApiService = FarmclubApiService();
+  RxBool isFormValid = RxBool(false);
 
   @override
   void onInit() {
     super.onInit();
     initHasText();
-    initializeVeggieData();
-    initializeVeggieLevel();
+
+    ever(isCheck, (_) {
+      checkFormVaildity();
+    });
 
     ever(titleValue, (_) {
       checkFormVaildity();
@@ -47,12 +55,22 @@ class FarmclubMakeController extends GetxController {
     ever(contentValue, (_) {
       checkFormVaildity();
     });
+
+    ever(selectedVeggieIndex, (_) {
+      checkFormVaildity();
+    });
+
+    // UI 초기화 로직 분리
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      initializeVeggieData();
+      initializeVeggieLevel();
+      isLoading.value = false; // 초기화가 끝나면 로딩 상태 해제
+    });
   }
 
   // 선택된 채소의 인덱스를 업데이트하는 메서드
   void updateSelectedVeggieIndex(int index) {
     selectedVeggieIndex.value = index;
-    checkFormVaildity(); // 선택된 채소가 변경될 때마다 폼 유효성을 다시 확인
   }
 
   void initHasText() {
@@ -72,19 +90,19 @@ class FarmclubMakeController extends GetxController {
     });
   }
 
-  // 선택된 이미지의 상태를 토글하고 다른 선택 상태를 해제하는 메서드
   void toggleImageSelection(int index) {
-    for (int i = 0; i < isSelectedList.length; i++) {
-      if (i == index) {
-        // 현재 선택한 아이템이면 반전
-        isSelectedList[i] = !isSelectedList[i];
-      } else {
-        // 다른 아이템은 선택 해제
-        isSelectedList[i] = false;
+    if (isSelectedList[index]) {
+      // 이미 선택된 아이템을 선택하면 선택 해제
+      isSelectedList[index] = false;
+      updateSelectedVeggieIndex(-1);
+    } else {
+      // 선택되지 않은 아이템을 선택하면 반전
+      for (int i = 0; i < isSelectedList.length; i++) {
+        isSelectedList[i] = i == index;
       }
+      updateSelectedVeggieIndex(index);
     }
-    print(index);
-    updateSelectedVeggieIndex(index);
+
     update(); // 상태 업데이트
   }
 
@@ -112,6 +130,10 @@ class FarmclubMakeController extends GetxController {
     });
   }
 
+  void toggleSelectCheck() {
+    isCheck.value = !isCheck.value;
+  }
+
   void updateTitleValue(String value) {
     titleValue.value = value;
   }
@@ -124,8 +146,15 @@ class FarmclubMakeController extends GetxController {
     contentValue.value = value;
   }
 
+  void checkMemberValidity() {
+    isMemberValid.value = _numberRegExp.hasMatch(memberValue.value);
+  }
+
   void checkFormVaildity() {
-    selectedVeggieIndex.value != null;
-    update(); // 추가: 상태 업데이트
+    isFormValid.value = contentValue.isNotEmpty &&
+        titleValue.isNotEmpty &&
+        memberValue.isNotEmpty &&
+        isCheck.value &&
+        selectedVeggieIndex.value != -1;
   }
 }

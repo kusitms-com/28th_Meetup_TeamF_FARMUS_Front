@@ -34,6 +34,7 @@ class _FarmclubSearchScreenState extends State<FarmclubSearchScreen> {
   @override
   void dispose() {
     _controller.farmclubList.clear();
+
     super.dispose();
   }
 

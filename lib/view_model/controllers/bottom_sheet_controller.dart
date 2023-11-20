@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bottom_sheet/bottom_sheet_farmclub_exit.dart';
 import 'package:mojacknong_android/common/bottom_sheet/bottom_sheet_farmclub_join.dart';
 import 'package:mojacknong_android/common/bottom_sheet/cupertino_action_sheet_helper.dart';
-import 'package:mojacknong_android/common/dialog/Dialog_join_farmclub.dart';
+import 'package:mojacknong_android/common/dialog/dialog_join_farmclub.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/Dialog_register_vege.dart';
+
+import '../../view/farmclub/BottomSheetFinal/farmclub_finish_bottom_sheet.dart';
 
 class BottomSheetController extends GetxController {
   void showActionSheetComment(
@@ -48,12 +50,12 @@ class BottomSheetController extends GetxController {
   }
 
   void showUserDeleteCupertinoActionSheet(
-      BuildContext? context, {
-        required String message,
-        required List<String> options,
-        List<Function()>? optionsAction,
-        required String cancelButtonText,
-      }) {
+    BuildContext? context, {
+    required String message,
+    required List<String> options,
+    List<Function()>? optionsAction,
+    required String cancelButtonText,
+  }) {
     CupertinoActionSheetHelper.showUserDeleteCupertinoActionSheet(
       context!,
       message: message,
@@ -91,21 +93,24 @@ class BottomSheetController extends GetxController {
       barrierColor: FarmusThemeData.grey2,
       builder: (BuildContext context) {
         return DialogJoinFarmclub(
+          image: "assets/image/image_farmclub_green.png",
           title: title,
-          content: "팜클럽에 가입했어요",
+          step: "팜클럽에 가입했어요",
         );
       },
     );
   }
 
-  void showAuthDialog(BuildContext context, String title, String content) {
+  void showAuthDialog(
+      BuildContext context, String image, String title, String step) {
     showDialog<void>(
       context: context,
       barrierColor: FarmusThemeData.grey2,
       builder: (BuildContext context) {
         return DialogJoinFarmclub(
+          image: image,
           title: title,
-          content: content,
+          step: step,
         );
       },
     );
@@ -122,4 +127,18 @@ class BottomSheetController extends GetxController {
       },
     );
   }
+
+
+  void showMissionFinishDialog(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      barrierColor: FarmusThemeData.grey2,
+      builder: (BuildContext context) {
+        return BottomSheetFarmClubClear(imagePath: "assets/image/ic_lettuce_blue.svg", textContent: "어쩌구");
+      },
+    );
+  }
+
+
+
 }

@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -9,19 +10,34 @@ import 'package:mojacknong_android/view/community/component/image_add.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_auth_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
+
+import '../../model/farmclub_mine.dart';
 
 class FarmclubAuthScreen extends StatefulWidget {
-  const FarmclubAuthScreen({super.key});
+  final List<FarmclubMine> farmclubData;
+
+  const FarmclubAuthScreen({
+    Key? key,
+    required this.farmclubData,
+  }) : super(key: key);
 
   @override
   State<FarmclubAuthScreen> createState() => _FarmclubAuthScreenState();
 }
 
 class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
-  FarmclubController farmclubController = Get.put(FarmclubController());
+  FarmclubAuthController _authController = Get.put(FarmclubAuthController());
+  FarmclubController _farmclubController = Get.put(FarmclubController());
   BottomSheetController bottomSheetController =
       Get.put(BottomSheetController());
+
+  void initState() {
+    super.initState();
+    _farmclubController.getMyFarmclub();
+  }
 
   final ImagePicker _picker = ImagePicker();
   File? _selectedImage;
@@ -35,7 +51,7 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
       });
     }
 
-    farmclubController.image.value = _selectedImage;
+    _authController.image.value = _selectedImage;
   }
 
   @override
@@ -45,66 +61,81 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
         title: "미션 인증",
       ),
       backgroundColor: FarmusThemeData.white,
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 8,
-          ),
-          const ChallengeStep(step: 0, title: "준비물을 챙겨요"),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: GestureDetector(
-              onTap: () {
-                _getImageFromGallery(
-                  ImageSource.gallery,
-                );
-              },
-              child: Container(
-                width: double.infinity,
-                height: 248,
-                decoration: BoxDecoration(
-                  color: FarmusThemeData.pictureBackground,
-                  borderRadius: BorderRadius.circular(16),
-                  image: _selectedImage != null
-                      ? DecorationImage(
-                          image: FileImage(_selectedImage!),
-                          fit: BoxFit.cover,
+      body: Obx(() {
+        if (_authController.isLoading.isTrue) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        final farmclubMission = _farmclubController.farmclubInfo.value;
+        if (farmclubMission == null) {
+          // farmclubMission이 null인 경우 처리
+          return Center(child: Text('데이터가 없습니다.'));
+        }
+
+        return Column(
+          children: [
+            const SizedBox(
+              height: 8,
+            ),
+            ChallengeStep(
+              step: farmclubMission.stepNum.toInt(),
+              title: farmclubMission.stepName,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: GestureDetector(
+                onTap: () {
+                  _getImageFromGallery(
+                    ImageSource.gallery,
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 248,
+                  decoration: BoxDecoration(
+                    color: FarmusThemeData.pictureBackground,
+                    borderRadius: BorderRadius.circular(16),
+                    image: _selectedImage != null
+                        ? DecorationImage(
+                            image: FileImage(_selectedImage!),
+                            fit: BoxFit.cover,
+                          )
+                        : null,
+                  ),
+                  child: _selectedImage == null
+                      ? const Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              ImageAdd(
+                                title: "인증 사진 추가하기",
+                              ),
+                            ],
+                          ),
                         )
                       : null,
                 ),
-                child: _selectedImage == null
-                    ? const Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            ImageAdd(
-                              title: "인증 사진 추가하기",
-                            ),
-                          ],
-                        ),
-                      )
-                    : null,
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: TextFormField(
-              maxLines: null,
-              decoration: const InputDecoration(
-                hintText: '인증 글을 작성해주세요',
-                hintStyle: FarmusThemeData.grey2Style13,
-                counterText: "",
-                focusedBorder: InputBorder.none,
-                enabledBorder: InputBorder.none,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: TextFormField(
+                maxLines: null,
+                decoration: const InputDecoration(
+                  hintText: '인증 글을 작성해주세요',
+                  hintStyle: FarmusThemeData.grey2Style13,
+                  counterText: "",
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                ),
+                maxLength: 50,
+                onChanged: _authController.updateContentValue,
               ),
-              maxLength: 50,
-              onChanged: farmclubController.updateContentValue,
             ),
-          ),
-        ],
-      ),
+          ],
+        );
+      }),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: Padding(
@@ -124,7 +155,7 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: Obx(
                     () => Text(
-                      "${farmclubController.contentValue.value.length} / 50",
+                      "${_authController.contentValue.value.length} / 50",
                       style: TextStyle(
                         color: FarmusThemeData.dark.withOpacity(0.3),
                       ),
@@ -135,11 +166,24 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
             ),
             ButtonBrown(
               text: "업로드하기",
-              enabled: farmclubController.isFormVaild,
+              enabled: _authController.isFormValid,
               onPress: () {
+                _authController.postFarmclubMission(
+                  _farmclubController
+                      .myFarmclubState[
+                          _farmclubController.selectedFarmclubIndex.toInt()]
+                      .registrationId,
+                  _authController.contentValue.toString(),
+                  _authController.image.value!,
+                );
                 Navigator.pop(context);
+
                 bottomSheetController.showAuthDialog(
-                    context, "상추 좋아하세요", "Step 0을 완료했어요");
+                  context,
+                  _authController.farmclubMission.value!.image,
+                  _authController.farmclubMission.value!.challengeName,
+                  _authController.farmclubMission.value!.step.toString(),
+                );
               },
             ),
           ],

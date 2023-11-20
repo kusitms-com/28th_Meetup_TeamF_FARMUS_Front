@@ -39,7 +39,7 @@ class _FarmclubMakeEditState extends State<FarmclubMakeEdit> {
         ),
         suffix: Obx(
           () => Text(
-            "${_controller.contentValue.value.length} / 20",
+            "${_controller.titleValue.value.length} / 20",
             style: TextStyle(
               color: FarmusThemeData.dark.withOpacity(0.3),
             ),

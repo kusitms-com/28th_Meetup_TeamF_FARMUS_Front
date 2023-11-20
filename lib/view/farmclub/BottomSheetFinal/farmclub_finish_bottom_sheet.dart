@@ -8,24 +8,16 @@ class BottomSheetFarmClubClear extends StatelessWidget {
   final String textContent;
 
   const BottomSheetFarmClubClear({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.textContent,
-  }) : super(key: key);
+  });
+
+
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-
     return Container(
-      height: screenHeight * 0.76,
-      decoration: const BoxDecoration(
-        color: FarmusThemeData.background,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(40),
-          topRight: Radius.circular(40),
-        ),
-      ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
@@ -64,10 +56,9 @@ class BottomSheetFarmClubClear extends StatelessWidget {
               alignment: Alignment.center,
               children: <Widget>[
                 SizedBox(
-                  width: double.infinity,
                   child: Image.asset(
                     'assets/image/final_background.png',
-                    fit: BoxFit.contain,
+                    fit: BoxFit.fitHeight,
                   ),
                 ),
                 Positioned(

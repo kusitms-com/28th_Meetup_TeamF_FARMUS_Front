@@ -5,6 +5,7 @@ import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_profile.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 
 class FarmclubRecordScreen extends StatefulWidget {
   FarmclubRecordScreen({super.key});

@@ -5,7 +5,7 @@ import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 
 class BottomSheetFarmclubExit extends StatefulWidget {
   const BottomSheetFarmclubExit({super.key});
@@ -16,8 +16,7 @@ class BottomSheetFarmclubExit extends StatefulWidget {
 }
 
 class _BottomSheetFarmclubExitState extends State<BottomSheetFarmclubExit> {
-  final FarmclubController _farmclubController = Get.find();
-  BottomSheetController _bottomSheetController = BottomSheetController();
+  final FarmclubEtcController _farmclubController = Get.find();
 
   @override
   Widget build(BuildContext context) {

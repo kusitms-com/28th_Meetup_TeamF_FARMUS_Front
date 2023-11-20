@@ -103,7 +103,7 @@ class _FarmclubState extends State<Farmclub> {
                 level: widget.level,
                 nowPerson: widget.currentUser,
                 maxPerson: widget.maxUser,
-                dday: "1",
+                dday: widget.status,
                 status: widget.status,
                 isRecommend: false,
               ),

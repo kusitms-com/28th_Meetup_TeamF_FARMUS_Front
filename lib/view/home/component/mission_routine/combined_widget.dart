@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 
 class CombinedWidget extends StatefulWidget {
   const CombinedWidget({
@@ -19,7 +19,7 @@ class CombinedWidget extends StatefulWidget {
 }
 
 class _CombinedWidgetState extends State<CombinedWidget> {
-  late FarmclubController _farmclubController;
+  late FarmclubEtcController _farmclubController;
 
   void _handleTextSubmission(String text) {
     widget.onTextSubmitted(text);
@@ -29,7 +29,7 @@ class _CombinedWidgetState extends State<CombinedWidget> {
   @override
   void initState() {
     super.initState();
-    _farmclubController = FarmclubController();
+    _farmclubController = FarmclubEtcController();
   }
 
   @override
