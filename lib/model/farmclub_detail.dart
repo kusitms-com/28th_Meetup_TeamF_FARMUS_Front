@@ -7,6 +7,12 @@ class FarmclubDetail {
   final int maxUser;
   final int currentUser;
   final int status;
+  final int? achievement;
+  final int stepNum;
+  final String stepName;
+  final String stepTip;
+  final List<String> stepImages;
+  final List<String>? diaries;
 
   FarmclubDetail({
     required this.challengeName,
@@ -17,6 +23,12 @@ class FarmclubDetail {
     required this.maxUser,
     required this.currentUser,
     required this.status,
+    required this.achievement,
+    required this.stepNum,
+    required this.stepName,
+    required this.stepTip,
+    required this.stepImages,
+    required this.diaries,
   });
 
   factory FarmclubDetail.fromJson(Map<String, dynamic> json) {
@@ -29,6 +41,14 @@ class FarmclubDetail {
       maxUser: json['maxUser'],
       currentUser: json['currentUser'],
       status: json['status'],
+      achievement: json['achievement'],
+      stepNum: json['stepNum'],
+      stepName: json['stepName'],
+      stepTip: json['stepTip'],
+      stepImages: List<String>.from(json['stepImages']),
+      diaries: json['diaries'] != null
+          ? List<String>.from(json['diaries'])
+          : null,
     );
   }
 }

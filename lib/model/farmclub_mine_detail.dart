@@ -3,6 +3,7 @@ class FarmclubMineDetail {
   final String veggieName;
   final String challengeDescription;
   final String veggieImage;
+
   final String difficulty;
   final int maxUser;
   final int currentUser;

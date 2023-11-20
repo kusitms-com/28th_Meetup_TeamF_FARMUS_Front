@@ -32,14 +32,6 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // List<Map<String, String>> challengeSteps = [
-    //   {"step": "0", "title": "준비물을 챙겨요"},
-    //   {"step": "1", "title": "상추를 심어요"},
-    //   {"step": "2", "title": "새싹이 자라나요"},
-    //   {"step": "3", "title": "새싹이 자라나요"},
-    //   {"step": "4", "title": "새싹이 자라나요"},
-    // ];
-
     return Scaffold(
       appBar: PrimaryAppBar(title: "함께 도전해요"),
       backgroundColor: FarmusThemeData.white,
@@ -83,32 +75,32 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
               height: 16,
             ),
             const FarmclubTitleWithDivider(title: "다음 Step"),
-            // ListView.builder(
-            //   shrinkWrap: true,
-            //   physics: const NeverScrollableScrollPhysics(),
-            //   itemCount: challengeSteps.length - 1,
-            //   itemBuilder: (context, index) {
-            //     return Column(
-            //       children: [
-            //         ChallengeStep(
-            //           step: challengeSteps[index + 1]["step"]!,
-            //           title: challengeSteps[index + 1]["title"]!,
-            //         ),
-            //         const SizedBox(
-            //           height: 16,
-            //         ),
-            //         const Divider(
-            //           endIndent: 16,
-            //           indent: 16,
-            //           color: FarmusThemeData.grey4,
-            //         ),
-            //         const SizedBox(
-            //           height: 16,
-            //         ),
-            //       ],
-            //     );
-            //   },
-            // ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 2,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    ChallengeStep(
+                      step: index,
+                      title: index.toString(),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Divider(
+                      endIndent: 16,
+                      indent: 16,
+                      color: FarmusThemeData.grey4,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                  ],
+                );
+              },
+            ),
             const SizedBox(
               height: 50,
             ),
@@ -147,7 +139,6 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                 enabled: RxBool(true),
                 onPress: () {
                   _bottomSheetController.showMissionFinishDialog(context);
-
                 },
               ),
             ),
@@ -156,5 +147,4 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
       ),
     );
   }
-
 }

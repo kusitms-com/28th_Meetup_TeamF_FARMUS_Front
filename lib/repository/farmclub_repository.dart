@@ -5,12 +5,11 @@ import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/model/farmclub_mine.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
-import 'package:mojacknong_android/model/farmclub_recommend.dart';
+import 'package:mojacknong_android/model/farmclub_mission.dart';
 
 import '../model/farmclub_mission_response.dart';
 
 class FarmclubRepository {
-
   // 나의 팜클럽 조회
   static Future<List<FarmclubMine>> getFarmclub() async {
     try {
@@ -26,13 +25,13 @@ class FarmclubRepository {
 
   // 팜클럽 목록 조회
   static Future<List<FarmclubInfoModel>> postFarmclub(
-      List<String> difficulties,
-      String status,
-      String keyword,
-      ) async {
+    List<String> difficulties,
+    String status,
+    String keyword,
+  ) async {
     try {
       List<FarmclubInfoModel> response =
-      await FarmclubApiService().postFarmclubSearch(
+          await FarmclubApiService().postFarmclubSearch(
         difficulties: difficulties,
         status: status,
         keyword: keyword,
@@ -51,7 +50,7 @@ class FarmclubRepository {
       print("challengeId  $id");
 
       FarmclubDetail? response =
-      await FarmclubApiService().getFarmclubDetail(id);
+          await FarmclubApiService().getFarmclubDetail(id);
 
       return response;
     } catch (e) {
@@ -66,7 +65,7 @@ class FarmclubRepository {
       print("challengeId  $id");
 
       FarmclubMineDetail? response =
-      await FarmclubApiService().getFarmclubMineDetail(id);
+          await FarmclubApiService().getFarmclubMineDetail(id);
 
       return response;
     } catch (e) {
@@ -76,9 +75,11 @@ class FarmclubRepository {
   }
 
   // 팜클럽 가입
-  static Future<String> postRegister(String challengeId, String veggieId) async {
+  static Future<String> postRegister(
+      String challengeId, String veggieId) async {
     try {
-      String response = await FarmclubApiService().postRegister(challengeId: challengeId, veggieId: veggieId);
+      String response = await FarmclubApiService()
+          .postRegister(challengeId: challengeId, veggieId: veggieId);
       print("레포 ${response}");
 
       return response;
@@ -88,10 +89,12 @@ class FarmclubRepository {
     }
   }
 
-
-  static Future<FarmclubMissionResponse> postFarmclubMission(int registrationId, String content, File image) async {
+  static Future<FarmclubMissionResponse> postFarmclubMission(
+      int registrationId, String content, File image) async {
     try {
-      FarmclubMissionResponse response = await FarmclubApiService().postFarmclubMission(registrationId: registrationId, content: content, image: image);
+      FarmclubMissionResponse response = await FarmclubApiService()
+          .postFarmclubMission(
+              registrationId: registrationId, content: content, image: image);
 
       print("레포 ${response}");
 
@@ -105,7 +108,8 @@ class FarmclubRepository {
   // 추천 팜클럽 조회
   static Future<List<FarmclubInfoModel>> getFarmclubRecommend() async {
     try {
-      List<FarmclubInfoModel> response = await FarmclubApiService().getFarmclubRecommendation();
+      List<FarmclubInfoModel> response =
+          await FarmclubApiService().getFarmclubRecommendation();
       print("레포 ${response.runtimeType}");
 
       return response;
@@ -115,4 +119,23 @@ class FarmclubRepository {
     }
   }
 
+  // 미션 목록 조회
+  static Future<List<FarmclubMission>> getFarmclubMission(
+    int challengeId,
+    int stepNum,
+  ) async {
+    try {
+      List<FarmclubMission> response =
+          await FarmclubApiService().getFarmclubMission(
+        challengeId,
+        stepNum,
+      );
+      print("레포 ${response.runtimeType}");
+
+      return response;
+    } catch (e) {
+      print("레포 에러 $e");
+      throw "레포 에러 $e";
+    }
+  }
 }

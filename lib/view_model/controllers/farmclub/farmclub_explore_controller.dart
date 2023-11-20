@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:mojacknong_android/model/farmclub_detail.dart';
-import 'package:mojacknong_android/model/farmclub_recommend.dart';
 
 import '../../../model/farmclub_info_model.dart';
 import '../../../repository/farmclub_repository.dart';
