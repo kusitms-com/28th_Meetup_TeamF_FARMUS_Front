@@ -83,15 +83,10 @@ class _FarmclubTextInfoState extends State<FarmclubTextInfo> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              widget.status != "준비 중"
-                  ? Text(
-                      "시작한 지 ${widget.dday}일째",
-                      style: FarmusThemeData.grey1Style11,
-                    )
-                  : Text(
-                      widget.status,
-                      style: FarmusThemeData.grey1Style11,
-                    ),
+              Text(
+                widget.status,
+                style: FarmusThemeData.grey1Style11,
+              ),
             ],
           ),
         ],

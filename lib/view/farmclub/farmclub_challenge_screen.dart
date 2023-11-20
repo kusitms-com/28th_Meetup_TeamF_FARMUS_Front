@@ -4,21 +4,20 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_white.dart';
-import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_feed.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_help.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 
 class FarmclubChallengeScreen extends StatefulWidget {
   final String? detailId;
-  const FarmclubChallengeScreen({
-    Key? key,
-    required this.detailId
 
-  }) : super(key: key);
+  const FarmclubChallengeScreen({Key? key, required this.detailId})
+      : super(key: key);
 
   @override
   State<FarmclubChallengeScreen> createState() =>
@@ -26,7 +25,10 @@ class FarmclubChallengeScreen extends StatefulWidget {
 }
 
 class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
-  final FarmclubController farmclubController = Get.put(FarmclubController());
+  final FarmclubEtcController farmclubController =
+      Get.put(FarmclubEtcController());
+
+  final BottomSheetController _bottomSheetController = BottomSheetController();
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +76,9 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
             const SizedBox(
               height: 16,
             ),
-            const ChallengeFeed(detailId: '',),
+            const ChallengePicture(
+              detailId: '',
+            ),
             const SizedBox(
               height: 16,
             ),
@@ -128,7 +132,7 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return  MyFarmclubMissionScreen(
+                          return MyFarmclubMissionScreen(
                             detailId: widget.detailId,
                           );
                         },
@@ -142,14 +146,8 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                 text: "미션 인증하기",
                 enabled: RxBool(true),
                 onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const FarmclubAuthScreen();
-                      },
-                    ),
-                  );
+                  _bottomSheetController.showMissionFinishDialog(context);
+
                 },
               ),
             ),
@@ -158,4 +156,5 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
       ),
     );
   }
+
 }

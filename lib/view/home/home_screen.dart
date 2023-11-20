@@ -6,8 +6,6 @@ import 'package:mojacknong_android/view/home/component/mission_routine/mission_r
 import 'package:mojacknong_android/view/home/detail/home_custom_app_bar.dart';
 import 'package:mojacknong_android/view/home/detail/home_swipe.dart';
 import 'package:mojacknong_android/view/home/home_with_data.dart';
-
-
 import '../../model/current_mission_list.dart';
 import '../../model/my_vege_list.dart';
 import '../../model/my_vege_routine_list.dart';
@@ -17,6 +15,7 @@ import 'home_difficulty/home_vege_difficult.dart';
 import 'home_difficulty/home_vege_easy.dart';
 import 'home_difficulty/home_vege_normal.dart';
 import 'home_without_vege.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -26,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final FarmclubController controller = Get.put(FarmclubController());
+  final FarmclubEtcController controller = Get.put(FarmclubEtcController());
   @override
   Widget build(BuildContext context) {
     print('Building HomeScreen');

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 
 class RecordPicture extends StatefulWidget {
   final RxInt like;

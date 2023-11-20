@@ -1,117 +1,64 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mojacknong_android/model/farmclub_info_model.dart';
+import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
+
+import '../../../model/farmclub_mine.dart';
+import '../../../repository/farmclub_repository.dart';
 
 class FarmclubController extends GetxController {
-  final TextEditingController controller = TextEditingController();
-  RxBool hasInput = RxBool(false);
+  // 나의 팜클럽 상태
+  var myFarmclubState = <FarmclubMine>[].obs;
 
   RxBool isSelectLike = RxBool(false);
   RxInt like = 2.obs; // 초기 좋아요 수
 
-  RxBool isCheck = RxBool(false);
-  RxBool isCategory = RxBool(false);
-  RxBool shouldExit = RxBool(false);
+  RxBool isLoading = true.obs;
+  Rx<FarmclubMineDetail?> farmclubInfo = Rx<FarmclubMineDetail?>(null);
 
-  RxBool isTextBox1Selected = RxBool(false);
-  RxBool isTextBox2Selected = RxBool(false);
+  RxInt selectedFarmclubIndex = RxInt(0);
 
-  RxInt selectedTextBoxIndex = RxInt(0);
-
-  final contentValue = "".obs;
-  final image = Rxn<File>();
-  final isFormVaild = RxBool(false);
-  RxList<FarmclubInfoModel> farmclubList = <FarmclubInfoModel>[].obs;
-
-  var isCombinedWidgetVisible = true.obs;
-
-  String enteredText = '';
-  RxList<String> difficulties = <String>[].obs;
-  RxString selectedStatus = "".obs;
-  RxString selectedKeyword = "".obs;
-
-  // 선택한 카테고리 정보 저장
-  RxString selectedCategory = "".obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-
-    controller.addListener(() {
-      final value = controller.text;
-      // 텍스트 필드에 값이 입력 되었는지 여부
-      if (value.isNotEmpty) {
-        hasInput.value = true;
-      } else {
-        hasInput.value = false;
-      }
-    });
-
-    ever(contentValue, (_) {
-      checkFormVaildity();
-    });
-
-    ever(image, (_) => checkFormVaildity());
+  void updateSelectedFarmclub(int index) async {
+    if (index >= 0 && index < myFarmclubState.length) {
+      // 새로운 팜클럽 선택
+      selectedFarmclubIndex.value = index;
+      selectedFarmclubIndex.refresh();
+      getFarmclubDetail(myFarmclubState.value[index].challengeId.toString());
+      print("gggg ${selectedFarmclubIndex.value}");
+    }
   }
 
-  void updateContentValue(String value) {
-    contentValue.value = value;
+  // 나의 팜클럽 조회
+  void getMyFarmclub() async {
+    try {
+      List<FarmclubMine> myFarmclubs = await FarmclubRepository.getFarmclub();
+      getFarmclubDetail(myFarmclubs[selectedFarmclubIndex.toInt()].challengeId.toString());
+
+      myFarmclubState.value = myFarmclubs;
+    } catch (e) {
+      print("나의 팜클럽 조회 중 오류: $e");
+    }
   }
 
-  void setImageFile(File file) {
-    image.value = file;
+  void getFarmclubDetail(String challengeId) async {
+    try {
+      isLoading(true);
+      FarmclubMineDetail? farmclubData =
+          await FarmclubRepository.getFarmclubMineDetail(challengeId);
+
+      farmclubInfo.value = farmclubData;
+
+    } catch (error) {
+      // 오류 처리 로직 추가
+      print('Error in getFarmclubDetail: $error');
+    } finally {
+      isLoading(false);
+    }
   }
 
-  void checkFormVaildity() {
-    isFormVaild.value = contentValue.isNotEmpty && image.value != null;
-  }
-
-  void toggleSelectCategory() {
-    isCategory.value = !isCategory.value;
-  }
-
-  void toggleSelectCheck() {
-    isCheck.value = !isCheck.value;
-  }
-
-  void toggleSelectTextBox(int index) {
-    // 이미 선택된 텍스트 박스를 다시 선택하는 경우 무시
-    if (index == selectedTextBoxIndex.value) return;
-
-    // 선택된 텍스트 박스의 인덱스 갱신
-    selectedTextBoxIndex.value = index;
-
-    // 선택된 텍스트 박스에 따라 shouldExit 및 배경 색상 업데이트
-    toggleShouldExit();
-  }
-
-  // shouldExit 값 및 배경 색상을 업데이트하는 메서드
-  void toggleShouldExit() {
-    shouldExit.value = isCheck.value;
-
-    // 선택된 텍스트 박스에 따라 배경 색상 업데이트
-    isTextBox1Selected.value = selectedTextBoxIndex.value == 0;
-    isTextBox2Selected.value = selectedTextBoxIndex.value == 1;
-  }
-
-  void updateEnteredText(String text) {
-    enteredText = text;
-  }
-
-  // 선택한 카테고리 업데이트 메서드
-  void updateSelectedCategory(String category) {
-    selectedCategory.value = category;
-  }
-
-  // difficulties 업데이트 메서드
-  void updateDifficulties(List<String> updatedDifficulties) {
-    difficulties.assignAll(updatedDifficulties);
-  }
-
-  // status 업데이트 메서드
-  void updateStatus(String updatedStatus) {
-    selectedStatus.value = updatedStatus;
+  void postRegister(String challengeId, String veggieId) async {
+    try {
+      String response = await FarmclubRepository.postRegister(challengeId, veggieId);
+    } catch (error) {
+      print('Error in getFarmclubDetail: $error');
+    }
   }
 }

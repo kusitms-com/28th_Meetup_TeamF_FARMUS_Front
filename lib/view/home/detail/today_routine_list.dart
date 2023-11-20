@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/mission_routine/cycle_setting.dart';
 import 'package:mojacknong_android/view/home/component/register/controller/buttom_sheet_home.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 
 class TodayRoutineList extends StatefulWidget {
   final String text;
@@ -21,14 +21,14 @@ class TodayRoutineList extends StatefulWidget {
 }
 
 class _TodayRoutineListState extends State<TodayRoutineList> {
-  late FarmclubController _farmclubController;
+  late FarmclubEtcController _farmclubController;
   late HomeBottomSheetController _homebottomSheetController =
       HomeBottomSheetController();
 
   @override
   void initState() {
     super.initState();
-    _farmclubController = FarmclubController();
+    _farmclubController = FarmclubEtcController();
     _homebottomSheetController = HomeBottomSheetController(); // Create it here
   }
 

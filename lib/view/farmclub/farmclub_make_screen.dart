@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/farmclub/component/around/vegetable_list.dart';
@@ -17,7 +18,7 @@ class FarmclubMakeScreen extends StatefulWidget {
 }
 
 class _FarmclubMakeScreenState extends State<FarmclubMakeScreen> {
-  FarmclubMakeController _controller = FarmclubMakeController();
+  FarmclubMakeController _controller = Get.put(FarmclubMakeController());
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +125,7 @@ class _FarmclubMakeScreenState extends State<FarmclubMakeScreen> {
           ),
           ButtonBrown(
             text: "개설하기",
-            enabled: _controller.isFormVaild,
+            enabled: _controller.isFormValid,
             onPress: () {},
           ),
         ],
