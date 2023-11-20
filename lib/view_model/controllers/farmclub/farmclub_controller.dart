@@ -53,4 +53,12 @@ class FarmclubController extends GetxController {
       isLoading(false);
     }
   }
+
+  void postRegister(String challengeId, String veggieId) async {
+    try {
+      String response = await FarmclubRepository.postRegister(challengeId, veggieId);
+    } catch (error) {
+      print('Error in getFarmclubDetail: $error');
+    }
+  }
 }
