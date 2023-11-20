@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/common/primary_app_bar.dart';
 
 class RegiCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const RegiCustomAppBar({Key? key}) : super(key: key);
@@ -10,32 +10,10 @@ class RegiCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: const [],
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: SvgPicture.asset('assets/image/ic_arrow_left.svg'),
+    return const Scaffold(
+        appBar: PrimaryAppBar(
+          title: "채소 등록",
         ),
-        backgroundColor: FarmusThemeData.white,
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(width: 105),
-            Text(
-              '채소 등록',
-              style: TextStyle(
-                color: FarmusThemeData.dark,
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+        backgroundColor: FarmusThemeData.white);
   }
 }

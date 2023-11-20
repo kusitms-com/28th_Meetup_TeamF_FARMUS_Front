@@ -18,7 +18,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DiaryAppBar(),
+      appBar: const DiaryAppBar(title: '상훈이'),
       backgroundColor: FarmusThemeData.white,
       body: Column(
         mainAxisSize: MainAxisSize.min,
