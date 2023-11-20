@@ -7,6 +7,7 @@ import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/model/farmclub_mine.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
+import 'package:mojacknong_android/model/farmclub_recommend.dart';
 
 import '../../model/farmclub_mission_response.dart';
 
@@ -198,4 +199,29 @@ class FarmclubApiService {
       throw "${e.message}";
     }
   }
+
+  // 나의 팜클럽 조회
+  Future<List<FarmclubRecommend>> getFarmclubRecommendation() async {
+    try {
+      Response response = await ApiClient().dio.get("/api/farmclub/recommendation");
+
+      if (response.statusCode == 200) {
+        print(response.data["data"]);
+        List<dynamic> dataList = response.data['data'];
+        List<FarmclubRecommend> farmclubRecommend =
+        dataList.map((data) => FarmclubRecommend.fromJson(data)).toList();
+
+        print(farmclubRecommend);
+
+        return farmclubRecommend;
+      } else {
+        // 오류 발생 시 빈 리스트 반환
+        return [];
+      }
+    } on DioException catch (e) {
+      print(e.message);
+      throw "${e.message}";
+    }
+  }
+
 }
