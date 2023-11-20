@@ -133,7 +133,11 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                             height: 12,
                           ),
                           const FarmclubTitleWithDivider(title: "함께 도전해요"),
-                          ChallengeFeed(farmclubInfo: farmclubInfo),
+                          ChallengeFeed(
+                            farmclubInfo: controller.farmclubInfo.value!,
+                            farmclubMine: controller.myFarmclubState[
+                                controller.selectedFarmclubIndex.toInt()],
+                          ),
                           const SizedBox(
                             height: 16,
                           ),

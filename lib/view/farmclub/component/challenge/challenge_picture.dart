@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_mission_feed_screen.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 
 class ChallengePicture extends StatefulWidget {
-  final String? detailId;
-  const ChallengePicture({
-    super.key,
-    required this.detailId
-  });
+  final String? registrationId;
+  final int? challengeId;
+  final int? stepNum;
+
+  const ChallengePicture(
+      {super.key, this.registrationId, this.challengeId, this.stepNum,});
 
   @override
   State<ChallengePicture> createState() => _ChallengePictureState();
 }
 
 class _ChallengePictureState extends State<ChallengePicture> {
+  FarmclubController _farmclubController = Get.put(FarmclubController());
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -23,23 +33,25 @@ class _ChallengePictureState extends State<ChallengePicture> {
         ),
         Expanded(
           flex: 2,
-          child: Container(
-            width: double.infinity,
-            height: 200,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: FarmusThemeData.background,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                "assets/image/image_challenge1.png",
-                fit: BoxFit.fill,
-                width: double.infinity,
-                height: double.infinity,
+          child: Obx(() {
+            return Container(
+              width: double.infinity,
+              height: 200,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: FarmusThemeData.background,
               ),
-            ),
-          ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  _farmclubController.farmclubInfo.value!.stepImages[0],
+                  fit: BoxFit.fill,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
+              ),
+            );
+          }),
         ),
         const SizedBox(
           width: 4,
@@ -56,12 +68,13 @@ class _ChallengePictureState extends State<ChallengePicture> {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    "assets/image/image_example_community2.png",
+                  child: _farmclubController.farmclubInfo.value!
+                      .stepImages[1] != null ? Image.network(
+                    _farmclubController.farmclubInfo.value!.stepImages[1],
                     fit: BoxFit.fill,
                     width: double.infinity,
                     height: double.infinity,
-                  ),
+                  ) : Image.asset("assets/image/image_empty.png"),
                 ),
               ),
               const SizedBox(
@@ -73,8 +86,10 @@ class _ChallengePictureState extends State<ChallengePicture> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return  FarmclubMissionFeedScreen(
-                          detailId: widget.detailId,
+                        return FarmclubMissionFeedScreen(
+                          registrationId: widget.registrationId,
+                          challengeId:_farmclubController.myFarmclubState[_farmclubController.selectedFarmclubIndex.toInt()].challengeId.toInt(),
+                          stepNum: _farmclubController.farmclubInfo.value!.stepNum.toInt(),
                         );
                       },
                     ),
@@ -90,12 +105,14 @@ class _ChallengePictureState extends State<ChallengePicture> {
                     borderRadius: BorderRadius.circular(8),
                     child: Stack(
                       children: [
-                        Image.asset(
-                          "assets/image/image_challenge2.png",
+                        _farmclubController.farmclubInfo.value!.stepImages[2] !=
+                            null ?
+                        Image.network(
+                          _farmclubController.farmclubInfo.value!.stepImages[2],
                           fit: BoxFit.cover,
                           width: double.infinity,
                           height: double.infinity,
-                        ),
+                        ) : Image.asset("assets/image/image_empty.png"),
                         Positioned.fill(
                           child: Container(
                             decoration: BoxDecoration(

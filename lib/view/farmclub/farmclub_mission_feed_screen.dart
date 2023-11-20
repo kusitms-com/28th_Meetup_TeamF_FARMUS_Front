@@ -9,13 +9,19 @@ import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_h
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/mission_feed.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_mission_controller.dart';
 
 class FarmclubMissionFeedScreen extends StatefulWidget {
-  final String? detailId;
+  final String? registrationId;
+  final int challengeId;
+  final int stepNum;
 
   const FarmclubMissionFeedScreen({
     super.key,
-    required this.detailId
+    this.registrationId,
+    required this.challengeId,
+    required this.stepNum,
   });
 
   @override
@@ -24,8 +30,19 @@ class FarmclubMissionFeedScreen extends StatefulWidget {
 }
 
 class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
+  FarmclubMissionController _farmclubMissionController =
+      Get.put(FarmclubMissionController());
+
+  @override
+  void initState() {
+    super.initState();
+    _farmclubMissionController.getFarmclubRecommend(widget.challengeId, widget.stepNum);
+  }
+
   @override
   Widget build(BuildContext context) {
+    print("디테일 ${widget.registrationId}");
+
     return Scaffold(
       appBar: CustomAppBar(),
       backgroundColor: FarmusThemeData.white,
@@ -98,8 +115,7 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                       MaterialPageRoute(
                         builder: (context) {
                           return MyFarmclubMissionScreen(
-                            detailId: widget.detailId,
-
+                            detailId: widget.registrationId,
                           );
                         },
                       ),
@@ -111,9 +127,7 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
               child: ButtonBrown(
                 text: "미션 인증하기",
                 enabled: RxBool(true),
-                onPress: () {
-
-                },
+                onPress: () {},
               ),
             ),
           ],
