@@ -8,6 +8,8 @@ import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/model/farmclub_mine.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
 
+import '../../model/farmclub_mission_response.dart';
+
 class FarmclubApiService {
   // 나의 팜클럽 조회
   Future<List<FarmclubMine>> getFarmclub() async {
@@ -149,7 +151,7 @@ class FarmclubApiService {
           );
 
       // 응답 상태 코드 확인
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         // 성공적으로 응답받은 경우
         print(response.data['data']);
         return response.data;
@@ -163,39 +165,30 @@ class FarmclubApiService {
     }
   }
 
-  Future<String> postFarmclubMission({
-    required String registrationId,
+  Future<FarmclubMissionResponse> postFarmclubMission({
+    required int registrationId,
     required String content,
     required File image,
   }) async {
     try {
-      // content를 JSON 형태로 변환
-      Map<String, dynamic> contentMap = {
-        "registrationId": registrationId,
-        "content": content,
-      };
-
+      // 요청 바디 데이터 생성
       FormData formData = FormData.fromMap({
-        'content': jsonEncode(contentMap),  // content를 JSON 형태로 추가
-        'image': await MultipartFile.fromFile(
-          image.path,
-          filename: image.path.split('/').last,
-        ),
+        "registrationId": registrationId.toString(),
+        "content": content,
+        "image": await MultipartFile.fromFile(image.path, filename: "image.png"),
       });
 
       Response response = await ApiClient().dio.post(
         "/api/farmclub/mission",
         data: formData,
-        options: Options(
-          headers: {'Content-Type': 'multipart/form-data'},
-        ),
+
       );
 
       // 응답 상태 코드 확인
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         // 성공적으로 응답받은 경우
         print(response.data['data']);
-        return response.data;
+        return FarmclubMissionResponse.fromJson(response.data);
       } else {
         // 응답이 실패한 경우
         throw "${response.statusCode}";
@@ -205,5 +198,4 @@ class FarmclubApiService {
       throw "${e.message}";
     }
   }
-
 }

@@ -6,6 +6,8 @@ import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/model/farmclub_mine.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
 
+import '../model/farmclub_mission_response.dart';
+
 class FarmclubRepository {
 
   // 나의 팜클럽 조회
@@ -86,9 +88,9 @@ class FarmclubRepository {
   }
 
 
-  static Future<String> postFarmclubMission(String registrationId, String content, File image) async {
+  static Future<FarmclubMissionResponse> postFarmclubMission(int registrationId, String content, File image) async {
     try {
-      String response = await FarmclubApiService().postFarmclubMission(registrationId: registrationId, content: content, image: image);
+      FarmclubMissionResponse response = await FarmclubApiService().postFarmclubMission(registrationId: registrationId, content: content, image: image);
 
       print("레포 ${response}");
 

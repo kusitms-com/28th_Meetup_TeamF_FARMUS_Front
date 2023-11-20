@@ -17,7 +17,6 @@ class BottomSheetFarmclubExit extends StatefulWidget {
 
 class _BottomSheetFarmclubExitState extends State<BottomSheetFarmclubExit> {
   final FarmclubEtcController _farmclubController = Get.find();
-  BottomSheetController _bottomSheetController = BottomSheetController();
 
   @override
   Widget build(BuildContext context) {

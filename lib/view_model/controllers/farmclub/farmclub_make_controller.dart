@@ -8,6 +8,10 @@ class FarmclubMakeController extends GetxController {
   // 선택된 채소들의 상태를 저장하는 변수
   RxList<bool> isSelectedList = List.generate(6, (index) => false).obs;
   RxInt selectedVeggieIndex = RxInt(-1);
+  RxBool isLoading = RxBool(true);
+
+  RxBool isMemberValid = RxBool(true); // 추가
+  final RegExp _numberRegExp = RegExp(r'^[3-9]$|^1[0-9]$|^20$'); // 추가
 
   RxBool isCheck = RxBool(false);
 
@@ -35,8 +39,6 @@ class FarmclubMakeController extends GetxController {
   void onInit() {
     super.onInit();
     initHasText();
-    initializeVeggieData();
-    initializeVeggieLevel();
 
     ever(isCheck, (_) {
       checkFormVaildity();
@@ -56,6 +58,13 @@ class FarmclubMakeController extends GetxController {
 
     ever(selectedVeggieIndex, (_) {
       checkFormVaildity();
+    });
+
+    // UI 초기화 로직 분리
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      initializeVeggieData();
+      initializeVeggieLevel();
+      isLoading.value = false; // 초기화가 끝나면 로딩 상태 해제
     });
   }
 
@@ -135,6 +144,10 @@ class FarmclubMakeController extends GetxController {
 
   void updateContentValue(String value) {
     contentValue.value = value;
+  }
+
+  void checkMemberValidity() {
+    isMemberValid.value = _numberRegExp.hasMatch(memberValue.value);
   }
 
   void checkFormVaildity() {

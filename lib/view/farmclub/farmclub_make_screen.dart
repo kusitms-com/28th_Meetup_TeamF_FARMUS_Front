@@ -103,7 +103,6 @@ class _FarmclubMakeScreenState extends State<FarmclubMakeScreen> {
                 ),
                 child: FarmclubMakeContent(
                   hintText: "",
-
                 ),
               ),
               const SizedBox(

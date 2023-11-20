@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 
+import '../../../model/farmclub_mission_response.dart';
 import '../../../repository/farmclub_repository.dart';
 
 class FarmclubAuthController extends GetxController {
@@ -33,9 +34,9 @@ class FarmclubAuthController extends GetxController {
   }
 
 
-  void postFarmclubMission(String registrationId, String content, File image) async {
+  void postFarmclubMission(int registrationId, String content, File image) async {
     try {
-      String response = await FarmclubRepository.postFarmclubMission(registrationId, content, image);
+      FarmclubMissionResponse response = await FarmclubRepository.postFarmclubMission(registrationId, content, image);
 
       print(response);
     } catch (e) {
