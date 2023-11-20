@@ -236,10 +236,7 @@ class FarmclubApiService {
         queryParameters: {"challengeId": challengeId, 'stepNum': stepNum},
       );
 
-      print(response.data);
-
       if (response.statusCode == 200) {
-        print("성공티비");
         print(response.data["data"]);
         List<dynamic> dataList = response.data['data'];
         List<FarmclubMission> farmclubMission =

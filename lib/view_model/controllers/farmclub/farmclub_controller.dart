@@ -21,7 +21,6 @@ class FarmclubController extends GetxController {
       // 새로운 팜클럽 선택
       selectedFarmclubIndex.value = index;
       selectedFarmclubIndex.refresh();
-      getFarmclubDetail(myFarmclubState.value[index].challengeId.toString());
       print("gggg ${selectedFarmclubIndex.value}");
     }
   }

@@ -6,12 +6,12 @@ class FarmclubMissionController extends GetxController {
   RxList<FarmclubMission> farmclubMissionList = <FarmclubMission>[].obs;
 
   Future<List<FarmclubMission>> getFarmclubRecommend(
-    int challengeId,
-    int stepNum,
-  ) async {
+      int challengeId,
+      int stepNum,
+      ) async {
     try {
       List<FarmclubMission> responseData =
-          await FarmclubRepository.getFarmclubMission(
+      await FarmclubRepository.getFarmclubMission(
         challengeId,
         stepNum,
       );
