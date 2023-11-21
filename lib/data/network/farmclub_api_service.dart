@@ -141,15 +141,15 @@ class FarmclubApiService {
   Future<List<VeggieRegistration>> getVeggieRegistraion() async {
     try {
       Response response = await ApiClient().dio.get(
-        "/api/veggie/registration",
-      );
+            "/api/veggie/registration",
+          );
 
       if (response.statusCode == 200) {
         print(response.data["data"]);
         List<dynamic> dataList = response.data['data'];
 
         List<VeggieRegistration> veggieRegistraion =
-        dataList.map((data) => VeggieRegistration.fromJson(data)).toList();
+            dataList.map((data) => VeggieRegistration.fromJson(data)).toList();
 
         print(veggieRegistraion);
 
@@ -162,7 +162,6 @@ class FarmclubApiService {
       throw "${e.message}";
     }
   }
-
 
   // 팜클럽 참여
   Future<int> postRegister({
@@ -317,19 +316,19 @@ class FarmclubApiService {
 
   // 내 미션 인증 글 조회
   Future<List<FarmclubMyMission>> getFarmclubMyMssion(
-      int challengeId,
-      ) async {
+    int challengeId,
+  ) async {
     try {
       Response response = await ApiClient().dio.get(
-        "/api/farmclub/mission/$challengeId",
-      );
+            "/api/farmclub/mission/$challengeId",
+          );
 
       if (response.statusCode == 200) {
         print(response.data["data"]);
         List<dynamic> dataList = response.data['data'];
 
         List<FarmclubMyMission> farmclubMyMission =
-        dataList.map((data) => FarmclubMyMission.fromJson(data)).toList();
+            dataList.map((data) => FarmclubMyMission.fromJson(data)).toList();
 
         print(farmclubMyMission);
 
@@ -344,5 +343,38 @@ class FarmclubApiService {
   }
 
   // 팜클럽 개설
+  Future<int> postFarmclub({
+    required String myVeggieId,
+    required String veggieInfoId,
+    required String challengeName,
+    required String maxUser,
+    required String description,
+  }) async {
+    try {
+      Map<String, dynamic> requestBody = {
+        'myVeggieId': myVeggieId,
+        'veggieInfoId': veggieInfoId,
+        'challengeName': challengeName,
+        'maxUser': maxUser,
+        'description': description,
+      };
 
+      Response response = await ApiClient().dio.post(
+            "/api/farmclub",
+            data: requestBody,
+          );
+
+      if (response.statusCode == 200) {
+
+        print(response.data['data']);
+        return response.data['data'];
+      } else {
+        // 오류 발생 시 빈 리스트 반환
+        throw "error";
+      }
+    } on DioException catch (e) {
+      print(e.message);
+      throw "${e.message}";
+    }
+  }
 }

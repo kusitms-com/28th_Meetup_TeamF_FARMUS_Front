@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_join_controller.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_make_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_register_controller.dart';
 
 import '../../../../model/veggie_registration.dart';
 
@@ -17,8 +17,8 @@ class VegetableList extends StatefulWidget {
 }
 
 class _VegetableListState extends State<VegetableList> {
-  final FarmclubMakeController _makeController =
-      Get.put(FarmclubMakeController());
+  final FarmclubRegisterController _makeController =
+      Get.put(FarmclubRegisterController());
   final FarmclubJoinController _joinController =
       Get.put(FarmclubJoinController());
 

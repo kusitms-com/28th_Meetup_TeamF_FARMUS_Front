@@ -90,8 +90,7 @@ class FarmclubRepository {
   }
 
   // 팜클럽 가입
-  static Future<int> postRegister(
-      String challengeId, String veggieId) async {
+  static Future<int> postRegister(String challengeId, String veggieId) async {
     try {
       int response = await FarmclubApiService()
           .postRegister(challengeId: challengeId, veggieId: veggieId);
@@ -173,6 +172,29 @@ class FarmclubRepository {
       List<FarmclubMyMission> response =
           await FarmclubApiService().getFarmclubMyMssion(
         challengeId,
+      );
+
+      return response;
+    } catch (e) {
+      throw "레포 에러 $e";
+    }
+  }
+
+  // 새로운 팜클럽 개설
+  static Future<int> postNewFarmclub(
+    String myVeggieId,
+    String veggieInfoId,
+    String challengeName,
+    String maxUser,
+    String description,
+  ) async {
+    try {
+      int response = await FarmclubApiService().postFarmclub(
+        myVeggieId: myVeggieId,
+        veggieInfoId: veggieInfoId,
+        challengeName: challengeName,
+        maxUser: maxUser,
+        description: description,
       );
 
       return response;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_make_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_register_controller.dart';
 
 class FarmclubMakeEdit extends StatefulWidget {
   final String hintText;
@@ -16,7 +16,7 @@ class FarmclubMakeEdit extends StatefulWidget {
 }
 
 class _FarmclubMakeEditState extends State<FarmclubMakeEdit> {
-  FarmclubMakeController _controller = Get.put(FarmclubMakeController());
+  FarmclubRegisterController _controller = Get.put(FarmclubRegisterController());
   final int maxLength = 20;
 
   @override
