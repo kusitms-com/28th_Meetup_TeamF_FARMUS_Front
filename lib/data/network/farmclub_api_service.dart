@@ -8,8 +8,6 @@ import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/model/farmclub_mine.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
 import 'package:mojacknong_android/model/farmclub_mission.dart';
-import 'package:mojacknong_android/model/farmclub_my_mission.dart';
-import 'package:mojacknong_android/model/veggie_registration.dart';
 
 import '../../model/farmclub_mission_response.dart';
 
@@ -137,34 +135,8 @@ class FarmclubApiService {
     }
   }
 
-  // 팜클럽 참여 전 채소 조회
-  Future<List<VeggieRegistration>> getVeggieRegistraion() async {
-    try {
-      Response response = await ApiClient().dio.get(
-            "/api/veggie/registration",
-          );
-
-      if (response.statusCode == 200) {
-        print(response.data["data"]);
-        List<dynamic> dataList = response.data['data'];
-
-        List<VeggieRegistration> veggieRegistraion =
-            dataList.map((data) => VeggieRegistration.fromJson(data)).toList();
-
-        print(veggieRegistraion);
-
-        return veggieRegistraion;
-      } else {
-        return [];
-      }
-    } on DioException catch (e) {
-      print(e.message);
-      throw "${e.message}";
-    }
-  }
-
   // 팜클럽 참여
-  Future<int> postRegister({
+  Future<String> postRegister({
     required String challengeId,
     required String veggieId,
   }) async {
@@ -183,7 +155,7 @@ class FarmclubApiService {
       if (response.statusCode == 200) {
         // 성공적으로 응답받은 경우
         print(response.data['data']);
-        return response.data['data'];
+        return response.data;
       } else {
         // 응답이 실패한 경우
         throw "${response.statusCode}";
@@ -306,71 +278,8 @@ class FarmclubApiService {
 
         return farmclubDiary;
       } else {
-        return [];
-      }
-    } on DioException catch (e) {
-      print(e.message);
-      throw "${e.message}";
-    }
-  }
-
-  // 내 미션 인증 글 조회
-  Future<List<FarmclubMyMission>> getFarmclubMyMssion(
-    int challengeId,
-  ) async {
-    try {
-      Response response = await ApiClient().dio.get(
-            "/api/farmclub/mission/$challengeId",
-          );
-
-      if (response.statusCode == 200) {
-        print(response.data["data"]);
-        List<dynamic> dataList = response.data['data'];
-
-        List<FarmclubMyMission> farmclubMyMission =
-            dataList.map((data) => FarmclubMyMission.fromJson(data)).toList();
-
-        print(farmclubMyMission);
-
-        return farmclubMyMission;
-      } else {
-        return [];
-      }
-    } on DioException catch (e) {
-      print(e.message);
-      throw "${e.message}";
-    }
-  }
-
-  // 팜클럽 개설
-  Future<int> postFarmclub({
-    required String myVeggieId,
-    required String veggieInfoId,
-    required String challengeName,
-    required String maxUser,
-    required String description,
-  }) async {
-    try {
-      Map<String, dynamic> requestBody = {
-        'myVeggieId': myVeggieId,
-        'veggieInfoId': veggieInfoId,
-        'challengeName': challengeName,
-        'maxUser': maxUser,
-        'description': description,
-      };
-
-      Response response = await ApiClient().dio.post(
-            "/api/farmclub",
-            data: requestBody,
-          );
-
-      if (response.statusCode == 200) {
-
-        print(response.data['data']);
-        return response.data['data'];
-      } else {
         // 오류 발생 시 빈 리스트 반환
-        throw "error";
+        return [];
       }
     } on DioException catch (e) {
       print(e.message);

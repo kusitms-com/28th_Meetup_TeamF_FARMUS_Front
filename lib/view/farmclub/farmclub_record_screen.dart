@@ -64,7 +64,7 @@ class _FarmclubRecordScreenState extends State<FarmclubRecordScreen> {
                 return Column(
                   children: [
                     RecordProfile(
-                      profile: diary.profileImage ?? "",
+                      profile: diary.profileImage,
                       nickname: diary.nickName,
                       postTime: diary.date,
                     ),
