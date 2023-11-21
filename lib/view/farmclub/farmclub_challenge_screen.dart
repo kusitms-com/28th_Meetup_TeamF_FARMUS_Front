@@ -11,6 +11,8 @@ import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_d
 import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_auth_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 
 class FarmclubChallengeScreen extends StatefulWidget {
@@ -25,10 +27,8 @@ class FarmclubChallengeScreen extends StatefulWidget {
 }
 
 class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
-  final FarmclubEtcController farmclubController =
-      Get.put(FarmclubEtcController());
-
-  final BottomSheetController _bottomSheetController = BottomSheetController();
+  FarmclubController farmclubController = Get.find();
+  FarmclubAuthController _authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -135,8 +135,20 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
               child: ButtonBrown(
                 text: "미션 인증하기",
                 enabled: RxBool(true),
-                onPress: () {
-                  _bottomSheetController.showMissionFinishDialog(context);
+                onPress: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FarmclubAuthScreen(
+                        farmclubData: farmclubController.myFarmclubState,
+                      ),
+                    ),
+                  );
+                  // 업로드 성공 후 새로고침
+                  if (_authController.missionUploaded.value) {
+                    _authController.missionUploaded.value = false; // 초기화
+                    loadFarmclubData(); // FarmclubScreen 새로고침
+                  }
                 },
               ),
             ),
@@ -144,5 +156,10 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> loadFarmclubData() async {
+    await farmclubController.getMyFarmclub();
+    setState(() {});
   }
 }

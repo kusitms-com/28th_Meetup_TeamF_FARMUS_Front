@@ -34,16 +34,19 @@ class _MissionFeedState extends State<MissionFeed> {
         SizedBox(
           height: 8,
         ),
-        RecordPicture(like: widget.mission.like.obs, image: widget.mission.image,),
+        RecordPicture(
+          like: widget.mission.like.obs,
+          image: widget.mission.image,
+        ),
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              Text(
-                widget.mission.content,
-                style: FarmusThemeData.darkStyle14,
-              ),
-            ],
+          child: Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              widget.mission.content,
+              style: FarmusThemeData.darkStyle14,
+              textAlign: TextAlign.start,
+            ),
           ),
         ),
       ],
