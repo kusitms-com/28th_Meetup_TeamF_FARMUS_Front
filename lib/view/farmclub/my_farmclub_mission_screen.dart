@@ -38,12 +38,19 @@ class _MyFarmclubMissionScreenState extends State<MyFarmclubMissionScreen> {
       ),
       backgroundColor: FarmusThemeData.white,
       body: FutureBuilder(
-        future: _farmclubMissionController
-            .getFarmclubMyMission(_farmclubController.myFarmclubState[_farmclubController.selectedFarmclubIndex.toInt()].challengeId.toInt()),
+        future: _farmclubMissionController.getFarmclubMyMission(
+            _farmclubController
+                .myFarmclubState[
+                    _farmclubController.selectedFarmclubIndex.toInt()]
+                .challengeId
+                .toInt()),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            print("화면 로딩 중");
-            return CircularProgressIndicator();
+            return Center(
+              child: CircularProgressIndicator(
+                color: FarmusThemeData.brown,
+              ),
+            );
           } else if (snapshot.hasError) {
             // 에러가 발생한 경우
             return Text('Error: ${snapshot.error}');

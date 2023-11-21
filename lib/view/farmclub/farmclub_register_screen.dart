@@ -8,19 +8,19 @@ import 'package:mojacknong_android/view/farmclub/component/farmclub_make_content
 import 'package:mojacknong_android/view/farmclub/component/farmclub_make_edit.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_make_member.dart';
 import 'package:mojacknong_android/view/farmclub/component/new_vegetable_select.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_register_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_make_controller.dart';
 
 import '../../model/veggie_registration.dart';
 
-class FarmclubRegisterScreen extends StatefulWidget {
-  const FarmclubRegisterScreen({super.key});
+class FarmclubMakeScreen extends StatefulWidget {
+  const FarmclubMakeScreen({super.key});
 
   @override
-  State<FarmclubRegisterScreen> createState() => _FarmclubRegisterScreenState();
+  State<FarmclubMakeScreen> createState() => _FarmclubMakeScreenState();
 }
 
-class _FarmclubRegisterScreenState extends State<FarmclubRegisterScreen> {
-  FarmclubRegisterController _controller = Get.put(FarmclubRegisterController());
+class _FarmclubMakeScreenState extends State<FarmclubMakeScreen> {
+  FarmclubMakeController _controller = Get.put(FarmclubMakeController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class _FarmclubRegisterScreenState extends State<FarmclubRegisterScreen> {
               const SizedBox(
                 height: 16,
               ),
-              NewVegetableSelect(),
+              NewVegetableSelect(allVegeInforList: [],),
               const SizedBox(
                 height: 32,
               ),
@@ -128,9 +128,7 @@ class _FarmclubRegisterScreenState extends State<FarmclubRegisterScreen> {
           ButtonBrown(
             text: "개설하기",
             enabled: _controller.isFormValid,
-            onPress: () {
-              _controller.postNewFarmclub();
-            },
+            onPress: () {},
           ),
         ],
       ),

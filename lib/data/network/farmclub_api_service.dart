@@ -9,6 +9,7 @@ import 'package:mojacknong_android/model/farmclub_mine.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
 import 'package:mojacknong_android/model/farmclub_mission.dart';
 import 'package:mojacknong_android/model/farmclub_my_mission.dart';
+import 'package:mojacknong_android/model/veggie_registration.dart';
 
 import '../../model/farmclub_mission_response.dart';
 
@@ -135,6 +136,33 @@ class FarmclubApiService {
       throw "${e.message}";
     }
   }
+
+  // 팜클럽 참여 전 채소 조회
+  Future<List<VeggieRegistration>> getVeggieRegistraion() async {
+    try {
+      Response response = await ApiClient().dio.get(
+        "/api/veggie/registration",
+      );
+
+      if (response.statusCode == 200) {
+        print(response.data["data"]);
+        List<dynamic> dataList = response.data['data'];
+
+        List<VeggieRegistration> veggieRegistraion =
+        dataList.map((data) => VeggieRegistration.fromJson(data)).toList();
+
+        print(veggieRegistraion);
+
+        return veggieRegistraion;
+      } else {
+        return [];
+      }
+    } on DioException catch (e) {
+      print(e.message);
+      throw "${e.message}";
+    }
+  }
+
 
   // 팜클럽 참여
   Future<String> postRegister({
