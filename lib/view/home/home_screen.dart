@@ -11,6 +11,7 @@ import '../../model/my_vege_list.dart';
 import '../../model/my_vege_routine_list.dart';
 import '../../repository/homescreen_repository.dart';
 import '../../view_model/controllers/farmclub/farmclub_controller.dart';
+import '../../view_model/controllers/vege_controller.dart';
 import 'home_difficulty/home_vege_difficult.dart';
 import 'home_difficulty/home_vege_easy.dart';
 import 'home_difficulty/home_vege_normal.dart';
@@ -26,6 +27,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final FarmclubEtcController controller = Get.put(FarmclubEtcController());
+  final VegeController vegeController = Get.put(VegeController());
   @override
   Widget build(BuildContext context) {
     print('Building HomeScreen');
@@ -75,9 +77,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
   }
-
-
-
 
 
   Widget levelSign(String? level, String? nickName){

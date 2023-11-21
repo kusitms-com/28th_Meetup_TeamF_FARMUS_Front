@@ -55,6 +55,44 @@ class VegeApiService {
   }
 
 
+  static FutureOr<void> enrollVegeApi(
+      String selectedDateData,
+      String selectedVeggieIdData,
+      String selectedVeggieColorImageUrlData,
+      String nicknameValueData,
+      String vegeNameData
+      ) async {
+    try {
+
+      print(selectedDateData);
+      print(selectedVeggieIdData);
+      print(selectedVeggieColorImageUrlData);
+      print(nicknameValueData);
+      print(vegeNameData);
+
+      Map<String, dynamic> requestBody = {
+        'nickname': nicknameValueData,
+        'veggieInfoId': selectedVeggieIdData,
+        'veggieImage': selectedVeggieColorImageUrlData,
+        'birth': selectedDateData
+      };
+
+      Response response = await ApiClient().dio.post('/api/veggie',data: requestBody);
+
+      if(response.statusCode == 200){
+        print("채소 등록 완료");
+        return;
+      }
+
+    } on DioException catch (e) {
+      print(e.message);
+      print("채소 등록 실패");
+
+    }
+    return null;
+  }
+
+
 
 
 

@@ -1,17 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mojacknong_android/data/network/farmclub_api_service.dart';
-
-import 'package:get/get.dart';
-
 import '../../../repository/vege_repository.dart';
 
-class FarmclubMakeController extends GetxController {
-  // 선택된 채소들의 상태를 저장하는 변수
+class VegeController extends GetxController {
+  final selectedVeggieId = "".obs;
+  final selectedVeggieColorImageUrl = "".obs;
+  final vegename = "".obs;
+  final nicknameValue = "".obs;
+  final selectedDate = "".obs;
+
+
+  @override
+  void onInit() {
+    super.onInit();
+
+  }
+
+  void updateSelectedDate(String date) {
+    selectedDate.value = date;
+    print(selectedDate.value);
+  }
+
+  // 선택한 채소의 id와 colorImageUrl을 업데이트하는 메서드
+  void updateSelectedVeggieData(String id, String colorImageUrl, String vegeName) {
+    selectedVeggieId.value = id;
+    selectedVeggieColorImageUrl.value = colorImageUrl;
+    vegename.value = vegeName;
+    print(selectedVeggieId.value);
+    print(selectedVeggieColorImageUrl.value);
+    print(vegename.value);
+  }
+
+  void updateNicknameValue(String value) {
+    nicknameValue.value = value;
+    print(nicknameValue.value);
+  }
+
+  Future<void> enrollVegeRequest() async {
+    print("api요청 닉네임" + nicknameValue.value + "3");
+    await VegeRepository.enrollVegeApi(selectedDate.value, selectedVeggieId.value,
+        selectedVeggieColorImageUrl.value, nicknameValue.value, vegename.value);
+  }
+
+
+
+
+
+
+
   RxList<bool> isSelectedList = List.generate(6, (index) => false).obs;
   RxInt selectedVeggieIndex = RxInt(-1);
   RxBool isLoading = RxBool(true);
 
+  // 선택된 채소의 인덱스를 업데이트하는 메서드
+  void updateSelectedVeggieIndex(int index) {
+    selectedVeggieIndex.value = index;
+  }
 
   RxBool isMemberValid = RxBool(true); // 추가
   final RegExp _numberRegExp = RegExp(r'^[3-9]$|^1[0-9]$|^20$'); // 추가
@@ -28,7 +72,6 @@ class FarmclubMakeController extends GetxController {
   final TextEditingController memberController = TextEditingController();
   final TextEditingController introController = TextEditingController();
 
-
   final titleValue = "".obs;
   final memberValue = "".obs;
   final contentValue = "".obs;
@@ -38,54 +81,6 @@ class FarmclubMakeController extends GetxController {
   RxBool hasIntroInput = RxBool(false);
 
   RxBool isFormValid = RxBool(false);
-
-  @override
-  void onInit() {
-    super.onInit();
-    initHasText();
-
-    ever(isCheck, (_) {
-      checkFormVaildity();
-    });
-
-    ever(titleValue, (_) {
-      checkFormVaildity();
-    });
-
-    ever(memberValue, (_) {
-      checkFormVaildity();
-    });
-
-    ever(contentValue, (_) {
-      checkFormVaildity();
-    });
-
-    ever(selectedVeggieIndex, (_) {
-      checkFormVaildity();
-    });
-
-
-    // UI 초기화 로직 분리
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      initializeVeggieData();
-      initializeVeggieLevel();
-      isLoading.value = false; // 초기화가 끝나면 로딩 상태 해제
-    });
-
-
-  }
-
-
-
-
-
-
-
-
-  // 선택된 채소의 인덱스를 업데이트하는 메서드
-  void updateSelectedVeggieIndex(int index) {
-    selectedVeggieIndex.value = index;
-  }
 
   void initHasText() {
     nameController.addListener(() {
@@ -103,8 +98,6 @@ class FarmclubMakeController extends GetxController {
       update();
     });
   }
-
-
 
   void toggleImageSelection(int index) {
     if (isSelectedList[index]) {
@@ -146,9 +139,6 @@ class FarmclubMakeController extends GetxController {
     });
   }
 
-
-
-
   void toggleSelectCheck() {
     isCheck.value = !isCheck.value;
   }
@@ -176,8 +166,4 @@ class FarmclubMakeController extends GetxController {
         isCheck.value &&
         selectedVeggieIndex.value != -1;
   }
-
-
-
-
 }

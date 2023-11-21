@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/calender.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/register_app_bar.dart';
@@ -8,6 +10,7 @@ import 'package:mojacknong_android/view/home/home_screen.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 import '../../../../repository/homescreen_repository.dart';
+import '../../../../view_model/controllers/vege_controller.dart';
 import '../../../farmclub/component/new_vegetable_select.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -18,6 +21,10 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+
+  final VegeController vegeController = Get.find();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,6 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: RegisterButton(
                     text: '등록하기',
                     onPressed: () async {
+                      await vegeController.enrollVegeRequest();
                       BottomSheetController().showRegisterDialog(
                           context, "상훈이"); //context에는 입력한 채소 별명이 떠야함
 
