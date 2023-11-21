@@ -8,6 +8,7 @@ import 'package:mojacknong_android/model/farmclub_mine.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
 import 'package:mojacknong_android/model/farmclub_mission.dart';
 import 'package:mojacknong_android/model/farmclub_my_mission.dart';
+import 'package:mojacknong_android/model/veggie_registration.dart';
 
 import '../model/farmclub_mission_response.dart';
 
@@ -73,6 +74,18 @@ class FarmclubRepository {
     } catch (e) {
       print("에러! getFarmclubDetail: $e");
       throw "에러! getFarmclubDetail: $e";
+    }
+  }
+
+  // 팜클럽 가입 전 채소 조회
+  static Future<List<VeggieRegistration>> getVeggieRegistration() async {
+    try {
+      List<VeggieRegistration> response =
+          await FarmclubApiService().getVeggieRegistraion();
+
+      return response;
+    } catch (e) {
+      throw "레포 에러 $e";
     }
   }
 
