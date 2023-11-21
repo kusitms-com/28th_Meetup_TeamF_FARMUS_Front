@@ -165,7 +165,7 @@ class FarmclubApiService {
 
 
   // 팜클럽 참여
-  Future<String> postRegister({
+  Future<int> postRegister({
     required String challengeId,
     required String veggieId,
   }) async {
@@ -342,4 +342,7 @@ class FarmclubApiService {
       throw "${e.message}";
     }
   }
+
+  // 팜클럽 개설
+
 }

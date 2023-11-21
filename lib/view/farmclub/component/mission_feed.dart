@@ -27,7 +27,7 @@ class _MissionFeedState extends State<MissionFeed> {
           height: 16,
         ),
         RecordProfile(
-          profile: widget.mission.profileImage,
+          profile: widget.mission.profileImage ?? "",
           nickname: widget.mission.nickName,
           postTime: widget.mission.date,
         ),
@@ -43,7 +43,7 @@ class _MissionFeedState extends State<MissionFeed> {
           child: Container(
             alignment: Alignment.centerLeft,
             child: Text(
-              widget.mission.content,
+              widget.mission.content ?? '', // null이면 빈 문자열 또는 다른 기본값으로 변경
               style: FarmusThemeData.darkStyle14,
               textAlign: TextAlign.start,
             ),

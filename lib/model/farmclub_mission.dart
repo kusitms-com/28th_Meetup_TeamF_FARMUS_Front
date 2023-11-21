@@ -1,6 +1,6 @@
 class FarmclubMission {
   final int postId;
-  final String profileImage;
+  final String? profileImage;
   final String nickName;
   final String date;
   final String image;
@@ -20,7 +20,7 @@ class FarmclubMission {
   factory FarmclubMission.fromJson(Map<String, dynamic> json) {
     return FarmclubMission(
       postId: json['postId'],
-      profileImage: json['profileImage'],
+      profileImage: json['profileImage'] as String?,
       nickName: json['nickName'],
       date: json['date'],
       image: json['image'],

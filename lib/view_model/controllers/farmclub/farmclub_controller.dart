@@ -70,15 +70,6 @@ class FarmclubController extends GetxController {
     }
   }
 
-  void postRegister(String challengeId, String veggieId) async {
-    try {
-      String response =
-          await FarmclubRepository.postRegister(challengeId, veggieId);
-    } catch (error) {
-      print('Error in getFarmclubDetail: $error');
-    }
-  }
-
 
   Future<List<FarmclubDiary>> getFarmclubDiary(
       int challengeId,
