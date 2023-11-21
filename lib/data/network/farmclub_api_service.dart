@@ -8,6 +8,7 @@ import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/model/farmclub_mine.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
 import 'package:mojacknong_android/model/farmclub_mission.dart';
+import 'package:mojacknong_android/model/farmclub_my_mission.dart';
 
 import '../../model/farmclub_mission_response.dart';
 
@@ -278,7 +279,34 @@ class FarmclubApiService {
 
         return farmclubDiary;
       } else {
-        // 오류 발생 시 빈 리스트 반환
+        return [];
+      }
+    } on DioException catch (e) {
+      print(e.message);
+      throw "${e.message}";
+    }
+  }
+
+  // 내 미션 인증 글 조회
+  Future<List<FarmclubMyMission>> getFarmclubMyMssion(
+      int challengeId,
+      ) async {
+    try {
+      Response response = await ApiClient().dio.get(
+        "/api/farmclub/mission/$challengeId",
+      );
+
+      if (response.statusCode == 200) {
+        print(response.data["data"]);
+        List<dynamic> dataList = response.data['data'];
+
+        List<FarmclubMyMission> farmclubMyMission =
+        dataList.map((data) => FarmclubMyMission.fromJson(data)).toList();
+
+        print(farmclubMyMission);
+
+        return farmclubMyMission;
+      } else {
         return [];
       }
     } on DioException catch (e) {

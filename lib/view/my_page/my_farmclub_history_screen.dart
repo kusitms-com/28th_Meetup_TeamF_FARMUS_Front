@@ -39,11 +39,7 @@ class _MyFarmclubHistoryScreenState extends State<MyFarmclubHistoryScreen> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             print("화면 로딩 중");
-            return Center(
-              child: CircularProgressIndicator(
-                color: FarmusThemeData.brown,
-              ),
-            );
+            return CircularProgressIndicator();
           } else if (snapshot.hasError) {
             // 에러가 발생한 경우
             return Text('Error: ${snapshot.error}');
