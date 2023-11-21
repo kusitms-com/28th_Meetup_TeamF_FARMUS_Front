@@ -6,7 +6,7 @@ import '../../../repository/farmclub_repository.dart';
 class FarmclubDiaryController extends GetxController {
   RxList<FarmclubDiary> farmclubDiaryList = <FarmclubDiary>[].obs;
 
-  Future<List<FarmclubDiary>> getFarmclubRecommend(
+  Future<List<FarmclubDiary>> getFarmclubDiary(
       int challengeId,
       ) async {
     try {

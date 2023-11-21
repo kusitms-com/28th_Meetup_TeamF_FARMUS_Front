@@ -1,7 +1,7 @@
 class FarmclubDetail {
+  final String veggieInfoId;
   final String challengeName;
   final String veggieName;
-  final String veggieInfoId;
   final String challengeDescription;
   final String veggieImage;
   final String difficulty;
@@ -13,12 +13,12 @@ class FarmclubDetail {
   final String stepName;
   final String stepTip;
   final List<String> stepImages;
-  final List<String>? diaries;
+  final bool isRegistered;
 
   FarmclubDetail({
+    required this.veggieInfoId,
     required this.challengeName,
     required this.veggieName,
-    required this.veggieInfoId,
     required this.challengeDescription,
     required this.veggieImage,
     required this.difficulty,
@@ -30,28 +30,29 @@ class FarmclubDetail {
     required this.stepName,
     required this.stepTip,
     required this.stepImages,
-    required this.diaries,
+    required this.isRegistered,
   });
 
   factory FarmclubDetail.fromJson(Map<String, dynamic> json) {
+    // 'data' 필드가 없는 경우를 고려하여 수정
+    final jsonData = json;
+
     return FarmclubDetail(
-      challengeName: json['challengeName'],
-      veggieName: json['veggieName'],
-      veggieInfoId: json['veggieInfoId'],
-      challengeDescription: json['challengeDescription'],
-      veggieImage: json['veggieImage'],
-      difficulty: json['difficulty'],
-      maxUser: json['maxUser'],
-      currentUser: json['currentUser'],
-      status: json['status'],
-      achievement: json['achievement'],
-      stepNum: json['stepNum'],
-      stepName: json['stepName'],
-      stepTip: json['stepTip'],
-      stepImages: List<String>.from(json['stepImages']),
-      diaries: json['diaries'] != null
-          ? List<String>.from(json['diaries'])
-          : null,
+      veggieInfoId: jsonData['veggieInfoId'],
+      challengeName: jsonData['challengeName'],
+      veggieName: jsonData['veggieName'],
+      challengeDescription: jsonData['challengeDescription'],
+      veggieImage: jsonData['veggieImage'],
+      difficulty: jsonData['difficulty'],
+      maxUser: jsonData['maxUser'],
+      currentUser: jsonData['currentUser'],
+      status: jsonData['status'],
+      achievement: jsonData['achievement'],
+      stepNum: jsonData['stepNum'],
+      stepName: jsonData['stepName'],
+      stepTip: jsonData['stepTip'],
+      stepImages: List<String>.from(jsonData['stepImages']),
+      isRegistered: jsonData['isRegistered'],
     );
   }
 }
