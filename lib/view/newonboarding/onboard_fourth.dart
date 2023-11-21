@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class OnboardSecond extends StatefulWidget {
-  const OnboardSecond({Key? key}) : super(key: key);
+class OnboardFourth extends StatefulWidget {
+  const OnboardFourth({Key? key}) : super(key: key);
 
   @override
-  State<OnboardSecond> createState() => _OnboardSecondState();
+  State<OnboardFourth> createState() => _OnboardFourthState();
 }
 
-class _OnboardSecondState extends State<OnboardSecond> {
+class _OnboardFourthState extends State<OnboardFourth> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,11 +19,11 @@ class _OnboardSecondState extends State<OnboardSecond> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 160),
+              const SizedBox(height: 85),
               Center(
                 child: Image.asset(
-                  "assets/image/onboard_image.png",
-                  width: 360,
+                  'assets/image/onboard4.png',
+                  width: 150,
                 ),
               ),
               const SizedBox(height: 16),
@@ -40,7 +40,7 @@ class _OnboardSecondState extends State<OnboardSecond> {
                         child: const Padding(
                           padding: EdgeInsets.all(40.0),
                           child: Text(
-                            '꾸준한 채소 기록을 통해\n홈파밍의 성취감을 느낄 수 있어요',
+                            '서로 소통하며 함께하는\n홈파밍의 즐거움을 느낄 수 있어요',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 14,
@@ -54,7 +54,7 @@ class _OnboardSecondState extends State<OnboardSecond> {
                     Positioned(
                       bottom: 323,
                       child: SvgPicture.asset(
-                        "assets/image/second_plant.svg",
+                        "assets/image/fourth_plant.svg",
                       ),
                     ),
                   ],
