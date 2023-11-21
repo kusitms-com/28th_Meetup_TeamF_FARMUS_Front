@@ -26,22 +26,28 @@ import '../../model/farmclub_mine_detail.dart';
 import 'component/record/record_feed.dart';
 
 class FarmclubScreen extends StatefulWidget {
-  bool isFarmclub;
-
-  FarmclubScreen({super.key, required this.isFarmclub});
-
   @override
   State<FarmclubScreen> createState() => _FarmclubScreenState();
 }
 
 class _FarmclubScreenState extends State<FarmclubScreen> {
-  FarmclubController controller = Get.put(FarmclubController());
-  FarmclubAuthController _authController = Get.put(FarmclubAuthController());
+  final FarmclubController controller = Get.put(FarmclubController());
+  final FarmclubAuthController _authController =
+      Get.put(FarmclubAuthController());
+
+  bool showFloatingButton = false;
 
   @override
   void initState() {
     super.initState();
-    controller.getMyFarmclub();
+    loadFarmclubData();
+  }
+
+  Future<void> loadFarmclubData() async {
+    await controller.getMyFarmclub();
+    setState(() {
+      showFloatingButton = controller.myFarmclubState.isNotEmpty;
+    });
   }
 
   @override
@@ -61,15 +67,20 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                   style: FarmusThemeData.darkStyle16,
                 ),
                 Bouncing(
-                  onPress: () {},
+                  onPress: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FarmclubExploreScreen(),
+                      ),
+                    );
+                  },
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) {
-                            return const FarmclubExploreScreen();
-                          },
+                          builder: (context) => const FarmclubExploreScreen(),
                         ),
                       );
                     },
@@ -83,7 +94,6 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
           ),
           Expanded(
             child: Obx(() {
-              // 로딩 중이면 로딩 화면을 표시
               if (controller.isLoading.isTrue) {
                 return Center(
                   child: CircularProgressIndicator(
@@ -92,11 +102,12 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                 );
               }
 
+              if (controller.myFarmclubState.isEmpty) {
+                return FarmclubInit();
+              }
+
               final FarmclubMineDetail? farmclubInfo =
                   controller.farmclubInfo.value;
-
-              print("가입: ${controller.farmclubInfo.value!.isRegistered}");
-
 
               return SingleChildScrollView(
                 child: Column(
@@ -160,8 +171,9 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                         ? RecordFeed(
                             farmclubInfo: controller.farmclubInfo.value!,
                             farmclubMine: controller.myFarmclubState[
-                                controller.selectedFarmclubIndex.toInt()]):
-                    RecordInit(),
+                                controller.selectedFarmclubIndex.toInt()],
+                          )
+                        : RecordInit(),
                     const SizedBox(
                       height: 12,
                     ),
@@ -176,7 +188,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: controller.myFarmclubState.isNotEmpty
+      floatingActionButton: showFloatingButton
           ? Container(
               padding: const EdgeInsets.all(8),
               color: Colors.transparent,
@@ -187,19 +199,18 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                   Expanded(
                     flex: 1,
                     child: ButtonWhite(
-                        text: "내 미션",
-                        onPress: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return const MyFarmclubMissionScreen(
-                                  detailId: '',
-                                );
-                              },
+                      text: "내 미션",
+                      onPress: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MyFarmclubMissionScreen(
+                              detailId: '',
                             ),
-                          );
-                        }),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                   Expanded(
                     flex: 2,
@@ -210,17 +221,15 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) {
-                              return FarmclubAuthScreen(
-                                  farmclubData: controller.myFarmclubState);
-                            },
+                            builder: (context) => FarmclubAuthScreen(
+                              farmclubData: controller.myFarmclubState,
+                            ),
                           ),
                         );
-
                         // 업로드 성공 후 새로고침
                         if (_authController.missionUploaded.value) {
                           _authController.missionUploaded.value = false; // 초기화
-                          super.initState(); // FarmclubScreen 새로고침
+                          loadFarmclubData(); // FarmclubScreen 새로고침
                         }
                       },
                     ),

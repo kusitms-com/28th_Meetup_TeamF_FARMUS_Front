@@ -9,6 +9,7 @@ import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_h
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/mission_feed.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_mission_controller.dart';
 
 class FarmclubMissionFeedScreen extends StatefulWidget {
@@ -31,75 +32,99 @@ class FarmclubMissionFeedScreen extends StatefulWidget {
 class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
   FarmclubMissionController _farmclubMissionController =
       Get.put(FarmclubMissionController());
+  FarmclubController _controller = Get.find();
 
   @override
   void initState() {
     super.initState();
-    _farmclubMissionController.getFarmclubRecommend(widget.challengeId, widget.stepNum);
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    try {
+      await _farmclubMissionController.getFarmclubRecommend(
+        widget.challengeId,
+        widget.stepNum,
+      );
+    } catch (error) {
+      // 오류 처리 로직 추가
+      print('Error fetching farmclub mission data: $error');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    print("디테일 ${widget.registrationId}");
-
     return Scaffold(
       appBar: CustomAppBar(),
       backgroundColor: FarmusThemeData.white,
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "미션 피드",
-                  style: FarmusThemeData.darkStyle16,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: SvgPicture.asset("assets/image/ic_close.svg"),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 16,
-                  ),
-                  ChallengeStep(step: widget.stepNum.toInt(), title: "준비물을 챙겨요"),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  ChallengeHelp(help: "상추를 키울 때에는 어쩌고저쩌고 해야해요."),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  SingleChildScrollView(
-                    child: Column(
-                      children: _farmclubMissionController.farmclubMissionList
-                          .map((mission) => MissionFeed(mission: mission))
-                          .toList(),
+      body: Obx(() {
+        if (_farmclubMissionController.farmclubMissionList.isEmpty) {
+          // 로딩 페이지 표시
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          // 응답이 왔을 때 화면 빌드
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 16,
                     ),
-                  ),
-                  SizedBox(
-                    height: 70,
-                  ),
-                ],
+                    Text(
+                      "미션 피드",
+                      style: FarmusThemeData.darkStyle16,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: SvgPicture.asset("assets/image/ic_close.svg"),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ),
-        ],
-      ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 16,
+                      ),
+                      ChallengeStep(
+                          step: widget.stepNum.toInt(),
+                          title: _controller.farmclubInfo.value!.stepName),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      ChallengeHelp(help: "상추를 키울 때에는 어쩌고저쩌고 해야해요."),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      SingleChildScrollView(
+                        child: Column(
+                          children: _farmclubMissionController
+                              .farmclubMissionList
+                              .map((mission) => MissionFeed(mission: mission))
+                              .toList(),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 70,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+        }
+      }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),

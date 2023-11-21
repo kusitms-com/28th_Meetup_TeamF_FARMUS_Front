@@ -44,7 +44,11 @@ class _DialogJoinFarmclubState extends State<DialogJoinFarmclub> {
                   widget.image != null
                       ? ClipRRect(
                           borderRadius: BorderRadius.circular(16),
-                          child: Image.network(widget.image),
+                          child: Image.network(
+                            widget.image,
+                            width: 100,
+                            height: 100,
+                          ),
                         )
                       : SvgPicture.asset(
                           "assets/image/ic_lettuce_blue.svg",
