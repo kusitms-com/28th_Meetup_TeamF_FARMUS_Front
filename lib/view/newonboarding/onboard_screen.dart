@@ -6,6 +6,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/model/farmus_user.dart';
 import 'package:mojacknong_android/view/newonboarding/onboard_first.dart';
+import 'package:mojacknong_android/view/newonboarding/onboard_fourth.dart';
+import 'package:mojacknong_android/view/newonboarding/onboard_second.dart';
+import 'package:mojacknong_android/view/newonboarding/onboard_third.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 const storage = FlutterSecureStorage();
@@ -54,11 +57,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             if (index == 0) {
               return const OnboardFirst();
             } else if (index == 1) {
-              return const OnboardFirst();
+              return const OnboardSecond();
             } else if (index == 2) {
-              return const OnboardFirst();
+              return const OnboardThird();
             } else if (index == 3) {
-              return const OnboardFirst();
+              return const OnboardFourth();
             } else {
               return Container();
             }
