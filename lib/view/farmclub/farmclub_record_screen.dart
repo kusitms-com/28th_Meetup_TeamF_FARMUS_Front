@@ -22,9 +22,10 @@ class _FarmclubRecordScreenState extends State<FarmclubRecordScreen> {
   @override
   void initState() {
     super.initState();
-    _diaryController.getFarmclubRecommend(
-      controller.myFarmclubState[controller.selectedFarmclubIndex.toInt()]
-          .challengeId,
+    _diaryController.getFarmclubDiary(
+      4
+      // controller.myFarmclubState[controller.selectedFarmclubIndex.toInt()]
+      //     .challengeId,
     );
   }
 

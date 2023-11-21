@@ -265,6 +265,7 @@ class FarmclubApiService {
 
       if (response.statusCode == 200) {
         print(response.data["data"]);
+        print("일기");
         List<dynamic> dataList = response.data['data'];
         List<FarmclubDiary> farmclubDiary =
         dataList.map((data) => FarmclubDiary.fromJson(data)).toList();

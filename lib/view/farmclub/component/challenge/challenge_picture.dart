@@ -9,8 +9,12 @@ class ChallengePicture extends StatefulWidget {
   final int? challengeId;
   final int? stepNum;
 
-  const ChallengePicture(
-      {super.key, this.registrationId, this.challengeId, this.stepNum,});
+  const ChallengePicture({
+    super.key,
+    this.registrationId,
+    this.challengeId,
+    this.stepNum,
+  });
 
   @override
   State<ChallengePicture> createState() => _ChallengePictureState();
@@ -34,6 +38,8 @@ class _ChallengePictureState extends State<ChallengePicture> {
         Expanded(
           flex: 2,
           child: Obx(() {
+            List<String?> stepImages =
+                _farmclubController.farmclubInfo.value!.stepImages;
             return Container(
               width: double.infinity,
               height: 200,
@@ -43,12 +49,14 @@ class _ChallengePictureState extends State<ChallengePicture> {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  _farmclubController.farmclubInfo.value!.stepImages[0],
-                  fit: BoxFit.fill,
-                  width: double.infinity,
-                  height: double.infinity,
-                ),
+                child: stepImages.length > 0 && stepImages[0] != null
+                    ? Image.network(
+                        stepImages[0]!,
+                        fit: BoxFit.fill,
+                        width: double.infinity,
+                        height: double.infinity,
+                      )
+                    : Image.asset("assets/image/image_empty.png"),
               ),
             );
           }),
@@ -68,13 +76,20 @@ class _ChallengePictureState extends State<ChallengePicture> {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: _farmclubController.farmclubInfo.value!
-                      .stepImages[1] != null ? Image.network(
-                    _farmclubController.farmclubInfo.value!.stepImages[1],
-                    fit: BoxFit.fill,
-                    width: double.infinity,
-                    height: double.infinity,
-                  ) : Image.asset("assets/image/image_empty.png"),
+                  child: _farmclubController
+                                  .farmclubInfo.value!.stepImages.length >
+                              1 &&
+                          _farmclubController
+                                  .farmclubInfo.value!.stepImages[1] !=
+                              null
+                      ? Image.network(
+                          _farmclubController
+                              .farmclubInfo.value!.stepImages[1]!,
+                          fit: BoxFit.fill,
+                          width: double.infinity,
+                          height: double.infinity,
+                        )
+                      : Image.asset("assets/image/image_empty.png"),
                 ),
               ),
               const SizedBox(
@@ -88,8 +103,15 @@ class _ChallengePictureState extends State<ChallengePicture> {
                       builder: (context) {
                         return FarmclubMissionFeedScreen(
                           registrationId: widget.registrationId,
-                          challengeId:_farmclubController.myFarmclubState[_farmclubController.selectedFarmclubIndex.toInt()].challengeId.toInt(),
-                          stepNum: _farmclubController.farmclubInfo.value!.stepNum.toInt(),
+                          challengeId: _farmclubController
+                              .myFarmclubState[_farmclubController
+                                  .selectedFarmclubIndex
+                                  .toInt()]
+                              .challengeId
+                              .toInt(),
+                          stepNum: _farmclubController
+                              .farmclubInfo.value!.stepNum
+                              .toInt(),
                         );
                       },
                     ),
@@ -105,14 +127,20 @@ class _ChallengePictureState extends State<ChallengePicture> {
                     borderRadius: BorderRadius.circular(8),
                     child: Stack(
                       children: [
-                        _farmclubController.farmclubInfo.value!.stepImages[2] !=
-                            null ?
-                        Image.network(
-                          _farmclubController.farmclubInfo.value!.stepImages[2],
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ) : Image.asset("assets/image/image_empty.png"),
+                        _farmclubController
+                                        .farmclubInfo.value!.stepImages.length >
+                                    2 &&
+                                _farmclubController
+                                        .farmclubInfo.value!.stepImages[2] !=
+                                    null
+                            ? Image.network(
+                                _farmclubController
+                                    .farmclubInfo.value!.stepImages[2]!,
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                              )
+                            : Image.asset("assets/image/image_empty.png"),
                         Positioned.fill(
                           child: Container(
                             decoration: BoxDecoration(
