@@ -111,6 +111,7 @@ class FarmclubMakeController extends GetxController {
       // 이미 선택된 아이템을 선택하면 선택 해제
       isSelectedList[index] = false;
       updateSelectedVeggieIndex(-1);
+      print(index);
     } else {
       // 선택되지 않은 아이템을 선택하면 반전
       for (int i = 0; i < isSelectedList.length; i++) {

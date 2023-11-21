@@ -7,6 +7,7 @@ import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/model/farmclub_mine.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
 import 'package:mojacknong_android/model/farmclub_mission.dart';
+import 'package:mojacknong_android/model/farmclub_my_mission.dart';
 
 import '../model/farmclub_mission_response.dart';
 
@@ -101,7 +102,6 @@ class FarmclubRepository {
 
       return response;
     } catch (e) {
-      print("레포 에러 $e");
       throw "레포 에러 $e";
     }
   }
@@ -111,11 +111,9 @@ class FarmclubRepository {
     try {
       List<FarmclubInfoModel> response =
           await FarmclubApiService().getFarmclubRecommendation();
-      print("레포 ${response.runtimeType}");
 
       return response;
     } catch (e) {
-      print("레포 에러 $e");
       throw "레포 에러 $e";
     }
   }
@@ -131,29 +129,41 @@ class FarmclubRepository {
         challengeId,
         stepNum,
       );
-      print("레포 ${response.runtimeType}");
 
       return response;
     } catch (e) {
-      print("레포 에러 $e");
       throw "레포 에러 $e";
     }
   }
 
   // 일기 목록 조회
   static Future<List<FarmclubDiary>> getFarmclubDiary(
-      int challengeId,
-      ) async {
+    int challengeId,
+  ) async {
     try {
       List<FarmclubDiary> response =
-      await FarmclubApiService().getFarmclubDiary(
+          await FarmclubApiService().getFarmclubDiary(
         challengeId,
       );
-      print("레포 ${response.runtimeType}");
 
       return response;
     } catch (e) {
-      print("레포 에러 $e");
+      throw "레포 에러 $e";
+    }
+  }
+
+  // 내 미션 인증 글 조회
+  static Future<List<FarmclubMyMission>> getFarmclubMyMission(
+    int challengeId,
+  ) async {
+    try {
+      List<FarmclubMyMission> response =
+          await FarmclubApiService().getFarmclubMyMssion(
+        challengeId,
+      );
+
+      return response;
+    } catch (e) {
       throw "레포 에러 $e";
     }
   }
