@@ -37,9 +37,14 @@ class _DiaryPictureState extends State<DiaryPicture> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Image.network(
-              '${widget.postImage}',
-              fit: BoxFit.fill,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                widget.postImage!,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 248,
+              ),
             ),
           ),
           SizedBox(

@@ -48,7 +48,7 @@ class _LoginScreen extends State<LoginScreen> {
       home: Scaffold(
         appBar: CustomAppBar(),
         body: Container(
-          color: FarmusThemeData.green1,
+          color: FarmusThemeData.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
