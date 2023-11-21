@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mojacknong_android/data/network/onboarding_api_service.dart';
 import 'package:mojacknong_android/model/farmus_user.dart';
 import 'package:mojacknong_android/repository/mypage_repository.dart';
 import 'package:mojacknong_android/repository/onboarding_repository.dart';
