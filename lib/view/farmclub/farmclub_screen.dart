@@ -19,10 +19,8 @@ import 'package:mojacknong_android/view/farmclub/component/record/record_init.da
 import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_explore_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
-import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_auth_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_make_controller.dart';
 
 import '../../model/farmclub_mine_detail.dart';
 
@@ -150,7 +148,10 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                           ),
                           const FarmclubTitleWithDivider(title: "함께 기록해요"),
                           farmclubInfo.diaries.isNotEmpty
-                              ? RecordFeed(farmclubInfo: farmclubInfo)
+                              ? RecordFeed(
+                                  farmclubInfo: controller.farmclubInfo.value!,
+                                  farmclubMine: controller.myFarmclubState[
+                                      controller.selectedFarmclubIndex.toInt()])
                               : RecordInit(),
                           const SizedBox(
                             height: 12,

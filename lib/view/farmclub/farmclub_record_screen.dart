@@ -16,12 +16,16 @@ class FarmclubRecordScreen extends StatefulWidget {
 
 class _FarmclubRecordScreenState extends State<FarmclubRecordScreen> {
   final FarmclubController controller = Get.put(FarmclubController());
-  final FarmclubDiaryController _diaryController = Get.put(FarmclubDiaryController());
+  final FarmclubDiaryController _diaryController =
+      Get.put(FarmclubDiaryController());
 
   @override
   void initState() {
     super.initState();
-    _diaryController.getFarmclubRecommend(controller.myFarmclubState[controller.selectedFarmclubIndex.toInt()].challengeId);
+    _diaryController.getFarmclubRecommend(
+      controller.myFarmclubState[controller.selectedFarmclubIndex.toInt()]
+          .challengeId,
+    );
   }
 
   @override
@@ -31,42 +35,43 @@ class _FarmclubRecordScreenState extends State<FarmclubRecordScreen> {
         title: "함께 기록해요",
       ),
       backgroundColor: FarmusThemeData.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            RecordProfile(nickname: "파머", postTime: "10/29 4:12"),
-            SizedBox(
-              height: 12,
-            ),
-            RecordPicture(
-              like: controller.like,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                "우리 상훈이가 쑥쑥 자라고 있네? 얼른 다 자라서 삼겹살이랑 쌈장 마늘 해서 상추쌈 싸먹고 싶다. 기대된다~~",
-                style: FarmusThemeData.darkStyle14,
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            RecordProfile(nickname: "파머", postTime: "10/29 4:12"),
-            SizedBox(
-              height: 12,
-            ),
-            RecordPicture(
-              like: controller.like,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                "우리 상훈이가 쑥쑥 자라고 있네? 얼른 다 자라서 삼겹살이랑 쌈장 마늘 해서 상추쌈 싸먹고 싶다. 기대된다~~",
-                style: FarmusThemeData.darkStyle14,
-              ),
-            ),
-          ],
-        ),
+      body: Obx(
+        () {
+          final diaryList = _diaryController.farmclubDiaryList;
+
+          return ListView.builder(
+            itemCount: diaryList.length,
+            itemBuilder: (context, index) {
+              final diary = diaryList[index];
+
+              return Column(
+                children: [
+                  RecordProfile(
+                    profile: diary.profileImage,
+                    nickname: diary.nickName,
+                    postTime: diary.date,
+                  ),
+                  SizedBox(height: 12),
+                  RecordPicture(
+                    like: diary.like.obs,
+                    image: diary.image,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          diary.content,
+                          style: FarmusThemeData.darkStyle14,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
+        },
       ),
     );
   }

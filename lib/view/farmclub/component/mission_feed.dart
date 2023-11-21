@@ -37,9 +37,13 @@ class _MissionFeedState extends State<MissionFeed> {
         RecordPicture(like: widget.mission.like.obs, image: widget.mission.image,),
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text(
-            widget.mission.content,
-            style: FarmusThemeData.darkStyle14,
+          child: Row(
+            children: [
+              Text(
+                widget.mission.content,
+                style: FarmusThemeData.darkStyle14,
+              ),
+            ],
           ),
         ),
       ],

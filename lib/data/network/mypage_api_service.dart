@@ -24,6 +24,7 @@ class MypageApiService {
       if (response.data["data"] != null) {
 
         final userData = FarmusUser.fromJson(response.data["data"]);
+        print(userData);
 
 
         return userData;
