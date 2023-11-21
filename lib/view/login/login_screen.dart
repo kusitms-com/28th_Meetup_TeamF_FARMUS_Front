@@ -7,7 +7,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
-import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/model/farmus_user.dart';
 import 'package:mojacknong_android/repository/login_repository.dart';
 import 'package:mojacknong_android/view/login/app_interceptor.dart';
@@ -48,20 +47,28 @@ class _LoginScreen extends State<LoginScreen> {
       home: Scaffold(
         appBar: CustomAppBar(),
         body: Container(
-          color: FarmusThemeData.green1,
+          color: const Color(0xff2ADF63),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
-              Center(
-                child: SvgPicture.asset(
-                  "assets/image/logo_tree.svg",
-                  width: 128,
-                  height: 128,
-                ),
+              Column(
+                children: [
+                  Center(
+                    child: SvgPicture.asset(
+                      "assets/image/splash_logo.svg",
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Center(
+                    child: SvgPicture.asset(
+                      "assets/image/splash_text.svg",
+                    ),
+                  )
+                ],
               ),
               Column(
                 children: [
@@ -148,11 +155,11 @@ class _LoginScreen extends State<LoginScreen> {
 
         if (value.early == true) {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => OnboardingScreen()),
+            MaterialPageRoute(builder: (context) => const OnboardingScreen()),
           );
         } else {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => MainScreen()),
+            MaterialPageRoute(builder: (context) => const MainScreen()),
           );
         }
       },
@@ -179,11 +186,11 @@ class _LoginScreen extends State<LoginScreen> {
 
         if (value.early == true) {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => OnboardingScreen()),
+            MaterialPageRoute(builder: (context) => const OnboardingScreen()),
           );
         } else {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => MainScreen()),
+            MaterialPageRoute(builder: (context) => const MainScreen()),
           );
         }
       },
