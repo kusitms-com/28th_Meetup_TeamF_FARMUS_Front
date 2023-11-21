@@ -21,7 +21,7 @@ class FarmclubApiService {
         print(response.data["data"]);
         List<dynamic> dataList = response.data['data'];
         List<FarmclubMine> farmclubmineList =
-        dataList.map((data) => FarmclubMine.fromJson(data)).toList();
+            dataList.map((data) => FarmclubMine.fromJson(data)).toList();
 
         print(farmclubmineList);
 
@@ -50,9 +50,9 @@ class FarmclubApiService {
       };
 
       Response response = await ApiClient().dio.post(
-        "/api/farmclub/search",
-        data: requestBody,
-      );
+            "/api/farmclub/search",
+            data: requestBody,
+          );
 
       if (response.statusCode == 200) {
         print(response.data['data']);
@@ -67,7 +67,7 @@ class FarmclubApiService {
           // List의 각 요소를 FarmclubInfoModel로 변환하여 리스트에 추가
           List<dynamic> dataList = response.data['data'];
           List<FarmclubInfoModel> farmclubList =
-          dataList.map((data) => FarmclubInfoModel.fromJson(data)).toList();
+              dataList.map((data) => FarmclubInfoModel.fromJson(data)).toList();
           print(farmclubList.runtimeType);
 
           return farmclubList;
@@ -91,8 +91,8 @@ class FarmclubApiService {
       print("challengeId  $challengeId");
       // API 호출
       Response response = await ApiClient().dio.get(
-        "/api/farmclub/$challengeId",
-      );
+            "/api/farmclub/$challengeId",
+          );
 
       // 응답 상태 코드 확인
       if (response.statusCode == 200) {
@@ -116,8 +116,8 @@ class FarmclubApiService {
       print("challengeId  $challengeId");
       // API 호출
       Response response = await ApiClient().dio.get(
-        "/api/farmclub/$challengeId",
-      );
+            "/api/farmclub/$challengeId",
+          );
 
       // 응답 상태 코드 확인
       if (response.statusCode == 200) {
@@ -147,9 +147,9 @@ class FarmclubApiService {
       };
 
       Response response = await ApiClient().dio.post(
-        "/api/farmclub/register",
-        data: requestBody,
-      );
+            "/api/farmclub/register",
+            data: requestBody,
+          );
 
       // 응답 상태 코드 확인
       if (response.statusCode == 200) {
@@ -177,13 +177,13 @@ class FarmclubApiService {
         "registrationId": registrationId.toString(),
         "content": content,
         "image":
-        await MultipartFile.fromFile(image.path, filename: "image.png"),
+            await MultipartFile.fromFile(image.path, filename: "image.png"),
       });
 
       Response response = await ApiClient().dio.post(
-        "/api/farmclub/mission",
-        data: formData,
-      );
+            "/api/farmclub/mission",
+            data: formData,
+          );
 
       // 응답 상태 코드 확인
       if (response.statusCode == 200) {
@@ -204,13 +204,13 @@ class FarmclubApiService {
   Future<List<FarmclubInfoModel>> getFarmclubRecommendation() async {
     try {
       Response response =
-      await ApiClient().dio.get("/api/farmclub/recommendation");
+          await ApiClient().dio.get("/api/farmclub/recommendation");
 
       if (response.statusCode == 200) {
         print(response.data["data"]);
         List<dynamic> dataList = response.data['data'];
         List<FarmclubInfoModel> farmclubRecommend =
-        dataList.map((data) => FarmclubInfoModel.fromJson(data)).toList();
+            dataList.map((data) => FarmclubInfoModel.fromJson(data)).toList();
 
         print(farmclubRecommend);
 
@@ -226,8 +226,10 @@ class FarmclubApiService {
   }
 
 // 미션 목록 조회
-  Future<List<FarmclubMission>> getFarmclubMission(int challengeId,
-      int stepNum,) async {
+  Future<List<FarmclubMission>> getFarmclubMission(
+    int challengeId,
+    int stepNum,
+  ) async {
     print(challengeId);
     print(stepNum);
     try {
@@ -240,7 +242,7 @@ class FarmclubApiService {
         print(response.data["data"]);
         List<dynamic> dataList = response.data['data'];
         List<FarmclubMission> farmclubMission =
-        dataList.map((data) => FarmclubMission.fromJson(data)).toList();
+            dataList.map((data) => FarmclubMission.fromJson(data)).toList();
 
         print(farmclubMission);
 
@@ -256,19 +258,21 @@ class FarmclubApiService {
   }
 
   // 일기 목록 조회
-  Future<List<FarmclubDiary>> getFarmclubDiary(int challengeId,) async {
-    print(challengeId);
+  Future<List<FarmclubDiary>> getFarmclubDiary(
+    int challengeId,
+  ) async {
+    print("일기 챌린지 요청 $challengeId");
     try {
       Response response = await ApiClient().dio.get(
-          "/api/farmclub/diary/$challengeId",
-      );
+            "/api/farmclub/diary/$challengeId",
+          );
 
       if (response.statusCode == 200) {
         print(response.data["data"]);
-        print("일기");
         List<dynamic> dataList = response.data['data'];
+
         List<FarmclubDiary> farmclubDiary =
-        dataList.map((data) => FarmclubDiary.fromJson(data)).toList();
+            dataList.map((data) => FarmclubDiary.fromJson(data)).toList();
 
         print(farmclubDiary);
 
@@ -282,5 +286,4 @@ class FarmclubApiService {
       throw "${e.message}";
     }
   }
-
 }

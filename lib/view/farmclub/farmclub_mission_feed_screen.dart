@@ -102,7 +102,7 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                       SizedBox(
                         height: 16,
                       ),
-                      ChallengeHelp(help: "상추를 키울 때에는 어쩌고저쩌고 해야해요."),
+                      ChallengeHelp(help: _controller.farmclubInfo.value!.stepTip),
                       SizedBox(
                         height: 8,
                       ),

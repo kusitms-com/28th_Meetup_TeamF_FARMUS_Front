@@ -45,6 +45,11 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
 
   Future<void> loadFarmclubData() async {
     await controller.getMyFarmclub();
+    await controller.getFarmclubDiary(
+      controller
+          .myFarmclubState[controller.selectedFarmclubIndex.toInt()].challengeId
+          .toInt(),
+    );
     setState(() {
       showFloatingButton = controller.myFarmclubState.isNotEmpty;
     });
@@ -67,14 +72,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                   style: FarmusThemeData.darkStyle16,
                 ),
                 Bouncing(
-                  onPress: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const FarmclubExploreScreen(),
-                      ),
-                    );
-                  },
+                  onPress: () {},
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -168,10 +166,10 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                     ),
                     const FarmclubTitleWithDivider(title: "함께 기록해요"),
                     controller.farmclubDiaryList.isNotEmpty
-                        ? RecordFeed(
-                            farmclubInfo: controller.farmclubInfo.value!,
-                            farmclubMine: controller.myFarmclubState[
-                                controller.selectedFarmclubIndex.toInt()],
+                        ? Container(
+                            child: RecordFeed(
+                              farmclubDiary: controller.farmclubDiaryList[0],
+                            ),
                           )
                         : RecordInit(),
                     const SizedBox(

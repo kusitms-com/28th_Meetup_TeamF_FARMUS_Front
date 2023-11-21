@@ -11,7 +11,7 @@ class FarmclubController extends GetxController {
   var myFarmclubState = <FarmclubMine>[].obs;
 
   RxBool isSelectLike = RxBool(false);
-  RxInt like = 2.obs; // 초기 좋아요 수
+  RxInt like = 0.obs; // 초기 좋아요 수
 
   RxBool isLoading = true.obs;
   Rx<FarmclubMineDetail?> farmclubInfo = Rx<FarmclubMineDetail?>(null);
@@ -33,7 +33,7 @@ class FarmclubController extends GetxController {
       selectedFarmclubIndex.value = index;
 
       print("내 팜클럽 리스트 ${selectedFarmclubIndex.value}");
-      getFarmclubDiary(myFarmclubState.value[selectedFarmclubIndex.toInt()].challengeId);
+      getFarmclubDiary(myFarmclubState.value[selectedFarmclubIndex.toInt()].challengeId.toInt());
 
       // 새로운 팜클럽 선택 후 화면 업데이트
       getMyFarmclub();
@@ -86,13 +86,13 @@ class FarmclubController extends GetxController {
     try {
       List<FarmclubDiary> responseData =
       await FarmclubRepository.getFarmclubDiary(
-        4,
+        challengeId,
       );
 
       // RxList 갱신
       farmclubDiaryList.clear();
       farmclubDiaryList.addAll(responseData);
-      debugPrintThrottled("일기 $farmclubDiaryList");
+      print("일기 $farmclubDiaryList");
 
       return responseData;
     } catch (error) {
