@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
-import '../../../common/dialog/dialog_join_farmclub.dart';
+import '../../../common/dialog/dialog_mission_farmclub.dart';
 import '../../../model/farmclub_mission_response.dart';
 import '../../../repository/farmclub_repository.dart';
 

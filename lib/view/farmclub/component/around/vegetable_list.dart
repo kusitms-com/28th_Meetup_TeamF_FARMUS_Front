@@ -28,7 +28,7 @@ class _VegetableListState extends State<VegetableList> {
         ? _makeController.veggieRegistration
         : _joinController.veggieRegistration;
 
-    return _joinController.veggieRegistration == []
+    return _joinController.veggieRegistration != []
         ? Container(
             width: double.infinity,
             height: 50,
