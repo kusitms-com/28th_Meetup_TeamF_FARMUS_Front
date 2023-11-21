@@ -32,7 +32,7 @@ class _RecordPictureState extends State<RecordPicture> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: widget.image != null
+                child: widget.image != ""
                     ? Image.network(
                   widget.image!,
                   fit: BoxFit.cover, // 이미지를 화면에 꽉 채우도록 설정

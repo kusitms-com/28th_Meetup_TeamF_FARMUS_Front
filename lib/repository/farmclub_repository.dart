@@ -90,10 +90,10 @@ class FarmclubRepository {
   }
 
   // 팜클럽 가입
-  static Future<String> postRegister(
+  static Future<int> postRegister(
       String challengeId, String veggieId) async {
     try {
-      String response = await FarmclubApiService()
+      int response = await FarmclubApiService()
           .postRegister(challengeId: challengeId, veggieId: veggieId);
       print("레포 ${response}");
 

@@ -40,7 +40,7 @@ class _RecordFeedState extends State<RecordFeed> {
             );
           },
           child: RecordProfile(
-            profile: widget.farmclubDiary.profileImage,
+            profile: widget.farmclubDiary.profileImage ?? "",
             nickname: widget.farmclubDiary.nickName,
             postTime:  widget.farmclubDiary.date,
           ),
