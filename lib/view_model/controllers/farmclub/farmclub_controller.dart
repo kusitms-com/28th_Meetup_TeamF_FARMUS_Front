@@ -22,6 +22,7 @@ class FarmclubController extends GetxController {
       selectedFarmclubIndex.value = index;
       selectedFarmclubIndex.refresh();
       print("gggg ${selectedFarmclubIndex.value}");
+      getMyFarmclub();
     }
   }
 
