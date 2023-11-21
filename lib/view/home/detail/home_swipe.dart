@@ -12,6 +12,8 @@ class SwipeScreen extends StatefulWidget {
     required this.myVegeList
   }) : super(key: key);
 
+
+
   @override
   _SwipeScreenState createState() => _SwipeScreenState();
 }
@@ -20,6 +22,8 @@ class _SwipeScreenState extends State<SwipeScreen> {
   final PageController _pageController = PageController();
  // final List<String> _pageContents = ['Page 1', 'Page 2', 'Page 3'];
   int _currentPage = 0;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +41,22 @@ class _SwipeScreenState extends State<SwipeScreen> {
                 });
               },
               itemBuilder: (context, index) {
+
                 return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const DiaryScreen(),
-                      ),
-                    );
-                  },
+                  // onTap: () {
+                  //   Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) =>  DiaryScreen(
+                  //         userNickName: widget.myVegeList?.userNickname,
+                  //         id: widget.myVegeList?.diaryPostList[index].id,
+                  //         nickname: widget.myVegeList?.diaryPostList[index].nickname,
+                  //         image: widget.myVegeList?.diaryPostList[index].image,
+                  //         age: widget.myVegeList?.diaryPostList[index].age,
+                  //       ),
+                  //     ),
+                  //   );
+                  // },
                   child: buildPageWidget(index),
                 );
               },

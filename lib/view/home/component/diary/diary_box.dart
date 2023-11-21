@@ -3,9 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class DiaryBox extends StatelessWidget {
-  final String nickname;
+  final String? nickname;
   final Widget imageWidget; //API 연결하면 주소로 바꾸기
-  final int age;
+  final int? age;
 
   const DiaryBox({
     Key? key,
@@ -16,6 +16,11 @@ class DiaryBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    double? nicknameLength = nickname?.length.toDouble();
+    double? ageLength = age?.toString().length.toDouble();
+
+    print(nicknameLength);
     return Container(
       alignment: Alignment.topCenter,
       width: double.infinity,
@@ -50,7 +55,7 @@ class DiaryBox extends StatelessWidget {
             top: 16,
             left: 16,
             child: SizedBox(
-              width: 106,
+              width: nicknameLength! + ageLength! + 130,
               height: 35,
               child: Container(
                 padding:

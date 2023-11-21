@@ -52,9 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
             final CurrentMissionList? currentMissionList = data[1] as CurrentMissionList?;
             final MyVegeRoutineList? myVegeRoutineList = data[2] as MyVegeRoutineList?;
 
-            print(myVegeList?.level);
 
-
+         //   print(myVegeList?.diaryPostList[0].id);
             if(myVegeList!.diaryPostList.isEmpty){
               return setView(levelSign(myVegeList.level, myVegeList.userNickname), HomeWithoutVege());
             }

@@ -15,7 +15,8 @@ class HomeGreenBoxUser extends StatelessWidget {
     this.id,
     this.nickname,
     this.image,
-    this.age}) : super(key: key);
+    this.age
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,14 @@ class HomeGreenBoxUser extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const DiaryScreen(),
+                builder: (context) => DiaryScreen(
+                  userNickName: '$userNickName',
+                  id: id,
+                  nickname: nickname,
+                  image: image,
+                  age: age,
+
+                ),
               ),
             );
           },

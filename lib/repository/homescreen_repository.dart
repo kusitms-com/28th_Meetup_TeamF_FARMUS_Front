@@ -3,8 +3,10 @@
 
 import 'dart:async';
 
+import '../data/network/diary_api_service.dart';
 import '../data/network/home_screen_api_service.dart';
 import '../model/current_mission_list.dart';
+import '../model/my_vege_diary_list.dart';
 import '../model/my_vege_list.dart';
 import '../model/my_vege_routine_list.dart';
 
@@ -42,7 +44,15 @@ class HomeScreenRepository {
 
   static Future<MyVegeRoutineList?> getMyVegeRoutineListApi() async {
 
-    final response = await HomeScreenApiService.getMyVegeRoutineListApi();
+    final response = await HomeScreenApiService.getMyVegeRoutineList();
+
+    return response;
+  }
+
+
+  static Future<MyVegeDiaryList?> getMyVegeDiaryListApi(int vegeId) async {
+
+    final response = await DiaryApiService.getMyVegeDiaryList(vegeId);
 
     return response;
   }
@@ -56,6 +66,13 @@ class HomeScreenRepository {
 
     return Future.wait(futures.cast<Future<dynamic>>());
   }
+
+
+
+
+
+
+
 
 
 
