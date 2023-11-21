@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mojacknong_android/view/login/login_screen.dart';
 import 'package:mojacknong_android/view/newonboarding/onboard_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 4),
       () => Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const OnBoardScreen()),
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
       ),
     );
   }

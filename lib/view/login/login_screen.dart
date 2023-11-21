@@ -7,11 +7,18 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
+import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/model/farmus_user.dart';
 import 'package:mojacknong_android/repository/login_repository.dart';
 import 'package:mojacknong_android/view/login/app_interceptor.dart';
 import 'package:mojacknong_android/view/main/main_screen.dart';
 import 'package:mojacknong_android/view/onboarding/onboarding_screen.dart';
+
+import '../newonboarding/onboard_first.dart';
+import '../newonboarding/onboard_fourth.dart';
+import '../newonboarding/onboard_second.dart';
+import '../newonboarding/onboard_third.dart';
+
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 const storage = FlutterSecureStorage();
@@ -32,74 +39,107 @@ class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreen();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreen extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   late FarmusUser user;
+  final PageController _pageController = PageController();
+  final List<String> _pageContents = ['Page 1', 'Page 2', 'Page 3', 'Page 4'];
+  int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
     authDio.interceptors.add(AppInterceptor(authDio));
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: CustomAppBar(),
-        body: Container(
-          color: const Color(0xff2ADF63),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 32,
+    return Scaffold(
+        body: Stack(
+          children: [
+            PageView.builder(
+              controller: _pageController,
+              itemCount: _pageContents.length,
+              onPageChanged: (int page) {
+                setState(() {
+                  _currentPage = page;
+                });
+              },
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return const OnboardFirst();
+                } else if (index == 1) {
+                  return const OnboardSecond();
+                } else if (index == 2) {
+                  return const OnboardThird();
+                } else if (index == 3) {
+                  return const OnboardFourth();
+                } else {
+                  return Container();
+                }
+              },
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 220,
+              child: buildPageIndicator(),
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 120,
+              child: Bouncing(
+                onPress: () {},
+                child: GestureDetector(
+                  onTap: () {
+                    kakaoLogin();
+                  },
+                  child: SvgPicture.asset(
+                    "assets/image/kakao_login.svg",
+                  ),
+                ),
               ),
-              Column(
-                children: [
-                  Center(
-                    child: SvgPicture.asset(
-                      "assets/image/splash_logo.svg",
-                    ),
+            ),
+            const SizedBox(height: 10),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 50,
+              child: Bouncing(
+                onPress: () {},
+                child: GestureDetector(
+                  onTap: () {
+                    googleLogin();
+                  },
+                  child: SvgPicture.asset(
+                    "assets/image/google_login.svg",
                   ),
-                  const SizedBox(height: 16),
-                  Center(
-                    child: SvgPicture.asset(
-                      "assets/image/splash_text.svg",
-                    ),
-                  )
-                ],
+                ),
               ),
-              Column(
-                children: [
-                  Bouncing(
-                    onPress: () {},
-                    child: GestureDetector(
-                      onTap: () {
-                        kakaoLogin();
-                      },
-                      child: SvgPicture.asset(
-                        "assets/image/kakao_login.svg",
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Bouncing(
-                    onPress: () {},
-                    child: GestureDetector(
-                      onTap: () {
-                        googleLogin();
-                      },
-                      child: SvgPicture.asset(
-                        "assets/image/google_login.svg",
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
+            ),
+          ],
+        ));
+  }
+
+  Widget buildPageIndicator() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(
+        _pageContents.length,
+            (index) => buildIndicator(index),
+      ),
+    );
+  }
+
+  Widget buildIndicator(int index) {
+    return Container(
+      width: 6.0,
+      height: 6.0,
+      margin: const EdgeInsets.symmetric(horizontal: 4.0),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: _currentPage == index
+            ? const Color(0x7e000000)
+            : const Color(0x33000000),
       ),
     );
   }
@@ -155,11 +195,11 @@ class _LoginScreen extends State<LoginScreen> {
 
         if (value.early == true) {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+            MaterialPageRoute(builder: (context) => OnboardingScreen()),
           );
         } else {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const MainScreen()),
+            MaterialPageRoute(builder: (context) => MainScreen()),
           );
         }
       },
@@ -186,11 +226,11 @@ class _LoginScreen extends State<LoginScreen> {
 
         if (value.early == true) {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+            MaterialPageRoute(builder: (context) => OnboardingScreen()),
           );
         } else {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const MainScreen()),
+            MaterialPageRoute(builder: (context) => MainScreen()),
           );
         }
       },
