@@ -35,7 +35,10 @@ class _RecordProfileState extends State<RecordProfile> {
                 shape: BoxShape.circle,
               ),
               child: widget.profile != null
-                  ? Image.network(widget.profile!, fit: BoxFit.fill,)
+                  ? Image.network(
+                      widget.profile!,
+                      fit: BoxFit.cover,
+                    )
                   : SvgPicture.asset("assets/image/ic_profile.svg"),
             ),
           ),

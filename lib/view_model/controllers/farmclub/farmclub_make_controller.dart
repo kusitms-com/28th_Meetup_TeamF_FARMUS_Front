@@ -4,11 +4,15 @@ import 'package:mojacknong_android/data/network/farmclub_api_service.dart';
 
 import 'package:get/get.dart';
 
+import '../../../model/veggie_registration.dart';
+import '../../../repository/farmclub_repository.dart';
+
 class FarmclubMakeController extends GetxController {
   // 선택된 채소들의 상태를 저장하는 변수
   RxList<bool> isSelectedList = List.generate(6, (index) => false).obs;
   RxInt selectedVeggieIndex = RxInt(-1);
   RxBool isLoading = RxBool(true);
+  RxList<VeggieRegistration> veggieRegistration = <VeggieRegistration>[].obs;
 
 
   RxBool isMemberValid = RxBool(true); // 추가
@@ -158,5 +162,22 @@ class FarmclubMakeController extends GetxController {
         memberValue.isNotEmpty &&
         isCheck.value &&
         selectedVeggieIndex.value != -1;
+  }
+
+  Future<List<VeggieRegistration>> getVeggieRegistration() async {
+    try {
+      List<VeggieRegistration> responseData =
+      await FarmclubRepository.getVeggieRegistration();
+
+      // RxList 갱신
+      veggieRegistration.clear();
+      veggieRegistration.addAll(responseData);
+
+      return responseData;
+    } catch (error) {
+      // 오류 처리 로직 추가
+      print('Error fetching farmclub data: $error');
+      throw error;
+    }
   }
 }
