@@ -53,8 +53,8 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
         const SizedBox(
           height: 16,
         ),
-        const ChallengeHelp(
-          help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
+         ChallengeHelp(
+          help: widget.farmclubInfo.stepTip,
         ),
         const SizedBox(
           height: 16,
