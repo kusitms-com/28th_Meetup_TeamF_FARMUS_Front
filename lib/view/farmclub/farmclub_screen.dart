@@ -14,35 +14,40 @@ import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_d
 import 'package:mojacknong_android/view/farmclub/component/group/group_rate.dart';
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_info.dart';
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_list.dart';
-import 'package:mojacknong_android/view/farmclub/component/record/record_feed.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_init.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_explore_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
-import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_auth_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_make_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_diary_controller.dart';
 
 import '../../model/farmclub_mine_detail.dart';
+import 'component/record/record_feed.dart';
 
 class FarmclubScreen extends StatefulWidget {
-  bool isFarmclub;
-
-  FarmclubScreen({super.key, required this.isFarmclub});
-
   @override
   State<FarmclubScreen> createState() => _FarmclubScreenState();
 }
 
 class _FarmclubScreenState extends State<FarmclubScreen> {
-  FarmclubController controller = Get.put(FarmclubController());
-  FarmclubAuthController _authController = Get.put(FarmclubAuthController());
+  final FarmclubController controller = Get.put(FarmclubController());
+  final FarmclubAuthController _authController =
+      Get.put(FarmclubAuthController());
+
+  bool showFloatingButton = false;
 
   @override
   void initState() {
     super.initState();
-    controller.getMyFarmclub();
+    loadFarmclubData();
+  }
+
+  Future<void> loadFarmclubData() async {
+    await controller.getMyFarmclub();
+    setState(() {
+      showFloatingButton = controller.myFarmclubState.isNotEmpty;
+    });
   }
 
   @override
@@ -62,15 +67,20 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                   style: FarmusThemeData.darkStyle16,
                 ),
                 Bouncing(
-                  onPress: () {},
+                  onPress: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FarmclubExploreScreen(),
+                      ),
+                    );
+                  },
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) {
-                            return const FarmclubExploreScreen();
-                          },
+                          builder: (context) => const FarmclubExploreScreen(),
                         ),
                       );
                     },
@@ -83,87 +93,102 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
             ),
           ),
           Expanded(
-            child: controller.myFarmclubState != []
-                ? Obx(() {
-                    final FarmclubMineDetail? farmclubInfo =
-                        controller.farmclubInfo.value;
+            child: Obx(() {
+              if (controller.isLoading.isTrue) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: FarmusThemeData.brown,
+                  ),
+                );
+              }
 
-                    print("myFarmclubState: ${controller.myFarmclubState}");
-                    print("myFarmclubState: ${farmclubInfo?.diaries}");
+              if (controller.myFarmclubState.isEmpty) {
+                return FarmclubInit();
+              }
 
-                    return SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          MyFarmclubList(
-                              farmclubData: controller.myFarmclubState),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          FarmclubTitle(
-                            title: farmclubInfo!.challengeName,
-                            veggie: farmclubInfo!.veggieName,
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          FarmclubContent(
-                              content: farmclubInfo.challengeDescription),
-                          MyFarmclubInfo(
-                            level: farmclubInfo.difficulty,
-                            now: farmclubInfo.currentUser.toString(),
-                            max: farmclubInfo.maxUser.toString(),
-                            status: farmclubInfo.status.toString(),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          GroupRate(farmclubInfo: farmclubInfo),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          const Divider(
-                            thickness: 12,
-                            color: FarmusThemeData.dividerBackground,
-                          ),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          const FarmclubTitleWithDivider(title: "함께 도전해요"),
-                          ChallengeFeed(farmclubInfo: farmclubInfo),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          const Divider(
-                            thickness: 12,
-                            color: FarmusThemeData.dividerBackground,
-                          ),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          const FarmclubTitleWithDivider(title: "함께 기록해요"),
-                          farmclubInfo.diaries.isNotEmpty
-                              ? RecordFeed(farmclubInfo: farmclubInfo)
-                              : RecordInit(),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          const SizedBox(
-                            height: 60,
-                          ),
-                        ],
-                      ),
-                    );
-                  })
-                : FarmclubInit(),
+              final FarmclubMineDetail? farmclubInfo =
+                  controller.farmclubInfo.value;
+
+              return SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    MyFarmclubList(
+                      farmclubData: controller.myFarmclubState,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    FarmclubTitle(
+                      title: farmclubInfo!.challengeName,
+                      veggie: farmclubInfo!.veggieName,
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    FarmclubContent(content: farmclubInfo.challengeDescription),
+                    MyFarmclubInfo(
+                      level: farmclubInfo.difficulty,
+                      now: farmclubInfo.currentUser.toString(),
+                      max: farmclubInfo.maxUser.toString(),
+                      status: farmclubInfo.status.toString(),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    GroupRate(farmclubInfo: farmclubInfo),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Divider(
+                      thickness: 12,
+                      color: FarmusThemeData.dividerBackground,
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    const FarmclubTitleWithDivider(title: "함께 도전해요"),
+                    ChallengeFeed(
+                      farmclubInfo: controller.farmclubInfo.value!,
+                      farmclubMine: controller.myFarmclubState[
+                          controller.selectedFarmclubIndex.toInt()],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Divider(
+                      thickness: 12,
+                      color: FarmusThemeData.dividerBackground,
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    const FarmclubTitleWithDivider(title: "함께 기록해요"),
+                    controller.farmclubDiaryList.isNotEmpty
+                        ? RecordFeed(
+                            farmclubInfo: controller.farmclubInfo.value!,
+                            farmclubMine: controller.myFarmclubState[
+                                controller.selectedFarmclubIndex.toInt()],
+                          )
+                        : RecordInit(),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    const SizedBox(
+                      height: 60,
+                    ),
+                  ],
+                ),
+              );
+            }),
           ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: controller.myFarmclubState != []
+      floatingActionButton: showFloatingButton
           ? Container(
               padding: const EdgeInsets.all(8),
               color: Colors.transparent,
@@ -174,19 +199,18 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                   Expanded(
                     flex: 1,
                     child: ButtonWhite(
-                        text: "내 미션",
-                        onPress: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return const MyFarmclubMissionScreen(
-                                  detailId: '',
-                                );
-                              },
+                      text: "내 미션",
+                      onPress: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MyFarmclubMissionScreen(
+                              detailId: '',
                             ),
-                          );
-                        }),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                   Expanded(
                     flex: 2,
@@ -197,17 +221,15 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) {
-                              return FarmclubAuthScreen(
-                                  farmclubData: controller.myFarmclubState);
-                            },
+                            builder: (context) => FarmclubAuthScreen(
+                              farmclubData: controller.myFarmclubState,
+                            ),
                           ),
                         );
-
                         // 업로드 성공 후 새로고침
                         if (_authController.missionUploaded.value) {
                           _authController.missionUploaded.value = false; // 초기화
-                          super.initState(); // FarmclubScreen 새로고침
+                          loadFarmclubData(); // FarmclubScreen 새로고침
                         }
                       },
                     ),
@@ -217,10 +239,5 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
             )
           : null,
     );
-  }
-
-  @override
-  void didUpdateWidget(FarmclubScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
   }
 }

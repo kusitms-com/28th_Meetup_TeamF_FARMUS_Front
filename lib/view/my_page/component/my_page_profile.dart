@@ -21,23 +21,17 @@ class _MyProfilePageState extends State<MyProfilePage> {
   String inputText = '';
   MyPageProfileController controller = Get.put(MyPageProfileController());
   BottomSheetController bottomSheetController = BottomSheetController();
-  final ImagePicker _picker = ImagePicker();
 
+  @override
+  void initState() {
+    super.initState();
+    controller.getUser();
+    controller.textEditingController.text = controller.contentValue.value;
+  }
 
-
-
-  Future<void> _pickImage() async {
-    final XFile? pickedFile =
-        await _picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      File selectedImage = File(pickedFile.path);
-
-      print("Selected Image Path: ${selectedImage.path}");
-
-      // 갤러리에서 선택한 파일을 사용하여 프로필 이미지 업데이트
-      controller.updateProfileImage(selectedImage.path);
-    }
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -64,12 +58,11 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       options: ["앨범에서 사진 선택", "기본 이미지로 변경"],
                       optionsAction: [
                         () {
-                          _pickImage();
+                          controller.pickImage();
                         },
                         () {
                           setState(() {
-                            controller.profileImagePath.value =
-                                'assets/image/ic_profile.svg';
+                            controller.profileImagePath.value = "null";
                           });
                           print("기본 이미지로 변경");
                         },
@@ -80,12 +73,26 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   child: Obx(
                     () {
                       // SVG 이미지인 경우
-                      if (controller.profileImagePath.value.endsWith('.svg')) {
+                      if (controller.profileImagePath == "null") {
                         return CircleAvatar(
                           radius: 70,
                           backgroundColor: Colors.grey[300],
                           child: ClipOval(
                             child: SvgPicture.asset(
+                              'assets/image/ic_profile.svg',
+                              width: 180,
+                              height: 180,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      } else if (controller.profileImagePath.value
+                          .startsWith('http')) {
+                        return CircleAvatar(
+                          radius: 70,
+                          backgroundColor: Colors.grey[300],
+                          child: ClipOval(
+                            child: Image.network(
                               controller.profileImagePath.value,
                               width: 180,
                               height: 180,
@@ -185,6 +192,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
             text: "확인",
             enabled: controller.hasInput,
             onPress: () {
+              controller.postProfile();
               Navigator.pop(context);
             },
           ),

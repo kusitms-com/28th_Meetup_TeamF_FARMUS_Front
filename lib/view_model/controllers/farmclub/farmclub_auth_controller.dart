@@ -41,24 +41,23 @@ class FarmclubAuthController extends GetxController {
     isFormValid.value = contentValue.isNotEmpty && image.value != null;
   }
 
-  void postFarmclubMission(
+
+  Future<void> postFarmclubMission(
       int registrationId, String content, File image) async {
     try {
-      isLoading.value = true; // 업로드 시작 시 로딩 상태 표시
+      isLoading.value = true;
 
       FarmclubMissionResponse response =
-          await FarmclubRepository.postFarmclubMission(
-              registrationId, content, image);
-
-      print("꺅갹 $response");
+      await FarmclubRepository.postFarmclubMission(
+          registrationId, content, image);
 
       farmclubMission.value = response.data;
-      missionUploaded.value = true; // 미션 업로드 성공 표시
+      missionUploaded.value = true;
 
     } catch (e) {
       print("오류: $e");
     } finally {
-      isLoading.value = false; // 업로드 종료 시 로딩 상태 종료
+      isLoading.value = false;
     }
   }
 }

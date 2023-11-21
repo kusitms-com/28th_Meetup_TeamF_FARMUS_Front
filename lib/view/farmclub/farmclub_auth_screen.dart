@@ -34,9 +34,18 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
   BottomSheetController bottomSheetController =
       Get.put(BottomSheetController());
 
+  @override
   void initState() {
     super.initState();
-    _farmclubController.getMyFarmclub();
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    try {
+      _farmclubController.getMyFarmclub();
+    } catch (error) {
+      print('Error fetching farmclub data: $error');
+    }
   }
 
   final ImagePicker _picker = ImagePicker();
@@ -62,7 +71,8 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
       ),
       backgroundColor: FarmusThemeData.white,
       body: Obx(() {
-        if (_authController.isLoading.isTrue) {
+        if (_authController.isLoading.isTrue ||
+            _farmclubController.isLoading.isTrue) {
           return Center(child: CircularProgressIndicator());
         }
 
@@ -167,8 +177,8 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
             ButtonBrown(
               text: "업로드하기",
               enabled: _authController.isFormValid,
-              onPress: () {
-                _authController.postFarmclubMission(
+              onPress: () async {
+                await _authController.postFarmclubMission(
                   _farmclubController
                       .myFarmclubState[
                           _farmclubController.selectedFarmclubIndex.toInt()]
@@ -177,12 +187,12 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
                   _authController.image.value!,
                 );
                 Navigator.pop(context);
-
+                // showAuthDialog 호출 시 데이터를 전달하여 렌더링
                 bottomSheetController.showAuthDialog(
                   context,
-                  _authController.farmclubMission.value!.image,
-                  _authController.farmclubMission.value!.challengeName,
-                  _authController.farmclubMission.value!.step.toString(),
+                  _authController.farmclubMission.value?.image ?? '',
+                  _authController.farmclubMission.value?.challengeName ?? '',
+                  _authController.farmclubMission.value?.step.toString() ?? '',
                 );
               },
             ),

@@ -58,8 +58,6 @@ class _MyPageHistoryState extends State<MyPageHistory> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // 이미지를 추가해야함 지금은 임의의 네트워크 이미지를 사용
-            // 실제 사용 시에는 `widget.imagePath`와 같은 변수를 사용
             Container(
               width: 64.0,
               height: 64.0,

@@ -7,10 +7,12 @@ import 'package:mojacknong_android/view/farmclub/component/around/farmclub_aroun
 import 'package:mojacknong_android/view/farmclub/component/around/farmclub_around_title.dart';
 import 'package:mojacknong_android/view/farmclub/component/around/farmclub_around_vegetable.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_init.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_help.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_content.dart';
+import 'package:mojacknong_android/view/farmclub/component/farmclub_init.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_info.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
@@ -39,7 +41,9 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
   @override
   void initState() {
     super.initState();
-    _detailController.getFarmclubDetail(widget.id.toString());
+    Future.delayed(Duration.zero, () {
+      _detailController.getFarmclubDetail(widget.id.toString());
+    });
   }
 
   @override
@@ -132,10 +136,11 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
                   height: 12,
                 ),
                 FarmclubTitleWithDivider(title: "함께 도전해요"),
+                farmclubInfo.stepImages != null ?
                 ChallengeStep(
-                  step: 0,
-                  title: "stepname",
-                ),
+                  step: farmclubInfo.stepNum,
+                  title: farmclubInfo.stepName,
+                ) : ChallengeInit(),
                 SizedBox(
                   height: 16,
                 ),
@@ -145,7 +150,9 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
                 SizedBox(
                   height: 16,
                 ),
-                ChallengePicture(detailId: "",),
+                farmclubInfo.stepImages.isNotEmpty
+                    ? ChallengePicture()
+                    : Center(child: ChallengeInit()),
                 SizedBox(
                   height: 16,
                 ),
