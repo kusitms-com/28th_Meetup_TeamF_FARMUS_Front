@@ -127,9 +127,20 @@ class OnboardingApiService {
 
   Future<String> patchComplete() async {
     try {
-      print("object");
       Response response =
           await ApiClient().dio.patch("/api/user/sign-up/complete");
+      print(response.data);
+      return "성공";
+    } on DioException catch (e) {
+      print(e.message);
+      return "false";
+    }
+  }
+
+  Future<String> patchUserProfileDelete() async {
+    try {
+      Response response =
+          await ApiClient().dio.patch("/api/user/delete/user-profile");
       print(response.data);
       return "성공";
     } on DioException catch (e) {

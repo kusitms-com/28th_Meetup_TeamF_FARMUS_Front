@@ -38,4 +38,9 @@ class OnboardingRepository {
     String response = await OnboardingApiService().patchComplete();
     return response;
   }
+
+  static Future<String> patchUserProfileDelete() async {
+    String response = await OnboardingApiService().patchComplete();
+    return response;
+  }
 }
