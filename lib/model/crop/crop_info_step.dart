@@ -1,3 +1,4 @@
+
 class CropInfoStep {
   final String stepName;
   final String tip;
@@ -9,15 +10,8 @@ class CropInfoStep {
 
   factory CropInfoStep.fromJson(Map<String, dynamic> json) {
     return CropInfoStep(
-      stepName: json['stepName'] as String? ?? '',
-      tip: json['tip'] as String? ?? '',
+      stepName: json['stepName'] ?? '',
+      tip: json['tip'] ?? '',
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'stepName': stepName,
-      'tip': tip,
-    };
   }
 }

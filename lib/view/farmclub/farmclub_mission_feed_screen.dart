@@ -62,7 +62,9 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
         if (_farmclubMissionController.farmclubMissionList.isEmpty) {
           // 로딩 페이지 표시
           return Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              color: FarmusThemeData.brown,
+            ),
           );
         } else {
           // 응답이 왔을 때 화면 빌드
@@ -103,7 +105,8 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                       SizedBox(
                         height: 16,
                       ),
-                      ChallengeHelp(help: _controller.farmclubInfo.value!.stepTip),
+                      ChallengeHelp(
+                          help: _controller.farmclubInfo.value!.stepTip),
                       SizedBox(
                         height: 8,
                       ),
@@ -143,9 +146,7 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return MyFarmclubMissionScreen(
-                            challengeID: 4
-                          );
+                          return MyFarmclubMissionScreen(challengeID: 4);
                         },
                       ),
                     );
