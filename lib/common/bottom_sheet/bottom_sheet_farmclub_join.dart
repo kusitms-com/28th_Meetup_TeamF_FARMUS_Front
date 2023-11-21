@@ -79,6 +79,7 @@ class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
             enabled: _farmclubJoinController.isCheck,
             onPress: () {
               if (Navigator.canPop(context)) {
+                _farmclubJoinController.postFarmclubRegister();
                 Navigator.pop(context);
 
                 _bottomSheetController.showJoinDialog(context, widget.title);

@@ -184,7 +184,7 @@ class FarmclubApiService {
       if (response.statusCode == 200) {
         // 성공적으로 응답받은 경우
         print(response.data['data']);
-        return response.data;
+        return response.data['data'];
       } else {
         // 응답이 실패한 경우
         throw "${response.statusCode}";

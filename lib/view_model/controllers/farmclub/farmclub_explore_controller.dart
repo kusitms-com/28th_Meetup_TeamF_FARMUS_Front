@@ -9,6 +9,8 @@ class FarmclubExploreController extends GetxController {
   RxList<FarmclubInfoModel> farmclubList = <FarmclubInfoModel>[].obs;
   RxList<FarmclubInfoModel> farmclubRecommendList = <FarmclubInfoModel>[].obs;
   Rx<FarmusUser?> user = Rx<FarmusUser?>(null);
+  FarmclubInfoModel? selectedFarmclub;
+
 
   Future<List<FarmclubInfoModel>> getFarmclubData() async {
     try {
@@ -58,4 +60,9 @@ class FarmclubExploreController extends GetxController {
       throw error;
     }
   }
+
+  void setSelectedFarmclub(FarmclubInfoModel farmclub) {
+    selectedFarmclub = farmclub;
+  }
+
 }
