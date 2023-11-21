@@ -5,6 +5,8 @@ import 'dart:async';
 
 import '../data/network/diary_api_service.dart';
 import '../data/network/home_screen_api_service.dart';
+import '../data/network/vege_api_service.dart';
+import '../model/all_vege_infor_list.dart';
 import '../model/current_mission_list.dart';
 import '../model/my_vege_diary_list.dart';
 import '../model/my_vege_list.dart';
@@ -57,6 +59,15 @@ class HomeScreenRepository {
     return response;
   }
 
+
+  static Future<AllVegeInforList?> getAllVegeInforListApi() async {
+
+    final response = await VegeApiService.getAllVegeInforList();
+
+    return response;
+  }
+
+
   static Future<List<dynamic>> getHomePageData() async {
     final List<FutureOr<dynamic>> futures = [
       getMyVegeListApi(),
@@ -66,6 +77,11 @@ class HomeScreenRepository {
 
     return Future.wait(futures.cast<Future<dynamic>>());
   }
+
+
+
+
+
 
 
 

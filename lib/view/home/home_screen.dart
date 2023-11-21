@@ -54,8 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
          //   print(myVegeList?.diaryPostList[0].id);
-            if(myVegeList!.diaryPostList.isEmpty){
-              return setView(levelSign(myVegeList.level, myVegeList.userNickname), HomeWithoutVege());
+            if(!myVegeList!.diaryPostList.isEmpty){
+              return setView(levelSign(myVegeList.level, myVegeList.userNickname), const HomeWithoutVege());
             }
             return setView( SwipeScreen(
               myVegeList: myVegeList,
