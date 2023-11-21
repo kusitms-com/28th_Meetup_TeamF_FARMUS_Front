@@ -49,9 +49,9 @@ class FarmclubJoinController extends GetxController {
     }
   }
 
-  Future<String> postFarmclubRegister() async {
+  Future<int> postFarmclubRegister() async {
     try {
-      String responseData =
+      int responseData =
       await FarmclubRepository.postRegister("1", veggieList[selectedVeggieIndex.toInt()].veggieId.toString());
 
       return responseData;
