@@ -3,10 +3,10 @@ import 'package:mojacknong_android/model/crop/crop_info_step.dart';
 
 class CropRepository {
   // 나의 팜클럽 조회
-  static Future<List<CropInfoStep>> getCropInfoStep(
+  static Future<List<List<CropInfoStep>>> getCropInfoStep(
       String veggieInfoid, int stepNum) async {
     try {
-      List<CropInfoStep> response =
+      List<List<CropInfoStep>> response =
           await CropApiService().getCropVeggieInfoStep(veggieInfoid, stepNum);
       print("레포 ${response.runtimeType}");
 
