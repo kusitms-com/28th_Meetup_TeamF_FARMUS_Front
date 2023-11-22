@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+
+
 import '../../../../view_model/controllers/vege_controller.dart';
 
 class NickNameVege extends StatefulWidget {
@@ -29,25 +31,25 @@ class _NickNameVegeState extends State<NickNameVege> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
 
-            GetBuilder<VegeController>(
-              builder: (controller) {
-                return TextField(
+              GetBuilder<VegeController>(
+                builder: (controller) {
+                  return TextField(
 
-                  onChanged: (value) {
-                    controller.updateNicknameValue(value);
-                  },
-                  decoration: InputDecoration(
-                    hintText: '채소',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: FarmusThemeData.grey4,
+                    onChanged: (value) {
+                      controller.updateNicknameValue(value);
+                    },
+                    decoration: InputDecoration(
+                      hintText: '채소',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: const BorderSide(
+                          color: FarmusThemeData.grey4,
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-            ),
+                  );
+                },
+              ),
           ],
         ),
       ),

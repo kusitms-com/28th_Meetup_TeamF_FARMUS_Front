@@ -11,6 +11,8 @@ import 'package:mojacknong_android/view/home/component/diary/diary_calendar.dart
 import 'package:mojacknong_android/view/home/component/diary/diary_post_controller.dart';
 import 'package:mojacknong_android/view/home/component/mission_routine/custom_switch.dart';
 
+import '../../../../view_model/controllers/diary_controller.dart';
+
 class WriteDiary extends StatefulWidget {
   final int? vegeId;
   const WriteDiary({
@@ -28,6 +30,8 @@ const int maxLengthContent = 300;
 class _WriteDiaryState extends State<WriteDiary> {
   final DiaryPostController diaryPostController =
       Get.put(DiaryPostController());
+
+
 
 
   final TextEditingController _contentController = TextEditingController();
@@ -52,6 +56,8 @@ class _WriteDiaryState extends State<WriteDiary> {
     if (pickedFile != null) {
       setState(() {
         _selectedImage = File(pickedFile.path);
+        diaryPostController.updateImageBoolValue(true);
+
       });
       diaryPostController.setImageFile(File(pickedFile.path));
     }
@@ -61,7 +67,7 @@ class _WriteDiaryState extends State<WriteDiary> {
 
   @override
   Widget build(BuildContext context) {
-    print("이미지 업로드");
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: FarmusThemeData.white,
@@ -69,19 +75,18 @@ class _WriteDiaryState extends State<WriteDiary> {
         title: "일기 작성하기",
         actions: [
           TextButton(
-            onPressed: () async {
-              // String result = await postPostingDiary(context);
+            onPressed:
+          diaryPostController.diaryWriteException()
+            ?
+          () async {
 
-              // // postPostingWrite가 완료되면 Navigator.pop 실행
-              // if (result == "성공") {
-
-              // }
               await diaryPostController.writeDiaryRequest(widget.vegeId!);
+              diaryPostController.updateContentValue("");
+              diaryPostController.updateImageBoolValue(false);
 
+              Navigator.pop(context, "data");
 
-              Navigator.pop(context);
-
-            },
+            }: null,
             child: const Text(
               "완료",
               style: TextStyle(
