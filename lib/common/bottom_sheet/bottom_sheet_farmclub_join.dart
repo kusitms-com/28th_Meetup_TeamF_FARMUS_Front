@@ -21,7 +21,7 @@ class BottomSheetFarmclubJoin extends StatefulWidget {
 
 class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
   final FarmclubJoinController _farmclubJoinController =
-      Get.put(FarmclubJoinController());
+      Get.find();
   final BottomSheetController _bottomSheetController = BottomSheetController();
 
   @override

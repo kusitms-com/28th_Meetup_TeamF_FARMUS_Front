@@ -18,9 +18,9 @@ class VegetableList extends StatefulWidget {
 
 class _VegetableListState extends State<VegetableList> {
   final FarmclubRegisterController _makeController =
-      Get.put(FarmclubRegisterController());
+  Get.put(FarmclubRegisterController());
   final FarmclubJoinController _joinController =
-      Get.put(FarmclubJoinController());
+  Get.put(FarmclubJoinController());
 
   @override
   Widget build(BuildContext context) {
@@ -30,65 +30,61 @@ class _VegetableListState extends State<VegetableList> {
 
     print("채소 데이터 ${veggieList.length}");
 
-    return _joinController.veggieRegistration != []
+    return _joinController.veggieRegistration.isNotEmpty
         ? Container(
-            width: double.infinity,
-            height: 150,
-            child: ListView.builder(
-              itemCount: veggieList.length,
-              itemBuilder: (context, index) {
-                VeggieRegistration veggie = veggieList[index];
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          if (widget.isMake) {
-                            _makeController.toggleSelectCheck();
-                          } else {
-                            _joinController.toggleSelectCheck();
-                          }
-                        },
-                        child: Obx(() {
-                          if (widget.isMake) {
-                            return SvgPicture.asset(
-                              _makeController.isCheck.value
-                                  ? "assets/image/ic_check_true.svg"
-                                  : "assets/image/ic_check_false.svg",
-                            );
-                          } else {
-                            return SvgPicture.asset(
-                              _joinController.isCheck.value
-                                  ? "assets/image/ic_check_true.svg"
-                                  : "assets/image/ic_check_false.svg",
-                            );
-                          }
-                        }),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      widget.isMake == true
-                          ? Text(
-                              "[${veggie.veggieName}] ${veggie.veggieNickname}")
-                          : Text("${veggie.veggieNickname}"),
-                    ],
+      width: double.infinity,
+      height: 150,
+      child: ListView.builder(
+        itemCount: veggieList.length,
+        itemBuilder: (context, index) {
+          VeggieRegistration veggie = veggieList[index];
+          return Obx(() {
+            bool isSelected = widget.isMake
+                ? _makeController.isCheck.value
+                : _joinController.veggieSelected[index] == 1;
+
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      if (widget.isMake) {
+                        _makeController.toggleSelectCheck();
+                      } else {
+                        _joinController.toggleSelectCheck(index);
+                      }
+                    },
+                    child: SvgPicture.asset(
+                      isSelected
+                          ? "assets/image/ic_check_true.svg"
+                          : "assets/image/ic_check_false.svg",
+                    ),
                   ),
-                );
-              },
-            ),
-          )
+                  SizedBox(
+                    width: 8,
+                  ),
+                  widget.isMake
+                      ? Text(
+                      "[${veggie.veggieName}] ${veggie.veggieNickname}")
+                      : Text("${veggie.veggieNickname}"),
+                ],
+              ),
+            );
+          });
+        },
+      ),
+    )
         : Column(
-            children: [
-              SizedBox(
-                height: 16,
-              ),
-              Text(
-                "내 텃밭에 아직 팜클럽 채소를 심지 않았어요",
-                style: FarmusThemeData.darkStyle16,
-              ),
-            ],
-          );
+      children: [
+        SizedBox(
+          height: 16,
+        ),
+        Text(
+          "내 텃밭에 아직 팜클럽 채소를 심지 않았어요",
+          style: FarmusThemeData.darkStyle16,
+        ),
+      ],
+    );
   }
 }

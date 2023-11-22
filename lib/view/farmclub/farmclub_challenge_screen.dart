@@ -59,31 +59,41 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const FarmclubTitleWithDivider(title: "완료한 Step"),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: _cropInfoStepController.cropInfoStepClear.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        ChallengeStep(
-                          step: index,
-                          title: _cropInfoStepController.cropInfoStepClear[index].stepName,
+                _cropInfoStepController.cropInfoStepClear.length == 0
+                    ? Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          "아직 완료한 Step이 없어요",
+                          style: FarmusThemeData.darkStyle14,
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        const Divider(
-                          endIndent: 16,
-                          indent: 16,
-                          color: FarmusThemeData.grey4,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                      ],
-                    );
-                  },
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount:
+                            _cropInfoStepController.cropInfoStepClear.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              ChallengeStep(
+                                step: index,
+                                title: _cropInfoStepController
+                                    .cropInfoStepClear[index].stepName,
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              const Divider(
+                                endIndent: 16,
+                                indent: 16,
+                                color: FarmusThemeData.grey4,
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                const SizedBox(
+                  height: 16,
                 ),
                 const FarmclubTitleWithDivider(title: "현재 Step"),
                 ChallengeStep(
@@ -105,32 +115,44 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                   height: 16,
                 ),
                 const FarmclubTitleWithDivider(title: "다음 Step"),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: _cropInfoStepController.cropInfoStepTodo.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        ChallengeStep(
-                          step: index + _cropInfoStepController.stepNum.toInt() + 1,
-                          title: _cropInfoStepController.cropInfoStepTodo[index].stepName,
+                _cropInfoStepController.cropInfoStepClear.length == 0
+                    ? Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          "현재 Step이 마지막 Step이에요",
+                          style: FarmusThemeData.darkStyle14,
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        const Divider(
-                          endIndent: 16,
-                          indent: 16,
-                          color: FarmusThemeData.grey4,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                      ],
-                    );
-                  },
-                ),
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount:
+                            _cropInfoStepController.cropInfoStepTodo.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              ChallengeStep(
+                                step: index +
+                                    _cropInfoStepController.stepNum.toInt() +
+                                    1,
+                                title: _cropInfoStepController
+                                    .cropInfoStepTodo[index].stepName,
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              const Divider(
+                                endIndent: 16,
+                                indent: 16,
+                                color: FarmusThemeData.grey4,
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                            ],
+                          );
+                        },
+                      ),
                 const SizedBox(
                   height: 50,
                 ),
