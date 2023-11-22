@@ -38,23 +38,6 @@ class DiaryScreen extends StatefulWidget {
 class _DiaryScreenState extends State<DiaryScreen> {
   final DiaryController diaryController = Get.put(DiaryController());
 
-//  final TextEditingController _contentController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    // 이 부분에서 diaryController 초기화 로직을 실행합니다.
-    // diaryController.userNickname(widget.userNickName);
-    // diaryController.nickname(widget.nickname);
-    // diaryController.image(widget.image);
-    // diaryController.vegeId(widget.vegeId);
-    // diaryController.age(widget.age);
-
-    // _contentController.addListener(() {
-    //   setState(() {});
-    // });
-  }
 
   @override
   Widget build(BuildContext context) {

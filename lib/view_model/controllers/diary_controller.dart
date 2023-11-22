@@ -14,6 +14,9 @@ class DiaryController extends GetxController {
 
 
 
+
+
+
   void updateUserNicknameValue(String value) {
     userNickname.value = value;
     print("get: " +userNickname.value);
