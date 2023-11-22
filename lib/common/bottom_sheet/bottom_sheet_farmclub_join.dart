@@ -4,9 +4,7 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/farmclub/component/around/vegetable_list.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_join_controller.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_make_controller.dart';
 
 class BottomSheetFarmclubJoin extends StatefulWidget {
   final String title;
@@ -81,6 +79,7 @@ class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
             enabled: _farmclubJoinController.isCheck,
             onPress: () {
               if (Navigator.canPop(context)) {
+                _farmclubJoinController.postFarmclubRegister();
                 Navigator.pop(context);
 
                 _bottomSheetController.showJoinDialog(context, widget.title);

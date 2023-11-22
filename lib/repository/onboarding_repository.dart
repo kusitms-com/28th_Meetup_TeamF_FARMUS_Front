@@ -43,4 +43,11 @@ class OnboardingRepository {
     String response = await OnboardingApiService().patchComplete();
     return response;
   }
+
+
+  static Future<String> postCropHistory() async {
+    String response = await OnboardingApiService().postCropHistory();
+    print("팜히스토리 생성 $response");
+    return response;
+  }
 }

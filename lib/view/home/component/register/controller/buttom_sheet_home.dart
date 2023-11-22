@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bottom_sheet/bottom_sheet_farmclub_exit.dart';
 import 'package:mojacknong_android/common/bottom_sheet/bottom_sheet_farmclub_join.dart';
-import 'package:mojacknong_android/common/dialog/dialog_join_farmclub.dart';
+import 'package:mojacknong_android/common/dialog/dialog_mission_farmclub.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/register/controller/home_cupertino_action_sheet_helper.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/Dialog_register_vege.dart';

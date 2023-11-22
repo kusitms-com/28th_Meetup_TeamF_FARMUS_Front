@@ -23,9 +23,9 @@ class _FarmclubRecordScreenState extends State<FarmclubRecordScreen> {
   void initState() {
     super.initState();
     _diaryController.getFarmclubDiary(
-      4
-      // controller.myFarmclubState[controller.selectedFarmclubIndex.toInt()]
-      //     .challengeId,
+      controller
+          .myFarmclubState[controller.selectedFarmclubIndex.toInt()].challengeId
+          .toInt(),
     );
   }
 
@@ -36,42 +36,58 @@ class _FarmclubRecordScreenState extends State<FarmclubRecordScreen> {
         title: "함께 기록해요",
       ),
       backgroundColor: FarmusThemeData.white,
-      body: Obx(
-        () {
-          final diaryList = _diaryController.farmclubDiaryList;
+      body: FutureBuilder(
+        future: _diaryController.getFarmclubDiary(
+          controller.myFarmclubState[controller.selectedFarmclubIndex.toInt()]
+              .challengeId
+              .toInt(),
+        ),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(
+                color: FarmusThemeData.brown,
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else {
+            final diaryList = _diaryController.farmclubDiaryList;
 
-          return ListView.builder(
-            itemCount: diaryList.length,
-            itemBuilder: (context, index) {
-              final diary = diaryList[index];
+            return ListView.builder(
+              itemCount: diaryList.length,
+              itemBuilder: (context, index) {
+                final diary = diaryList[index];
 
-              return Column(
-                children: [
-                  RecordProfile(
-                    profile: diary.profileImage,
-                    nickname: diary.nickName,
-                    postTime: diary.date,
-                  ),
-                  SizedBox(height: 12),
-                  RecordPicture(
-                    like: diary.like.obs,
-                    image: diary.image,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        Text(
+                return Column(
+                  children: [
+                    RecordProfile(
+                      profile: diary.profileImage ?? "",
+                      nickname: diary.nickName,
+                      postTime: diary.date,
+                    ),
+                    SizedBox(height: 12),
+                    RecordPicture(
+                      like: diary.like.obs,
+                      image: diary.image,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
                           diary.content,
                           style: FarmusThemeData.darkStyle14,
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
-              );
-            },
-          );
+                  ],
+                );
+              },
+            );
+          }
         },
       ),
     );

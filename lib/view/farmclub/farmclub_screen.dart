@@ -18,6 +18,7 @@ import 'package:mojacknong_android/view/farmclub/component/record/record_init.da
 import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_explore_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
+import 'package:mojacknong_android/view/my_page/my_farmclub_history_screen.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_auth_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_diary_controller.dart';
@@ -45,6 +46,11 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
 
   Future<void> loadFarmclubData() async {
     await controller.getMyFarmclub();
+    await controller.getFarmclubDiary(
+      controller
+          .myFarmclubState[controller.selectedFarmclubIndex.toInt()].challengeId
+          .toInt(),
+    );
     setState(() {
       showFloatingButton = controller.myFarmclubState.isNotEmpty;
     });
@@ -67,14 +73,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                   style: FarmusThemeData.darkStyle16,
                 ),
                 Bouncing(
-                  onPress: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const FarmclubExploreScreen(),
-                      ),
-                    );
-                  },
+                  onPress: () {},
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -168,10 +167,10 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                     ),
                     const FarmclubTitleWithDivider(title: "함께 기록해요"),
                     controller.farmclubDiaryList.isNotEmpty
-                        ? RecordFeed(
-                            farmclubInfo: controller.farmclubInfo.value!,
-                            farmclubMine: controller.myFarmclubState[
-                                controller.selectedFarmclubIndex.toInt()],
+                        ? Container(
+                            child: RecordFeed(
+                              farmclubDiary: controller.farmclubDiaryList[0],
+                            ),
                           )
                         : RecordInit(),
                     const SizedBox(
@@ -204,8 +203,8 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const MyFarmclubMissionScreen(
-                              detailId: '',
+                            builder: (context) => MyFarmclubMissionScreen(
+                             challengeID: 4,
                             ),
                           ),
                         );

@@ -9,6 +9,7 @@ import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_h
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/mission_feed.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
+import 'package:mojacknong_android/view/my_page/my_farmclub_history_screen.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_mission_controller.dart';
 
@@ -102,7 +103,7 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                       SizedBox(
                         height: 16,
                       ),
-                      ChallengeHelp(help: "상추를 키울 때에는 어쩌고저쩌고 해야해요."),
+                      ChallengeHelp(help: _controller.farmclubInfo.value!.stepTip),
                       SizedBox(
                         height: 8,
                       ),
@@ -143,7 +144,7 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                       MaterialPageRoute(
                         builder: (context) {
                           return MyFarmclubMissionScreen(
-                            detailId: widget.registrationId,
+                            challengeID: 4
                           );
                         },
                       ),

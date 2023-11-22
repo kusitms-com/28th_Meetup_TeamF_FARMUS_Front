@@ -148,4 +148,15 @@ class OnboardingApiService {
       return "false";
     }
   }
+
+  Future<String> postCropHistory() async {
+    try {
+      Response response = await ApiClient().dio.post("/api/crop/history");
+      print(response.data);
+      return "성공";
+    } on DioException catch (e) {
+      print(e.message);
+      return "false";
+    }
+  }
 }

@@ -1,43 +1,43 @@
-class FarmclubDiary {
+class FarmclubMyMission {
   final int postId;
-  final String? profileImage;
-  final String nickName;
+  final int stepNum;
+  final String stepName;
   final String date;
   final String image;
   final String content;
-  final int like;
+  final int likeNum;
 
-  FarmclubDiary({
+  FarmclubMyMission({
     required this.postId,
-    required this.profileImage,
-    required this.nickName,
+    required this.stepNum,
+    required this.stepName,
     required this.date,
     required this.image,
     required this.content,
-    required this.like,
+    required this.likeNum,
   });
 
-  factory FarmclubDiary.fromJson(Map<String, dynamic> json) {
-    return FarmclubDiary(
+  factory FarmclubMyMission.fromJson(Map<String, dynamic> json) {
+    return FarmclubMyMission(
       postId: json['postId'] as int,
-      profileImage: json['profileImage'] as String?,
-      nickName: json['nickName'] as String,
+      stepNum: json['stepNum'] as int,
+      stepName: json['stepName'] as String,
       date: json['date'] as String,
       image: json['image'] as String,
       content: json['content'] as String,
-      like: json['like'] as int,
+      likeNum: json['likeNum'] as int,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'postId': postId,
-      'profileImage': profileImage,
-      'nickName': nickName,
+      'stepNum': stepNum,
+      'stepName': stepName,
       'date': date,
       'image': image,
       'content': content,
-      'like': like,
+      'likeNum': likeNum,
     };
   }
 }

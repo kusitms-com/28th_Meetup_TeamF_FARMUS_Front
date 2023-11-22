@@ -8,6 +8,8 @@ import 'package:mojacknong_android/model/farmclub_info_model.dart';
 import 'package:mojacknong_android/model/farmclub_mine.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
 import 'package:mojacknong_android/model/farmclub_mission.dart';
+import 'package:mojacknong_android/model/farmclub_my_mission.dart';
+import 'package:mojacknong_android/model/veggie_registration.dart';
 
 import '../../model/farmclub_mission_response.dart';
 
@@ -21,7 +23,7 @@ class FarmclubApiService {
         print(response.data["data"]);
         List<dynamic> dataList = response.data['data'];
         List<FarmclubMine> farmclubmineList =
-        dataList.map((data) => FarmclubMine.fromJson(data)).toList();
+            dataList.map((data) => FarmclubMine.fromJson(data)).toList();
 
         print(farmclubmineList);
 
@@ -50,9 +52,9 @@ class FarmclubApiService {
       };
 
       Response response = await ApiClient().dio.post(
-        "/api/farmclub/search",
-        data: requestBody,
-      );
+            "/api/farmclub/search",
+            data: requestBody,
+          );
 
       if (response.statusCode == 200) {
         print(response.data['data']);
@@ -67,7 +69,7 @@ class FarmclubApiService {
           // List의 각 요소를 FarmclubInfoModel로 변환하여 리스트에 추가
           List<dynamic> dataList = response.data['data'];
           List<FarmclubInfoModel> farmclubList =
-          dataList.map((data) => FarmclubInfoModel.fromJson(data)).toList();
+              dataList.map((data) => FarmclubInfoModel.fromJson(data)).toList();
           print(farmclubList.runtimeType);
 
           return farmclubList;
@@ -91,8 +93,8 @@ class FarmclubApiService {
       print("challengeId  $challengeId");
       // API 호출
       Response response = await ApiClient().dio.get(
-        "/api/farmclub/$challengeId",
-      );
+            "/api/farmclub/$challengeId",
+          );
 
       // 응답 상태 코드 확인
       if (response.statusCode == 200) {
@@ -116,8 +118,8 @@ class FarmclubApiService {
       print("challengeId  $challengeId");
       // API 호출
       Response response = await ApiClient().dio.get(
-        "/api/farmclub/$challengeId",
-      );
+            "/api/farmclub/$challengeId",
+          );
 
       // 응답 상태 코드 확인
       if (response.statusCode == 200) {
@@ -135,8 +137,34 @@ class FarmclubApiService {
     }
   }
 
+  // 팜클럽 참여 전 채소 조회
+  Future<List<VeggieRegistration>> getVeggieRegistraion() async {
+    try {
+      Response response = await ApiClient().dio.get(
+            "/api/veggie/registration",
+          );
+
+      if (response.statusCode == 200) {
+        print(response.data["data"]);
+        List<dynamic> dataList = response.data['data'];
+
+        List<VeggieRegistration> veggieRegistraion =
+            dataList.map((data) => VeggieRegistration.fromJson(data)).toList();
+
+        print(veggieRegistraion);
+
+        return veggieRegistraion;
+      } else {
+        return [];
+      }
+    } on DioException catch (e) {
+      print(e.message);
+      throw "${e.message}";
+    }
+  }
+
   // 팜클럽 참여
-  Future<String> postRegister({
+  Future<int> postRegister({
     required String challengeId,
     required String veggieId,
   }) async {
@@ -147,15 +175,15 @@ class FarmclubApiService {
       };
 
       Response response = await ApiClient().dio.post(
-        "/api/farmclub/register",
-        data: requestBody,
-      );
+            "/api/farmclub/register",
+            data: requestBody,
+          );
 
       // 응답 상태 코드 확인
       if (response.statusCode == 200) {
         // 성공적으로 응답받은 경우
         print(response.data['data']);
-        return response.data;
+        return response.data['data'];
       } else {
         // 응답이 실패한 경우
         throw "${response.statusCode}";
@@ -177,13 +205,13 @@ class FarmclubApiService {
         "registrationId": registrationId.toString(),
         "content": content,
         "image":
-        await MultipartFile.fromFile(image.path, filename: "image.png"),
+            await MultipartFile.fromFile(image.path, filename: "image.png"),
       });
 
       Response response = await ApiClient().dio.post(
-        "/api/farmclub/mission",
-        data: formData,
-      );
+            "/api/farmclub/mission",
+            data: formData,
+          );
 
       // 응답 상태 코드 확인
       if (response.statusCode == 200) {
@@ -204,13 +232,13 @@ class FarmclubApiService {
   Future<List<FarmclubInfoModel>> getFarmclubRecommendation() async {
     try {
       Response response =
-      await ApiClient().dio.get("/api/farmclub/recommendation");
+          await ApiClient().dio.get("/api/farmclub/recommendation");
 
       if (response.statusCode == 200) {
         print(response.data["data"]);
         List<dynamic> dataList = response.data['data'];
         List<FarmclubInfoModel> farmclubRecommend =
-        dataList.map((data) => FarmclubInfoModel.fromJson(data)).toList();
+            dataList.map((data) => FarmclubInfoModel.fromJson(data)).toList();
 
         print(farmclubRecommend);
 
@@ -226,8 +254,10 @@ class FarmclubApiService {
   }
 
 // 미션 목록 조회
-  Future<List<FarmclubMission>> getFarmclubMission(int challengeId,
-      int stepNum,) async {
+  Future<List<FarmclubMission>> getFarmclubMission(
+    int challengeId,
+    int stepNum,
+  ) async {
     print(challengeId);
     print(stepNum);
     try {
@@ -240,7 +270,7 @@ class FarmclubApiService {
         print(response.data["data"]);
         List<dynamic> dataList = response.data['data'];
         List<FarmclubMission> farmclubMission =
-        dataList.map((data) => FarmclubMission.fromJson(data)).toList();
+            dataList.map((data) => FarmclubMission.fromJson(data)).toList();
 
         print(farmclubMission);
 
@@ -256,25 +286,26 @@ class FarmclubApiService {
   }
 
   // 일기 목록 조회
-  Future<List<FarmclubDiary>> getFarmclubDiary(int challengeId,) async {
-    print(challengeId);
+  Future<List<FarmclubDiary>> getFarmclubDiary(
+    int challengeId,
+  ) async {
+    print("일기 챌린지 요청 $challengeId");
     try {
       Response response = await ApiClient().dio.get(
-          "/api/farmclub/diary/$challengeId",
-      );
+            "/api/farmclub/diary/$challengeId",
+          );
 
       if (response.statusCode == 200) {
         print(response.data["data"]);
-        print("일기");
         List<dynamic> dataList = response.data['data'];
+
         List<FarmclubDiary> farmclubDiary =
-        dataList.map((data) => FarmclubDiary.fromJson(data)).toList();
+            dataList.map((data) => FarmclubDiary.fromJson(data)).toList();
 
         print(farmclubDiary);
 
         return farmclubDiary;
       } else {
-        // 오류 발생 시 빈 리스트 반환
         return [];
       }
     } on DioException catch (e) {
@@ -283,4 +314,67 @@ class FarmclubApiService {
     }
   }
 
+  // 내 미션 인증 글 조회
+  Future<List<FarmclubMyMission>> getFarmclubMyMssion(
+    int challengeId,
+  ) async {
+    try {
+      Response response = await ApiClient().dio.get(
+            "/api/farmclub/mission/$challengeId",
+          );
+
+      if (response.statusCode == 200) {
+        print(response.data["data"]);
+        List<dynamic> dataList = response.data['data'];
+
+        List<FarmclubMyMission> farmclubMyMission =
+            dataList.map((data) => FarmclubMyMission.fromJson(data)).toList();
+
+        print(farmclubMyMission);
+
+        return farmclubMyMission;
+      } else {
+        return [];
+      }
+    } on DioException catch (e) {
+      print(e.message);
+      throw "${e.message}";
+    }
+  }
+
+  // 팜클럽 개설
+  Future<int> postFarmclub({
+    required String myVeggieId,
+    required String veggieInfoId,
+    required String challengeName,
+    required String maxUser,
+    required String description,
+  }) async {
+    try {
+      Map<String, dynamic> requestBody = {
+        'myVeggieId': myVeggieId,
+        'veggieInfoId': veggieInfoId,
+        'challengeName': challengeName,
+        'maxUser': maxUser,
+        'description': description,
+      };
+
+      Response response = await ApiClient().dio.post(
+            "/api/farmclub",
+            data: requestBody,
+          );
+
+      if (response.statusCode == 200) {
+
+        print(response.data['data']);
+        return response.data['data'];
+      } else {
+        // 오류 발생 시 빈 리스트 반환
+        throw "error";
+      }
+    } on DioException catch (e) {
+      print(e.message);
+      throw "${e.message}";
+    }
+  }
 }
