@@ -13,6 +13,8 @@ class FarmclubController extends GetxController {
   RxBool isSelectLike = RxBool(false);
   RxInt like = 0.obs; // 초기 좋아요 수
 
+
+
   RxBool isLoading = true.obs;
   Rx<FarmclubMineDetail?> farmclubInfo = Rx<FarmclubMineDetail?>(null);
 
@@ -42,16 +44,32 @@ class FarmclubController extends GetxController {
   }
 
 // 나의 팜클럽 조회
-  Future<void> getMyFarmclub() async {
+  Future<List<FarmclubMine>> getMyFarmclub() async {
     try {
-      List<FarmclubMine> myFarmclubs = await FarmclubRepository.getFarmclub();
-      getFarmclubDetail(
-          myFarmclubs[selectedFarmclubIndex.toInt()].challengeId.toString());
-      // myFarmclubState 값 변경 후 화면 업데이트
-      myFarmclubState.value = myFarmclubs;
-      update();
+      isLoading(true);
+
+      List<FarmclubMine>? myFarmclubs = await FarmclubRepository.getFarmclub();
+      if (myFarmclubs.isEmpty) {
+        print("object");
+        isLoading(false);
+
+        return [];
+      } else {
+        getFarmclubDetail(
+            myFarmclubs[selectedFarmclubIndex.toInt()].challengeId.toString());
+        // myFarmclubState 값 변경 후 화면 업데이트
+        myFarmclubState.value = myFarmclubs;
+        update();
+        isLoading(false);
+
+        return myFarmclubs;
+      }
+
     } catch (e) {
       print("나의 팜클럽 조회 중 오류: $e");
+      isLoading(false);
+
+      throw e;
     }
   }
 
@@ -75,6 +93,8 @@ class FarmclubController extends GetxController {
       int challengeId,
       ) async {
     try {
+      isLoading(true);
+
       List<FarmclubDiary> responseData =
       await FarmclubRepository.getFarmclubDiary(
         challengeId,
@@ -84,11 +104,15 @@ class FarmclubController extends GetxController {
       farmclubDiaryList.clear();
       farmclubDiaryList.addAll(responseData);
       print("일기 $farmclubDiaryList");
+      isLoading(false);
 
       return responseData;
+
     } catch (error) {
       // 오류 처리 로직 추가
       print('Error fetching farmclub data: $error');
+      isLoading(false);
+
       throw error;
     }
   }
