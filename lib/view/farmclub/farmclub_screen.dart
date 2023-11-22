@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/model/farmclub_mine.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_white.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_feed.dart';
@@ -18,10 +19,8 @@ import 'package:mojacknong_android/view/farmclub/component/record/record_init.da
 import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_explore_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
-import 'package:mojacknong_android/view/my_page/my_farmclub_history_screen.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_auth_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_diary_controller.dart';
 
 import '../../model/farmclub_mine_detail.dart';
 import 'component/record/record_feed.dart';
@@ -35,6 +34,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
   final FarmclubController controller = Get.put(FarmclubController());
   final FarmclubAuthController _authController =
       Get.put(FarmclubAuthController());
+  late bool isFarmclubEmpty;
 
   bool showFloatingButton = false;
 
@@ -45,15 +45,21 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
   }
 
   Future<void> loadFarmclubData() async {
-    await controller.getMyFarmclub();
-    await controller.getFarmclubDiary(
-      controller
-          .myFarmclubState[controller.selectedFarmclubIndex.toInt()].challengeId
-          .toInt(),
-    );
-    setState(() {
-      showFloatingButton = controller.myFarmclubState.isNotEmpty;
-    });
+    List<FarmclubMine> response = await controller.getMyFarmclub();
+    if (response == []) {
+      isFarmclubEmpty = true;
+    } else {
+      await controller.getFarmclubDiary(
+        controller.myFarmclubState[controller.selectedFarmclubIndex.toInt()]
+            .challengeId
+            .toInt(),
+      );
+      isFarmclubEmpty = false;
+
+      setState(() {
+        showFloatingButton = controller.myFarmclubState.isNotEmpty;
+      });
+    }
   }
 
   @override
@@ -204,7 +210,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => MyFarmclubMissionScreen(
-                             challengeID: 4,
+                              challengeID: 4,
                             ),
                           ),
                         );
