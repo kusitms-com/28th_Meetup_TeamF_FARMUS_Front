@@ -55,7 +55,7 @@ class VegeApiService {
   }
 
 
-  static FutureOr<void> enrollVegeApi(
+  static FutureOr<void> enrollVege(
       String selectedDateData,
       String selectedVeggieIdData,
       String selectedVeggieColorImageUrlData,

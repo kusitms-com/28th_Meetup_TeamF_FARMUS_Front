@@ -48,15 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
             return Text('Error: ${snapshot.error}');
           } else {
 
-
             final List<dynamic> data = snapshot.data as List<dynamic>;
             final MyVegeList? myVegeList  = data[0] as MyVegeList?;
             final CurrentMissionList? currentMissionList = data[1] as CurrentMissionList?;
             final MyVegeRoutineList? myVegeRoutineList = data[2] as MyVegeRoutineList?;
 
-
-         //   print(myVegeList?.diaryPostList[0].id);
-            if(!myVegeList!.diaryPostList.isEmpty){
+            if(myVegeList!.diaryPostList.isEmpty){
               return setView(levelSign(myVegeList.level, myVegeList.userNickname), const HomeWithoutVege());
             }
             return setView( SwipeScreen(

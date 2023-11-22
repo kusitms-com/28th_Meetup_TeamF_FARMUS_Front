@@ -72,7 +72,7 @@ class _SwipeScreenState extends State<SwipeScreen> {
 
       return  HomeGreenBoxUser(
         userNickName: widget.myVegeList?.userNickname,
-        id: widget.myVegeList?.diaryPostList[index].id,
+        vegeId: widget.myVegeList?.diaryPostList[index].id,
         nickname: widget.myVegeList?.diaryPostList[index].nickname,
         image: widget.myVegeList?.diaryPostList[index].image,
         age: widget.myVegeList?.diaryPostList[index].age

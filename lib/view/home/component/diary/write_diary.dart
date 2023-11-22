@@ -12,7 +12,11 @@ import 'package:mojacknong_android/view/home/component/diary/diary_post_controll
 import 'package:mojacknong_android/view/home/component/mission_routine/custom_switch.dart';
 
 class WriteDiary extends StatefulWidget {
-  const WriteDiary({Key? key}) : super(key: key);
+  final int? vegeId;
+  const WriteDiary({
+    Key? key,
+    this.vegeId
+  }) : super(key: key);
 
   @override
   _WriteDiaryState createState() => _WriteDiaryState();

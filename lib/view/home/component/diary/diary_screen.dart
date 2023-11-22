@@ -12,14 +12,14 @@ import 'empty_card.dart';
 
 class DiaryScreen extends StatefulWidget {
   final String? userNickName;
-  final int? id;
+  final int? vegeId;
   final String? nickname;
   final String? image;
   final int? age;
   const DiaryScreen({
     Key? key,
     this.userNickName,
-    this.id,
+    this.vegeId,
     this.nickname,
     this.image,
     this.age}
@@ -36,10 +36,8 @@ class _DiaryScreenState extends State<DiaryScreen> {
       appBar: DiaryAppBar(title: '${widget.userNickName}'),
       backgroundColor: FarmusThemeData.white,
       body: FutureBuilder(
-        future: HomeScreenRepository.getMyVegeDiaryListApi(widget.id!),
+        future: HomeScreenRepository.getMyVegeDiaryListApi(widget.vegeId!),
         builder: (context, snapshot) {
-
-          print(snapshot.data?.diaryPostList.length);
 
 
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -101,7 +99,9 @@ class _DiaryScreenState extends State<DiaryScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const WriteDiary();
+                          return  WriteDiary(
+                            vegeId: widget.vegeId
+                          );
                         },
                       ),
                     );

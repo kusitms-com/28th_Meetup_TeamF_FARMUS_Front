@@ -12,7 +12,7 @@ class VegeRepository {
       String vegeNameData
       ) async {
 
-      final response = await VegeApiService.enrollVegeApi(
+      final response = await VegeApiService.enrollVege(
           selectedDateData,
           selectedVeggieIdData,
           selectedVeggieColorImageUrlData,
