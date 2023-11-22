@@ -21,7 +21,7 @@ class BottomSheetFarmclubJoin extends StatefulWidget {
 
 class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
   final FarmclubJoinController _farmclubJoinController =
-      Get.find();
+      Get.put(FarmclubJoinController());
   final BottomSheetController _bottomSheetController = BottomSheetController();
 
   @override
@@ -53,7 +53,7 @@ class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Container(
             width: double.infinity,
-            height: 160,
+            height: 140,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               border: Border.all(

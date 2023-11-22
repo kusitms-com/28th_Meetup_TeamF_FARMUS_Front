@@ -11,7 +11,6 @@ import 'package:mojacknong_android/view/farmclub/component/search/brown_category
 import 'package:mojacknong_android/view/farmclub/component/search/search_category.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_explore_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_search_controller.dart';
-import 'package:mojacknong_android/view_model/controllers/vege_controller.dart';
 
 class FarmclubExploreScreen extends StatefulWidget {
   const FarmclubExploreScreen({Key? key}) : super(key: key);
@@ -28,7 +27,6 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
   void initState() {
     super.initState();
     _exploreController.getUserApi();
-    _exploreController.getFarmclubData();
   }
 
   @override
@@ -36,8 +34,6 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
     _exploreController.farmclubList.clear();
     super.dispose();
   }
-
-
 
   @override
   Widget build(BuildContext context) {

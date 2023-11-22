@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_register_controller.dart';
 
 class NewVegetableItem extends StatefulWidget {
   final String blackPath;
@@ -11,7 +9,6 @@ class NewVegetableItem extends StatefulWidget {
   final Function onTap;
   final String veggieName;
   final String difficulty;
-  final int index;
 
   const NewVegetableItem({
     Key? key,
@@ -21,7 +18,6 @@ class NewVegetableItem extends StatefulWidget {
     required this.onTap,
     required this.veggieName,
     required this.difficulty,
-    required this.index,
   }) : super(key: key);
 
   @override
@@ -30,14 +26,12 @@ class NewVegetableItem extends StatefulWidget {
 
 class _NewVegetableItemState extends State<NewVegetableItem> {
 
-  FarmclubRegisterController _farmclubRegisterController = Get.put(FarmclubRegisterController());
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         widget.onTap();
-        // _farmclubRegisterController.toggleImageSelection(widget.index);
       },
       child: Column(
         children: [
