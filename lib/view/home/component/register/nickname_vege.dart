@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
-import '../../../../view_model/controllers/farmclub/farmclub_make_controller.dart';
+
 import '../../../../view_model/controllers/vege_controller.dart';
 
 class NickNameVege extends StatefulWidget {

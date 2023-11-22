@@ -58,15 +58,12 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             return setView( SwipeScreen(
               myVegeList: myVegeList,
-
             ),
                 HomeWithVege( currentMissionList: currentMissionList,
               myVegeRoutineList: myVegeRoutineList,
 
-            ));
-
-
-
+            )
+            );
           }
         },
       ),
