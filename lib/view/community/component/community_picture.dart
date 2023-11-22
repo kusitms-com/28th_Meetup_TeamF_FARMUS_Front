@@ -29,32 +29,40 @@ class CommunityPicture extends StatelessWidget {
               "assets/image/image_example_community.png",
               fit: BoxFit.fill,
             )
-          : Image.network(
-              image!,
-              fit: BoxFit.fill,
-              loadingBuilder: (BuildContext context, Widget child,
-                  ImageChunkEvent? loadingProgress) {
-                if (loadingProgress == null) {
-                  return child;
-                } else if (loadingProgress.cumulativeBytesLoaded ==
-                    loadingProgress.expectedTotalBytes) {
-                  // 이미지가 완전히 로드된 경우
-                  return child;
-                } else {
-                  // 이미지 로딩 중
-                  return Center(
-                    child: CircularProgressIndicator(
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                          FarmusThemeData.brownButton),
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              (loadingProgress.expectedTotalBytes ?? 1)
-                          : null,
-                    ),
-                  );
-                }
-              },
-            );
+          : ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                  image!,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: 248,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    } else if (loadingProgress.cumulativeBytesLoaded ==
+                        loadingProgress.expectedTotalBytes) {
+                      // 이미지가 완전히 로드된 경우
+                      return child;
+                    } else {
+                      // 이미지 로딩 중
+                      return Center(
+                        child: CircularProgressIndicator(
+                          valueColor: const AlwaysStoppedAnimation<Color>(
+                              FarmusThemeData.brownButton),
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  (loadingProgress.expectedTotalBytes ?? 1)
+                              : null,
+                        ),
+                      );
+                    }
+                  },
+                ),
+            ),
+          );
     } catch (e) {
       return Image.asset(
         "assets/image/image_example_community2.png",

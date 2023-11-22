@@ -23,9 +23,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = <Widget>[
 
     HomeScreen(),
-    FarmclubScreen(
-      isFarmclub: true,
-    ),
+    FarmclubScreen(),
     CommunityScreen(),
     MyPageScreen()
   ];

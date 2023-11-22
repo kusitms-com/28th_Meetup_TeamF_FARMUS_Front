@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/community/component/community_post_time.dart';
 
 class RecordProfile extends StatefulWidget {
+  final String profile;
   final String nickname;
   final String postTime;
-  const RecordProfile(
-      {super.key, required this.nickname, required this.postTime});
+
+  const RecordProfile({
+    super.key,
+    required this.profile,
+    required this.nickname,
+    required this.postTime,
+  });
 
   @override
   State<RecordProfile> createState() => _RecordProfileState();
 }
 
 class _RecordProfileState extends State<RecordProfile> {
+
   @override
   Widget build(BuildContext context) {
+    print(widget.profile);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
@@ -27,7 +36,12 @@ class _RecordProfileState extends State<RecordProfile> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
               ),
-              child: Image.asset("assets/image/image_example_profile2.png"),
+              child: widget.profile != ""
+                  ? Image.network(
+                      widget.profile,
+                      fit: BoxFit.cover,
+                    )
+                  : SvgPicture.asset("assets/image/ic_profile.svg"),
             ),
           ),
           SizedBox(

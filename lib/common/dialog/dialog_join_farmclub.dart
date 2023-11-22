@@ -5,13 +5,14 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 class DialogJoinFarmclub extends StatefulWidget {
   final String image;
   final String title;
-  final String step;
+  final String content;
 
-  const DialogJoinFarmclub(
-      {super.key,
-      required this.image,
-      required this.title,
-      required this.step});
+  const DialogJoinFarmclub({
+    super.key,
+   required  this.image,
+    required this.title,
+    required this.content,
+  });
 
   @override
   State<DialogJoinFarmclub> createState() => _DialogJoinFarmclubState();
@@ -41,10 +42,14 @@ class _DialogJoinFarmclubState extends State<DialogJoinFarmclub> {
                       height: 30,
                     ),
                   ),
-                  widget.image != null
+                  widget.image != ""
                       ? ClipRRect(
                           borderRadius: BorderRadius.circular(16),
-                          child: Image.network(widget.image),
+                          child: Image.network(
+                            widget.image,
+                            width: 100,
+                            height: 100,
+                          ),
                         )
                       : SvgPicture.asset(
                           "assets/image/ic_lettuce_blue.svg",
@@ -70,7 +75,7 @@ class _DialogJoinFarmclubState extends State<DialogJoinFarmclub> {
                         width: 8,
                       ),
                       Text(
-                        "Step ${widget.step}을 완료했어요",
+                        widget.content,
                         style: FarmusThemeData.darkStyle16,
                       ),
                     ],

@@ -11,7 +11,7 @@ import 'package:mojacknong_android/view/my_page/history/my_page_vege_history.dar
 import '../../model/farmus_user.dart';
 import '../../model/mypage_history.dart';
 import '../../repository/mypage_repository.dart';
-import '../farmclub/my_farmclub_mission_screen.dart';
+import 'my_farmclub_history_screen.dart';
 import 'history_vege_screen.dart';
 
 class MyPageScreen extends StatefulWidget {
@@ -109,7 +109,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                               return GestureDetector(
 
                                 onTap: () {
-                                  MyFarmclubMissionScreen(
+                                  MyFarmclubHistoryScreen(
                                     detailId: history
                                         .farmClubHistoryDetailList[reversedIndex]
                                         .detailId,

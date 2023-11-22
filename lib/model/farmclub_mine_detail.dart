@@ -1,4 +1,5 @@
 class FarmclubMineDetail {
+  final String veggieInfoId;
   final String challengeName;
   final String veggieName;
   final String challengeDescription;
@@ -12,9 +13,10 @@ class FarmclubMineDetail {
   final String stepName;
   final String stepTip;
   final List<String> stepImages;
-  final List<dynamic> diaries;
+  final bool isRegistered;
 
   FarmclubMineDetail({
+    required this.veggieInfoId,
     required this.challengeName,
     required this.veggieName,
     required this.challengeDescription,
@@ -28,11 +30,12 @@ class FarmclubMineDetail {
     required this.stepName,
     required this.stepTip,
     required this.stepImages,
-    required this.diaries,
+    required this.isRegistered,
   });
 
   factory FarmclubMineDetail.fromJson(Map<String, dynamic> json) {
     return FarmclubMineDetail(
+      veggieInfoId: json['veggieInfoId'],
       challengeName: json['challengeName'],
       veggieName: json['veggieName'],
       challengeDescription: json['challengeDescription'],
@@ -46,7 +49,7 @@ class FarmclubMineDetail {
       stepName: json['stepName'],
       stepTip: json['stepTip'],
       stepImages: List<String>.from(json['stepImages']),
-      diaries: List<dynamic>.from(json['diaries']),
+      isRegistered: json['isRegistered'],
     );
   }
 }

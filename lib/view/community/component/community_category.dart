@@ -40,14 +40,8 @@ class _CommunityCategoryState extends State<CommunityCategory> {
       child: GestureDetector(
         onTap: () {
           setState(() {
-            if (isSelected) {
-              if (widget.feedController != null) {
-                widget.feedController!.selectCategory(""); // 선택 해제
-              }
-            } else {
-              if (widget.feedController != null) {
-                widget.feedController!.selectCategory(widget.category); // 선택
-              }
+            if (widget.feedController != null) {
+              widget.feedController!.selectCategory(widget.category); // 선택
             }
             isSelected = !isSelected;
           });

@@ -27,9 +27,12 @@ class _GrowPictureState extends State<GrowPicture> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Image.asset(
-              "assets/image/image_example_community.png",
-              fit: BoxFit.fill,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                "assets/image/image_example_community.png",
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           SizedBox(

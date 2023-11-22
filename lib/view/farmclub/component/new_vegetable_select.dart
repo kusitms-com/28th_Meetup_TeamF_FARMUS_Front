@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/farmclub/component/new_vegetable_item.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_make_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_register_controller.dart';
 
 import '../../../model/all_vege_infor_dto.dart';
 import '../../../model/all_vege_infor_list.dart';

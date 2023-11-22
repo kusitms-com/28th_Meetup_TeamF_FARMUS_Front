@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/model/farmclub_mine_detail.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_init.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_picture.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 
+import '../../../../model/farmclub_mine.dart';
 import '../../farmclub_challenge_screen.dart';
 import 'challenge_help.dart';
 import 'challenge_step.dart';
 
 class ChallengeFeed extends StatefulWidget {
+
   final FarmclubMineDetail farmclubInfo;
+  final FarmclubMine farmclubMine;
 
   const ChallengeFeed({
-    super.key,
     required this.farmclubInfo,
+    required this.farmclubMine,
+    super.key,
   });
 
   @override
@@ -48,8 +53,8 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
         const SizedBox(
           height: 16,
         ),
-        const ChallengeHelp(
-          help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
+         ChallengeHelp(
+          help: widget.farmclubInfo.stepTip,
         ),
         const SizedBox(
           height: 16,
@@ -61,14 +66,14 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
                 MaterialPageRoute(
                   builder: (context) {
                     return const FarmclubChallengeScreen(
-                      detailId: '',
+                      detailId: "",
                     );
                   },
                 ),
               );
             },
             child: widget.farmclubInfo.stepImages.isNotEmpty ? ChallengePicture(
-              detailId: '',
+              registrationId: widget.farmclubMine.registrationId.toString(),
             ) : ChallengeInit()),
       ],
     );

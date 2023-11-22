@@ -12,7 +12,7 @@ class CommunityFeedController extends GetxController {
   var content = "".obs;
   var image = "".obs;
 
-  var selectedCategories = <String>[].obs;
+  RxList<String> selectedCategories = <String>[].obs;
 
   var communityPostings = <CommunityPosting>[].obs;
 
@@ -36,25 +36,24 @@ class CommunityFeedController extends GetxController {
     this.image.value = image;
   }
 
-  // 카테고리 선택 메서드
+
+
+
   void selectCategory(String category) {
-    if (selectedCategories.contains(category)) {
-      // 이미 선택된 경우 해제
-      selectedCategories.remove(category);
-    } else {
-      // 선택되지 않은 경우 추가
-      selectedCategories.add(category);
+    if (selectedCategories.isEmpty || category.isNotEmpty) {
+      if (selectedCategories.contains(category)) {
+        selectedCategories.remove(category);
+      } else {
+        selectedCategories.add(category);
+      }
+
+      print("카테고리 ${selectedCategories.value}");
+
+      // 선택 또는 선택 해제할 때마다 화면 갱신
+      update();
     }
   }
 
-  void toggleCategory(String category) {
-    if (selectedCategories.contains(category)) {
-      selectedCategories.remove(category);
-    } else {
-      selectedCategories.add(category);
-    }
-    update();
-  }
 
   Future<void> getWholePosting() async {
     try {

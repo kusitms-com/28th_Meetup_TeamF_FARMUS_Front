@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../repository/onboarding_repository.dart';
+
 class OnboardingController extends GetxController {
   // 텍스트 입력 필드 컨트롤러
   final TextEditingController controller = TextEditingController();
@@ -130,5 +132,15 @@ class OnboardingController extends GetxController {
   void onClose() {
     controller.dispose();
     super.onClose();
+  }
+
+
+  Future<void> postCrepHistory() async {
+    try {
+
+      OnboardingRepository.postCropHistory();
+    } catch (error) {
+      throw error;
+    }
   }
 }

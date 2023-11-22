@@ -25,7 +25,7 @@ class _ChallengeStepState extends State<ChallengeStep> {
               width: 16,
             ),
             Text(
-              "Step ${widget.step}",
+              "Step ${widget.step.toString()}",
               style: TextStyle(
                 fontFamily: "Pretendard",
                 fontSize: 14,
