@@ -8,7 +8,12 @@ import 'package:mojacknong_android/view/farmclub/component/farmclub_help.dart';
 import '../../view_model/controllers/crop/crop_info_step_controller.dart';
 
 class FarmclubHelpScreen extends StatefulWidget {
-  const FarmclubHelpScreen({super.key});
+  final String veggieInfoId;
+
+  const FarmclubHelpScreen({
+    super.key,
+    required this.veggieInfoId,
+  });
 
   @override
   State<FarmclubHelpScreen> createState() => _FarmclubHelpScreenState();

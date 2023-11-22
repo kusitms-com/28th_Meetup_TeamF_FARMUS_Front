@@ -4,10 +4,12 @@ import 'package:mojacknong_android/view/farmclub/farmclub_help_screen.dart';
 
 class ChallengeHelp extends StatelessWidget {
   final String help;
+  final String veggieInfoId;
 
   const ChallengeHelp({
     super.key,
     required this.help,
+    required this.veggieInfoId,
   });
 
   @override
@@ -20,7 +22,7 @@ class ChallengeHelp extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return FarmclubHelpScreen();
+                return FarmclubHelpScreen(veggieInfoId: veggieInfoId,);
               },
             ),
           );

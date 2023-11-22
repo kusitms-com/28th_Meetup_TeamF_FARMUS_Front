@@ -45,9 +45,10 @@ class CropInfoStepController extends GetxController {
     }
   }
 
-  Future<List<List<WholeHint>>> getCropWholeHint() async {
+  Future<List<WholeHint>> getCropWholeHint() async {
+    print(veggieInfoid);
     try {
-      List<List<WholeHint>> responseData =
+      List<WholeHint> responseData =
           await CropRepository.getCropWholeHint(
         veggieInfoid.value,
       );

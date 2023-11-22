@@ -153,6 +153,7 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
                 ),
                 ChallengeHelp(
                   help: farmclubInfo.stepTip,
+                  veggieInfoId: farmclubInfo.veggieInfoId,
                 ),
                 SizedBox(
                   height: 16,

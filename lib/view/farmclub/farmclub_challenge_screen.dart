@@ -106,6 +106,7 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                 ),
                 ChallengeHelp(
                   help: _cropInfoStepController.cropInfoStepCurrent[0].tip,
+                  veggieInfoId: _cropInfoStepController.veggieInfoid.toString(),
                 ),
                 const SizedBox(
                   height: 16,

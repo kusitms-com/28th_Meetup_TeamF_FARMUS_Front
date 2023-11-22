@@ -18,11 +18,11 @@ class CropRepository {
   }
 
   // 전체 가이드라인
-  static Future<List<List<WholeHint>>> getCropWholeHint(
+  static Future<List<WholeHint>> getCropWholeHint(
     String veggieInfoid,
   ) async {
     try {
-      List<List<WholeHint>> response = await CropApiService().getCropWholeHint(
+      List<WholeHint> response = await CropApiService().getCropWholeHint(
         veggieInfoid,
       );
       print("레포 ${response.runtimeType}");

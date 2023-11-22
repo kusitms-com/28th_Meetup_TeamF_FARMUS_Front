@@ -37,27 +37,27 @@ class CropApiService {
     }
   }
 
-  Future<List<List<WholeHint>>> getCropWholeHint(
+  Future<List<WholeHint>> getCropWholeHint(
     String veggieInfoid,
   ) async {
+    print("veggieInfoid $veggieInfoid");
     try {
-      Response response =
-          await ApiClient().dio.get("/api/crop/$veggieInfoid");
+      Response response = await ApiClient().dio.get("/api/crop/$veggieInfoid");
 
       if (response.statusCode == 200) {
-        List<List<dynamic>> dataLists =
-            List<List<dynamic>>.from(response.data['data']);
+        print(response.data["data"]);
+        List<dynamic> dataList = response.data['data'];
 
-        List<List<WholeHint>> wholeHint = dataLists.map((dataList) {
-          return dataList.map((data) => WholeHint.fromJson(data)).toList();
-        }).toList();
+        List<WholeHint> farmclubMyMission =
+            dataList.map((data) => WholeHint.fromJson(data)).toList();
 
-        return wholeHint;
+        print(farmclubMyMission);
+
+        return farmclubMyMission;
       } else {
-        // 오류 발생 시 빈 리스트 반환
         return [];
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e.message);
       throw "${e.message}";
     }

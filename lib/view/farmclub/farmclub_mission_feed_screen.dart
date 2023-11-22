@@ -106,7 +106,10 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                         height: 16,
                       ),
                       ChallengeHelp(
-                          help: _controller.farmclubInfo.value!.stepTip),
+                        help: _controller.farmclubInfo.value!.stepTip,
+                        veggieInfoId:
+                            _controller.farmclubInfo.value!.veggieInfoId,
+                      ),
                       SizedBox(
                         height: 8,
                       ),

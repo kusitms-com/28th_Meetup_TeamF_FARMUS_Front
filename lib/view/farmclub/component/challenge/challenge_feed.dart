@@ -28,6 +28,7 @@ class ChallengeFeed extends StatefulWidget {
 
 class _ChallengeFeedState extends State<ChallengeFeed> {
 
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -55,6 +56,7 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
         ),
          ChallengeHelp(
           help: widget.farmclubInfo.stepTip,
+           veggieInfoId: widget.farmclubInfo.veggieInfoId,
         ),
         const SizedBox(
           height: 16,
