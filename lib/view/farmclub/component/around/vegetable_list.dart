@@ -28,10 +28,12 @@ class _VegetableListState extends State<VegetableList> {
         ? _makeController.veggieRegistration
         : _joinController.veggieRegistration;
 
+    print("채소 데이터 ${veggieList.length}");
+
     return _joinController.veggieRegistration != []
         ? Container(
             width: double.infinity,
-            height: 50,
+            height: 150,
             child: ListView.builder(
               itemCount: veggieList.length,
               itemBuilder: (context, index) {
@@ -49,11 +51,19 @@ class _VegetableListState extends State<VegetableList> {
                           }
                         },
                         child: Obx(() {
-                          return SvgPicture.asset(
-                            _joinController.isCheck.value
-                                ? "assets/image/ic_check_true.svg"
-                                : "assets/image/ic_check_false.svg",
-                          );
+                          if (widget.isMake) {
+                            return SvgPicture.asset(
+                              _makeController.isCheck.value
+                                  ? "assets/image/ic_check_true.svg"
+                                  : "assets/image/ic_check_false.svg",
+                            );
+                          } else {
+                            return SvgPicture.asset(
+                              _joinController.isCheck.value
+                                  ? "assets/image/ic_check_true.svg"
+                                  : "assets/image/ic_check_false.svg",
+                            );
+                          }
                         }),
                       ),
                       SizedBox(
@@ -70,13 +80,15 @@ class _VegetableListState extends State<VegetableList> {
             ),
           )
         : Column(
-          children: [
-            SizedBox(height: 16,),
-            Text(
+            children: [
+              SizedBox(
+                height: 16,
+              ),
+              Text(
                 "내 텃밭에 아직 팜클럽 채소를 심지 않았어요",
                 style: FarmusThemeData.darkStyle16,
               ),
-          ],
-        );
+            ],
+          );
   }
 }

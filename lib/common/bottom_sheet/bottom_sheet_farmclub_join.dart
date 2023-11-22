@@ -53,7 +53,7 @@ class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Container(
             width: double.infinity,
-            height: 140,
+            height: 160,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
