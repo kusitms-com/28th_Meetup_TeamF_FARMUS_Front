@@ -47,23 +47,28 @@ class DiaryApiService {
       ) async {
     try {
 
-      Map<String, dynamic> requestBody = {
+      FormData formData;
+      formData = FormData.fromMap({
         'veggieId': vegeId,
         'content': content,
         'isOpen': isOpen,
-        'image': diaryImage,
-      };
+        'image': await MultipartFile.fromFile(
+          diaryImage.path,
+          filename: diaryImage.path.split('/').last,
+        ),
 
-      Response response = await ApiClient().dio.post('/api/veggie',data: requestBody);
+      });
+
+      Response response = await ApiClient().dio.post('/api/veggie/diary',data: formData);
 
       if(response.statusCode == 200){
-        print("채소 등록 완료");
+        print("일기 등록 완료");
         return;
       }
 
     } on DioException catch (e) {
       print(e.message);
-      print("채소 등록 실패");
+      print("일기 등록 실패");
 
     }
     return null;
