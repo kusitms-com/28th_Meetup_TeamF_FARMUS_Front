@@ -2,6 +2,7 @@ class FarmclubDetail {
   final String veggieInfoId;
   final String challengeName;
   final String veggieName;
+  final int challengeId;
   final String challengeDescription;
   final String veggieImage;
   final String difficulty;
@@ -19,6 +20,7 @@ class FarmclubDetail {
     required this.veggieInfoId,
     required this.challengeName,
     required this.veggieName,
+    required this.challengeId,
     required this.challengeDescription,
     required this.veggieImage,
     required this.difficulty,
@@ -41,6 +43,7 @@ class FarmclubDetail {
       veggieInfoId: jsonData['veggieInfoId'],
       challengeName: jsonData['challengeName'],
       veggieName: jsonData['veggieName'],
+      challengeId: jsonData['challengeId'],
       challengeDescription: jsonData['challengeDescription'],
       veggieImage: jsonData['veggieImage'],
       difficulty: jsonData['difficulty'],
