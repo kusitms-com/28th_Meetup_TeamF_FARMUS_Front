@@ -27,7 +27,6 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
 
- // final VegeController vegeController = Get.find();
   final VegeController vegeController =
   Get.put(VegeController());
 
@@ -101,10 +100,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   right: 0,
                   child: RegisterButton(
                     text: '등록하기',
-                    onPressed: () async {
+                    onPressed: vegeController.vegeRegisterException()
+                        ? () async {
                       await vegeController.enrollVegeRequest();
+
+
+
                       BottomSheetController().showRegisterDialog(
-                          context, vegeController.selectNicknameValue()); //context에는 입력한 채소 별명이 떠야함
+                          context, vegeController.selectNicknameValue());
+
+                      vegeController.updateNicknameValue(" ");
+                      vegeController.updateSelectedDate(" ");
+                      vegeController.updateSelectedVeggieData(" "," "," ");
+
 
                       Navigator.push(
                         context,
@@ -112,7 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             builder: (context) =>
                             const MainScreen()), //home screen으로 가고 이때 작물이 존재하는 상태니, home screen에서 swipescreen호출
                       );
-                    },
+                    }: null,
                   ),
 
                 ),

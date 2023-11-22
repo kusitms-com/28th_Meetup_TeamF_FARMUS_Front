@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+
+import '../../../view_model/controllers/vege_controller.dart';
 
 class NewVegetableItem extends StatefulWidget {
   final String blackPath;
@@ -25,6 +29,7 @@ class NewVegetableItem extends StatefulWidget {
 }
 
 class _NewVegetableItemState extends State<NewVegetableItem> {
+  final VegeController vegeController = Get.find();
 
 
   @override
@@ -32,6 +37,8 @@ class _NewVegetableItemState extends State<NewVegetableItem> {
     return GestureDetector(
       onTap: () {
         widget.onTap();
+        //vegeController.updatevegeBoolValue(true);
+
       },
       child: Column(
         children: [

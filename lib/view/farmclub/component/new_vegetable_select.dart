@@ -13,8 +13,7 @@ class NewVegetableSelect extends StatelessWidget {
   final List<AllVegeInforDto>? allVegeInforList;
   final VegeController vegeController = Get.find();
 
-  // final VegeController vegeController =
-  // Get.put(VegeController());
+
 
   NewVegetableSelect({
     super.key,

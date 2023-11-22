@@ -9,12 +9,37 @@ class VegeController extends GetxController {
   final nicknameValue = "".obs;
   final selectedDate = "".obs;
 
+
+  // final vegeBool = RxBool(false);
+  // final vegeNicknameBool = RxBool(false);
+  // final calendarBool = RxBool(false);
   //
-  // @override
-  // void onInit() {
-  //   super.onInit();
   //
+  // void updatevegeBoolValue(bool value) {
+  //   vegeNicknameBool.value = value;
+  //   print(vegeNicknameBool.value);
   // }
+  //
+  // void updatevegeNicknameBoolValue(bool value) {
+  //   vegeNicknameBool.value = value;
+  //   print(vegeNicknameBool.value);
+  // }
+  //
+  // void updatecalendarBoolValue(bool value) {
+  //   calendarBool.value = value;
+  //   print(calendarBool.value);
+  // }
+
+  bool vegeRegisterException(){
+    if(nicknameValue.value == " " || selectedDate.value == " "  || selectedVeggieId == " "){
+      return false;
+    }
+
+    return true;
+
+  }
+
+
 
   void updateSelectedDate(String date) {
     selectedDate.value = date;
@@ -27,8 +52,7 @@ class VegeController extends GetxController {
     selectedVeggieColorImageUrl.value = colorImageUrl;
     vegename.value = vegeName;
     print(selectedVeggieId.value);
-    print(selectedVeggieColorImageUrl.value);
-    print(vegename.value);
+
   }
 
   void updateNicknameValue(String value) {
