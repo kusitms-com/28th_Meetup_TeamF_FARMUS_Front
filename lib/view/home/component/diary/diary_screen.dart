@@ -122,9 +122,8 @@ class _DiaryScreenState extends State<DiaryScreen> {
                           );
 
                           if (result != null) {
-                            print(1);
 
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => DiaryScreen(

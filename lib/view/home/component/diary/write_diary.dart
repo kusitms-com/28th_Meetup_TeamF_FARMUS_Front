@@ -75,21 +75,18 @@ class _WriteDiaryState extends State<WriteDiary> {
         title: "일기 작성하기",
         actions: [
           TextButton(
-            onPressed: diaryPostController.diaryWriteException()
-            ? () async {
-              // String result = await postPostingDiary(context);
+            onPressed:
+          diaryPostController.diaryWriteException()
+            ?
+          () async {
 
-              // // postPostingWrite가 완료되면 Navigator.pop 실행
-              // if (result == "성공") {
-
-              // }
               await diaryPostController.writeDiaryRequest(widget.vegeId!);
               diaryPostController.updateContentValue("");
               diaryPostController.updateImageBoolValue(false);
 
               Navigator.pop(context, "data");
 
-            } : null,
+            }: null,
             child: const Text(
               "완료",
               style: TextStyle(
