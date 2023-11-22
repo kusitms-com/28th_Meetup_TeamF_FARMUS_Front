@@ -10,7 +10,6 @@ import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_s
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_auth_screen.dart';
 import 'package:mojacknong_android/view/farmclub/my_farmclub_mission_screen.dart';
-import 'package:mojacknong_android/view/my_page/my_farmclub_history_screen.dart';
 import 'package:mojacknong_android/view_model/controllers/crop/crop_info_step_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_auth_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
@@ -60,29 +59,43 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const FarmclubTitleWithDivider(title: "완료한 Step"),
-                const Row(
-                  children: [
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Text(
-                      "아직 완료한 Step이 없어요",
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 16,
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: _cropInfoStepController.cropInfoStepClear.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        ChallengeStep(
+                          step: index,
+                          title: _cropInfoStepController.cropInfoStepClear[index].stepName,
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        const Divider(
+                          endIndent: 16,
+                          indent: 16,
+                          color: FarmusThemeData.grey4,
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                      ],
+                    );
+                  },
                 ),
                 const FarmclubTitleWithDivider(title: "현재 Step"),
-                const ChallengeStep(
-                  step: 0,
-                  title: "준비물을 챙겨요",
+                ChallengeStep(
+                  step: _cropInfoStepController.stepNum.toInt(),
+                  title:
+                      _cropInfoStepController.cropInfoStepCurrent[0].stepName,
                 ),
                 const SizedBox(
                   height: 16,
                 ),
-                const ChallengeHelp(
-                  help: "상추 씨앗과 상토, 재배 용기를 준비해 주세요",
+                ChallengeHelp(
+                  help: _cropInfoStepController.cropInfoStepCurrent[0].tip,
                 ),
                 const SizedBox(
                   height: 16,
@@ -95,13 +108,13 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 2,
+                  itemCount: _cropInfoStepController.cropInfoStepTodo.length,
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
                         ChallengeStep(
-                          step: index,
-                          title: index.toString(),
+                          step: index + _cropInfoStepController.stepNum.toInt() + 1,
+                          title: _cropInfoStepController.cropInfoStepTodo[index].stepName,
                         ),
                         const SizedBox(
                           height: 16,
