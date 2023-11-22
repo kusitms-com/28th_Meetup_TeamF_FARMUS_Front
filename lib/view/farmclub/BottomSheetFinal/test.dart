@@ -23,7 +23,7 @@ class _TestPageState extends State<TestPage> {
       backgroundColor: FarmusThemeData.white,
       builder: (BuildContext context) {
         return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.7, //원래 0.8
+          height: MediaQuery.of(context).size.height * 0.7, //배경 있는 버전 : 0.8
           child: const BottomSheetFarmClubFinal(
             imagePath: 'assets/image/lettuce1.svg',
             textContent:

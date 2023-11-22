@@ -15,8 +15,6 @@ class BottomSheetFarmClubFinal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     return Container(
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -58,7 +56,7 @@ class BottomSheetFarmClubFinal extends StatelessWidget {
                 'assets/image/final_rec.png',
               ),
               Positioned(
-                top: 40, // Adjust this value as needed for text positioning
+                top: 40,
                 child: Text(
                   textContent,
                   textAlign: TextAlign.center,
@@ -70,8 +68,8 @@ class BottomSheetFarmClubFinal extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 30), // Space between image and button
-          const FarmClearButton(text: '팜클럽 마치기'), // Button outside the stack
+          const SizedBox(height: 30),
+          const FarmClearButton(text: '팜클럽 마치기'),
         ],
       ),
     );
