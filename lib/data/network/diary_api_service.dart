@@ -47,18 +47,6 @@ class DiaryApiService {
       ) async {
     try {
 
-      // Map<String, dynamic> requestBody = {
-      //   'veggieId': vegeId,
-      //   'content': content,
-      //   'isOpen': isOpen,
-      //   'image': diaryImage,
-      // };
-
-      print(vegeId);
-      print(content);
-      print(isOpen);
-      print(diaryImage);
-
       FormData formData;
       formData = FormData.fromMap({
         'veggieId': vegeId,

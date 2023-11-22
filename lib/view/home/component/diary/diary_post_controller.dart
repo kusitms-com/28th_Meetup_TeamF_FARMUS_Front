@@ -39,10 +39,6 @@ class DiaryPostController extends GetxController {
 
 
   Future<void> writeDiaryRequest(int vegeId) async {
-    print("컨트롤러 데이터" +contentValue.value);
-    print("컨트롤러 데이터" +vegeId.toString());
-    print("컨트롤러 데이터" +isBool.value.toString());
-    print("컨트롤러 데이터" +image.value.toString());
 
     await DiaryRepository.writeDiaryApi(
       vegeId,
