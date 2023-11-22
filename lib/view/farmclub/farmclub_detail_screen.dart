@@ -7,16 +7,16 @@ import 'package:mojacknong_android/view/farmclub/component/around/farmclub_aroun
 import 'package:mojacknong_android/view/farmclub/component/around/farmclub_around_title.dart';
 import 'package:mojacknong_android/view/farmclub/component/around/farmclub_around_vegetable.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_help.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_init.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_picture.dart';
-import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_help.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_content.dart';
-import 'package:mojacknong_android/view/farmclub/component/farmclub_init.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_info.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_detail_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_join_controller.dart';
 
 class FarmclubDetailScreen extends StatefulWidget {
   final int id;
@@ -36,14 +36,20 @@ class FarmclubDetailScreen extends StatefulWidget {
 class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
   BottomSheetController _bottomSheetController = BottomSheetController();
   FarmclubDetailController _detailController =
-      Get.put(FarmclubDetailController());
+  Get.put(FarmclubDetailController());
+  FarmclubJoinController _joinController = Get.put(FarmclubJoinController());
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration.zero, () {
-      _detailController.getFarmclubDetail(widget.id.toString());
-    });
+    _initializeData();
+  }
+
+  Future<void> _initializeData() async {
+    await _detailController.getFarmclubDetail(widget.id.toString());
+    await _joinController.getVeggieRegistration();
+    _joinController.challengeId = _detailController.joinChallengeId;
+    print("챌린지 아이디 !!! ${_detailController.joinChallengeId}");
   }
 
   @override
@@ -80,7 +86,7 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
         }
       }),
       floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterFloat,
+      FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: Padding(
         padding: EdgeInsets.all(8.0),
         child: ButtonBrown(
@@ -136,16 +142,17 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
                   height: 12,
                 ),
                 FarmclubTitleWithDivider(title: "함께 도전해요"),
-                farmclubInfo.stepImages != null ?
-                ChallengeStep(
+                farmclubInfo.stepImages != null
+                    ? ChallengeStep(
                   step: farmclubInfo.stepNum,
                   title: farmclubInfo.stepName,
-                ) : ChallengeInit(),
+                )
+                    : ChallengeInit(),
                 SizedBox(
                   height: 16,
                 ),
                 ChallengeHelp(
-                  help: "ㅋㅋ",
+                  help: farmclubInfo.stepTip,
                 ),
                 SizedBox(
                   height: 16,

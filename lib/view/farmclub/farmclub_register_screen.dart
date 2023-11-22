@@ -9,6 +9,7 @@ import 'package:mojacknong_android/view/farmclub/component/farmclub_make_edit.da
 import 'package:mojacknong_android/view/farmclub/component/farmclub_make_member.dart';
 import 'package:mojacknong_android/view/farmclub/component/new_vegetable_select.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_register_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/vege_controller.dart';
 
 import '../../model/veggie_registration.dart';
 
@@ -22,12 +23,17 @@ class FarmclubRegisterScreen extends StatefulWidget {
 class _FarmclubRegisterScreenState extends State<FarmclubRegisterScreen> {
   FarmclubRegisterController _controller =
       Get.put(FarmclubRegisterController());
+  VegeController _vegeController = Get.put(VegeController());
 
   @override
   void initState() {
     super.initState();
-    _controller.getAllVeggie();
-    _controller.getVeggieRegistration();
+    _initializeData();
+  }
+
+  Future<void> _initializeData() async {
+    await _controller.getAllVeggie();
+    await _controller.getVeggieRegistration();
     _controller.isSelectedVeggie.value = false;
   }
 
@@ -72,13 +78,14 @@ class _FarmclubRegisterScreenState extends State<FarmclubRegisterScreen> {
                     height: 16,
                   ),
                   Container(
+                    width: double.infinity,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(color: FarmusThemeData.grey4)),
                       child: Column(
                         children: [
                           VegetableList(
-                            isMake: true,
+                            isMake: false,
                           ),
                         ],
                       )),

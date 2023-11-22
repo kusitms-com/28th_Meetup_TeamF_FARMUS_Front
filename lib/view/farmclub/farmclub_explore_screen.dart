@@ -23,12 +23,12 @@ class FarmclubExploreScreen extends StatefulWidget {
 class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
   FarmclubExploreController _exploreController =
       Get.put(FarmclubExploreController());
-  VegeController _vegeController = Get.put(VegeController());
 
   @override
   void initState() {
     super.initState();
     _exploreController.getUserApi();
+    _exploreController.getFarmclubData();
   }
 
   @override

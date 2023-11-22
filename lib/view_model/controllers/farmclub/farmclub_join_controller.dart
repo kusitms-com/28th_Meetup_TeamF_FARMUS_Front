@@ -9,6 +9,7 @@ class FarmclubJoinController extends GetxController {
   var veggieList = <VeggieRegistration>[].obs;
   RxList<int> veggieSelected = <int>[].obs;
   RxInt selectedVeggieIndex = RxInt(0);
+  RxInt challengeId = RxInt(0);
 
   @override
   void onInit() {
@@ -53,7 +54,8 @@ class FarmclubJoinController extends GetxController {
     try {
       int responseData = await FarmclubRepository.postRegister(
           "1", veggieList[selectedVeggieIndex.toInt()].veggieId.toString());
-
+      print("채소 아이디 ${veggieList[selectedVeggieIndex.toInt()].veggieId.toString()}");
+      print("채소 아이디 ${veggieList[selectedVeggieIndex.toInt()].veggieId.toString()}");
       return responseData;
     } catch (error) {
       // 오류 처리 로직 추가
@@ -63,6 +65,7 @@ class FarmclubJoinController extends GetxController {
   }
 
   void toggleSelectCheck(int index) {
+    print("가입할 팜클럽 아이디 $challengeId");
     // 이미 선택한 채소를 다시 선택한 경우 선택 해제
     if (veggieSelected[index] == 1) {
       veggieSelected[index] = 0;
