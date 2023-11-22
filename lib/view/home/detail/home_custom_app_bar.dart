@@ -44,15 +44,6 @@ class HomeCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     height: 24,
                   ),
                 ),
-                const SizedBox(width: 16),
-                InkWell(
-                  onTap: () {},
-                  child: SvgPicture.asset(
-                    'assets/image/ic_alarm.svg',
-                    width: 24,
-                    height: 24,
-                  ),
-                ),
               ],
             ),
           ),
