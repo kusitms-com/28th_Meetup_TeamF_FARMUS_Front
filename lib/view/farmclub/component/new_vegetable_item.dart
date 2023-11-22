@@ -37,7 +37,7 @@ class _NewVegetableItemState extends State<NewVegetableItem> {
     return GestureDetector(
       onTap: () {
         widget.onTap();
-        _farmclubRegisterController.toggleImageSelection(widget.index);
+        // _farmclubRegisterController.toggleImageSelection(widget.index);
       },
       child: Column(
         children: [

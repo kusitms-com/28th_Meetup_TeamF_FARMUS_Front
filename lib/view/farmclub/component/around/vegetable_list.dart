@@ -40,7 +40,7 @@ class _VegetableListState extends State<VegetableList> {
           VeggieRegistration veggie = veggieList[index];
           return Obx(() {
             bool isSelected = widget.isMake
-                ? _makeController.isCheck.value
+                ? _makeController.veggieSelected[index] == 1
                 : _joinController.veggieSelected[index] == 1;
 
             return Padding(
@@ -50,7 +50,7 @@ class _VegetableListState extends State<VegetableList> {
                   GestureDetector(
                     onTap: () {
                       if (widget.isMake) {
-                        _makeController.toggleSelectCheck();
+                        _makeController.toggleSelectCheck(index);
                       } else {
                         _joinController.toggleSelectCheck(index);
                       }

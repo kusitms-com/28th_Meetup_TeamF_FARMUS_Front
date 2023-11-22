@@ -85,7 +85,7 @@ class _FarmclubRegisterScreenState extends State<FarmclubRegisterScreen> {
                       child: Column(
                         children: [
                           VegetableList(
-                            isMake: false,
+                            isMake: true,
                           ),
                         ],
                       )),

@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
+import 'package:mojacknong_android/view_model/controllers/crop/crop_info_step_controller.dart';
 
-class FarmclubHelp extends StatelessWidget {
+class FarmclubHelp extends StatefulWidget {
   const FarmclubHelp({super.key});
 
+  @override
+  State<FarmclubHelp> createState() => _FarmclubHelpState();
+}
+
+class _FarmclubHelpState extends State<FarmclubHelp> {
   @override
   Widget build(BuildContext context) {
     return Column(
