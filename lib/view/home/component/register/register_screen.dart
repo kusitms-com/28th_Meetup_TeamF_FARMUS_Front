@@ -12,6 +12,7 @@ import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controlle
 import '../../../../repository/homescreen_repository.dart';
 import '../../../../view_model/controllers/vege_controller.dart';
 import '../../../farmclub/component/new_vegetable_select.dart';
+import '../../../main/main_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
 
@@ -109,7 +110,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                            const HomeScreen()), //home screen으로 가고 이때 작물이 존재하는 상태니, home screen에서 swipescreen호출
+                            const MainScreen()), //home screen으로 가고 이때 작물이 존재하는 상태니, home screen에서 swipescreen호출
                       );
                     },
                   ),

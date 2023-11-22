@@ -21,6 +21,27 @@ class DiaryPostController extends GetxController {
   //   titleValue.value = value;
   // }
 
+  final imageBool = RxBool(false);
+ // final contentBool = RxBool(false);
+
+
+  void updateImageBoolValue(bool value){
+    imageBool.value = value;
+    print(imageBool.value);
+  }
+
+  // void updateContentBoolValue(bool value){
+  //   contentBool.value = value;
+  //   print(contentBool.value);
+  // }
+
+  bool diaryWriteException(){
+
+    return imageBool.value;
+
+  }
+
+
   void updateSwitchValue(bool value){
     isBool.value = value;
     print(isBool.value);
