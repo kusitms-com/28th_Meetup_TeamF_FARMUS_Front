@@ -52,9 +52,10 @@ class FarmclubJoinController extends GetxController {
 
   Future<int> postFarmclubRegister() async {
     try {
-      int responseData = await FarmclubRepository.postRegister(
-          "1", veggieList[selectedVeggieIndex.toInt()].veggieId.toString());
       print("채소 아이디 ${veggieList[selectedVeggieIndex.toInt()].veggieId.toString()}");
+
+      int responseData = await FarmclubRepository.postRegister(
+          veggieList[selectedVeggieIndex.toInt()].veggieId.toString(), veggieList[selectedVeggieIndex.toInt()].veggieId.toString());
       print("채소 아이디 ${veggieList[selectedVeggieIndex.toInt()].veggieId.toString()}");
       return responseData;
     } catch (error) {
