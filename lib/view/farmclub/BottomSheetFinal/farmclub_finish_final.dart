@@ -3,11 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
-class BottomSheetFarmClubClear extends StatelessWidget {
+class BottomSheetFarmClubFinal extends StatelessWidget {
   final String imagePath;
   final String textContent;
 
-  const BottomSheetFarmClubClear({
+  const BottomSheetFarmClubFinal({
     super.key,
     required this.imagePath,
     required this.textContent,
@@ -15,8 +15,6 @@ class BottomSheetFarmClubClear extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     return Container(
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -38,51 +36,40 @@ class BottomSheetFarmClubClear extends StatelessWidget {
               SvgPicture.asset('assets/image/partycorn.svg'),
             ],
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 40),
           SvgPicture.asset(
             imagePath,
             fit: BoxFit.cover,
             width: MediaQuery.of(context).size.width,
             height: 100,
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           const Text(
             "상추 좋아하세요",
             style: TextStyle(fontSize: 16, color: FarmusThemeData.grey1),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 60),
           Stack(
             alignment: Alignment.center,
             children: <Widget>[
               Image.asset(
-                'assets/image/final2.png',
-                fit: BoxFit.fill,
-                width: screenWidth,
-                height: screenHeight * 0.52,
+                'assets/image/final_rec.png',
               ),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 100.0),
-                  child: Text(
-                    textContent,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: FarmusThemeData.white,
+              Positioned(
+                top: 40,
+                child: Text(
+                  textContent,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      color: FarmusThemeData.black,
                       fontSize: 14.0,
-                    ),
-                  ),
-                ),
-              ),
-              const Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: EdgeInsets.only(top: 80.0),
-                  child: FarmClearButton(text: '팜클럽 마치기'),
+                      fontWeight: FontWeight.w500),
                 ),
               ),
             ],
           ),
+          const SizedBox(height: 30),
+          const FarmClearButton(text: '팜클럽 마치기'),
         ],
       ),
     );
@@ -114,7 +101,7 @@ class FarmClearButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SizedBox(
-          width: 300,
+          width: 340,
           height: 48,
           child: TextButton(
             onPressed: onPressed,
