@@ -15,6 +15,7 @@ import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_auth
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 
 import 'farmclub_help_screen.dart';
+import 'farmclub_mission_feed_screen.dart';
 
 class FarmclubChallengeScreen extends StatefulWidget {
   final String? detailId;
@@ -126,12 +127,37 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                const ChallengePicture(),
+                GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return FarmclubMissionFeedScreen(
+                              registrationId: _farmclubController
+                                  .myFarmclubState[_farmclubController
+                                  .selectedFarmclubIndex
+                                  .toInt()].registrationId.toString(),
+                              challengeId: _farmclubController
+                                  .myFarmclubState[_farmclubController
+                                      .selectedFarmclubIndex
+                                      .toInt()]
+                                  .challengeId
+                                  .toInt(),
+                              stepNum: _farmclubController
+                                  .farmclubInfo.value!.stepNum
+                                  .toInt(),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    child: ChallengePicture()),
                 const SizedBox(
                   height: 16,
                 ),
                 const FarmclubTitleWithDivider(title: "다음 Step"),
-                _cropInfoStepController.cropInfoStepClear.length == 0
+                _cropInfoStepController.cropInfoStepTodo.length == 0
                     ? Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
