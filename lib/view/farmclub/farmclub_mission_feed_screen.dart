@@ -13,6 +13,8 @@ import 'package:mojacknong_android/view/my_page/my_farmclub_history_screen.dart'
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_mission_controller.dart';
 
+import 'farmclub_help_screen.dart';
+
 class FarmclubMissionFeedScreen extends StatefulWidget {
   final String? registrationId;
   final int challengeId;
@@ -62,7 +64,9 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
         if (_farmclubMissionController.farmclubMissionList.isEmpty) {
           // 로딩 페이지 표시
           return Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              color: FarmusThemeData.brown,
+            ),
           );
         } else {
           // 응답이 왔을 때 화면 빌드
@@ -103,7 +107,24 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                       SizedBox(
                         height: 16,
                       ),
-                      ChallengeHelp(help: _controller.farmclubInfo.value!.stepTip),
+                      ChallengeHelp(
+                        help: _controller.farmclubInfo.value!.stepTip,
+                        veggieInfoId:
+                            _controller.farmclubInfo.value!.veggieInfoId,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return FarmclubHelpScreen(
+                                  veggieInfoId: _controller
+                                      .farmclubInfo.value!.veggieInfoId,
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
                       SizedBox(
                         height: 8,
                       ),
@@ -143,9 +164,7 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return MyFarmclubMissionScreen(
-                            challengeID: 4
-                          );
+                          return MyFarmclubMissionScreen(challengeID: 4);
                         },
                       ),
                     );
