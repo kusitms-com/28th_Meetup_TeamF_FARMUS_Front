@@ -61,7 +61,7 @@ class _WriteDiaryState extends State<WriteDiary> {
 
   @override
   Widget build(BuildContext context) {
-    print("이미지 업로드");
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: FarmusThemeData.white,
@@ -78,8 +78,7 @@ class _WriteDiaryState extends State<WriteDiary> {
               // }
               await diaryPostController.writeDiaryRequest(widget.vegeId!);
 
-
-              Navigator.pop(context);
+              Navigator.pop(context, "data");
 
             },
             child: const Text(
