@@ -41,7 +41,7 @@ class _FarmclubRegisterScreenState extends State<FarmclubRegisterScreen> {
               const SizedBox(
                 height: 16,
               ),
-              NewVegetableSelect(allVegeInforList: [],),
+              NewVegetableSelect(),
               const SizedBox(
                 height: 32,
               ),
