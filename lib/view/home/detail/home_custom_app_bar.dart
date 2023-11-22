@@ -43,7 +43,6 @@ class HomeCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     width: 24,
                     height: 24,
                   ),
-
                 ),
                 const SizedBox(width: 16),
                 InkWell(

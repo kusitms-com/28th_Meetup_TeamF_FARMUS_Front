@@ -36,6 +36,12 @@ class VegeController extends GetxController {
     print(nicknameValue.value);
   }
 
+  String selectNicknameValue(){
+
+    return nicknameValue.value;
+
+  }
+
   Future<void> enrollVegeRequest() async {
 
     await VegeRepository.enrollVegeApi(selectedDate.value, selectedVeggieId.value,

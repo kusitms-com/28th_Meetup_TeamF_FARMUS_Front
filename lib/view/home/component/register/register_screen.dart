@@ -14,7 +14,11 @@ import '../../../../view_model/controllers/vege_controller.dart';
 import '../../../farmclub/component/new_vegetable_select.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+
+  const RegisterScreen({
+    Key? key,
+
+  }) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -99,7 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onPressed: () async {
                       await vegeController.enrollVegeRequest();
                       BottomSheetController().showRegisterDialog(
-                          context, "상훈이"); //context에는 입력한 채소 별명이 떠야함
+                          context, vegeController.selectNicknameValue()); //context에는 입력한 채소 별명이 떠야함
 
                       Navigator.push(
                         context,
