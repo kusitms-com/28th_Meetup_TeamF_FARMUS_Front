@@ -9,12 +9,12 @@ class VegeController extends GetxController {
   final nicknameValue = "".obs;
   final selectedDate = "".obs;
 
-
-  @override
-  void onInit() {
-    super.onInit();
-
-  }
+  //
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //
+  // }
 
   void updateSelectedDate(String date) {
     selectedDate.value = date;
@@ -37,7 +37,7 @@ class VegeController extends GetxController {
   }
 
   Future<void> enrollVegeRequest() async {
-    print("api요청 닉네임" + nicknameValue.value + "3");
+
     await VegeRepository.enrollVegeApi(selectedDate.value, selectedVeggieId.value,
         selectedVeggieColorImageUrl.value, nicknameValue.value, vegename.value);
   }
@@ -50,12 +50,8 @@ class VegeController extends GetxController {
 
   RxList<bool> isSelectedList = List.generate(6, (index) => false).obs;
   RxInt selectedVeggieIndex = RxInt(-1);
-  RxBool isLoading = RxBool(true);
+  RxBool isLoading = RxBool(false);
 
-  // 선택된 채소의 인덱스를 업데이트하는 메서드
-  void updateSelectedVeggieIndex(int index) {
-    selectedVeggieIndex.value = index;
-  }
 
   RxBool isMemberValid = RxBool(true); // 추가
   final RegExp _numberRegExp = RegExp(r'^[3-9]$|^1[0-9]$|^20$'); // 추가
@@ -72,6 +68,7 @@ class VegeController extends GetxController {
   final TextEditingController memberController = TextEditingController();
   final TextEditingController introController = TextEditingController();
 
+
   final titleValue = "".obs;
   final memberValue = "".obs;
   final contentValue = "".obs;
@@ -81,6 +78,48 @@ class VegeController extends GetxController {
   RxBool hasIntroInput = RxBool(false);
 
   RxBool isFormValid = RxBool(false);
+
+  @override
+  void onInit() {
+    super.onInit();
+    initHasText();
+
+    ever(isCheck, (_) {
+      checkFormVaildity();
+    });
+
+    ever(titleValue, (_) {
+      checkFormVaildity();
+    });
+
+    ever(memberValue, (_) {
+      checkFormVaildity();
+    });
+
+    ever(contentValue, (_) {
+      checkFormVaildity();
+    });
+
+    ever(selectedVeggieIndex, (_) {
+      checkFormVaildity();
+    });
+
+
+    // UI 초기화 로직 분리
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      initializeVeggieData();
+      initializeVeggieLevel();
+      isLoading.value = true; // 초기화가 끝나면 로딩 상태 해제
+    });
+
+
+  }
+
+
+  // 선택된 채소의 인덱스를 업데이트하는 메서드
+  void updateSelectedVeggieIndex(int index) {
+    selectedVeggieIndex.value = index;
+  }
 
   void initHasText() {
     nameController.addListener(() {
@@ -98,6 +137,8 @@ class VegeController extends GetxController {
       update();
     });
   }
+
+
 
   void toggleImageSelection(int index) {
     if (isSelectedList[index]) {
@@ -138,6 +179,9 @@ class VegeController extends GetxController {
       'tomato': 'Hard',
     });
   }
+
+
+
 
   void toggleSelectCheck() {
     isCheck.value = !isCheck.value;

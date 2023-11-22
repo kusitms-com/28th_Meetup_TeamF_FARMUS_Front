@@ -22,8 +22,9 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
 
-  final VegeController vegeController = Get.find();
-
+ // final VegeController vegeController = Get.find();
+  final VegeController vegeController =
+  Get.put(VegeController());
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const CustomCalendar(),
+                      CustomCalendar(),
                     ],
                   ),
                 ),

@@ -9,7 +9,8 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../../../../view_model/controllers/vege_controller.dart';
 
 class CustomCalendar extends StatefulWidget {
-  const CustomCalendar({Key? key}) : super(key: key);
+  CustomCalendar({Key? key}) : super(key: key);
+  final VegeController vegeController = Get.find();
 
   @override
   _CustomCalendarState createState() => _CustomCalendarState();
@@ -102,5 +103,5 @@ class MyCustomCalendar extends StatelessWidget {
 }
 
 void main() {
-  runApp(const MaterialApp(home: CustomCalendar()));
+  runApp( MaterialApp(home: CustomCalendar()));
 }

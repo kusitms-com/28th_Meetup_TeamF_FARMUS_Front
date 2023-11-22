@@ -7,16 +7,17 @@ import '../../../../view_model/controllers/farmclub/farmclub_make_controller.dar
 import '../../../../view_model/controllers/vege_controller.dart';
 
 class NickNameVege extends StatefulWidget {
+
   const NickNameVege({Key? key}) : super(key: key);
+
 
   @override
   State<NickNameVege> createState() => _NickNameVegeState();
 }
 
 class _NickNameVegeState extends State<NickNameVege> {
+  final VegeController vegeController = Get.find();
 
-  final VegeController vegeController =
-  Get.put(VegeController());
 
 
 

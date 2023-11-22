@@ -8,9 +8,13 @@ import '../../../model/all_vege_infor_dto.dart';
 import '../../../model/all_vege_infor_list.dart';
 import '../../../view_model/controllers/vege_controller.dart';
 
+
 class NewVegetableSelect extends StatelessWidget {
   final List<AllVegeInforDto>? allVegeInforList;
   final VegeController vegeController = Get.find();
+
+  // final VegeController vegeController =
+  // Get.put(VegeController());
 
   NewVegetableSelect({
     super.key,
@@ -21,7 +25,7 @@ class NewVegetableSelect extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        if (vegeController.isLoading.value) {
+        if (!vegeController.isLoading.value) {
           return Center(
               child: CircularProgressIndicator(
             color: FarmusThemeData.brown,

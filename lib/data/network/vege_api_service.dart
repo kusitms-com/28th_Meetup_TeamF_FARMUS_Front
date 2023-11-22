@@ -64,17 +64,12 @@ class VegeApiService {
       ) async {
     try {
 
-      print(selectedDateData);
-      print(selectedVeggieIdData);
-      print(selectedVeggieColorImageUrlData);
-      print(nicknameValueData);
-      print(vegeNameData);
-
       Map<String, dynamic> requestBody = {
         'nickname': nicknameValueData,
         'veggieInfoId': selectedVeggieIdData,
         'veggieImage': selectedVeggieColorImageUrlData,
-        'birth': selectedDateData
+        'birth': selectedDateData,
+        "veggieName":vegeNameData
       };
 
       Response response = await ApiClient().dio.post('/api/veggie',data: requestBody);
