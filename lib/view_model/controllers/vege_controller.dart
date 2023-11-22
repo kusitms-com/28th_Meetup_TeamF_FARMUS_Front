@@ -52,6 +52,8 @@ class VegeController extends GetxController {
 
 
 
+
+
   RxList<bool> isSelectedList = List.generate(6, (index) => false).obs;
   RxInt selectedVeggieIndex = RxInt(-1);
   RxBool isLoading = RxBool(false);

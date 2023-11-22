@@ -48,14 +48,6 @@ class FarmclubInit extends StatelessWidget {
               child: ButtonBrown(
                 text: "탐색하기",
                 enabled: RxBool(true),
-                onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const FarmclubExploreScreen(),
-                    ),
-                  );
-                },
               ),
             ),
           ),

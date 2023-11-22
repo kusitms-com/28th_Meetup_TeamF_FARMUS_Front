@@ -183,7 +183,7 @@ class FarmclubApiService {
       if (response.statusCode == 200) {
         // 성공적으로 응답받은 경우
         print(response.data['data']);
-        return response.data['registrationId'];
+        return response.data['data'];
       } else {
         // 응답이 실패한 경우
         throw "${response.statusCode}";
@@ -367,7 +367,7 @@ class FarmclubApiService {
       if (response.statusCode == 200) {
 
         print(response.data['data']);
-        return response.data['data']["challengeId"];
+        return response.data['data'];
       } else {
         // 오류 발생 시 빈 리스트 반환
         throw "error";
@@ -377,5 +377,4 @@ class FarmclubApiService {
       throw "${e.message}";
     }
   }
-
 }

@@ -17,13 +17,13 @@ class FarmclubMakeEdit extends StatefulWidget {
 
 class _FarmclubMakeEditState extends State<FarmclubMakeEdit> {
   FarmclubRegisterController _controller = Get.put(FarmclubRegisterController());
-  final int maxLength = 10;
+  final int maxLength = 20;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _controller.nameController, // 사용할 컨트롤러 연결
-      maxLength: 10, // 최대 입력 글자수
+      maxLength: 20, // 최대 입력 글자수
       cursorColor: FarmusThemeData.grey2,
       onChanged: _controller.updateTitleValue,
 
@@ -39,7 +39,7 @@ class _FarmclubMakeEditState extends State<FarmclubMakeEdit> {
         ),
         suffix: Obx(
           () => Text(
-            "${_controller.titleValue.value.length} / 10",
+            "${_controller.titleValue.value.length} / 20",
             style: TextStyle(
               color: FarmusThemeData.dark.withOpacity(0.3),
             ),

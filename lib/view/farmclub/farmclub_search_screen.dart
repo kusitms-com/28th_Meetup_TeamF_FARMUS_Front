@@ -127,7 +127,7 @@ class _FarmclubSearchScreenState extends State<FarmclubSearchScreen> {
                                             id: data.challengeId,
                                             title: data.challengeName,
                                             vaggie: data.veggieName,
-                                            currentUser: data.currentUser,
+                                            currentUser: data.challengeId,
                                             image: data.image,
                                             level: data.difficulty,
                                             maxUser: data.maxUser,
