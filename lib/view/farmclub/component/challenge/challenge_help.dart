@@ -5,11 +5,13 @@ import 'package:mojacknong_android/view/farmclub/farmclub_help_screen.dart';
 class ChallengeHelp extends StatelessWidget {
   final String help;
   final String veggieInfoId;
+  Function() onTap;
 
-  const ChallengeHelp({
+  ChallengeHelp({
     super.key,
     required this.help,
     required this.veggieInfoId,
+    required this.onTap,
   });
 
   @override
@@ -17,16 +19,7 @@ class ChallengeHelp extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return FarmclubHelpScreen(veggieInfoId: veggieInfoId,);
-              },
-            ),
-          );
-        },
+        onTap: onTap,
         child: Container(
           alignment: Alignment.centerLeft,
           width: double.infinity,

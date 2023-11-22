@@ -13,6 +13,8 @@ import 'package:mojacknong_android/view/my_page/my_farmclub_history_screen.dart'
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_mission_controller.dart';
 
+import 'farmclub_help_screen.dart';
+
 class FarmclubMissionFeedScreen extends StatefulWidget {
   final String? registrationId;
   final int challengeId;
@@ -109,6 +111,19 @@ class _FarmclubMissionFeedScreenState extends State<FarmclubMissionFeedScreen> {
                         help: _controller.farmclubInfo.value!.stepTip,
                         veggieInfoId:
                             _controller.farmclubInfo.value!.veggieInfoId,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return FarmclubHelpScreen(
+                                  veggieInfoId: _controller
+                                      .farmclubInfo.value!.veggieInfoId,
+                                );
+                              },
+                            ),
+                          );
+                        },
                       ),
                       SizedBox(
                         height: 8,

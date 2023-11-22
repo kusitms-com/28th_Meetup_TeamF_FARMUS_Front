@@ -7,21 +7,21 @@ import 'package:mojacknong_android/view/farmclub/component/farmclub_help.dart';
 
 import '../../view_model/controllers/crop/crop_info_step_controller.dart';
 
+
 class FarmclubHelpScreen extends StatefulWidget {
   final String veggieInfoId;
 
   const FarmclubHelpScreen({
-    super.key,
+    Key? key,
     required this.veggieInfoId,
-  });
+  }) : super(key: key);
 
   @override
   State<FarmclubHelpScreen> createState() => _FarmclubHelpScreenState();
 }
-
 class _FarmclubHelpScreenState extends State<FarmclubHelpScreen> {
   CropInfoStepController _cropInfoStepController =
-      Get.put(CropInfoStepController());
+  Get.put(CropInfoStepController());
 
   @override
   void initState() {
@@ -39,12 +39,14 @@ class _FarmclubHelpScreenState extends State<FarmclubHelpScreen> {
       appBar: CustomAppBar(),
       backgroundColor: FarmusThemeData.white,
       body: Obx(() {
-        if (_cropInfoStepController.wholeHint.value != null) {
+        if (_cropInfoStepController.cropWholeHints.isEmpty) {
           return Center(
-              child: CircularProgressIndicator(
-            color: FarmusThemeData.brown,
-          ));
+            child: CircularProgressIndicator(
+              color: FarmusThemeData.brown,
+            ),
+          );
         } else {
+          print("${_cropInfoStepController.cropWholeHints[5].content}");
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,20 +73,18 @@ class _FarmclubHelpScreenState extends State<FarmclubHelpScreen> {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        FarmclubHelp(),
-                        FarmclubHelp(),
-                        FarmclubHelp(),
-                        FarmclubHelp(),
-                        FarmclubHelp(),
-                        FarmclubHelp(),
-                        FarmclubHelp(),
-                        FarmclubHelp(),
-                      ],
-                    ),
+                // Expanded 제거
+                SingleChildScrollView(
+                  child: Column(
+                    children: _cropInfoStepController.cropWholeHints
+                        .map(
+                          (hint) => FarmclubHelp(
+                        step: hint.num,
+                        title: hint.content,
+                        tips: hint.tips,
+                      ),
+                    )
+                        .toList(),
                   ),
                 ),
               ],

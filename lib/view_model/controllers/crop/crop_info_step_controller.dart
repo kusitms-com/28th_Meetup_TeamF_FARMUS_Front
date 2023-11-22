@@ -9,19 +9,23 @@ class CropInfoStepController extends GetxController {
   RxList<CropInfoStep> cropInfoStepCurrent = <CropInfoStep>[].obs;
   RxList<CropInfoStep> cropInfoStepTodo = <CropInfoStep>[].obs;
 
-  RxList<List<WholeHint>> wholeHint = <List<WholeHint>>[].obs;
+  RxList<WholeHint> cropWholeHints = <WholeHint>[].obs;
 
-
-  RxString veggieInfoid = "".obs;
+  RxString veggieInfoId = "".obs;
   RxInt stepNum = 0.obs;
+
+  void setCropWholeHints(List<WholeHint> hints) {
+    cropWholeHints.clear();
+    cropWholeHints.addAll(hints);
+  }
 
   Future<List<List<CropInfoStep>>> getCropInfoStep() async {
     try {
       List<List<CropInfoStep>> responseData =
-          await CropRepository.getCropInfoStep(
-              veggieInfoid.value, stepNum.value);
+      await CropRepository.getCropInfoStep(
+          veggieInfoId.value, stepNum.value);
+      setCropWholeHints(cropWholeHints);
 
-      // RxList 갱신
       cropInfoStep.clear();
       cropInfoStepClear.clear();
       cropInfoStepCurrent.clear();
@@ -34,39 +38,33 @@ class CropInfoStepController extends GetxController {
       stepNum.value = cropInfoStepClear.length;
 
 
-
       print(stepNum.value);
 
       return responseData;
     } catch (error) {
-      // 오류 처리 로직 추가
-      print('Error fetching farmclub data: $error');
+      print('팜클럽 데이터를 가져오는 중 오류 발생: $error');
       throw error;
     }
   }
 
   Future<List<WholeHint>> getCropWholeHint() async {
-    print(veggieInfoid);
+    print(veggieInfoId);
     try {
       List<WholeHint> responseData =
-          await CropRepository.getCropWholeHint(
-        veggieInfoid.value,
+      await CropRepository.getCropWholeHint(
+        veggieInfoId.value,
       );
 
-      // RxList 갱신
-      cropInfoStep.clear();
-      cropInfoStepClear.clear();
-      cropInfoStepCurrent.clear();
-      cropInfoStepTodo.clear();
+      cropWholeHints.clear();
+      cropWholeHints.addAll(responseData);
 
-      stepNum.value = cropInfoStepClear.length;
+      stepNum.value = cropWholeHints.length;
 
       print(stepNum.value);
 
       return responseData;
     } catch (error) {
-      // 오류 처리 로직 추가
-      print('Error fetching farmclub data: $error');
+      print('팜클럽 데이터를 가져오는 중 오류 발생: $error');
       throw error;
     }
   }

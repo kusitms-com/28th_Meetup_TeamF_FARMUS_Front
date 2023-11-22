@@ -14,6 +14,8 @@ import 'package:mojacknong_android/view_model/controllers/crop/crop_info_step_co
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_auth_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 
+import 'farmclub_help_screen.dart';
+
 class FarmclubChallengeScreen extends StatefulWidget {
   final String? detailId;
 
@@ -37,7 +39,7 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
   }
 
   Future<void> _fetchData() async {
-    _cropInfoStepController.veggieInfoid.value =
+    _cropInfoStepController.veggieInfoId.value =
         _farmclubController.farmclubInfo.value!.veggieInfoId.toString();
     _cropInfoStepController.stepNum.value =
         _farmclubController.farmclubInfo.value!.stepNum.toInt();
@@ -106,7 +108,20 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                 ),
                 ChallengeHelp(
                   help: _cropInfoStepController.cropInfoStepCurrent[0].tip,
-                  veggieInfoId: _cropInfoStepController.veggieInfoid.toString(),
+                  veggieInfoId: _cropInfoStepController.veggieInfoId.toString(),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return FarmclubHelpScreen(
+                            veggieInfoId:
+                                _cropInfoStepController.veggieInfoId.toString(),
+                          );
+                        },
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 16,

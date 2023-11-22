@@ -12,7 +12,6 @@ import 'challenge_help.dart';
 import 'challenge_step.dart';
 
 class ChallengeFeed extends StatefulWidget {
-
   final FarmclubMineDetail farmclubInfo;
   final FarmclubMine farmclubMine;
 
@@ -27,8 +26,6 @@ class ChallengeFeed extends StatefulWidget {
 }
 
 class _ChallengeFeedState extends State<ChallengeFeed> {
-
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -54,9 +51,21 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
         const SizedBox(
           height: 16,
         ),
-         ChallengeHelp(
+        ChallengeHelp(
           help: widget.farmclubInfo.stepTip,
-           veggieInfoId: widget.farmclubInfo.veggieInfoId,
+          veggieInfoId: widget.farmclubInfo.veggieInfoId,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return const FarmclubChallengeScreen(
+                    detailId: "",
+                  );
+                },
+              ),
+            );
+          },
         ),
         const SizedBox(
           height: 16,
@@ -74,9 +83,12 @@ class _ChallengeFeedState extends State<ChallengeFeed> {
                 ),
               );
             },
-            child: widget.farmclubInfo.stepImages.isNotEmpty ? ChallengePicture(
-              registrationId: widget.farmclubMine.registrationId.toString(),
-            ) : ChallengeInit()),
+            child: widget.farmclubInfo.stepImages.isNotEmpty
+                ? ChallengePicture(
+                    registrationId:
+                        widget.farmclubMine.registrationId.toString(),
+                  )
+                : ChallengeInit()),
       ],
     );
   }
