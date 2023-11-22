@@ -1,21 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mojacknong_android/data/network/farmclub_api_service.dart';
+import '../../../repository/vege_repository.dart';
 
-import 'package:get/get.dart';
+class VegeController extends GetxController {
+  final selectedVeggieId = "".obs;
+  final selectedVeggieColorImageUrl = "".obs;
+  final vegename = "".obs;
+  final nicknameValue = "".obs;
+  final selectedDate = "".obs;
 
-import '../../../model/veggie_registration.dart';
-import '../../../repository/farmclub_repository.dart';
+  //
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //
+  // }
 
-class FarmclubRegisterController extends GetxController {
-  // 선택된 채소들의 상태를 저장하는 변수
+  void updateSelectedDate(String date) {
+    selectedDate.value = date;
+    print(selectedDate.value);
+  }
+
+  // 선택한 채소의 id와 colorImageUrl을 업데이트하는 메서드
+  void updateSelectedVeggieData(String id, String colorImageUrl, String vegeName) {
+    selectedVeggieId.value = id;
+    selectedVeggieColorImageUrl.value = colorImageUrl;
+    vegename.value = vegeName;
+    print(selectedVeggieId.value);
+    print(selectedVeggieColorImageUrl.value);
+    print(vegename.value);
+  }
+
+  void updateNicknameValue(String value) {
+    nicknameValue.value = value;
+    print(nicknameValue.value);
+  }
+
+  String selectNicknameValue(){
+
+    return nicknameValue.value;
+
+  }
+
+  Future<void> enrollVegeRequest() async {
+
+    await VegeRepository.enrollVegeApi(selectedDate.value, selectedVeggieId.value,
+        selectedVeggieColorImageUrl.value, nicknameValue.value, vegename.value);
+  }
+
+
+
+
+
+
+
   RxList<bool> isSelectedList = List.generate(6, (index) => false).obs;
   RxInt selectedVeggieIndex = RxInt(-1);
-  RxBool isLoading = RxBool(true);
-  RxList<VeggieRegistration> veggieRegistration = <VeggieRegistration>[].obs;
+  RxBool isLoading = RxBool(false);
 
-  RxBool isMemberValid = RxBool(true);
-  final RegExp _numberRegExp = RegExp(r'^[3-9]$|^1[0-9]$|^20$');
+
+  RxBool isMemberValid = RxBool(true); // 추가
+  final RegExp _numberRegExp = RegExp(r'^[3-9]$|^1[0-9]$|^20$'); // 추가
 
   RxBool isCheck = RxBool(false);
 
@@ -67,20 +112,14 @@ class FarmclubRegisterController extends GetxController {
 
 
     // UI 초기화 로직 분리
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       initializeVeggieData();
       initializeVeggieLevel();
-      isLoading.value = false; // 초기화가 끝나면 로딩 상태 해제
+      isLoading.value = true; // 초기화가 끝나면 로딩 상태 해제
     });
 
 
   }
-
-
-
-
-
-
 
 
   // 선택된 채소의 인덱스를 업데이트하는 메서드
@@ -120,7 +159,6 @@ class FarmclubRegisterController extends GetxController {
       updateSelectedVeggieIndex(index);
     }
 
-    print("1. 채소 선택 ${selectedVeggieIndex}");
     update(); // 상태 업데이트
   }
 
@@ -153,22 +191,18 @@ class FarmclubRegisterController extends GetxController {
 
   void toggleSelectCheck() {
     isCheck.value = !isCheck.value;
-    print("2. 채소 선택 ${isCheck}");
   }
 
   void updateTitleValue(String value) {
     titleValue.value = value;
-    print("3. 팜클럽 이름 ${titleValue}");
   }
 
   void updateMemberValue(String value) {
     memberValue.value = value;
-    print("4. 멤버 ${memberValue}");
   }
 
   void updateContentValue(String value) {
     contentValue.value = value;
-    print("5. 한줄소개 ${contentValue}");
   }
 
   void checkMemberValidity() {
@@ -179,45 +213,7 @@ class FarmclubRegisterController extends GetxController {
     isFormValid.value = contentValue.isNotEmpty &&
         titleValue.isNotEmpty &&
         memberValue.isNotEmpty &&
+        isCheck.value &&
         selectedVeggieIndex.value != -1;
-  }
-
-  Future<List<VeggieRegistration>> getVeggieRegistration() async {
-    try {
-      List<VeggieRegistration> responseData =
-          await FarmclubRepository.getVeggieRegistration();
-
-      // RxList 갱신
-      veggieRegistration.clear();
-      veggieRegistration.addAll(responseData);
-
-      return responseData;
-    } catch (error) {
-      // 오류 처리 로직 추가
-      print('Error fetching farmclub data: $error');
-      throw error;
-    }
-  }
-
-  Future<int> postNewFarmclub() async {
-    print(selectedVeggieIndex.toString());
-    print(titleValue.toString());
-    print(memberValue.toString());
-    print(contentValue.toString());
-    try {
-      int responseData = await FarmclubRepository.postNewFarmclub(
-        selectedVeggieIndex.toString(),
-        "65550000f986782347487451",
-        titleValue.toString(),
-        memberValue.toString(),
-        contentValue.toString(),
-      );
-
-      return responseData;
-    } catch (error) {
-      // 오류 처리 로직 추가
-      print('Error fetching farmclub data: $error');
-      throw error;
-    }
   }
 }

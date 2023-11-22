@@ -7,6 +7,7 @@ import 'package:mojacknong_android/view/farmclub/BottomSheetFinal/test.dart';
 
 Future<void> main() async {
   // 웹 환경에서 카카오 로그인을 정상적으로 완료하기 위함
+
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(

@@ -25,6 +25,8 @@ class NewVegetableItem extends StatefulWidget {
 }
 
 class _NewVegetableItemState extends State<NewVegetableItem> {
+
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -39,18 +41,19 @@ class _NewVegetableItemState extends State<NewVegetableItem> {
                 border: Border.all(
                     color: widget.isSelected
                         ? FarmusThemeData.green1
-                        : FarmusThemeData.pictureBackground),
+                        : FarmusThemeData.pictureBackground
+                ),
                 borderRadius: BorderRadius.circular(8),
                 color: FarmusThemeData.pictureBackground,
               ),
               child: Container(
                 alignment: Alignment.center,
                 child: widget.isSelected
-                    ? SvgPicture.asset(
+                    ? Image.network(
                         widget.colPath,
                         width: 80,
                       )
-                    : SvgPicture.asset(
+                    : Image.network(
                         widget.blackPath,
                         width: 80,
                       ),

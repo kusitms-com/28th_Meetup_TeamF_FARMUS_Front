@@ -12,7 +12,11 @@ import 'package:mojacknong_android/view/home/component/diary/diary_post_controll
 import 'package:mojacknong_android/view/home/component/mission_routine/custom_switch.dart';
 
 class WriteDiary extends StatefulWidget {
-  const WriteDiary({Key? key}) : super(key: key);
+  final int? vegeId;
+  const WriteDiary({
+    Key? key,
+    this.vegeId
+  }) : super(key: key);
 
   @override
   _WriteDiaryState createState() => _WriteDiaryState();
@@ -25,8 +29,7 @@ class _WriteDiaryState extends State<WriteDiary> {
   final DiaryPostController diaryPostController =
       Get.put(DiaryPostController());
 
-  // final CommunityFeedController communityFeedController =
-  //     Get.put(CommunityFeedController());
+
   final TextEditingController _contentController = TextEditingController();
   final ImagePicker _picker = ImagePicker();
   File? _selectedImage;
@@ -71,8 +74,13 @@ class _WriteDiaryState extends State<WriteDiary> {
 
               // // postPostingWrite가 완료되면 Navigator.pop 실행
               // if (result == "성공") {
-              Navigator.pop(context);
+
               // }
+              await diaryPostController.writeDiaryRequest(widget.vegeId!);
+
+
+              Navigator.pop(context);
+
             },
             child: const Text(
               "완료",
@@ -181,9 +189,12 @@ class _WriteDiaryState extends State<WriteDiary> {
                             fontSize: 16, fontWeight: FontWeight.w600),
                       ),
                       const Spacer(),
+
                       CustomSwitch(
                         value: isSwitched,
                         onChanged: (value) {
+                          print(value);
+
                           setState(() {
                             isSwitched = value;
                           });
@@ -210,22 +221,22 @@ class _WriteDiaryState extends State<WriteDiary> {
     );
   }
 
-  Future<String> postPostingDiary(BuildContext context) async {
-    try {
-      String result = "";
-
-      if (result == "성공") {
-        // CommunityScreen에서 전체 게시물을 다시 가져오기
-        //await communityFeedController.getWholePosting();
-
-        // 게시가 성공하면 PostScreen을 네비게이션 스택에서 제거
-        Navigator.pop(context);
-      }
-
-      return "result";
-    } on DioError catch (e) {
-      print("에러 ${e.message}");
-      return "실패";
-    }
-  }
-}
+//   Future<String> postPostingDiary(BuildContext context) async {
+//     try {
+//       String result = "";
+//
+//       if (result == "성공") {
+//         // CommunityScreen에서 전체 게시물을 다시 가져오기
+//         //await communityFeedController.getWholePosting();
+//
+//         // 게시가 성공하면 PostScreen을 네비게이션 스택에서 제거
+//         Navigator.pop(context);
+//       }
+//
+//       return "result";
+//     } on DioError catch (e) {
+//       print("에러 ${e.message}");
+//       return "실패";
+//     }
+//   }
+ }

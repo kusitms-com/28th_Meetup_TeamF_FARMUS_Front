@@ -5,17 +5,18 @@ import 'package:mojacknong_android/view/home/component/diary/diary_screen.dart';
 
 class HomeGreenBoxUser extends StatelessWidget {
   final String? userNickName;
-  final int? id;
+  final int? vegeId;
   final String? nickname;
   final String? image;
   final int? age;
   const HomeGreenBoxUser({
     Key? key,
     this.userNickName,
-    this.id,
+    this.vegeId,
     this.nickname,
     this.image,
-    this.age}) : super(key: key);
+    this.age
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,14 @@ class HomeGreenBoxUser extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const DiaryScreen(),
+                builder: (context) => DiaryScreen(
+                  userNickName: '$userNickName',
+                  vegeId: vegeId,
+                  nickname: nickname,
+                  image: image,
+                  age: age,
+
+                ),
               ),
             );
           },
