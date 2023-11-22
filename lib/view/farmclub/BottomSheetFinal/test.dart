@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view/farmclub/BottomSheetFinal/farmclub_finish_bottom_sheet.dart';
+import 'package:mojacknong_android/view/farmclub/BottomSheetFinal/farmclub_finish_final.dart';
 
 class TestPage extends StatefulWidget {
   const TestPage({super.key});
@@ -12,17 +12,23 @@ class TestPage extends StatefulWidget {
 class _TestPageState extends State<TestPage> {
   void showFarmclubBottomSheet(BuildContext context, String title) {
     showModalBottomSheet<void>(
-      isScrollControlled: true,
       context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(40.0),
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(40.0),
+          topRight: Radius.circular(40.0),
+        ),
       ),
       backgroundColor: FarmusThemeData.white,
       builder: (BuildContext context) {
-        return const BottomSheetFarmClubClear(
-          imagePath: 'assets/image/lettuce1.svg',
-          textContent:
-          '텃밭부터 식탁까지 이어진 nn일의\n팜클럽 기간동안 n번 미션 인증을 했고\nn번 성장일기를 기록했어요\n\n앞으로의 홈파밍 여정도 팜어스와 함께해요!',
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.7, //원래 0.8
+          child: const BottomSheetFarmClubFinal(
+            imagePath: 'assets/image/lettuce1.svg',
+            textContent:
+                '텃밭부터 식탁까지 이어진 nn일의\n팜클럽 기간동안 n번 미션 인증을 했고\nn번 성장일기를 기록했어요\n\n앞으로의 홈파밍 여정도 팜어스와 함께해요!',
+          ),
         );
       },
     );
