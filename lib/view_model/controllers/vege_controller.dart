@@ -24,8 +24,6 @@ class VegeController extends GetxController {
   }
 
 
-
-
   void updateSelectedDate(String date) {
     selectedDate.value = date;
     print(selectedDate.value);
@@ -158,6 +156,7 @@ class VegeController extends GetxController {
     if (isSelectedList[index]) {
       // 이미 선택된 아이템을 선택하면 선택 해제
       isSelectedList[index] = false;
+      updateSelectedVeggieData("", "", "");
       updateSelectedVeggieIndex(-1);
     } else {
       // 선택되지 않은 아이템을 선택하면 반전

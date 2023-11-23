@@ -49,7 +49,7 @@ class _NewVegetableSelectState extends State<NewVegetableSelect> {
               itemCount: 6,
               itemBuilder: (BuildContext context, int index) {
                 return widget.isFarmclub != true
-                    ? GetBuilder<FarmclubRegisterController>(
+                    ? GetBuilder<VegeController>(
                   builder: (controller) {
                     return SizedBox(
                       height: 180, // 아이템의 높이를 조절
