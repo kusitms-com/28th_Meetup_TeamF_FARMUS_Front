@@ -8,7 +8,7 @@ import 'package:mojacknong_android/common/dialog/dialog_mission_farmclub.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/Dialog_register_vege.dart';
 
-import '../../common/bottom_sheet/farmclub_finish_final.dart';
+import '../../view/farmclub/BottomSheetFinal/farmclub_finish_bottom_sheet.dart';
 
 class BottomSheetController extends GetxController {
   void showActionSheetComment(
@@ -125,6 +125,17 @@ class BottomSheetController extends GetxController {
         return DialogRegisterVege(
           title: title,
         );
+      },
+    );
+  }
+
+
+  void showMissionFinishDialog(BuildContext context, String title) {
+    showDialog<void>(
+      context: context,
+      barrierColor: FarmusThemeData.grey2,
+      builder: (BuildContext context) {
+        return BottomSheetFarmClubClear(imagePath: "assets/image/ic_lettuce_blue.svg", textContent: title);
       },
     );
   }

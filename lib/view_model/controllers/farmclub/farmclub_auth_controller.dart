@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/model/farmclub_complete.dart';
+import 'package:mojacknong_android/view/farmclub/BottomSheetFinal/farmclub_finish_final.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 import '../../../common/dialog/dialog_mission_farmclub.dart';
@@ -45,6 +46,7 @@ class FarmclubAuthController extends GetxController {
 
 
   Future<void> postFarmclubMission(
+      BuildContext context,
       int registrationId, String content, File image) async {
     try {
       isLoading.value = true;
@@ -57,7 +59,7 @@ class FarmclubAuthController extends GetxController {
       missionUploaded.value = true;
 
       if (farmclubMission.value!.isEnd == true) {
-        deleteFarmclubComplete();
+        deleteFarmclubComplete(context);
       }
 
     } catch (e) {
@@ -67,7 +69,7 @@ class FarmclubAuthController extends GetxController {
     }
   }
 
-  Future<void> deleteFarmclubComplete() async {
+  Future<void> deleteFarmclubComplete(BuildContext context) async {
     try {
       print(registrationId);
       FarmclubComplete? farmclubCompleteData =
@@ -76,6 +78,7 @@ class FarmclubAuthController extends GetxController {
       farmclubComplete.refresh();
       farmclubComplete.value = farmclubCompleteData;
       print(farmclubComplete.value!.challengeName.toString());
+      controller.showMissionFinishDialog(context, farmclubComplete.value!.challengeName);
     } catch (e) {
       print("오류: $e");
     }
