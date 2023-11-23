@@ -130,12 +130,12 @@ class BottomSheetController extends GetxController {
   }
 
 
-  void showMissionFinishDialog(BuildContext context) {
+  void showMissionFinishDialog(BuildContext context, String title) {
     showDialog<void>(
       context: context,
       barrierColor: FarmusThemeData.grey2,
       builder: (BuildContext context) {
-        return BottomSheetFarmClubClear(imagePath: "assets/image/ic_lettuce_blue.svg", textContent: "어쩌구");
+        return BottomSheetFarmClubClear(imagePath: "assets/image/ic_lettuce_blue.svg", textContent: title);
       },
     );
   }
