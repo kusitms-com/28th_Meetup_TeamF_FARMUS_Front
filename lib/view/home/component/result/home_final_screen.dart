@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/mission_routine/cycle_setting.dart';
+import 'package:mojacknong_android/view/home/component/result/home_final_apbar.dart';
 import 'package:mojacknong_android/view/home/component/result/home_final_controller.dart';
 import 'package:mojacknong_android/view/home/component/result/home_final_dialog.dart';
 import 'package:mojacknong_android/view/home/component/result/home_final_first.dart';
@@ -96,7 +96,7 @@ class _HomeFinalScreenState extends State<HomeFinalScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: CustomAppBar(),
+        appBar: const HomeFinalAppBar(),
         backgroundColor: FarmusThemeData.white,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
