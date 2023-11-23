@@ -27,17 +27,13 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
   @override
   void initState() {
     super.initState();
-    _exploreController.getUserApi();
-    _exploreController.getFarmclubData();
+    _initializeData();
   }
 
-  @override
-  void dispose() {
-    _exploreController.farmclubList.clear();
-    super.dispose();
+  Future<void> _initializeData() async {
+    await _exploreController.getUserApi();
+    await _exploreController.getFarmclubData();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -89,92 +85,106 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
           const SizedBox(height: 12),
           RecommendFarmclubList(),
           const SizedBox(height: 40),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
-                  child: Text(
-                    "팜클럽 모아보기",
-                    style: TextStyle(
-                      color: FarmusThemeData.dark,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: "Pretendard",
-                    ),
-                  ),
+          Obx(() {
+            if (_exploreController.isLoading.value) {
+              // 로딩 중일 때 표시할 UI
+              return Center(
+                child: CircularProgressIndicator(
+                  color: FarmusThemeData.brown,
                 ),
-                const SizedBox(height: 8),
-                Row(
+              );
+            } else {
+              return Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      width: 16,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: Text(
+                        "팜클럽 모아보기",
+                        style: TextStyle(
+                          color: FarmusThemeData.dark,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: "Pretendard",
+                        ),
+                      ),
                     ),
-                    SearchCategory(
-                        title: "재배 난이도",
-                        categories: ["Easy", "Normal", "Hard"]),
-                  ],
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 16,
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 16,
+                        ),
+                        SearchCategory(
+                            title: "재배 난이도",
+                            categories: ["Easy", "Normal", "Hard"]),
+                      ],
                     ),
-                    SearchCategory(
-                        title: "팜클럽 상태", categories: ["준비 중", "진행 중"]),
-                  ],
-                ),
-                const Divider(
-                  endIndent: 16,
-                  indent: 16,
-                  color: FarmusThemeData.grey4,
-                ),
-                Expanded(
-                  child: Obx(
-                    () {
-                      final farmclubList = _exploreController.farmclubList;
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 16,
+                        ),
+                        SearchCategory(
+                            title: "팜클럽 상태", categories: ["준비 중", "진행 중"]),
+                      ],
+                    ),
+                    const Divider(
+                      endIndent: 16,
+                      indent: 16,
+                      color: FarmusThemeData.grey4,
+                    ),
+                    Expanded(
+                      child: Obx(
+                        () {
+                          final farmclubList = _exploreController.farmclubList;
+                          print("object ${farmclubList[0].veggieInfoId}");
 
-                      return ListView.builder(
-                        itemCount: farmclubList.length + 1,
-                        itemBuilder: (context, index) {
-                          if (index == farmclubList.length) {
-                            // 마지막 아이템에 빈 컨테이너를 추가하여
-                            // 플로팅 버튼이 가려지는 현상 방지
-                            return Container(
-                              height: 40,
-                            );
-                          }
+                          return ListView.builder(
+                            itemCount: farmclubList.length + 1,
+                            itemBuilder: (context, index) {
+                              if (index == farmclubList.length) {
+                                // 마지막 아이템에 빈 컨테이너를 추가하여
+                                // 플로팅 버튼이 가려지는 현상 방지
+                                return Container(
+                                  height: 40,
+                                );
+                              }
 
-                          FarmclubInfoModel data = farmclubList[index];
-                          return Column(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 4),
-                                child: Farmclub(
-                                  id: data.challengeId,
-                                  title: data.challengeName,
-                                  vaggie: data.veggieName,
-                                  currentUser: data.currentUser,
-                                  image: data.image,
-                                  level: data.difficulty,
-                                  maxUser: data.maxUser,
-                                  status: data.status,
-                                  challengeId: data.challengeId.toString(),
-                                ),
-                              ),
-                            ],
+                              FarmclubInfoModel data = farmclubList[index];
+                              print(data.veggieInfoId);
+                              return Column(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 4),
+                                    child: Farmclub(
+                                      id: data.challengeId,
+                                      title: data.challengeName,
+                                      vaggie: data.veggieName,
+                                      currentUser: data.currentUser,
+                                      image: data.image,
+                                      level: data.difficulty,
+                                      maxUser: data.maxUser,
+                                      status: data.status,
+                                      challengeId: data.challengeId.toString(),
+                                      veggieId: data.veggieInfoId,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
                           );
                         },
-                      );
-                    },
-                  ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              );
+            }
+          }),
         ],
       ),
       floatingActionButton: const FloatingButtonFarmclub(),

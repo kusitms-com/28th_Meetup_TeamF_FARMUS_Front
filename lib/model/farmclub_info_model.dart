@@ -1,6 +1,7 @@
 class FarmclubInfoModel {
   final int challengeId;
   final String veggieName;
+  final String veggieInfoId;
   final String challengeName;
   final String image;
   final String difficulty;
@@ -11,6 +12,7 @@ class FarmclubInfoModel {
   FarmclubInfoModel({
     required this.challengeId,
     required this.veggieName,
+    required this.veggieInfoId,
     required this.challengeName,
     required this.image,
     required this.difficulty,
@@ -27,6 +29,7 @@ class FarmclubInfoModel {
     return FarmclubInfoModel(
       challengeId: json['challengeId'] ?? 0,
       veggieName: json['veggieName'] ?? "",
+      veggieInfoId: json['veggieInfoId'] ?? "",
       challengeName: json['challengeName'] ?? "",
       image: json['image'] ?? "",
       difficulty: json['difficulty'] ?? "",
