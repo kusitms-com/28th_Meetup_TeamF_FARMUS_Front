@@ -26,13 +26,11 @@ class _HomeFinalThird extends State<HomeFinalThird> {
 
   @override
   void dispose() {
-    // postDone();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("실패 화면");
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
@@ -45,7 +43,6 @@ class _HomeFinalThird extends State<HomeFinalThird> {
           GestureDetector(
             onTap: () {
               _homeFinalController.pickBox3();
-              // updateResult();
             },
             child: HomeSelectBox(
               title: "커뮤니티에서 도움 받아볼래요",
@@ -58,7 +55,6 @@ class _HomeFinalThird extends State<HomeFinalThird> {
           GestureDetector(
             onTap: () {
               _homeFinalController.pickBox4();
-              // updateResult();
             },
             child: HomeSelectBox(
               title: "괜찮아요, 이대로 종료할게요",
@@ -71,46 +67,6 @@ class _HomeFinalThird extends State<HomeFinalThird> {
           const SizedBox(
             height: 60,
           ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //   children: [
-          //     Expanded(
-          //       child: PreviousButton(
-          //         onPressed: () {
-          //           Navigator.push(
-          //             context,
-          //             MaterialPageRoute(
-          //               builder: (context) {
-          //                 return const HomeFinalFirst();
-          //               },
-          //             ),
-          //           );
-          //         },
-          //       ),
-          //     ),
-          //     // Expanded(
-          //     //   child: Obx(
-          //     //     () => HomeNextButton(
-          //     //       text: '다음',
-          //     //       onPressed: () {
-          //     //         if (_homeFinalController.isTaped3.value) {
-          //     //           Navigator.push(
-          //     //             context,
-          //     //             MaterialPageRoute(
-          //     //               builder: (context) => const MainScreen(),
-          //     //             ),
-          //     //           );
-          //     //         } else if (_homeFinalController.isTaped4.value) {
-          //     //           showHomeFinalDialog(context);
-          //     //         }
-          //     //       },
-          //     //       enabled: _homeFinalController.isTaped3.value ||
-          //     //           _homeFinalController.isTaped4.value,
-          //     //     ),
-          //     //   ),
-          //     // ),
-          //   ],
-          // )
         ],
       ),
     );
@@ -125,23 +81,4 @@ class _HomeFinalThird extends State<HomeFinalThird> {
       },
     );
   }
-
-  // void updateResult() {
-  //   motivation = [];
-  //   if (_homeFinalController.isTaped3.value) {
-  //     motivation.add("커뮤니티 탭으로 이동");
-  //   } else {
-  //     motivation.remove("커뮤니티 탭으로 이동");
-  //   }
-  //   if (_homeFinalController.isTaped4.value) {
-  //     motivation.add("종료");
-  //   } else {
-  //     motivation.remove("종료");
-  //   }
-  // }
-
-  // Future<String> postDone() {
-  //   print(motivation);
-  //   return HomeFinalRepository.postDone(motivation);
-  // }
 }

@@ -42,7 +42,7 @@ class _HomeFinalDialogState extends State<HomeFinalDialog> {
                         width: 8,
                       ),
                       const Text(
-                        "상훈이의 홈파밍을 종료합니다.",
+                        "홈파밍을 종료합니다.",
                         style: FarmusThemeData.darkStyle16,
                       ),
                     ],

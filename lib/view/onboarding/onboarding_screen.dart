@@ -54,7 +54,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   void initState() {
     super.initState();
-    _currentWidget = OnboardingFirst();
+    _currentWidget = const OnboardingFirst();
   }
 
   bool showPreviousButton = true;
@@ -66,8 +66,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             _currentPage += 1;
           } else {
             isLastPage = true;
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MainScreen()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const MainScreen()));
             return;
           }
         } else {
@@ -83,27 +83,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         if (_currentPage == 1) {
           title = "안녕하세요! 먼저 프로필을 설정해주세요";
           description = "";
-          _currentWidget = OnboardingFirst();
+          _currentWidget = const OnboardingFirst();
           showPreviousButton = false;
         } else if (_currentPage == 2) {
           title = "홈파밍을 하는 이유가 궁금해요!";
           description = "그에 맞는 응원 메시지를 전해드릴게요";
-          _currentWidget = OnboardingSecond();
+          _currentWidget = const OnboardingSecond();
           showPreviousButton = true;
         } else if (_currentPage == 3) {
           title = "홈파밍에 시간을 얼마나 쓸 수 있나요?";
           description = "기를 채소를 고르지 못했다면 팜어스가 추천해드릴게요";
-          _currentWidget = OnboardingThird();
+          _currentWidget = const OnboardingThird();
           showPreviousButton = true;
         } else if (_currentPage == 4) {
           title = "채소를 얼마나 잘 기르시나요?";
           description = "기를 채소를 고르지 못했다면 팜어스가 추천해드릴게요";
-          _currentWidget = OnboardingFourth();
+          _currentWidget = const OnboardingFourth();
           showPreviousButton = true;
         } else if (_currentPage == 5) {
           title = "파머님 가입이 완료되었어요!";
           description = "홈에서 추천 채소를 확인해보세요";
-          _currentWidget = OnboardingFinish();
+          _currentWidget = const OnboardingFinish();
           showPreviousButton = true;
         }
       },
@@ -159,7 +159,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
             Expanded(
-              child: _currentWidget,
+              child: SingleChildScrollView(child: _currentWidget),
             ),
             Obx(
               () => Padding(
