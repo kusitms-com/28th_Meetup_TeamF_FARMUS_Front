@@ -25,6 +25,7 @@ class _GreenButtonState extends State<GreenButton> {
       onPress: () {},
       child: GestureDetector(
         onTap: () async {
+          print(widget.veggieInfoId);
           await joinController.getVeggieRegistration(widget.veggieInfoId);
           controller.showFarmclubJoinBottomSheet(context, widget.challengeId);
         },
