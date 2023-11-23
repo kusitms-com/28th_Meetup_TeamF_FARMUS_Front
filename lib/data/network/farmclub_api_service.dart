@@ -113,7 +113,7 @@ class FarmclubApiService {
   }
 
   // 가입하지 않은 팜클럽 정보 조회
-  Future<FarmclubDetail> getFarmclubDetail(String challengeId) async {
+  Future<FarmclubDetail> getFarmclubDetail(int challengeId) async {
     try {
       print("challengeId  $challengeId");
       // API 호출
@@ -138,10 +138,10 @@ class FarmclubApiService {
   }
 
   // 팜클럽 참여 전 채소 조회
-  Future<List<VeggieRegistration>> getVeggieRegistraion() async {
+  Future<List<VeggieRegistration>> getVeggieRegistraion(String veggieInfoId) async {
     try {
       Response response = await ApiClient().dio.get(
-            "/api/veggie/registration",
+            "/api/veggie/registration/$veggieInfoId",
           );
 
       if (response.statusCode == 200) {

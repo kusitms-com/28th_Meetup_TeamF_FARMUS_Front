@@ -9,7 +9,7 @@ class FarmclubDetailController extends GetxController {
   Rx<FarmclubDetail?> farmclubInfo = Rx<FarmclubDetail?>(null);
   RxInt joinChallengeId = 0.obs;
 
-  Future<void> getFarmclubDetail(String challengeId) async {
+  Future<void> getFarmclubDetail(int challengeId) async {
     try {
       isLoading(true);
       FarmclubDetail? farmclubData =
