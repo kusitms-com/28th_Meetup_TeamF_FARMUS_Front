@@ -37,7 +37,6 @@ class _NickNameVegeState extends State<NickNameVege> {
 
                     onChanged: (value) {
                       controller.updateNicknameValue(value);
-
                     },
                     decoration: InputDecoration(
                       hintText: '채소',
