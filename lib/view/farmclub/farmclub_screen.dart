@@ -36,8 +36,6 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
       Get.put(FarmclubAuthController());
   late bool isFarmclubEmpty;
 
-  bool showFloatingButton = false;
-
   @override
   void initState() {
     super.initState();
@@ -55,10 +53,11 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
             .challengeId
             .toInt(),
       );
-      isFarmclubEmpty = false;
+      setState(() {
+
+      });
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -190,8 +189,10 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
           ),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: showFloatingButton
+      floatingActionButtonLocation: controller.myFarmclubState.isNotEmpty
+          ? FloatingActionButtonLocation.centerDocked
+          : null,
+      floatingActionButton: controller.myFarmclubState.isNotEmpty
           ? Container(
               padding: const EdgeInsets.all(8),
               color: Colors.transparent,
