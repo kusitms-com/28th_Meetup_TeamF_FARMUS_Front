@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:mojacknong_android/view/home/component/mission_routine/calendar_controller.dart';
 import 'package:mojacknong_android/view/home/component/mission_routine/combined_widget.dart';
 import 'package:mojacknong_android/view/home/component/mission_routine/display_text_widget.dart';
+import 'package:mojacknong_android/view/home/component/mission_routine/mission_routine_controller.dart';
 
 class RoutineListItem extends StatefulWidget {
+  final int veggieId;
   final String veggieNickname;
-  final VoidCallback onTap;
+  final String color;
+  final VoidCallback resetFunciton;
 
   const RoutineListItem({
     Key? key,
+    required this.veggieId,
     required this.veggieNickname,
-    required this.onTap,
+    required this.color,
+    required this.resetFunciton,
   }) : super(key: key);
 
   @override
@@ -18,6 +25,8 @@ class RoutineListItem extends StatefulWidget {
 }
 
 class _RoutineListItemState extends State<RoutineListItem> {
+  final CalendarController calendarController = Get.find();
+  final MissionRoutineController controller = Get.find();
   bool isCombinedWidgetVisible = false;
   List<DisplayTextWidget> displayTextWidgets = [];
 
@@ -60,18 +69,18 @@ class _RoutineListItemState extends State<RoutineListItem> {
             setState(() {
               isCombinedWidgetVisible = !isCombinedWidgetVisible;
             });
-            widget.onTap();
           },
           child: Container(
             width: veggieWidth + mathplusWidth + additionalPadding,
-            margin: const EdgeInsets.only(left: 20.0, right: 20, bottom: 12),
+            margin: const EdgeInsets.only(top: 12.0, left: 20.0, right: 20),
             child: Row(
               children: [
                 Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
-                    color: const Color(0xffDCccD4),
+                    // #XXXXXX -> 0xffXXXXXX
+                    color: Color(int.parse('0xff' + widget.color.substring(1))),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Row(
@@ -109,21 +118,18 @@ class _RoutineListItemState extends State<RoutineListItem> {
           CombinedWidget(
             textFieldController: TextEditingController(),
             onTextSubmitted: (text) {
+              controller
+                  .createRoutine(widget.veggieId, text,
+                      calendarController.currentDate.value)
+                  .then((value) => widget.resetFunciton());
               //루틴 새로 입력하면
               setState(() {
-                // 여기서displaytextwidget 호출
-                displayTextWidgets.add(
-                  DisplayTextWidget(
-                    textFieldController: TextEditingController(text: text),
-                    text: text,
-                  ),
-                );
+                // TODO 루틴 추가 api
                 isCombinedWidgetVisible = false;
               });
             },
           ),
         for (var displayTextWidget in displayTextWidgets) displayTextWidget,
-        const SizedBox(height: 12),
       ],
     );
   }

@@ -34,14 +34,14 @@ class _TodayRoutineListState extends State<TodayRoutineList> {
 
   @override
   Widget build(BuildContext context) {
-   // print("루틴 체크 박스");
+    // print("루틴 체크 박스");
     return SizedBox(
       height: 47, // Adjust the height as needed
       child: ListTile(
-          // decoration: BoxDecoration(
-          //   color: const Color(0xffDCFFD4),
-          //   borderRadius: BorderRadius.circular(10),
-          // )
+        // decoration: BoxDecoration(
+        //   color: const Color(0xffDCFFD4),
+        //   borderRadius: BorderRadius.circular(10),
+        // )
         title: Row(
           children: [
             GestureDetector(
@@ -72,11 +72,11 @@ class _TodayRoutineListState extends State<TodayRoutineList> {
                   cancelButtonText: "취소",
                   optionsAction: [
                     () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const CycleSetting()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => const CycleSetting()),
+                      // );
                     },
                     () {
                       // "삭제하기" 옵션은 여기에 구현하기

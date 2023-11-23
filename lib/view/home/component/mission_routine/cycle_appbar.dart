@@ -6,8 +6,14 @@ class CycleAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
   final String? title;
   final List<Widget>? actions;
+  final VoidCallback onPressed;
 
-  const CycleAppBar({super.key, this.leading, this.title, this.actions});
+  const CycleAppBar(
+      {super.key,
+      this.leading,
+      this.title,
+      this.actions,
+      required this.onPressed});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -40,6 +46,7 @@ class CycleAppBar extends StatelessWidget implements PreferredSizeWidget {
         actions: [
           TextButton(
             onPressed: () {
+              onPressed();
               Navigator.of(context).pop();
             },
             child: const Text(
