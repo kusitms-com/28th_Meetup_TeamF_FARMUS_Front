@@ -36,9 +36,6 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
       Get.put(FarmclubAuthController());
   late bool isFarmclubEmpty;
 
-
-  bool showFloatingButton = false;
-
   @override
   void initState() {
     super.initState();
@@ -48,7 +45,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
   Future<void> loadFarmclubData() async {
     List<FarmclubMine> response = await controller.getMyFarmclub();
 
-    if (response == []) {
+    if (response.isEmpty) {
       isFarmclubEmpty = true;
     } else {
       await controller.getFarmclubDiary(
@@ -56,10 +53,8 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
             .challengeId
             .toInt(),
       );
-      isFarmclubEmpty = false;
-
       setState(() {
-        showFloatingButton = controller.myFarmclubState.isNotEmpty;
+
       });
     }
   }
