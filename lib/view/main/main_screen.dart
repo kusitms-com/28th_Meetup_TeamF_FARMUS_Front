@@ -7,6 +7,8 @@ import 'package:mojacknong_android/view/community/community_screen.dart';
 import 'package:mojacknong_android/view/farmclub/farmclub_screen.dart';
 import 'package:mojacknong_android/view/home/home_screen.dart';
 import 'package:mojacknong_android/view/my_page/my_page_screen.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_detail_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_register_controller.dart';
 
 import '../../view_model/controllers/vege_controller.dart';
 
@@ -19,6 +21,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+  final FarmclubDetailController _farmclubDetailController = Get.put(FarmclubDetailController());
 
   final List<Widget> _screens = <Widget>[
 

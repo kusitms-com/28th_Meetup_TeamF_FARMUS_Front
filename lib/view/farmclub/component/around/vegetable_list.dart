@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_detail_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_join_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_register_controller.dart';
 
@@ -21,6 +22,7 @@ class _VegetableListState extends State<VegetableList> {
   Get.put(FarmclubRegisterController());
   final FarmclubJoinController _joinController =
   Get.put(FarmclubJoinController());
+  final FarmclubDetailController _detailController = Get.put(FarmclubDetailController());
 
   @override
   Widget build(BuildContext context) {

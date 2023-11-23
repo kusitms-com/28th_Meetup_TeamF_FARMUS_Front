@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
+import 'package:mojacknong_android/model/all_vege_infor_dto.dart';
+import 'package:mojacknong_android/model/all_vege_infor_list.dart';
 import 'package:mojacknong_android/view/farmclub/component/around/vegetable_list.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_make_content.dart';
@@ -11,6 +13,8 @@ import 'package:mojacknong_android/view/farmclub/component/new_vegetable_select.
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_register_controller.dart';
 
 import '../../model/veggie_registration.dart';
+import '../../repository/homescreen_repository.dart';
+import '../../view_model/controllers/vege_controller.dart';
 
 class FarmclubRegisterScreen extends StatefulWidget {
   const FarmclubRegisterScreen({super.key});
@@ -21,6 +25,12 @@ class FarmclubRegisterScreen extends StatefulWidget {
 
 class _FarmclubRegisterScreenState extends State<FarmclubRegisterScreen> {
   FarmclubRegisterController _controller = Get.put(FarmclubRegisterController());
+  final VegeController vegeController = Get.put(VegeController());
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +51,10 @@ class _FarmclubRegisterScreenState extends State<FarmclubRegisterScreen> {
               const SizedBox(
                 height: 16,
               ),
-              NewVegetableSelect(allVegeInforList: [], isFarmclub: false,),
+              NewVegetableSelect(
+                isFarmclub: false,
+                allVegeInforList: [],
+              ),
               const SizedBox(
                 height: 32,
               ),
