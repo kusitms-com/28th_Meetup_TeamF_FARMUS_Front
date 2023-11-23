@@ -55,11 +55,12 @@ class FarmclubController extends GetxController {
 
         return [];
       } else {
-        await getFarmclubDetail(
+        getFarmclubDetail(
             myFarmclubs[selectedFarmclubIndex.toInt()].challengeId.toString());
         // myFarmclubState 값 변경 후 화면 업데이트
         myFarmclubState.value = myFarmclubs;
         update();
+        isLoading(false);
 
         return myFarmclubs;
       }
