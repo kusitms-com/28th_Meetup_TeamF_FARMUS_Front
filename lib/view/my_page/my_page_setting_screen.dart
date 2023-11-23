@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/common/primary_app_bar.dart';
-import 'package:mojacknong_android/view/home/component/mission_routine/custom_switch.dart';
 import 'package:mojacknong_android/view/my_page/component/my_page_setting_text.dart';
+import 'package:mojacknong_android/view/my_page/history/my_page_setting_web.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 class MyPageSettingScreen extends StatefulWidget {
@@ -14,37 +14,51 @@ class MyPageSettingScreen extends StatefulWidget {
 }
 
 class _MyPageSettingScreenState extends State<MyPageSettingScreen> {
-  BottomSheetController _controller = Get.put(BottomSheetController());
+  final BottomSheetController _controller = Get.put(BottomSheetController());
 
   bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PrimaryAppBar(title: "설정"),
+      appBar: const PrimaryAppBar(title: "설정"),
       backgroundColor: FarmusThemeData.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MyPageSettingText(
             text: "개인정보 처리 방침",
+            onPress: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => const MyPageSettingWeb(
+                    url:
+                        "https://www.notion.so/FARMUS-5a883da34dd14ff594e952b470dd19f6?pvs=4"),
+              ));
+            },
           ),
-          Divider(
+          const Divider(
             color: FarmusThemeData.grey4,
             indent: 16,
             endIndent: 16,
           ),
           MyPageSettingText(
             text: "서비스 이용약관",
+            onPress: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => const MyPageSettingWeb(
+                    url:
+                        "https://www.notion.so/FARMUS-b479368ce7e64145943e39d2162e7166?pvs=4"),
+              ));
+            },
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          Divider(
+          const Divider(
             thickness: 12,
             color: FarmusThemeData.dividerBackground,
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           MyPageSettingText(
@@ -58,7 +72,7 @@ class _MyPageSettingScreenState extends State<MyPageSettingScreen> {
               );
             },
           ),
-          Divider(
+          const Divider(
             color: FarmusThemeData.grey4,
             indent: 16,
             endIndent: 16,
@@ -72,7 +86,7 @@ class _MyPageSettingScreenState extends State<MyPageSettingScreen> {
                   cancelButtonText: "취소");
             },
           ),
-          Divider(
+          const Divider(
             color: FarmusThemeData.grey4,
             indent: 16,
             endIndent: 16,
