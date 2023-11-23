@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/model/farmclub_diary.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/community/component/community_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_profile.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_diary_controller.dart';
@@ -59,8 +60,7 @@ class _RecordFeedState extends State<RecordFeed> {
               ),
             );
           },
-          child: RecordPicture(
-            like: widget.farmclubDiary.like.toInt().obs,
+          child: CommunityPicture(
             image: widget.farmclubDiary.image,
           ),
         ),

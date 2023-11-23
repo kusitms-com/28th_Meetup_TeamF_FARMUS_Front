@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/community/component/community_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/record/record_profile.dart';
 
@@ -34,8 +35,7 @@ class _MissionFeedState extends State<MissionFeed> {
         SizedBox(
           height: 8,
         ),
-        RecordPicture(
-          like: widget.mission.like.obs,
+        CommunityPicture(
           image: widget.mission.image,
         ),
         Padding(
