@@ -26,6 +26,7 @@ class FarmclubJoinController extends GetxController {
 
     try {
 
+      print("선택 채소 아이디 $veggieInfoId");
       isCheck.value = false;
       isFormValid.value = false;
 
