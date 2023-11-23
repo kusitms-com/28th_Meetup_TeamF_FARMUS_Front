@@ -9,12 +9,22 @@ class VegeController extends GetxController {
   final nicknameValue = "".obs;
   final selectedDate = "".obs;
 
-  //
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //
-  // }
+
+
+  bool vegeRegisterException(){
+
+
+    print("닉네임 " +nicknameValue.value +"날짜 "+selectedDate.value +"채소 id "+selectedVeggieId.value);
+    if(nicknameValue.value == "" || selectedDate.value == ""  || selectedVeggieId.value == ""){
+      return false;
+    }
+
+    return true;
+
+  }
+
+
+
 
   void updateSelectedDate(String date) {
     selectedDate.value = date;
