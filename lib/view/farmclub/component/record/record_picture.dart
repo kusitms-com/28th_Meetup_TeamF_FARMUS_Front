@@ -7,8 +7,10 @@ import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_cont
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 
 class RecordPicture extends StatefulWidget {
-  final RxInt like;
-  RecordPicture({super.key, required this.like});
+  final RxInt? like;
+  final String? image;
+
+  RecordPicture({super.key, this.like, this.image});
 
   @override
   State<RecordPicture> createState() => _RecordPictureState();
@@ -22,7 +24,7 @@ class _RecordPictureState extends State<RecordPicture> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Obx(
-        () => Container(
+            () => Container(
           width: double.infinity,
           height: 248,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
@@ -30,7 +32,14 @@ class _RecordPictureState extends State<RecordPicture> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
+                child: widget.image != ""
+                    ? Image.network(
+                  widget.image!,
+                  fit: BoxFit.cover, // 이미지를 화면에 꽉 채우도록 설정
+                  width: double.infinity,
+                  height: 248, // 원하는 높이로 조정
+                )
+                    : Image.asset(
                   "assets/image/image_challenge1.png",
                   fit: BoxFit.fill,
                   width: double.infinity,

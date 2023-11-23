@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
+import '../diary/diary_post_controller.dart';
+
 class CustomSwitch extends StatefulWidget {
+
   final Function(bool value) onChanged;
   final bool value;
   final double trackWidth;
@@ -11,7 +16,7 @@ class CustomSwitch extends StatefulWidget {
   final Color toggleActiveColor;
   final Color trackInActiveColor;
   final Color trackActiveColor;
-  const CustomSwitch({
+   CustomSwitch({
     super.key,
     required this.onChanged,
     required this.value,
@@ -24,11 +29,14 @@ class CustomSwitch extends StatefulWidget {
     this.toggleActiveColor = Colors.white,
   });
   @override
-  _CustomSwitchState createState() => _CustomSwitchState();
+  _CustomSwitchState createState() => _CustomSwitchState(value);
 }
 
 class _CustomSwitchState extends State<CustomSwitch> {
-  bool _isSwitched = false;
+  final DiaryPostController diaryPostController = Get.find();
+  bool _isSwitched;
+
+  _CustomSwitchState(this._isSwitched);
 
   @override
   void initState() {
@@ -41,6 +49,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        diaryPostController.updateSwitchValue(!_isSwitched);
         setState(() {
           _isSwitched = !_isSwitched;
           widget.onChanged(_isSwitched);

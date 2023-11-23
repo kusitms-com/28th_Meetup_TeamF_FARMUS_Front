@@ -7,7 +7,6 @@ class FarmclubSearchController extends GetxController {
   final TextEditingController controller = TextEditingController();
   RxBool hasInput = RxBool(false);
   final contentValue = "".obs;
-
   RxList<FarmclubInfoModel> farmclubList = <FarmclubInfoModel>[].obs;
 
   var isCombinedWidgetVisible = true.obs;

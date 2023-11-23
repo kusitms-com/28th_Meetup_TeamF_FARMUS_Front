@@ -111,7 +111,9 @@ class HomeVegeNormal extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            const RegisterScreen()), //페이지 수정하기
+                            RegisterScreen(
+
+                            )), //페이지 수정하기
                   );
                 },
                 child: SvgPicture.asset(

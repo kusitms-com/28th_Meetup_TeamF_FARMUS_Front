@@ -5,24 +5,23 @@ import 'package:mojacknong_android/view/farmclub/component/farmclub_text_info.da
 import 'package:mojacknong_android/view/farmclub/farmclub_detail_screen.dart';
 
 class RecommendFarmclub extends StatefulWidget {
+  final int id;
   final String farmclubImage;
   final String vegetable;
   final String farmclubTitle;
   final String level;
-
   final int nowPerson;
   final int maxPerson;
-  final String dday;
 
   RecommendFarmclub({
     Key? key,
+    required this.id,
     required this.vegetable,
     required this.farmclubImage,
     required this.farmclubTitle,
     required this.level,
     required this.nowPerson,
     required this.maxPerson,
-    required this.dday,
   }) : super(key: key);
 
   @override
@@ -41,7 +40,7 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
             MaterialPageRoute(
               builder: (context) {
                 return FarmclubDetailScreen(
-                  id: 0,
+                  id: widget.id,
                   title: widget.farmclubTitle,
                 );
               },
@@ -62,7 +61,7 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
                       color: FarmusThemeData.background,
                       borderRadius: BorderRadius.circular(8.65),
                     ),
-                    child: Image.asset(
+                    child: Image.network(
                       widget.farmclubImage,
                       fit: BoxFit.fill,
                     ),
@@ -98,7 +97,6 @@ class _RecommendFarmclubState extends State<RecommendFarmclub> {
                 level: widget.level,
                 nowPerson: widget.nowPerson,
                 maxPerson: widget.maxPerson,
-                dday: widget.dday,
                 isRecommend: true,
                 status: "",
               )

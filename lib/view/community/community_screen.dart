@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/custom_app_bar.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/model/community_posting.dart';
 import 'package:mojacknong_android/view/community/component/button_next_my_post.dart';
 import 'package:mojacknong_android/view/community/component/community_category.dart';
 import 'package:mojacknong_android/view/community/component/community_feed.dart';
 import 'package:mojacknong_android/view/community/component/floating_button_post.dart';
 import 'package:mojacknong_android/view_model/controllers/community_feed_controller.dart';
+
+import '../../model/community_posting.dart';
 
 class CommunityScreen extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class CommunityScreen extends StatefulWidget {
 
 class _CommunityScreenState extends State<CommunityScreen> {
   final CommunityFeedController _communityController =
-      Get.put(CommunityFeedController());
+  Get.put(CommunityFeedController());
 
   List<String> category = <String>["도와주세요", "자랑할래요", "정보나눠요"];
 
@@ -47,9 +48,11 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 width: 10,
               ),
               ...category.map(
-                (item) {
+                    (item) {
                   return CommunityCategory(
-                      feedController: _communityController, category: item);
+                    feedController: _communityController,
+                    category: item,
+                  );
                 },
               ).toList(),
               Expanded(
@@ -73,7 +76,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                   itemCount: _communityController.communityPostings.length,
                   itemBuilder: (context, index) {
                     CommunityPosting posting =
-                        _communityController.communityPostings[index];
+                    _communityController.communityPostings[index];
                     return CommunityFeed(
                       postingId: posting.postingId,
                       userId: posting.userId,

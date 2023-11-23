@@ -7,14 +7,20 @@ import 'package:mojacknong_android/view/farmclub/component/around/farmclub_aroun
 import 'package:mojacknong_android/view/farmclub/component/around/farmclub_around_title.dart';
 import 'package:mojacknong_android/view/farmclub/component/around/farmclub_around_vegetable.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
-import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_help.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_init.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_content.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
 import 'package:mojacknong_android/view/farmclub/component/my_farmclub_info.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_detail_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_join_controller.dart';
+
+import '../../view_model/controllers/crop/crop_info_step_controller.dart';
+import '../../view_model/controllers/farmclub/farmclub_controller.dart';
+import 'farmclub_help_screen.dart';
 
 class FarmclubDetailScreen extends StatefulWidget {
   final int id;
@@ -35,11 +41,28 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
   BottomSheetController _bottomSheetController = BottomSheetController();
   FarmclubDetailController _detailController =
       Get.put(FarmclubDetailController());
+  FarmclubJoinController _joinController = Get.put(FarmclubJoinController());
+  CropInfoStepController _cropInfoStepController =
+      Get.put(CropInfoStepController());
+  FarmclubController _farmclubController = Get.find();
+
 
   @override
   void initState() {
     super.initState();
-    _detailController.getFarmclubDetail(widget.id.toString());
+    _initializeData();
+  }
+
+  Future<void> _initializeData() async {
+    await _detailController.getFarmclubDetail(widget.id.toString());
+    await _joinController.getVeggieRegistration();
+    _cropInfoStepController.veggieInfoId.value =
+        _detailController.farmclubInfo.value!.veggieInfoId.toString();
+    _cropInfoStepController.stepNum.value =
+        _detailController.farmclubInfo.value!.stepNum.toInt();
+    await _cropInfoStepController.getCropInfoStep();
+    _joinController.challengeId = _detailController.joinChallengeId;
+    print("챌린지 아이디 !!! ${_detailController.joinChallengeId}");
   }
 
   @override
@@ -132,20 +155,37 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
                   height: 12,
                 ),
                 FarmclubTitleWithDivider(title: "함께 도전해요"),
-                ChallengeStep(
-                  step: 0,
-                  title: "stepname",
-                ),
+                farmclubInfo.stepImages != null
+                    ? ChallengeStep(
+                        step: farmclubInfo.stepNum,
+                        title: farmclubInfo.stepName,
+                      )
+                    : ChallengeInit(),
                 SizedBox(
                   height: 16,
                 ),
                 ChallengeHelp(
-                  help: "ㅋㅋ",
+                  help: farmclubInfo.stepTip,
+                  veggieInfoId: farmclubInfo.veggieInfoId,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return FarmclubHelpScreen(
+                            veggieInfoId: farmclubInfo.veggieInfoId,
+                          );
+                        },
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(
                   height: 16,
                 ),
-                ChallengePicture(detailId: "",),
+                farmclubInfo.stepImages.isNotEmpty
+                    ? ChallengePicture()
+                    : Center(child: ChallengeInit()),
                 SizedBox(
                   height: 16,
                 ),

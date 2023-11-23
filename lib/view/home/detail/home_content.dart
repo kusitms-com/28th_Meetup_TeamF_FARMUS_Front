@@ -53,6 +53,7 @@ class _HomeContentState extends State<HomeContent> {
                   veggieNickname: widget.veggieNickname,
                   stepName: widget.stepName,
                   stepNum: widget.stepNum,
+                  color: widget.color,
                   onTap: () {},
                 ),
               const SizedBox(height: 10),

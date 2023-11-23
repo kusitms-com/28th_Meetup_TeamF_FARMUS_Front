@@ -6,6 +6,7 @@ class HomeFarmClub extends StatefulWidget {
   final String? veggieNickname;
   final int? stepNum;
   final String? stepName;
+  final String? color;
   final VoidCallback onTap;
 
   const HomeFarmClub({
@@ -13,7 +14,7 @@ class HomeFarmClub extends StatefulWidget {
     required this.veggieNickname,
     required this.stepName,
     required this.stepNum,
-    required this.onTap,
+    required this.onTap, this.color,
   }) : super(key: key);
 
   @override
@@ -46,6 +47,7 @@ class _HomeFarmClubState extends State<HomeFarmClub> {
               veggieNickname: widget.veggieNickname,
               routineId: widget.stepNum,
               routineName: widget.stepName,
+              color: widget.color,
               onTap: widget.onTap,
             ),
           );

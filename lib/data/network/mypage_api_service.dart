@@ -24,6 +24,7 @@ class MypageApiService {
       if (response.data["data"] != null) {
 
         final userData = FarmusUser.fromJson(response.data["data"]);
+        print(userData);
 
 
         return userData;
@@ -125,11 +126,14 @@ class MypageApiService {
 
     } on DioException catch (e) {
       print(e.message);
-      print("탐클럽 히스토리 디테일 조회 실패");
+      print("팜클럽 히스토리 디테일 조회 실패");
 
     }
     return null;
   }
+
+
+
 
 }
 

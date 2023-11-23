@@ -75,7 +75,7 @@ class HomeScreenApiService {
   }
 
 
-  static FutureOr<MyVegeRoutineList?> getMyVegeRoutineListApi() async {
+  static FutureOr<MyVegeRoutineList?> getMyVegeRoutineList() async {
     try {
 
       Response response = await ApiClient().dio.get('/api/veggie/routine/today');

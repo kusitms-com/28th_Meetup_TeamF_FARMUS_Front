@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_make_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_register_controller.dart';
 
 class FarmclubMakeEdit extends StatefulWidget {
   final String hintText;
@@ -16,14 +16,14 @@ class FarmclubMakeEdit extends StatefulWidget {
 }
 
 class _FarmclubMakeEditState extends State<FarmclubMakeEdit> {
-  FarmclubMakeController _controller = Get.put(FarmclubMakeController());
-  final int maxLength = 20;
+  FarmclubRegisterController _controller = Get.put(FarmclubRegisterController());
+  final int maxLength = 10;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _controller.nameController, // 사용할 컨트롤러 연결
-      maxLength: 20, // 최대 입력 글자수
+      maxLength: 10, // 최대 입력 글자수
       cursorColor: FarmusThemeData.grey2,
       onChanged: _controller.updateTitleValue,
 
@@ -39,7 +39,7 @@ class _FarmclubMakeEditState extends State<FarmclubMakeEdit> {
         ),
         suffix: Obx(
           () => Text(
-            "${_controller.titleValue.value.length} / 20",
+            "${_controller.titleValue.value.length} / 10",
             style: TextStyle(
               color: FarmusThemeData.dark.withOpacity(0.3),
             ),

@@ -11,6 +11,7 @@ import 'package:mojacknong_android/view/farmclub/component/search/brown_category
 import 'package:mojacknong_android/view/farmclub/component/search/search_category.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_explore_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_search_controller.dart';
+import 'package:mojacknong_android/view_model/controllers/vege_controller.dart';
 
 class FarmclubExploreScreen extends StatefulWidget {
   const FarmclubExploreScreen({Key? key}) : super(key: key);
@@ -26,6 +27,8 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
   @override
   void initState() {
     super.initState();
+    _exploreController.getUserApi();
+    _exploreController.getFarmclubData();
   }
 
   @override
@@ -34,9 +37,12 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
     super.dispose();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     _exploreController.getFarmclubData();
+    _exploreController.getFarmclubRecommend();
 
     return Scaffold(
       appBar: PrimaryAppBar(
@@ -61,41 +67,28 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16),
-          Row(
-            children: const [
-              SizedBox(width: 16),
-              Text(
-                "파머",
-                style: TextStyle(
-                  color: FarmusThemeData.dark,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: "Pretendard",
-                ),
-              ),
-              Text(
-                " 님을 위한",
-                style: TextStyle(
-                  color: FarmusThemeData.dark,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: "Pretendard",
-                ),
-              )
-            ],
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 16.0),
-            child: Text(
-              "추천 팜클럽",
-              style: TextStyle(
-                color: FarmusThemeData.dark,
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                fontFamily: "Pretendard",
-              ),
-            ),
-          ),
+          Obx(() {
+            // Obx를 사용하여 user의 변화를 감지하고 UI를 갱신
+            final user = _exploreController.user.value;
+            if (user != null) {
+              return Row(
+                children: [
+                  SizedBox(width: 16),
+                  Text(
+                    "${user.nickName!} 님을 위한\n추천 팜클럽",
+                    style: TextStyle(
+                      color: FarmusThemeData.dark,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Pretendard",
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return SizedBox.shrink();
+            }
+          }),
           const SizedBox(height: 12),
           RecommendFarmclubList(),
           const SizedBox(height: 40),

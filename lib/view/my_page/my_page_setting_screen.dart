@@ -26,37 +26,6 @@ class _MyPageSettingScreenState extends State<MyPageSettingScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              MyPageSettingText(
-                text: "푸시알림",
-              ),
-              Spacer(),
-              Text(
-                "09:00",
-                style: FarmusThemeData.darkStyle16,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              CustomSwitch(
-                value: isSwitched,
-                onChanged: (value) {
-                  setState(() {
-                    isSwitched = value;
-                  });
-                },
-              ),
-              SizedBox(
-                width: 16,
-              ),
-            ],
-          ),
-          Divider(
-            color: FarmusThemeData.grey4,
-            indent: 16,
-            endIndent: 16,
-          ),
           MyPageSettingText(
             text: "개인정보 처리 방침",
           ),

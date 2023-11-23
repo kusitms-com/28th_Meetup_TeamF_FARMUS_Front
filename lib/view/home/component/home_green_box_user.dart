@@ -5,17 +5,18 @@ import 'package:mojacknong_android/view/home/component/diary/diary_screen.dart';
 
 class HomeGreenBoxUser extends StatelessWidget {
   final String? userNickName;
-  final int? id;
+  final int? vegeId;
   final String? nickname;
   final String? image;
   final int? age;
   const HomeGreenBoxUser({
     Key? key,
     this.userNickName,
-    this.id,
+    this.vegeId,
     this.nickname,
     this.image,
-    this.age}) : super(key: key);
+    this.age
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,14 @@ class HomeGreenBoxUser extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const DiaryScreen(),
+                builder: (context) => DiaryScreen(
+                  userNickName: '$userNickName',
+                  vegeId: vegeId,
+                  nickname: nickname,
+                  image: image,
+                  age: age,
+
+                ),
               ),
             );
           },
@@ -43,10 +51,9 @@ class HomeGreenBoxUser extends StatelessWidget {
                     'assets/image/bigbox.svg',
                   ),
                 ),
-                Positioned(
-                  top: 0,
-                  left: 20,
-                  right: 0,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 40),
+
                   child: Container(
                     alignment: Alignment.topLeft,
                     child: Column(
@@ -56,14 +63,14 @@ class HomeGreenBoxUser extends StatelessWidget {
                           height: 36,
                         ),
                         Text(
-                          '${nickname}' +"+" +"${age}",
-                          style: FarmusThemeData.darkStyle13
+                            '${nickname}' +"+" +"${age}",
+                            style: FarmusThemeData.darkStyle13
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         Text(
-                           '${userNickName}' +'님의 사랑으로\n오늘도 쑥쑥 자라는 중',
+                          '${userNickName}' +'님의 사랑으로\n오늘도 쑥쑥 자라는 중',
                           style: TextStyle(
                             color: FarmusThemeData.dark,
                             fontFamily: "Pretendard-Semi-Bold",
