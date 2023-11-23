@@ -25,4 +25,5 @@ class AllVegeInforDto {
       grayImageUrl: json['grayImageUrl'] ?? '',
     );
   }
+
 }
