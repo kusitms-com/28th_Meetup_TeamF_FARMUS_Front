@@ -11,8 +11,6 @@ import '../../../view_model/controllers/vege_controller.dart';
 class NewVegetableSelect extends StatefulWidget {
   final bool isFarmclub;
   final List<AllVegeInforDto>? allVegeInforList;
-  final VegeController vegeController = Get.find();
-
 
   NewVegetableSelect({
     super.key,

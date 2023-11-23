@@ -10,6 +10,7 @@ class VegeController extends GetxController {
   final selectedDate = "".obs;
 
 
+
   bool vegeRegisterException(){
 
 
@@ -24,6 +25,7 @@ class VegeController extends GetxController {
 
 
 
+
   void updateSelectedDate(String date) {
     selectedDate.value = date;
     print(selectedDate.value);
@@ -35,7 +37,8 @@ class VegeController extends GetxController {
     selectedVeggieColorImageUrl.value = colorImageUrl;
     vegename.value = vegeName;
     print(selectedVeggieId.value);
-
+    print(selectedVeggieColorImageUrl.value);
+    print(vegename.value);
   }
 
   void updateNicknameValue(String value) {
@@ -155,7 +158,6 @@ class VegeController extends GetxController {
     if (isSelectedList[index]) {
       // 이미 선택된 아이템을 선택하면 선택 해제
       isSelectedList[index] = false;
-      updateSelectedVeggieData("","","");
       updateSelectedVeggieIndex(-1);
     } else {
       // 선택되지 않은 아이템을 선택하면 반전
