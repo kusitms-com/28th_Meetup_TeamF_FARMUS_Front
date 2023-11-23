@@ -6,12 +6,14 @@ import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_join_controller.dart';
 
+import '../../view_model/controllers/farmclub/farmclub_detail_controller.dart';
+
 class BottomSheetFarmclubJoin extends StatefulWidget {
-  final String title;
+  final String challengeId;
 
   const BottomSheetFarmclubJoin({
     super.key,
-    required this.title,
+    required this.challengeId,
   });
 
   @override
@@ -20,8 +22,8 @@ class BottomSheetFarmclubJoin extends StatefulWidget {
 }
 
 class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
-  final FarmclubJoinController _farmclubJoinController =
-      Get.find();
+  final FarmclubJoinController _farmclubJoinController = Get.find();
+  FarmclubDetailController _detailController = Get.find();
   final BottomSheetController _bottomSheetController = BottomSheetController();
 
   @override
@@ -82,7 +84,7 @@ class _BottomSheetFarmclubJoinState extends State<BottomSheetFarmclubJoin> {
                 _farmclubJoinController.postFarmclubRegister();
                 Navigator.pop(context);
 
-                _bottomSheetController.showJoinDialog(context, widget.title);
+                _bottomSheetController.showJoinDialog(context, _detailController.farmclubInfo.value!.challengeName.toString());
               }
             },
           ),

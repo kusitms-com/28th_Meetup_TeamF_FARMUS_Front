@@ -42,7 +42,7 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
 
   Future<void> _fetchData() async {
     try {
-      _farmclubController.getMyFarmclub();
+      await _farmclubController.getMyFarmclub();
     } catch (error) {
       print('Error fetching farmclub data: $error');
     }

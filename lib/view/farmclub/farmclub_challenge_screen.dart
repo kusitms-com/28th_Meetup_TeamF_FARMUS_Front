@@ -5,6 +5,7 @@ import 'package:mojacknong_android/common/primary_app_bar.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_brown.dart';
 import 'package:mojacknong_android/view/farmclub/component/button_white.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_help.dart';
+import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_init.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_picture.dart';
 import 'package:mojacknong_android/view/farmclub/component/challenge/challenge_step.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_title_with_divider.dart';
@@ -54,7 +55,7 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
       backgroundColor: FarmusThemeData.white,
       body: Obx(() {
         if (_cropInfoStepController.cropInfoStep.isEmpty) {
-          return CircularProgressIndicator(color: FarmusThemeData.brown);
+          return Center(child: CircularProgressIndicator(color: FarmusThemeData.brown));
         } else {
           return SingleChildScrollView(
             child: Column(
@@ -127,32 +128,38 @@ class _FarmclubChallengeScreenState extends State<FarmclubChallengeScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return FarmclubMissionFeedScreen(
-                              registrationId: _farmclubController
-                                  .myFarmclubState[_farmclubController
-                                  .selectedFarmclubIndex
-                                  .toInt()].registrationId.toString(),
-                              challengeId: _farmclubController
-                                  .myFarmclubState[_farmclubController
-                                      .selectedFarmclubIndex
-                                      .toInt()]
-                                  .challengeId
-                                  .toInt(),
-                              stepNum: _farmclubController
-                                  .farmclubInfo.value!.stepNum
-                                  .toInt(),
-                            );
-                          },
-                        ),
-                      );
-                    },
-                    child: ChallengePicture()),
+                _farmclubController.farmclubInfo.value!.stepImages.isNotEmpty
+                    ? GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return FarmclubMissionFeedScreen(
+                                  registrationId: _farmclubController
+                                      .myFarmclubState[_farmclubController
+                                          .selectedFarmclubIndex
+                                          .toInt()]
+                                      .registrationId
+                                      .toString(),
+                                  challengeId: _farmclubController
+                                      .myFarmclubState[_farmclubController
+                                          .selectedFarmclubIndex
+                                          .toInt()]
+                                      .challengeId
+                                      .toInt(),
+                                  stepNum: _farmclubController
+                                      .farmclubInfo.value!.stepNum
+                                      .toInt(),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                        child: ChallengePicture())
+                    : Center(
+                        child: ChallengeInit(),
+                      ),
                 const SizedBox(
                   height: 16,
                 ),
