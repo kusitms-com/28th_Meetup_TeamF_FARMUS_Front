@@ -43,7 +43,7 @@ class _HomeFinalSecond extends State<HomeFinalSecond> {
     super.initState();
 
     _contentController.addListener(() {
-      setState(() {}); // 화면을 새로고침 글자 수를 업데이트
+      setState(() {});
     });
   }
 
@@ -144,34 +144,6 @@ class _HomeFinalSecond extends State<HomeFinalSecond> {
             const SizedBox(
               height: 30,
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //   children: [
-            //     Expanded(
-            //       child: PreviousButton(
-            //         onPressed: () {
-            //           Navigator.pop(context);
-            //         },
-            //       ),
-            //     ),
-            //     Expanded(
-            //       child: Obx(
-            //         () => CustomBtn(
-            //           text: _homeTextController.contentValue.value.isNotEmpty
-            //               ? '완료'
-            //               : '나중에 등록하기',
-            //           onPressed: () {
-            //             if (_homeTextController.contentValue.value.isNotEmpty) {
-            //               showHomeFinalDialog(context);
-            //             } else {
-            //               Navigator.pop(context);
-            //             }
-            //           },
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // )
           ],
         ),
       ),
@@ -187,9 +159,4 @@ class _HomeFinalSecond extends State<HomeFinalSecond> {
       },
     );
   }
-
-  // Future<String> postDone() {
-  //   print(motivation);
-  //   return HomeFinalRepository.postDone(motivation);
-  // }
 }

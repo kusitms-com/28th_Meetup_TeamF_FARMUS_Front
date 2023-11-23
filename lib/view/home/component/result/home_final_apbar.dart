@@ -15,7 +15,7 @@ class HomeFinalAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: leading, // Any leading widget if provided
+      leading: leading,
       title: title != null
           ? Text(
               title!,

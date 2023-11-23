@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mojacknong_android/repository/onboarding_repository.dart';
 
 class HomeFinalController extends GetxController {
   // 텍스트 입력 필드 컨트롤러
@@ -18,10 +17,7 @@ class HomeFinalController extends GetxController {
   final isTaped4 = RxBool(false);
   final isTaped5 = RxBool(false);
   final isTaped6 = RxBool(false);
-  // final isSelected7 = RxBool(false);
-  // final isSelected8 = RxBool(false);
-  // final isSelected9 = RxBool(false);
-  // final isSelected10 = RxBool(false);
+
   final isSecond = RxBool(false);
 
   RxBool hasBoxesSelected = RxBool(false);
@@ -30,14 +26,6 @@ class HomeFinalController extends GetxController {
   var skill = RxString("");
 
   final image = Rxn<File>();
-
-  // _currentPage를 RxInt로 변경
-  var currentPage = RxInt(1);
-
-  // _currentPage를 업데이트하는 메서드
-  void updateCurrentPage(int newPage) {
-    currentPage.value = newPage;
-  }
 
   @override
   void onInit() {
@@ -83,13 +71,5 @@ class HomeFinalController extends GetxController {
   void onClose() {
     controller.dispose();
     super.onClose();
-  }
-
-  Future<void> postCrepHistory() async {
-    try {
-      OnboardingRepository.postCropHistory();
-    } catch (error) {
-      rethrow;
-    }
   }
 }

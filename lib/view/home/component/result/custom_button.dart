@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mojacknong_android/common/bouncing.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
-class CustomBtn extends StatelessWidget {
+class CustomBotton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
   final Color? backgroundColor;
   final Color? foregroundColor;
   final Color? surfaceTintColor;
 
-  const CustomBtn({
+  const CustomBotton({
     Key? key,
     required this.text,
     this.onPressed,

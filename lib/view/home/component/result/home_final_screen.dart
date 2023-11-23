@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
-import 'package:mojacknong_android/view/home/component/mission_routine/cycle_setting.dart';
 import 'package:mojacknong_android/view/home/component/result/home_final_apbar.dart';
 import 'package:mojacknong_android/view/home/component/result/home_final_controller.dart';
 import 'package:mojacknong_android/view/home/component/result/home_final_dialog.dart';
@@ -11,6 +10,7 @@ import 'package:mojacknong_android/view/home/component/result/home_final_second.
 import 'package:mojacknong_android/view/home/component/result/home_final_third.dart';
 import 'package:mojacknong_android/view/home/component/result/home_next_botton.dart';
 import 'package:mojacknong_android/view/home/component/result/home_text_controller.dart';
+import 'package:mojacknong_android/view/main/main_screen.dart';
 import 'package:mojacknong_android/view/onboarding/component/previous_button.dart';
 
 class HomeFinalScreen extends StatefulWidget {
@@ -154,7 +154,7 @@ class _HomeFinalScreenState extends State<HomeFinalScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const CycleSetting())); //커뮤니티 화면으로 이동해야함 (예시 페이지)
+                                          const MainScreen())); //커뮤니티 화면으로 이동해야함 (예시 페이지)
                             } else if (_homeFinalController.isTaped4.value) {
                               showHomeFinalDialog(context);
                             }
