@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/home/component/mission_routine/mission_routine_controller.dart';
 import 'package:mojacknong_android/view/home/component/mission_routine/mission_routine_screen.dart';
 import 'package:mojacknong_android/view/home/detail/home_custom_app_bar.dart';
 import 'package:mojacknong_android/view/home/detail/home_swipe.dart';
@@ -28,6 +29,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final FarmclubEtcController controller = Get.put(FarmclubEtcController());
   final VegeController vegeController = Get.put(VegeController());
+  final MissionRoutineController mrController =
+      Get.put(MissionRoutineController());
   @override
   Widget build(BuildContext context) {
     print('Building HomeScreen');

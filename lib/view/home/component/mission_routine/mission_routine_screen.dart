@@ -24,7 +24,7 @@ class MissionRoutineScreen extends StatefulWidget {
 }
 
 class _MissionRoutineScreenState extends State<MissionRoutineScreen> {
-  MissionRoutineController controller = Get.put(MissionRoutineController());
+  MissionRoutineController controller = Get.find();
   NRoutineController nRoutineController = Get.put(NRoutineController());
   CalendarController calendarController = Get.put(CalendarController());
   final GlobalKey<_MissionRoutineScreenState> _key =
