@@ -24,8 +24,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final VegeController vegeController =
-  Get.put(VegeController());
+  final FarmclubRegisterController _registerController = Get.put(FarmclubRegisterController());
+  final VegeController vegeController = Get.put(VegeController());
 
   @override
   Widget build(BuildContext context) {
@@ -112,55 +112,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           );
                         },
                       ),
-                      const SizedBox(height: 20),
-                      CustomCalendar(),
-                    ],
-                  ),
-                ),
-                Positioned(
-                  bottom: 8,
-                  left: 0,
-                  right: 0,
-                  child: RegisterButton(
-                    text: '등록하기',
-                    onPressed: () async{
-                      if(vegeController.vegeRegisterException()){
-                            await vegeController.enrollVegeRequest();
-
-                            BottomSheetController().showRegisterDialog(
-                            context, vegeController.selectNicknameValue());
-
-                            vegeController.updateNicknameValue("");
-                            vegeController.updateSelectedDate("");
-                            vegeController.updateSelectedVeggieData("","","");
-
-                            Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                            builder: (context) =>
-                            const MainScreen()), //home screen으로 가고 이때 작물이 존재하는 상태니, home screen에서 swipescreen호출
-                            );
-                          }
-                          return null;
-
-                      }
-                  ),
-
-                ),
-              ],
-            );
-          }
-        }
-      )
-
-
-
-
-
-
-
-
-
-    );
+                    ),
+                  ],
+                );
+              }
+            }));
   }
 }

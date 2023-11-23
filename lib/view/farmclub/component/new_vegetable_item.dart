@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_register_controller.dart';
-
-import '../../../view_model/controllers/vege_controller.dart';
 
 class NewVegetableItem extends StatefulWidget {
   final String blackPath;
@@ -32,7 +29,6 @@ class NewVegetableItem extends StatefulWidget {
 }
 
 class _NewVegetableItemState extends State<NewVegetableItem> {
-  final VegeController vegeController = Get.find();
 
   FarmclubRegisterController _farmclubRegisterController = Get.put(FarmclubRegisterController());
 
@@ -41,7 +37,6 @@ class _NewVegetableItemState extends State<NewVegetableItem> {
     return GestureDetector(
       onTap: () {
         widget.onTap();
-        //vegeController.updatevegeBoolValue(true);
         // _farmclubRegisterController.toggleImageSelection(widget.index);
       },
       child: Column(
