@@ -13,6 +13,7 @@ import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_regi
 import '../../../../repository/homescreen_repository.dart';
 import '../../../../view_model/controllers/vege_controller.dart';
 import '../../../farmclub/component/new_vegetable_select.dart';
+import '../../../main/main_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({
@@ -24,7 +25,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final FarmclubRegisterController _registerController = Get.put(FarmclubRegisterController());
+  final FarmclubRegisterController _registerController = Get.put(
+      FarmclubRegisterController());
   final VegeController vegeController = Get.put(VegeController());
 
   @override
@@ -96,26 +98,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       left: 0,
                       right: 0,
                       child: RegisterButton(
-                        text: '등록하기',
-                        onPressed: () async {
-                          await vegeController.enrollVegeRequest();
-                          BottomSheetController().showRegisterDialog(
-                              context,
-                              vegeController
-                                  .selectNicknameValue()); //context에는 입력한 채소 별명이 떠야함
+                          text: '등록하기',
+                          onPressed: () async {
+                            if (vegeController.vegeRegisterException()) {
+                              await vegeController.enrollVegeRequest();
 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                const HomeScreen()), //home screen으로 가고 이때 작물이 존재하는 상태니, home screen에서 swipescreen호출
-                          );
-                        },
+                              BottomSheetController().showRegisterDialog(
+                                  context, vegeController
+                                  .selectNicknameValue());
+
+                              vegeController.updateNicknameValue("");
+                              vegeController.updateSelectedDate("");
+                              vegeController.updateSelectedVeggieData("", "", "");
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const MainScreen()), //home screen으로 가고 이때 작물이 존재하는 상태니, home screen에서 swipescreen호출
+                              );
+                            }
+                            return null;
+                          }
                       ),
+
                     ),
                   ],
                 );
               }
-            }));
+            }
+        )
+    );
   }
 }
