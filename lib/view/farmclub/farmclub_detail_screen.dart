@@ -133,8 +133,13 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
                 SizedBox(
                   height: 16,
                 ),
-                FarmclubContent(
-                  content: farmclubInfo.challengeDescription,
+                GestureDetector(
+                  onTap: () {
+                    _bottomSheetController.showMissionFinishDialog(context, "title");
+                  },
+                  child: FarmclubContent(
+                    content: farmclubInfo.challengeDescription,
+                  ),
                 ),
                 SizedBox(
                   height: 8,

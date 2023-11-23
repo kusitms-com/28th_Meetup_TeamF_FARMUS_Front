@@ -8,7 +8,7 @@ import 'package:mojacknong_android/common/dialog/dialog_mission_farmclub.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/Dialog_register_vege.dart';
 
-import '../../view/farmclub/BottomSheetFinal/farmclub_finish_bottom_sheet.dart';
+import '../../common/bottom_sheet/farmclub_finish_final.dart';
 
 class BottomSheetController extends GetxController {
   void showActionSheetComment(
@@ -131,12 +131,28 @@ class BottomSheetController extends GetxController {
 
 
   void showMissionFinishDialog(BuildContext context, String title) {
-    showDialog<void>(
+    showModalBottomSheet<void>(
       context: context,
-      barrierColor: FarmusThemeData.grey2,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(40.0),
+          topRight: Radius.circular(40.0),
+        ),
+      ),
+      backgroundColor: FarmusThemeData.white,
       builder: (BuildContext context) {
-        return BottomSheetFarmClubClear(imagePath: "assets/image/ic_lettuce_blue.svg", textContent: title);
+        return SizedBox.expand(
+          child:   BottomSheetFarmClubFinal(
+            imagePath: 'assets/image/lettuce1.svg',
+            textContent:
+            '텃밭부터 식탁까지 이어진 {}일의\n팜클럽 기간동안 {n}번 미션 인증을 했고\n{n}번 성장일기를 기록했어요\n\n앞으로의 홈파밍 여정도 팜어스와 함께해요!',
+          ),
+        );
       },
     );
   }
+
+
+
 }
