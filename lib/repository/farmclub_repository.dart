@@ -48,7 +48,7 @@ class FarmclubRepository {
   }
 
   // 팜클럽 정보 조회
-  static Future<FarmclubDetail?> getFarmclubDetail(String id) async {
+  static Future<FarmclubDetail?> getFarmclubDetail(int id) async {
     try {
       print("challengeId  $id");
 
@@ -78,10 +78,10 @@ class FarmclubRepository {
   }
 
   // 팜클럽 가입 전 채소 조회
-  static Future<List<VeggieRegistration>> getVeggieRegistration() async {
+  static Future<List<VeggieRegistration>> getVeggieRegistration(String veggieInfoId) async {
     try {
       List<VeggieRegistration> response =
-          await FarmclubApiService().getVeggieRegistraion();
+          await FarmclubApiService().getVeggieRegistraion(veggieInfoId);
 
       return response;
     } catch (e) {

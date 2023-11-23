@@ -21,7 +21,7 @@ class FarmclubJoinController extends GetxController {
     });
   }
 
-  Future<List<VeggieRegistration>> getVeggieRegistration() async {
+  Future<List<VeggieRegistration>> getVeggieRegistration(String veggieInfoId) async {
     veggieSelected.assignAll(List<int>.filled(veggieList.length, 0));
 
     try {
@@ -31,7 +31,7 @@ class FarmclubJoinController extends GetxController {
 
 
       List<VeggieRegistration> responseData =
-      await FarmclubRepository.getVeggieRegistration();
+      await FarmclubRepository.getVeggieRegistration(veggieInfoId);
 
 
       // RxList 갱신
