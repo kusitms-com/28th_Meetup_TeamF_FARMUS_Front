@@ -1,3 +1,6 @@
+# APK 경로
+루트 디렉토리
+
 # 🥬 FARMUS, 팜어스 🥗
 
 ![서비스 이미지](https://devmint.s3.ap-northeast-2.amazonaws.com/readme/servicetitle.png)
