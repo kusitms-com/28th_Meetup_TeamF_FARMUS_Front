@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+//새로운 화면
 class OnboardFirst extends StatefulWidget {
   const OnboardFirst({Key? key}) : super(key: key);
 
