@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_register_controller.dart';
 
 import '../../../view_model/controllers/vege_controller.dart';
 
@@ -13,6 +14,7 @@ class NewVegetableItem extends StatefulWidget {
   final Function onTap;
   final String veggieName;
   final String difficulty;
+  final int index;
 
   const NewVegetableItem({
     Key? key,
@@ -22,6 +24,7 @@ class NewVegetableItem extends StatefulWidget {
     required this.onTap,
     required this.veggieName,
     required this.difficulty,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -31,6 +34,7 @@ class NewVegetableItem extends StatefulWidget {
 class _NewVegetableItemState extends State<NewVegetableItem> {
   final VegeController vegeController = Get.find();
 
+  FarmclubRegisterController _farmclubRegisterController = Get.put(FarmclubRegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +42,7 @@ class _NewVegetableItemState extends State<NewVegetableItem> {
       onTap: () {
         widget.onTap();
         //vegeController.updatevegeBoolValue(true);
-
+        // _farmclubRegisterController.toggleImageSelection(widget.index);
       },
       child: Column(
         children: [
