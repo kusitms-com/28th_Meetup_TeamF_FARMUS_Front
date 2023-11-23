@@ -6,6 +6,7 @@ import 'package:mojacknong_android/view/my_page/component/my_page_setting_text.d
 import 'package:mojacknong_android/view/my_page/history/my_page_setting_web.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
+//설정
 class MyPageSettingScreen extends StatefulWidget {
   const MyPageSettingScreen({super.key});
 

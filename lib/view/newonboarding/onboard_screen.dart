@@ -16,6 +16,7 @@ import 'package:mojacknong_android/view/newonboarding/onboard_second.dart';
 import 'package:mojacknong_android/view/newonboarding/onboard_third.dart';
 import 'package:mojacknong_android/view/onboarding/onboarding_screen.dart';
 
+// login
 final GoogleSignIn googleSignIn = GoogleSignIn();
 const storage = FlutterSecureStorage();
 
