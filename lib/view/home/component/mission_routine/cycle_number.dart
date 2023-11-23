@@ -2,15 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:mojacknong_android/view/home/component/mission_routine/custom_switch.dart';
 
 class CycleNumber extends StatefulWidget {
-  const CycleNumber({super.key});
+  final int routineId;
+  final int period;
+
+  const CycleNumber({Key? key, required this.routineId, required this.period})
+      : super(key: key);
 
   @override
   _CycleNumberState createState() => _CycleNumberState();
 }
 
 class _CycleNumberState extends State<CycleNumber> {
-  final TextEditingController _controller = TextEditingController(text: '3');
+  final TextEditingController _controller = TextEditingController(text: "0");
   bool isSwitched = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller.text = widget.period.toString();
+  }
 
   @override
   Widget build(BuildContext context) {

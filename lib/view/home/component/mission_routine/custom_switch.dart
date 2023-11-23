@@ -39,12 +39,20 @@ class _CustomSwitchState extends State<CustomSwitch> {
   _CustomSwitchState(this._isSwitched);
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _isSwitched = widget.value;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         diaryPostController.updateSwitchValue(!_isSwitched);
         setState(() {
           _isSwitched = !_isSwitched;
+          widget.onChanged(_isSwitched);
         });
       },
       child: SizedBox(

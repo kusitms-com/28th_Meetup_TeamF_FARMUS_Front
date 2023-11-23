@@ -1,6 +1,5 @@
 // import 'package:mojacknong_android/view/home/get/home_farm_mission.dart';
 
-
 import 'dart:async';
 
 import '../data/network/diary_api_service.dart';
@@ -30,13 +29,12 @@ class HomeScreenRepository {
   //   return response;
   // }
 
-
   static Future<MyVegeList?> getMyVegeListApi() async {
     final response = await HomeScreenApiService.getMyVegeList();
+    print(response?.motivation);
 
     return response;
   }
-
 
   static Future<CurrentMissionList?> getCurrentMissionListApi() async {
     final response = await HomeScreenApiService.getCurrentMissionList();
@@ -45,28 +43,22 @@ class HomeScreenRepository {
   }
 
   static Future<MyVegeRoutineList?> getMyVegeRoutineListApi() async {
-
     final response = await HomeScreenApiService.getMyVegeRoutineList();
 
     return response;
   }
 
-
   static Future<MyVegeDiaryList?> getMyVegeDiaryListApi(int vegeId) async {
-
     final response = await DiaryApiService.getMyVegeDiaryList(vegeId);
 
     return response;
   }
 
-
   static Future<AllVegeInforList?> getAllVegeInforListApi() async {
-
     final response = await VegeApiService.getAllVegeInforList();
 
     return response;
   }
-
 
   static Future<List<dynamic>> getHomePageData() async {
     final List<FutureOr<dynamic>> futures = [
@@ -77,19 +69,4 @@ class HomeScreenRepository {
 
     return Future.wait(futures.cast<Future<dynamic>>());
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

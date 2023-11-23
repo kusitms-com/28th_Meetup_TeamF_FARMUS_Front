@@ -83,19 +83,19 @@ class _OnboardingSecond extends State<OnboardingSecond> {
   void updateMotivation() {
     motivation = [];
     if (_onboardingController.isSelected1.value) {
-      motivation.add("채소값 절약");
+      motivation.add("채솟값을 절약하고 싶어요");
     } else {
-      motivation.remove("채소값 절약");
+      motivation.remove("채솟값을 절약하고 싶어요");
     }
     if (_onboardingController.isSelected2.value) {
-      motivation.add("신선하고 안전한 식재료");
+      motivation.add("신선하고 안전한 식재료를 얻고 싶어요");
     } else {
-      motivation.remove("신선하고 안전한 식재료");
+      motivation.remove("신선하고 안전한 식재료를 얻고 싶어요");
     }
     if (_onboardingController.isSelected3.value) {
-      motivation.add("스트레스 해소 및 안정");
+      motivation.add("스트레스를 해소하고 안정을 얻고 싶어요");
     } else {
-      motivation.remove("스트레스 해소 및 안정");
+      motivation.remove("스트레스를 해소하고 안정을 얻고 싶어요");
     }
   }
 

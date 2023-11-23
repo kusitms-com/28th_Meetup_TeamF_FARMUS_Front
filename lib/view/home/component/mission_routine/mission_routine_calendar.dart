@@ -1,12 +1,18 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/data/network/home_screen_api_service.dart';
+import 'package:mojacknong_android/model/routine_month_dto.dart';
+import 'package:mojacknong_android/view/home/component/mission_routine/calendar_controller.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class MissionRoutineCalendar extends StatefulWidget {
   final Function(DateTime selectedDay, DateTime focusedDay,
-      List<dynamic> selectedEvents) onDaySelected;
+      List<RoutineMonthDto> selectedEvents) onDaySelected;
 
   const MissionRoutineCalendar({Key? key, required this.onDaySelected})
       : super(key: key);
@@ -16,31 +22,33 @@ class MissionRoutineCalendar extends StatefulWidget {
 }
 
 class _MissionRoutineCalendarState extends State<MissionRoutineCalendar> {
-  Map<DateTime, List> _events = {};
   DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
-  List? _selectedEvents;
+  DateTime _selectedDay = DateTime.now();
+  CalendarController controller = Get.find();
 
   @override
   void initState() {
     super.initState();
     initializeDateFormatting('ko_KR', null);
-    _selectedDay = _focusedDay;
-    _fetchEventData();
   }
 
-  void _fetchEventData() async {
-    var apiData = await HomeScreenApiService().getDataFromApi();
-    setState(() {
-      _events = {
-        DateTime.utc(2023, 11, 10): [apiData[0], apiData[0]]
-      };
-      _selectedEvents = _events[_selectedDay] ?? [];
+  List<RoutineMonthDto> _getMarksForDay(DateTime day) {
+    bool isExist = false;
+    controller.eventsMap[day]?.forEach((element) {
+      if (element.routineList.isNotEmpty) {
+        isExist = true;
+      }
     });
+
+    if (isExist) {
+      return controller.eventsMap[day]!;
+    } else {
+      return [];
+    }
   }
 
-  List<dynamic> _getEventsForDay(DateTime day) {
-    return _events[day] ?? [];
+  List<RoutineMonthDto> _getEventsForDay(DateTime day) {
+    return controller.eventsMap[day] ?? [];
   }
 
   @override
@@ -53,22 +61,27 @@ class _MissionRoutineCalendarState extends State<MissionRoutineCalendar> {
             lastDay: DateTime.utc(2025, 12, 31),
             headerVisible: false,
             rowHeight: 52.0,
-            daysOfWeekHeight: 48.0,
+            daysOfWeekHeight: 42.0,
+            // 여기 위에도 그냥 기본 설정임
             focusedDay: _focusedDay,
             selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
             onDaySelected: (selectedDay, focusedDay) {
               setState(() {
                 _selectedDay = selectedDay;
                 _focusedDay = focusedDay;
-                _selectedEvents = _getEventsForDay(selectedDay);
+                controller.updateCurrentDate(selectedDay);
+                controller.dayEvents.value = _getEventsForDay(selectedDay);
               });
-              widget.onDaySelected(selectedDay, focusedDay, _selectedEvents!);
+              widget.onDaySelected(
+                  selectedDay, focusedDay, controller.dayEvents);
             },
-            eventLoader: _getEventsForDay,
+            // 이 밑은 그냥 꾸미는거임
+            eventLoader: _getMarksForDay,
             calendarStyle: const CalendarStyle(
                 cellPadding: EdgeInsets.all(10.0),
                 markersMaxCount: 1,
-                markerSize: 10.0,
+                markerMargin: EdgeInsets.symmetric(vertical: 8.0),
+                markerSize: 8.0,
                 markersAlignment: Alignment.bottomCenter,
                 isTodayHighlighted: false,
                 markerDecoration: BoxDecoration(
@@ -79,7 +92,7 @@ class _MissionRoutineCalendarState extends State<MissionRoutineCalendar> {
                   color: FarmusThemeData.brownButton,
                   shape: BoxShape.circle,
                 ),
-                cellMargin: EdgeInsets.all(5)),
+                cellMargin: EdgeInsets.all(7)),
             headerStyle: const HeaderStyle(
               formatButtonVisible: false,
               titleCentered: true,
