@@ -10,26 +10,6 @@ class VegeController extends GetxController {
   final selectedDate = "".obs;
 
 
-  // final vegeBool = RxBool(false);
-  // final vegeNicknameBool = RxBool(false);
-  // final calendarBool = RxBool(false);
-  //
-  //
-  // void updatevegeBoolValue(bool value) {
-  //   vegeNicknameBool.value = value;
-  //   print(vegeNicknameBool.value);
-  // }
-  //
-  // void updatevegeNicknameBoolValue(bool value) {
-  //   vegeNicknameBool.value = value;
-  //   print(vegeNicknameBool.value);
-  // }
-  //
-  // void updatecalendarBoolValue(bool value) {
-  //   calendarBool.value = value;
-  //   print(calendarBool.value);
-  // }
-
   bool vegeRegisterException(){
 
 
