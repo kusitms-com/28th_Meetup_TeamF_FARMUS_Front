@@ -66,13 +66,13 @@ class BottomSheetController extends GetxController {
     );
   }
 
-  void showFarmclubJoinBottomSheet(BuildContext context, String title) {
+  void showFarmclubJoinBottomSheet(BuildContext context, String challengeId) {
     showModalBottomSheet<void>(
       context: context,
       backgroundColor: FarmusThemeData.white,
       builder: (BuildContext context) {
         return BottomSheetFarmclubJoin(
-          title: title,
+          challengeId: challengeId,
         );
       },
     );
