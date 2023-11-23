@@ -46,7 +46,8 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
 
   Future<void> loadFarmclubData() async {
     List<FarmclubMine> response = await controller.getMyFarmclub();
-    if (response == []) {
+
+    if (response.isEmpty) {
       isFarmclubEmpty = true;
     } else {
       await controller.getFarmclubDiary(
@@ -55,12 +56,9 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
             .toInt(),
       );
       isFarmclubEmpty = false;
-
-      setState(() {
-        showFloatingButton = controller.myFarmclubState.isNotEmpty;
-      });
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
