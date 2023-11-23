@@ -41,9 +41,6 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _exploreController.getFarmclubData();
-    _exploreController.getFarmclubRecommend();
-
     return Scaffold(
       appBar: PrimaryAppBar(
         actions: [
@@ -165,6 +162,7 @@ class _FarmclubExploreScreenState extends State<FarmclubExploreScreen> {
                                   level: data.difficulty,
                                   maxUser: data.maxUser,
                                   status: data.status,
+                                  challengeId: data.challengeId.toString(),
                                 ),
                               ),
                             ],

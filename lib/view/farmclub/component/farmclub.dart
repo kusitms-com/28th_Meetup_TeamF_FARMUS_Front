@@ -13,17 +13,20 @@ class Farmclub extends StatefulWidget {
   final int maxUser;
   final int currentUser;
   final String status;
+  final String challengeId;
 
-  const Farmclub(
-      {super.key,
-      required this.id,
-      required this.title,
-      required this.vaggie,
-      required this.currentUser,
-      this.image,
-      required this.level,
-      required this.maxUser,
-      required this.status});
+  Farmclub({
+    super.key,
+    required this.id,
+    required this.title,
+    required this.vaggie,
+    required this.currentUser,
+    this.image,
+    required this.level,
+    required this.maxUser,
+    required this.status,
+    required this.challengeId,
+  });
 
   @override
   State<Farmclub> createState() => _FarmclubState();
@@ -108,9 +111,9 @@ class _FarmclubState extends State<Farmclub> {
                 isRecommend: false,
               ),
               Spacer(),
-              GreenButton(
-                title: widget.title,
-              ),
+              // GreenButton(
+              //   challengeId: widget.challengeId,
+              // ),
             ],
           ),
         ),

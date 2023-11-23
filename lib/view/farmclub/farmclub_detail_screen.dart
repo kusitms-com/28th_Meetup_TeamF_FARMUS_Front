@@ -54,8 +54,8 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
   }
 
   Future<void> _initializeData() async {
-    await _detailController.getFarmclubDetail(widget.id.toString());
-    await _joinController.getVeggieRegistration();
+    await _detailController.getFarmclubDetail(widget.id.toInt());
+    await _joinController.getVeggieRegistration(_cropInfoStepController.veggieInfoId.toString());
     _cropInfoStepController.veggieInfoId.value =
         _detailController.farmclubInfo.value!.veggieInfoId.toString();
     _cropInfoStepController.stepNum.value =
