@@ -36,6 +36,8 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
       Get.put(FarmclubAuthController());
   late bool isFarmclubEmpty;
 
+  bool showFloatingButton = false;
+
   @override
   void initState() {
     super.initState();
@@ -44,8 +46,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
 
   Future<void> loadFarmclubData() async {
     List<FarmclubMine> response = await controller.getMyFarmclub();
-
-    if (response.isEmpty) {
+    if (response == []) {
       isFarmclubEmpty = true;
     } else {
       await controller.getFarmclubDiary(
@@ -53,7 +54,11 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
             .challengeId
             .toInt(),
       );
-      setState(() {});
+      isFarmclubEmpty = false;
+
+      setState(() {
+        showFloatingButton = controller.myFarmclubState.isNotEmpty;
+      });
     }
   }
 
@@ -187,10 +192,8 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
           ),
         ],
       ),
-      floatingActionButtonLocation: controller.myFarmclubState.isNotEmpty
-          ? FloatingActionButtonLocation.centerDocked
-          : null,
-      floatingActionButton: controller.myFarmclubState.isNotEmpty
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: showFloatingButton
           ? Container(
               padding: const EdgeInsets.all(8),
               color: Colors.transparent,
@@ -232,22 +235,6 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                         if (_authController.missionUploaded.value) {
                           _authController.missionUploaded.value = false; // 초기화
                           loadFarmclubData(); // FarmclubScreen 새로고침
-
-                          if (_authController.isEnd.value)  {
-                            _authController.isEnd.value = false; // 초기화
-                            _authController.showMissionFinishDialog(
-                              context,
-                              _authController.farmclubComplete.value!.image,
-                              _authController
-                                  .farmclubComplete.value!.challengeName,
-                              _authController.farmclubComplete.value!.day
-                                  .toString(),
-                              _authController.farmclubComplete.value!.mission
-                                  .toString(),
-                              _authController.farmclubComplete.value!.diary
-                                  .toString(),
-                            );
-                          }
                         }
                       },
                     ),

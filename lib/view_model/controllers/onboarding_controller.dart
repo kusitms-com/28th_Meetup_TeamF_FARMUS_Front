@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../repository/onboarding_repository.dart';
-
 class OnboardingController extends GetxController {
   // 텍스트 입력 필드 컨트롤러
   final TextEditingController controller = TextEditingController();
@@ -59,20 +57,39 @@ class OnboardingController extends GetxController {
     });
   }
 
+  RxList<String> motivation = <String>[].obs;
+
+  void updateMotivation() {
+    if (isSelected1.value) {
+      motivation.add("채솟값을 절약하고 싶어요");
+    } else {
+      motivation.remove("채솟값을 절약하고 싶어요");
+    }
+    if (isSelected2.value) {
+      motivation.add("신선하고 안전한 식재료를 얻고 싶어요");
+    } else {
+      motivation.remove("신선하고 안전한 식재료를 얻고 싶어요");
+    }
+    if (isSelected3.value) {
+      motivation.add("스트레스를 해소하고 안정을 얻고 싶어요");
+    } else {
+      motivation.remove("스트레스를 해소하고 안정을 얻고 싶어요");
+    }
+  }
   void setImageFile(File file) {
     image.value = file;
   }
 
   void selectBox1() {
-    isSelected1.toggle();
+    isSelected1.value = !isSelected1.value;
   }
 
   void selectBox2() {
-    isSelected2.toggle();
+    isSelected2.value = !isSelected2.value;
   }
 
   void selectBox3() {
-    isSelected3.toggle();
+    isSelected3.value = !isSelected3.value;
   }
 
   void selectBox4() {
@@ -132,15 +149,5 @@ class OnboardingController extends GetxController {
   void onClose() {
     controller.dispose();
     super.onClose();
-  }
-
-
-  Future<void> postCrepHistory() async {
-    try {
-
-      OnboardingRepository.postCropHistory();
-    } catch (error) {
-      throw error;
-    }
   }
 }
