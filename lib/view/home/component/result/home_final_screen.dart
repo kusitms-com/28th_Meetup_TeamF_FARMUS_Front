@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
+import 'package:mojacknong_android/view/community/community_screen.dart';
 import 'package:mojacknong_android/view/home/component/result/home_final_apbar.dart';
 import 'package:mojacknong_android/view/home/component/result/home_final_controller.dart';
 import 'package:mojacknong_android/view/home/component/result/home_final_dialog.dart';
@@ -154,7 +155,7 @@ class _HomeFinalScreenState extends State<HomeFinalScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const MainScreen())); //커뮤니티 화면으로 이동해야함 (예시 페이지)
+                                           CommunityScreen())); //커뮤니티 화면으로 이동해야함 (예시 페이지)
                             } else if (_homeFinalController.isTaped4.value) {
                               showHomeFinalDialog(context);
                             }

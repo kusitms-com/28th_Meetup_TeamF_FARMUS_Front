@@ -4,6 +4,8 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/diary/edit_vege_info.dart';
 import 'package:mojacknong_android/view/home/component/register/controller/buttom_sheet_home.dart';
 
+import '../result/home_final_screen.dart';
+
 class DiaryAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String? title;
 
@@ -61,7 +63,12 @@ class _DiaryAppBarState extends State<DiaryAppBar> {
                     );
                   },
                   () {
-                    // "삭제하기" 옵션은 여기에 구현하기
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                        builder: (context) => const HomeFinalScreen()
+                    ),
+                    );
                   },
                 ],
               );

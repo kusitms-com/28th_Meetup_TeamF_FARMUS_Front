@@ -46,7 +46,9 @@ class FarmClubListItem extends StatelessWidget {
     print("textWidth: $textWidth");
     print("textWidth: $textWidth + $arrowRightWidth + 20");
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+
+      },
       child: Container(
         width: textWidth + arrowRightWidth + 50,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
