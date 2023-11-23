@@ -6,12 +6,12 @@ import 'package:mojacknong_android/view/home/component/result/home_final_apbar.d
 import 'package:mojacknong_android/view/home/component/result/home_final_controller.dart';
 import 'package:mojacknong_android/view/home/component/result/home_final_dialog.dart';
 import 'package:mojacknong_android/view/home/component/result/home_final_first.dart';
+import 'package:mojacknong_android/view/home/component/result/home_final_progess_bar.dart';
 import 'package:mojacknong_android/view/home/component/result/home_final_second.dart';
 import 'package:mojacknong_android/view/home/component/result/home_final_third.dart';
 import 'package:mojacknong_android/view/home/component/result/home_next_botton.dart';
 import 'package:mojacknong_android/view/home/component/result/home_text_controller.dart';
 import 'package:mojacknong_android/view/onboarding/component/previous_button.dart';
-import 'package:mojacknong_android/view/onboarding/component/progress_bar.dart';
 
 class HomeFinalScreen extends StatefulWidget {
   const HomeFinalScreen({Key? key}) : super(key: key);
@@ -103,7 +103,7 @@ class _HomeFinalScreenState extends State<HomeFinalScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 16.0),
-              child: ProgressBar(currentPage: _currentPage),
+              child: HomeFinalProgressBar(currentPage: _currentPage),
             ),
             const SizedBox(height: 30),
             Padding(
