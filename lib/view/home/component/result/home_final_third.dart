@@ -71,46 +71,46 @@ class _HomeFinalThird extends State<HomeFinalThird> {
           const SizedBox(
             height: 60,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: PreviousButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const HomeFinalFirst();
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-              // Expanded(
-              //   child: Obx(
-              //     () => HomeNextButton(
-              //       text: '다음',
-              //       onPressed: () {
-              //         if (_homeFinalController.isTaped3.value) {
-              //           Navigator.push(
-              //             context,
-              //             MaterialPageRoute(
-              //               builder: (context) => const MainScreen(),
-              //             ),
-              //           );
-              //         } else if (_homeFinalController.isTaped4.value) {
-              //           showHomeFinalDialog(context);
-              //         }
-              //       },
-              //       enabled: _homeFinalController.isTaped3.value ||
-              //           _homeFinalController.isTaped4.value,
-              //     ),
-              //   ),
-              // ),
-            ],
-          )
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: [
+          //     Expanded(
+          //       child: PreviousButton(
+          //         onPressed: () {
+          //           Navigator.push(
+          //             context,
+          //             MaterialPageRoute(
+          //               builder: (context) {
+          //                 return const HomeFinalFirst();
+          //               },
+          //             ),
+          //           );
+          //         },
+          //       ),
+          //     ),
+          //     // Expanded(
+          //     //   child: Obx(
+          //     //     () => HomeNextButton(
+          //     //       text: '다음',
+          //     //       onPressed: () {
+          //     //         if (_homeFinalController.isTaped3.value) {
+          //     //           Navigator.push(
+          //     //             context,
+          //     //             MaterialPageRoute(
+          //     //               builder: (context) => const MainScreen(),
+          //     //             ),
+          //     //           );
+          //     //         } else if (_homeFinalController.isTaped4.value) {
+          //     //           showHomeFinalDialog(context);
+          //     //         }
+          //     //       },
+          //     //       enabled: _homeFinalController.isTaped3.value ||
+          //     //           _homeFinalController.isTaped4.value,
+          //     //     ),
+          //     //   ),
+          //     // ),
+          //   ],
+          // )
         ],
       ),
     );
