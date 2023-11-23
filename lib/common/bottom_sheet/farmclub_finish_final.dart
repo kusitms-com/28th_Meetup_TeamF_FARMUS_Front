@@ -5,13 +5,11 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class BottomSheetFarmClubFinal extends StatelessWidget {
   final String imagePath;
-  final String title;
   final String textContent;
 
   const BottomSheetFarmClubFinal({
     Key? key,
     required this.imagePath,
-    required this.title,
     required this.textContent,
   }) : super(key: key);
 
@@ -45,15 +43,15 @@ class BottomSheetFarmClubFinal extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 64),
-                  Image.network(
+                  SvgPicture.asset(
                     imagePath,
                     fit: BoxFit.cover,
                     width: MediaQuery.of(context).size.width,
                     height: 100,
                   ),
                   const SizedBox(height: 32),
-                  Text(
-                    title,
+                  const Text(
+                    "상추 좋아하세요",
                     style: FarmusThemeData.grey1Style16,
                   ),
                 ],
