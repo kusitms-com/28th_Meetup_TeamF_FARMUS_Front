@@ -91,6 +91,7 @@ class OnboardingApiService {
 
   Future<String> postMotivation(List<String> motivation) async {
     try {
+      print(motivation);
       String motivationData = jsonEncode({"motivation": motivation});
       Response response = await ApiClient()
           .dio

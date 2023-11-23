@@ -9,13 +9,15 @@ class HomeGreenBoxUser extends StatelessWidget {
   final String? nickname;
   final String? image;
   final int? age;
+  final String? motivation;
   const HomeGreenBoxUser({
     Key? key,
     this.userNickName,
     this.vegeId,
     this.nickname,
     this.image,
-    this.age
+    this.age,
+    this.motivation,
   }) : super(key: key);
 
   @override
@@ -34,7 +36,6 @@ class HomeGreenBoxUser extends StatelessWidget {
                   nickname: nickname,
                   image: image,
                   age: age,
-
                 ),
               ),
             );
@@ -53,7 +54,6 @@ class HomeGreenBoxUser extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40),
-
                   child: Container(
                     alignment: Alignment.topLeft,
                     child: Column(
@@ -62,15 +62,13 @@ class HomeGreenBoxUser extends StatelessWidget {
                         SizedBox(
                           height: 36,
                         ),
-                        Text(
-                            '${nickname}' +"+" +"${age}",
-                            style: FarmusThemeData.darkStyle13
-                        ),
+                        Text('${nickname}' + "+" + "${age}",
+                            style: FarmusThemeData.darkStyle13),
                         SizedBox(
                           height: 20,
                         ),
                         Text(
-                          '${userNickName}' +'님의 사랑으로\n오늘도 쑥쑥 자라는 중',
+                          '${motivation}',
                           style: TextStyle(
                             color: FarmusThemeData.dark,
                             fontFamily: "Pretendard-Semi-Bold",

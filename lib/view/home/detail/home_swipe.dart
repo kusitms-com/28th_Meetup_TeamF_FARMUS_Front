@@ -7,12 +7,7 @@ import '../component/diary/diary_screen.dart';
 
 class SwipeScreen extends StatefulWidget {
   final MyVegeList? myVegeList;
-  const SwipeScreen({
-    Key? key,
-    required this.myVegeList
-  }) : super(key: key);
-
-
+  const SwipeScreen({Key? key, required this.myVegeList}) : super(key: key);
 
   @override
   _SwipeScreenState createState() => _SwipeScreenState();
@@ -20,10 +15,8 @@ class SwipeScreen extends StatefulWidget {
 
 class _SwipeScreenState extends State<SwipeScreen> {
   final PageController _pageController = PageController();
- // final List<String> _pageContents = ['Page 1', 'Page 2', 'Page 3'];
+  // final List<String> _pageContents = ['Page 1', 'Page 2', 'Page 3'];
   int _currentPage = 0;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +34,6 @@ class _SwipeScreenState extends State<SwipeScreen> {
                 });
               },
               itemBuilder: (context, index) {
-
                 return GestureDetector(
                   // onTap: () {
                   //   Navigator.push(
@@ -69,15 +61,14 @@ class _SwipeScreenState extends State<SwipeScreen> {
   }
 
   Widget buildPageWidget(index) {
-
-      return  HomeGreenBoxUser(
-        userNickName: widget.myVegeList?.userNickname,
-        vegeId: widget.myVegeList?.diaryPostList[index].id,
-        nickname: widget.myVegeList?.diaryPostList[index].nickname,
-        image: widget.myVegeList?.diaryPostList[index].image,
-        age: widget.myVegeList?.diaryPostList[index].age
-      );
-
+    return HomeGreenBoxUser(
+      userNickName: widget.myVegeList?.userNickname,
+      vegeId: widget.myVegeList?.diaryPostList[index].id,
+      nickname: widget.myVegeList?.diaryPostList[index].nickname,
+      image: widget.myVegeList?.diaryPostList[index].image,
+      age: widget.myVegeList?.diaryPostList[index].age,
+      motivation: widget.myVegeList?.motivation,
+    );
   }
 
   Widget buildPageIndicator() {

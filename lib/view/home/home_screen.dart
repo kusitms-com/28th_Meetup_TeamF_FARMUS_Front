@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     print('Building HomeScreen');
-    return  Scaffold(
+    return Scaffold(
       appBar: const HomeCustomAppBar(),
       backgroundColor: FarmusThemeData.white,
       body: FutureBuilder(
@@ -47,43 +47,42 @@ class _HomeScreenState extends State<HomeScreen> {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-
             final List<dynamic> data = snapshot.data as List<dynamic>;
-            final MyVegeList? myVegeList  = data[0] as MyVegeList?;
-            final CurrentMissionList? currentMissionList = data[1] as CurrentMissionList?;
-            final MyVegeRoutineList? myVegeRoutineList = data[2] as MyVegeRoutineList?;
-
-            if(myVegeList!.diaryPostList.isEmpty){
-              return setView(levelSign(myVegeList.level, myVegeList.userNickname), const HomeWithoutVege());
+            final MyVegeList? myVegeList = data[0] as MyVegeList?;
+            final CurrentMissionList? currentMissionList =
+                data[1] as CurrentMissionList?;
+            final MyVegeRoutineList? myVegeRoutineList =
+                data[2] as MyVegeRoutineList?;
+            print(myVegeList?.motivation);
+            if (myVegeList!.diaryPostList.isEmpty) {
+              return setView(
+                  levelSign(myVegeList.level, myVegeList.userNickname),
+                  const HomeWithoutVege());
             }
-            return setView( SwipeScreen(
-              myVegeList: myVegeList,
-            ),
-                HomeWithVege( currentMissionList: currentMissionList,
-              myVegeRoutineList: myVegeRoutineList,
-
-            )
-            );
+            return setView(
+                SwipeScreen(
+                  myVegeList: myVegeList,
+                ),
+                HomeWithVege(
+                  currentMissionList: currentMissionList,
+                  myVegeRoutineList: myVegeRoutineList,
+                ));
           }
         },
       ),
     );
-
-
   }
 
-
-  Widget levelSign(String? level, String? nickName){
-
-    if(level == "EASY"){
+  Widget levelSign(String? level, String? nickName) {
+    if (level == "EASY") {
       return HomeVegeEasy(
         name: nickName,
       );
-    }else if(level == "NORMAL"){
+    } else if (level == "NORMAL") {
       return HomeVegeNormal(
         name: nickName,
       );
-    }else if(level == "HARD"){
+    } else if (level == "HARD") {
       return HomeVegeDif(
         name: nickName,
       );
@@ -92,7 +91,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return HomeVegeEasy();
   }
 
-  SingleChildScrollView setView<T extends Widget>(T isVegeClass, T noTextClass) {
+  SingleChildScrollView setView<T extends Widget>(
+      T isVegeClass, T noTextClass) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,8 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                          const MissionRoutineScreen(),
+                          builder: (context) => const MissionRoutineScreen(),
                         ),
                       );
                     },
