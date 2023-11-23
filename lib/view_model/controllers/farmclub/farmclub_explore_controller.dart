@@ -11,6 +11,7 @@ class FarmclubExploreController extends GetxController {
   Rx<FarmusUser?> user = Rx<FarmusUser?>(null);
   FarmclubInfoModel? selectedFarmclub;
 
+  RxBool isLoading = true.obs;
 
   Future<List<FarmclubInfoModel>> getFarmclubData() async {
     try {
@@ -20,15 +21,19 @@ class FarmclubExploreController extends GetxController {
         "All",
         "",
       );
+      print(responseData[0].veggieInfoId);
 
       // RxList 갱신
       farmclubList.clear();
       farmclubList.addAll(responseData);
+      isLoading(false);
 
       return responseData;
     } catch (error) {
       // 오류 처리 로직 추가
       print('Error fetching farmclub data: $error');
+      isLoading(false);
+
       throw error;
     }
   }
@@ -52,6 +57,7 @@ class FarmclubExploreController extends GetxController {
 
   Future<FarmusUser?> getUserApi() async {
     try {
+      isLoading(true);
       FarmusUser? response = await MypageApiService().getUser();
       user.value = response;
     } catch (error) {
@@ -64,5 +70,4 @@ class FarmclubExploreController extends GetxController {
   void setSelectedFarmclub(FarmclubInfoModel farmclub) {
     selectedFarmclub = farmclub;
   }
-
 }

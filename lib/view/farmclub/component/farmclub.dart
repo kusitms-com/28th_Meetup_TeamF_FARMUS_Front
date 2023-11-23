@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/farmclub/component/explore/green_button.dart';
 import 'package:mojacknong_android/view/farmclub/component/farmclub_text_info.dart';
@@ -14,6 +15,7 @@ class Farmclub extends StatefulWidget {
   final int currentUser;
   final String status;
   final String challengeId;
+  final String veggieId;
 
   Farmclub({
     super.key,
@@ -26,6 +28,7 @@ class Farmclub extends StatefulWidget {
     required this.maxUser,
     required this.status,
     required this.challengeId,
+    required this.veggieId
   });
 
   @override
@@ -33,6 +36,7 @@ class Farmclub extends StatefulWidget {
 }
 
 class _FarmclubState extends State<Farmclub> {
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -111,9 +115,10 @@ class _FarmclubState extends State<Farmclub> {
                 isRecommend: false,
               ),
               Spacer(),
-              // GreenButton(
-              //   challengeId: widget.challengeId,
-              // ),
+              GreenButton(
+                challengeId: widget.challengeId,
+                veggieInfoId: widget.veggieId,
+              ),
             ],
           ),
         ),
