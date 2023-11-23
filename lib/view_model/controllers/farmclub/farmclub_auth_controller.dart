@@ -70,6 +70,7 @@ class FarmclubAuthController extends GetxController {
 
   Future<void> deleteFarmclubComplete(BuildContext context) async {
     try {
+      isEnd.value = true;
       print(registrationId);
       FarmclubComplete? farmclubCompleteData =
           await FarmclubRepository.deleteFarmclubComplete(

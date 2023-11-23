@@ -55,6 +55,13 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
       );
       setState(() {});
     }
+
+    if (_authController.isEnd.isTrue) {
+      controller.selectedFarmclubIndex.value = 0;
+      await controller.getMyFarmclub();
+      await _authController.deleteFarmclubComplete(context);
+      _authController.isEnd.value = false;
+    }
   }
 
   @override
@@ -232,23 +239,9 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                         if (_authController.missionUploaded.value) {
                           _authController.missionUploaded.value = false; // 초기화
                           loadFarmclubData(); // FarmclubScreen 새로고침
-
-                          if (_authController.isEnd.value)  {
-                            _authController.isEnd.value = false; // 초기화
-                            _authController.showMissionFinishDialog(
-                              context,
-                              _authController.farmclubComplete.value!.image,
-                              _authController
-                                  .farmclubComplete.value!.challengeName,
-                              _authController.farmclubComplete.value!.day
-                                  .toString(),
-                              _authController.farmclubComplete.value!.mission
-                                  .toString(),
-                              _authController.farmclubComplete.value!.diary
-                                  .toString(),
-                            );
-                          }
                         }
+                          loadFarmclubData(); // FarmclubScreen 새로고침
+
                       },
                     ),
                   ),

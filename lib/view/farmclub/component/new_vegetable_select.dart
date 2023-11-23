@@ -14,7 +14,7 @@ class NewVegetableSelect extends StatefulWidget {
 
   NewVegetableSelect({
     super.key,
-    required this.allVegeInforList,
+     this.allVegeInforList,
     required this.isFarmclub,
   });
 

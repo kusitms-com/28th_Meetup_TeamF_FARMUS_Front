@@ -1,6 +1,3 @@
-
-
-
 class AllVegeInforDto {
   final String? id;
   final String? name;
@@ -26,4 +23,7 @@ class AllVegeInforDto {
     );
   }
 
+  static List<AllVegeInforDto> listFromJson(List<dynamic> jsonList) {
+    return jsonList.map((e) => AllVegeInforDto.fromJson(e)).toList();
+  }
 }
