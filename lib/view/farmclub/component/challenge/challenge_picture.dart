@@ -52,7 +52,7 @@ class _ChallengePictureState extends State<ChallengePicture> {
                 child: stepImages.length > 0 && stepImages[0] != null
                     ? Image.network(
                         stepImages[0]!,
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                         width: double.infinity,
                         height: double.infinity,
                       )
@@ -85,7 +85,7 @@ class _ChallengePictureState extends State<ChallengePicture> {
                       ? Image.network(
                           _farmclubController
                               .farmclubInfo.value!.stepImages[1]!,
-                          fit: BoxFit.fill,
+                          fit: BoxFit.cover,
                           width: double.infinity,
                           height: double.infinity,
                         )
