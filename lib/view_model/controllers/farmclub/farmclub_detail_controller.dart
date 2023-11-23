@@ -7,15 +7,17 @@ import '../../../model/veggie_registration.dart';
 class FarmclubDetailController extends GetxController {
   RxBool isLoading = true.obs;
   Rx<FarmclubDetail?> farmclubInfo = Rx<FarmclubDetail?>(null);
+  RxString veggieInfoId = "".obs;
   RxInt joinChallengeId = 0.obs;
 
-  Future<void> getFarmclubDetail(String challengeId) async {
+  Future<void> getFarmclubDetail(int challengeId) async {
     try {
       isLoading(true);
       FarmclubDetail? farmclubData =
           await FarmclubRepository.getFarmclubDetail(challengeId);
 
       farmclubInfo.value = farmclubData;
+      veggieInfoId.value = farmclubData!.veggieInfoId;
       joinChallengeId.value = farmclubInfo.value!.challengeId.toInt();
     } catch (error) {
       // 오류 처리 로직 추가

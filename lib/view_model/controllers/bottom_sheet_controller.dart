@@ -8,7 +8,7 @@ import 'package:mojacknong_android/common/dialog/dialog_mission_farmclub.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/register/customs/Dialog_register_vege.dart';
 
-import '../../view/farmclub/BottomSheetFinal/farmclub_finish_bottom_sheet.dart';
+import '../../common/bottom_sheet/farmclub_finish_final.dart';
 
 class BottomSheetController extends GetxController {
   void showActionSheetComment(
@@ -66,13 +66,13 @@ class BottomSheetController extends GetxController {
     );
   }
 
-  void showFarmclubJoinBottomSheet(BuildContext context, String title) {
+  void showFarmclubJoinBottomSheet(BuildContext context, String challengeId) {
     showModalBottomSheet<void>(
       context: context,
       backgroundColor: FarmusThemeData.white,
       builder: (BuildContext context) {
         return BottomSheetFarmclubJoin(
-          title: title,
+          challengeId: challengeId,
         );
       },
     );
@@ -125,17 +125,6 @@ class BottomSheetController extends GetxController {
         return DialogRegisterVege(
           title: title,
         );
-      },
-    );
-  }
-
-
-  void showMissionFinishDialog(BuildContext context) {
-    showDialog<void>(
-      context: context,
-      barrierColor: FarmusThemeData.grey2,
-      builder: (BuildContext context) {
-        return BottomSheetFarmClubClear(imagePath: "assets/image/ic_lettuce_blue.svg", textContent: "어쩌구");
       },
     );
   }

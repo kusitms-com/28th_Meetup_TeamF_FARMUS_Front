@@ -198,8 +198,9 @@ class FarmclubRegisterController extends GetxController {
 
   Future<List<VeggieRegistration>> getVeggieRegistration() async {
     try {
+      print("선택 $selectedVeggieId");
       List<VeggieRegistration> responseData =
-          await FarmclubRepository.getVeggieRegistration();
+          await FarmclubRepository.getVeggieRegistration(selectedVeggieId.toString());
 
       // RxList 갱신
       veggieRegistration.clear();

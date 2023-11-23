@@ -15,7 +15,6 @@ class _OnboardingSecond extends State<OnboardingSecond> {
   final OnboardingController _onboardingController =
       Get.put(OnboardingController());
 
-  List<String> motivation = [];
 
   @override
   void dispose() {
@@ -36,8 +35,7 @@ class _OnboardingSecond extends State<OnboardingSecond> {
           ),
           GestureDetector(
             onTap: () {
-              _onboardingController.selectBox1();
-              updateMotivation();
+              _onboardingController.updateMotivation();
             },
             child: SelectBox(
               title: "채솟값을 절약하고 싶어요",
@@ -50,8 +48,7 @@ class _OnboardingSecond extends State<OnboardingSecond> {
           ),
           GestureDetector(
             onTap: () {
-              _onboardingController.selectBox2();
-              updateMotivation();
+              _onboardingController.updateMotivation();
             },
             child: SelectBox(
               title: "신선하고 안전한 식재료를 얻고 싶어요",
@@ -64,7 +61,7 @@ class _OnboardingSecond extends State<OnboardingSecond> {
           ),
           GestureDetector(
             onTap: () {
-              updateMotivation();
+              _onboardingController.updateMotivation();
             },
             child: SelectBox(
               title: "스트레스를 해소하고 안정을 얻고 싶어요",
@@ -80,27 +77,8 @@ class _OnboardingSecond extends State<OnboardingSecond> {
     );
   }
 
-  void updateMotivation() {
-    motivation = [];
-    if (_onboardingController.isSelected1.value) {
-      motivation.add("채솟값을 절약하고 싶어요");
-    } else {
-      motivation.remove("채솟값을 절약하고 싶어요");
-    }
-    if (_onboardingController.isSelected2.value) {
-      motivation.add("신선하고 안전한 식재료를 얻고 싶어요");
-    } else {
-      motivation.remove("신선하고 안전한 식재료를 얻고 싶어요");
-    }
-    if (_onboardingController.isSelected3.value) {
-      motivation.add("스트레스를 해소하고 안정을 얻고 싶어요");
-    } else {
-      motivation.remove("스트레스를 해소하고 안정을 얻고 싶어요");
-    }
-  }
-
   Future<String> postMotivation() {
-    print(motivation);
-    return OnboardingRepository.postMotivation(motivation);
+    print(              _onboardingController.motivation);
+    return OnboardingRepository.postMotivation(_onboardingController.motivation);
   }
 }

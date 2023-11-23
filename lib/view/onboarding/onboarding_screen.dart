@@ -23,7 +23,6 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentPage = 1;
   String title = "안녕하세요! 먼저 프로필을 설정해주세요";
-
   String description = "";
   late Widget _currentWidget;
   bool isLastPage = false;
@@ -49,25 +48,25 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   final OnboardingController _onboardingController =
-      Get.put(OnboardingController());
+  Get.put(OnboardingController());
 
   @override
   void initState() {
     super.initState();
-    _currentWidget = const OnboardingFirst();
+    _currentWidget = OnboardingFirst();
   }
 
   bool showPreviousButton = true;
   void _handleButtonPress(bool isNext) {
     setState(
-      () {
+          () {
         if (isNext) {
           if (_currentPage < 5) {
             _currentPage += 1;
           } else {
             isLastPage = true;
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const MainScreen()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MainScreen()));
             return;
           }
         } else {
@@ -83,27 +82,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         if (_currentPage == 1) {
           title = "안녕하세요! 먼저 프로필을 설정해주세요";
           description = "";
-          _currentWidget = const OnboardingFirst();
+          _currentWidget = OnboardingFirst();
           showPreviousButton = false;
         } else if (_currentPage == 2) {
           title = "홈파밍을 하는 이유가 궁금해요!";
           description = "그에 맞는 응원 메시지를 전해드릴게요";
-          _currentWidget = const OnboardingSecond();
+          _currentWidget = OnboardingSecond();
           showPreviousButton = true;
         } else if (_currentPage == 3) {
           title = "홈파밍에 시간을 얼마나 쓸 수 있나요?";
           description = "기를 채소를 고르지 못했다면 팜어스가 추천해드릴게요";
-          _currentWidget = const OnboardingThird();
+          _currentWidget = OnboardingThird();
           showPreviousButton = true;
         } else if (_currentPage == 4) {
           title = "채소를 얼마나 잘 기르시나요?";
           description = "기를 채소를 고르지 못했다면 팜어스가 추천해드릴게요";
-          _currentWidget = const OnboardingFourth();
+          _currentWidget = OnboardingFourth();
           showPreviousButton = true;
         } else if (_currentPage == 5) {
           title = "파머님 가입이 완료되었어요!";
           description = "홈에서 추천 채소를 확인해보세요";
-          _currentWidget = const OnboardingFinish();
+          _currentWidget = OnboardingFinish();
           showPreviousButton = true;
         }
       },
@@ -116,7 +115,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: CustomAppBar(),
-        backgroundColor: FarmusThemeData.white,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -159,10 +157,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
             Expanded(
-              child: SingleChildScrollView(child: _currentWidget),
+              child: _currentWidget,
             ),
             Obx(
-              () => Padding(
+                  () => Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -180,27 +178,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         text: _currentPage == 5
                             ? "시작하기"
                             : _currentPage == 2 &&
-                                    !isBoxesSelectedCurrentPage2()
-                                ? "건너뛰기"
-                                : "다음",
+                            !isBoxesSelectedCurrentPage2()
+                            ? "건너뛰기"
+                            : "다음",
                         onPressed: () => _handleButtonPress(true),
                         // 버튼 활성화 유무 결정
                         enabled: _currentPage == 1
-                            // 특수문자, 닉네임 입력
+                        // 특수문자, 닉네임 입력
                             ? _onboardingController.hasInput.value &&
-                                !_onboardingController
-                                    .hasSpecialCharacters.value
+                            !_onboardingController
+                                .hasSpecialCharacters.value
                             : _currentPage == 2
-                                // 2페이지는 건너뛰기, 다음버튼으로 항상 활성화
-                                ? true
-                                // 박스 하나라도 선택하면 버튼 활성화
-                                : _currentPage == 3
-                                    ? isBoxesSelectedCurrentPage3()
-                                    : _currentPage == 4
-                                        ? isBoxesSelectedCurrentPage4()
-                                        : _currentPage == 5
-                                            ? true
-                                            : false,
+                        // 2페이지는 건너뛰기, 다음버튼으로 항상 활성화
+                            ? true
+                        // 박스 하나라도 선택하면 버튼 활성화
+                            : _currentPage == 3
+                            ? isBoxesSelectedCurrentPage3()
+                            : _currentPage == 4
+                            ? isBoxesSelectedCurrentPage4()
+                            : _currentPage == 5
+                            ? true
+                            : false,
                       ),
                     ),
                   ],

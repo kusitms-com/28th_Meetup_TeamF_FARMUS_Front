@@ -54,8 +54,8 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
   }
 
   Future<void> _initializeData() async {
-    await _detailController.getFarmclubDetail(widget.id.toString());
-    await _joinController.getVeggieRegistration();
+    await _detailController.getFarmclubDetail(widget.id.toInt());
+    await _joinController.getVeggieRegistration(_detailController.veggieInfoId.value);
     _cropInfoStepController.veggieInfoId.value =
         _detailController.farmclubInfo.value!.veggieInfoId.toString();
     _cropInfoStepController.stepNum.value =
@@ -105,7 +105,8 @@ class _FarmclubDetailScreenScreenState extends State<FarmclubDetailScreen> {
         child: ButtonBrown(
           text: "팜클럽 가입하기",
           enabled: RxBool(true),
-          onPress: () {
+          onPress: () async {
+            await _joinController.getVeggieRegistration(_detailController.veggieInfoId.toString());
             _bottomSheetController.showFarmclubJoinBottomSheet(
                 context, widget.title);
           },

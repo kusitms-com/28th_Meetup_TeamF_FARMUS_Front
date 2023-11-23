@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mojacknong_android/repository/homescreen_repository.dart';
 import '../../../repository/vege_repository.dart';
+import '../../data/network/vege_api_service.dart';
+import '../../model/all_vege_infor_dto.dart';
 
 class VegeController extends GetxController {
   final selectedVeggieId = "".obs;
@@ -9,20 +12,21 @@ class VegeController extends GetxController {
   final nicknameValue = "".obs;
   final selectedDate = "".obs;
 
-
-
-  bool vegeRegisterException(){
-
-
-    print("닉네임 " +nicknameValue.value +"날짜 "+selectedDate.value +"채소 id "+selectedVeggieId.value);
-    if(nicknameValue.value == "" || selectedDate.value == ""  || selectedVeggieId.value == ""){
+  bool vegeRegisterException() {
+    print("닉네임 " +
+        nicknameValue.value +
+        "날짜 " +
+        selectedDate.value +
+        "채소 id " +
+        selectedVeggieId.value);
+    if (nicknameValue.value == "" ||
+        selectedDate.value == "" ||
+        selectedVeggieId.value == "") {
       return false;
     }
 
     return true;
-
   }
-
 
   void updateSelectedDate(String date) {
     selectedDate.value = date;
@@ -30,7 +34,8 @@ class VegeController extends GetxController {
   }
 
   // 선택한 채소의 id와 colorImageUrl을 업데이트하는 메서드
-  void updateSelectedVeggieData(String id, String colorImageUrl, String vegeName) {
+  void updateSelectedVeggieData(
+      String id, String colorImageUrl, String vegeName) {
     selectedVeggieId.value = id;
     selectedVeggieColorImageUrl.value = colorImageUrl;
     vegename.value = vegeName;
@@ -44,26 +49,22 @@ class VegeController extends GetxController {
     print(nicknameValue.value);
   }
 
-  String selectNicknameValue(){
-
+  String selectNicknameValue() {
     return nicknameValue.value;
-
   }
 
   Future<void> enrollVegeRequest() async {
-
-    await VegeRepository.enrollVegeApi(selectedDate.value, selectedVeggieId.value,
-        selectedVeggieColorImageUrl.value, nicknameValue.value, vegename.value);
+    await VegeRepository.enrollVegeApi(
+        selectedDate.value,
+        selectedVeggieId.value,
+        selectedVeggieColorImageUrl.value,
+        nicknameValue.value,
+        vegename.value);
   }
-
-
-
-
 
   RxList<bool> isSelectedList = List.generate(6, (index) => false).obs;
   RxInt selectedVeggieIndex = RxInt(-1);
   RxBool isLoading = RxBool(false);
-
 
   RxBool isMemberValid = RxBool(true); // 추가
   final RegExp _numberRegExp = RegExp(r'^[3-9]$|^1[0-9]$|^20$'); // 추가
@@ -79,7 +80,6 @@ class VegeController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController memberController = TextEditingController();
   final TextEditingController introController = TextEditingController();
-
 
   final titleValue = "".obs;
   final memberValue = "".obs;
@@ -116,17 +116,13 @@ class VegeController extends GetxController {
       checkFormVaildity();
     });
 
-
     // UI 초기화 로직 분리
     WidgetsBinding.instance.addPostFrameCallback((_) {
       initializeVeggieData();
       initializeVeggieLevel();
       isLoading.value = true; // 초기화가 끝나면 로딩 상태 해제
     });
-
-
   }
-
 
   // 선택된 채소의 인덱스를 업데이트하는 메서드
   void updateSelectedVeggieIndex(int index) {
@@ -149,8 +145,6 @@ class VegeController extends GetxController {
       update();
     });
   }
-
-
 
   void toggleImageSelection(int index) {
     if (isSelectedList[index]) {
@@ -192,9 +186,6 @@ class VegeController extends GetxController {
       'tomato': 'Hard',
     });
   }
-
-
-
 
   void toggleSelectCheck() {
     isCheck.value = !isCheck.value;

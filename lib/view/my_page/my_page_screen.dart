@@ -43,10 +43,6 @@ class _MyPageScreenState extends State<MyPageScreen> {
                 final FarmusUser? user = data[0] as FarmusUser?;
                 final MypageHistory? history = data[1] as MypageHistory?;
 
-                print( history?.veggieHistoryDetailList[0].detailId);
-
-
-
                 return Column(children: <Widget>[
                   MyPageHeader(
                       name: user?.nickName,
@@ -57,45 +53,42 @@ class _MyPageScreenState extends State<MyPageScreen> {
                   HistoryHeader(historyType: "채소 히스토리"),
                   const SizedBox(height: 12.0),
                   Expanded(
-                    child: history?.veggieHistoryDetailList != null
+                    child: history?.veggieHistoryDetailList != null && history!.veggieHistoryDetailList.isNotEmpty
                         ? ListView.builder(
-                            padding: const EdgeInsets.only(top: 4.0),
-                            itemCount:
-                                min(3, history!.veggieHistoryDetailList.length),
-                            itemBuilder: (context, index) {
-                              final reversedIndex =
-                                  history.veggieHistoryDetailList.length -
-                                      index -
-                                      1;
-                              return GestureDetector(
-                                onTap: () {
-                                  HistoryVegeScreen(
-                                    name: history.veggieHistoryDetailList[reversedIndex].name,
-                                    veggieName: history.veggieHistoryDetailList[reversedIndex].veggieName,
-                                    period: history.veggieHistoryDetailList[reversedIndex].period,
-                                    image: history.veggieHistoryDetailList[reversedIndex].image,
-                                    detailId: history.veggieHistoryDetailList[reversedIndex].detailId,
-                                  );
-
-                                },
-                                child: MyPageVegeHistory(
-                                  name: history.veggieHistoryDetailList[reversedIndex].name,
-                                  veggieName: history.veggieHistoryDetailList[reversedIndex].veggieName,
-                                  period: history.veggieHistoryDetailList[reversedIndex].period,
-                                  image: history.veggieHistoryDetailList[reversedIndex].image,
-                                  detailId: history.veggieHistoryDetailList[reversedIndex].detailId,
-                                ),
-                              );
-                            },
-                          )
+                      padding: const EdgeInsets.only(top: 4.0),
+                      itemCount: min(3, history!.veggieHistoryDetailList.length),
+                      itemBuilder: (context, index) {
+                        final reversedIndex = history.veggieHistoryDetailList.length - index - 1;
+                        return GestureDetector(
+                          onTap: () {
+                            HistoryVegeScreen(
+                              name: history.veggieHistoryDetailList[reversedIndex].name,
+                              veggieName: history.veggieHistoryDetailList[reversedIndex].veggieName,
+                              period: history.veggieHistoryDetailList[reversedIndex].period,
+                              image: history.veggieHistoryDetailList[reversedIndex].image,
+                              detailId: history.veggieHistoryDetailList[reversedIndex].detailId,
+                            );
+                          },
+                          child: MyPageVegeHistory(
+                            name: history.veggieHistoryDetailList[reversedIndex].name,
+                            veggieName: history.veggieHistoryDetailList[reversedIndex].veggieName,
+                            period: history.veggieHistoryDetailList[reversedIndex].period,
+                            image: history.veggieHistoryDetailList[reversedIndex].image,
+                            detailId: history.veggieHistoryDetailList[reversedIndex].detailId,
+                          ),
+                        );
+                      },
+                    )
                         : noData(),
                   ),
+
 
                   const SizedBox(height: 10.0),
                   ChallengeHeader(historyType: "팜클럽 히스토리"),
                   const SizedBox(height: 12.0),
                   Expanded(
-                    child: history?.farmClubHistoryDetailList != null
+                    child: history?.farmClubHistoryDetailList != null && history!.farmClubHistoryDetailList.isNotEmpty
+
                         ? ListView.builder(
                             padding: const EdgeInsets.only(top: 4.0),
                             itemCount: min(

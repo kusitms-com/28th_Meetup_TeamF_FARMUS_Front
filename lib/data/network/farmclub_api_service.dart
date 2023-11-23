@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mojacknong_android/data/network/base_api_services.dart';
+import 'package:mojacknong_android/model/farmclub_complete.dart';
 import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/model/farmclub_diary.dart';
 import 'package:mojacknong_android/model/farmclub_info_model.dart';
@@ -113,7 +114,7 @@ class FarmclubApiService {
   }
 
   // 가입하지 않은 팜클럽 정보 조회
-  Future<FarmclubDetail> getFarmclubDetail(String challengeId) async {
+  Future<FarmclubDetail> getFarmclubDetail(int challengeId) async {
     try {
       print("challengeId  $challengeId");
       // API 호출
@@ -138,10 +139,11 @@ class FarmclubApiService {
   }
 
   // 팜클럽 참여 전 채소 조회
-  Future<List<VeggieRegistration>> getVeggieRegistraion() async {
+  Future<List<VeggieRegistration>> getVeggieRegistraion(
+      String veggieInfoId) async {
     try {
       Response response = await ApiClient().dio.get(
-            "/api/veggie/registration",
+            "/api/veggie/registration/$veggieInfoId",
           );
 
       if (response.statusCode == 200) {
@@ -365,7 +367,6 @@ class FarmclubApiService {
           );
 
       if (response.statusCode == 200) {
-
         print(response.data['data']);
         return response.data['data']["challengeId"];
       } else {
@@ -378,4 +379,65 @@ class FarmclubApiService {
     }
   }
 
+  // 팜클럽 종료
+  Future<int> deleteFarmclub({
+    required String challengeId,
+    required bool isContinue,
+  }) async {
+    try {
+      Map<String, dynamic> requestBody = {
+        "challengeId": challengeId,
+        "isContinue": isContinue,
+      };
+
+      Response response = await ApiClient().dio.delete(
+            "/api/farmclub",
+            data: requestBody,
+          );
+
+      // 응답 상태 코드 확인
+      if (response.statusCode == 200) {
+        // 성공적으로 응답받은 경우
+        print(response.data['data']);
+        return response.data['data'];
+      } else {
+        // 응답이 실패한 경우
+        throw "${response.statusCode}";
+      }
+    } on DioException catch (e) {
+      print(e.message);
+      throw "${e.message}";
+    }
+  }
+
+  // 홈파밍 종료
+  Future<FarmclubComplete> deleteFarmclubComplete({
+    required String registrationId,
+  }) async {
+    try {
+      Map<String, dynamic> requestBody = {
+        "registrationId": registrationId,
+      };
+
+      Response response = await ApiClient().dio.delete(
+            "/api/farmclub/complete",
+            data: requestBody,
+          );
+
+      // 응답 상태 코드 확인
+      if (response.statusCode == 200) {
+        // 성공적으로 응답받은 경우
+        print(response.data['data']);
+        return FarmclubComplete.fromJson(response.data);
+      } else {
+        // 응답이 실패한 경우
+        throw "${response.statusCode}";
+      }
+    } on DioError catch (e) {
+      print(e.message);
+      throw "${e.message}";
+    }
+  }
+
+  // 홈파밍 종료
 }

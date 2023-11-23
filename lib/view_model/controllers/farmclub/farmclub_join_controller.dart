@@ -21,17 +21,18 @@ class FarmclubJoinController extends GetxController {
     });
   }
 
-  Future<List<VeggieRegistration>> getVeggieRegistration() async {
+  Future<List<VeggieRegistration>> getVeggieRegistration(String veggieInfoId) async {
     veggieSelected.assignAll(List<int>.filled(veggieList.length, 0));
 
     try {
 
+      print("선택 채소 아이디 $veggieInfoId");
       isCheck.value = false;
       isFormValid.value = false;
 
 
       List<VeggieRegistration> responseData =
-      await FarmclubRepository.getVeggieRegistration();
+      await FarmclubRepository.getVeggieRegistration(veggieInfoId);
 
 
       // RxList 갱신
@@ -55,7 +56,8 @@ class FarmclubJoinController extends GetxController {
       print("채소 아이디 ${veggieList[selectedVeggieIndex.toInt()].veggieId.toString()}");
 
       int responseData = await FarmclubRepository.postRegister(
-          veggieList[selectedVeggieIndex.toInt()].veggieId.toString(), veggieList[selectedVeggieIndex.toInt()].veggieId.toString());
+
+         challengeId.toString(), veggieList[selectedVeggieIndex.toInt()].veggieId.toString());
       print("채소 아이디 ${veggieList[selectedVeggieIndex.toInt()].veggieId.toString()}");
       return responseData;
     } catch (error) {

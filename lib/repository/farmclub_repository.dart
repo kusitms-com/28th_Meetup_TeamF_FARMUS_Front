@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:mojacknong_android/data/network/farmclub_api_service.dart';
+import 'package:mojacknong_android/model/farmclub_complete.dart';
 import 'package:mojacknong_android/model/farmclub_detail.dart';
 import 'package:mojacknong_android/model/farmclub_diary.dart';
 import 'package:mojacknong_android/model/farmclub_info_model.dart';
@@ -48,7 +49,7 @@ class FarmclubRepository {
   }
 
   // 팜클럽 정보 조회
-  static Future<FarmclubDetail?> getFarmclubDetail(String id) async {
+  static Future<FarmclubDetail?> getFarmclubDetail(int id) async {
     try {
       print("challengeId  $id");
 
@@ -78,10 +79,10 @@ class FarmclubRepository {
   }
 
   // 팜클럽 가입 전 채소 조회
-  static Future<List<VeggieRegistration>> getVeggieRegistration() async {
+  static Future<List<VeggieRegistration>> getVeggieRegistration(String veggieInfoId) async {
     try {
       List<VeggieRegistration> response =
-          await FarmclubApiService().getVeggieRegistraion();
+          await FarmclubApiService().getVeggieRegistraion(veggieInfoId);
 
       return response;
     } catch (e) {
@@ -202,4 +203,18 @@ class FarmclubRepository {
       throw "레포 에러 $e";
     }
   }
+
+  // 팜클럽 성공
+  static Future<FarmclubComplete?> deleteFarmclubComplete(String registrationId) async {
+    try {
+      FarmclubComplete response =
+      await FarmclubApiService().deleteFarmclubComplete(registrationId: registrationId);
+
+      return response;
+    } catch (e) {
+      print("에러! getFarmclubDetail: $e");
+      throw "에러! getFarmclubDetail: $e";
+    }
+  }
+
 }

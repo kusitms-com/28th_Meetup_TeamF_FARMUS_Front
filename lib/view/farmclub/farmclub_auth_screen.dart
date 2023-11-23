@@ -42,7 +42,7 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
 
   Future<void> _fetchData() async {
     try {
-      _farmclubController.getMyFarmclub();
+      await _farmclubController.getMyFarmclub();
     } catch (error) {
       print('Error fetching farmclub data: $error');
     }
@@ -179,6 +179,7 @@ class _FarmclubAuthScreenState extends State<FarmclubAuthScreen> {
               enabled: _authController.isFormValid,
               onPress: () async {
                 await _authController.postFarmclubMission(
+                  context,
                   _farmclubController
                       .myFarmclubState[
                           _farmclubController.selectedFarmclubIndex.toInt()]

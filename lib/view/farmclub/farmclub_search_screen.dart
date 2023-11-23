@@ -124,14 +124,18 @@ class _FarmclubSearchScreenState extends State<FarmclubSearchScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 4),
                                         child: Farmclub(
-                                            id: data.challengeId,
-                                            title: data.challengeName,
-                                            vaggie: data.veggieName,
-                                            currentUser: data.currentUser,
-                                            image: data.image,
-                                            level: data.difficulty,
-                                            maxUser: data.maxUser,
-                                            status: data.status),
+                                          id: data.challengeId,
+                                          title: data.challengeName,
+                                          vaggie: data.veggieName,
+                                          currentUser: data.currentUser,
+                                          image: data.image,
+                                          level: data.difficulty,
+                                          maxUser: data.maxUser,
+                                          status: data.status,
+                                          challengeId:
+                                              data.challengeId.toString(),
+                                          veggieId: data.veggieInfoId,
+                                        ),
                                       ),
                                     ],
                                   );

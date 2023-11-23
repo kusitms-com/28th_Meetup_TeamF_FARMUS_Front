@@ -6,9 +6,10 @@ import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controlle
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_join_controller.dart';
 
 class GreenButton extends StatefulWidget {
-  final String title;
+  final String challengeId;
+  final String veggieInfoId;
 
-  const GreenButton({super.key, required this.title});
+  const GreenButton({super.key, required this.veggieInfoId, required this.challengeId});
 
   @override
   State<GreenButton> createState() => _GreenButtonState();
@@ -24,8 +25,9 @@ class _GreenButtonState extends State<GreenButton> {
       onPress: () {},
       child: GestureDetector(
         onTap: () async {
-          await joinController.getVeggieRegistration();
-          controller.showFarmclubJoinBottomSheet(context, widget.title);
+          print(widget.veggieInfoId);
+          await joinController.getVeggieRegistration(widget.veggieInfoId);
+          controller.showFarmclubJoinBottomSheet(context, widget.challengeId);
         },
         child: Container(
           width: 45,
