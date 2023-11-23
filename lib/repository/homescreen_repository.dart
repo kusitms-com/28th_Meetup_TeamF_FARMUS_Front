@@ -44,6 +44,7 @@ class HomeScreenRepository {
 
   static Future<MyVegeRoutineList?> getMyVegeRoutineListApi() async {
     final response = await HomeScreenApiService.getMyVegeRoutineList();
+    print("routineList: ${response?.diaryPostList}");
 
     return response;
   }
