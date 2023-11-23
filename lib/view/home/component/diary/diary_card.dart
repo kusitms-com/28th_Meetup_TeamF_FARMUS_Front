@@ -20,12 +20,14 @@ class DiaryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     const double cardBarHeight = 150 + 27; // card_bar.svg의 높이
     const double cardHeight = 150; // 카드의 높이
-  //  final DateTime date = DateFormat('yyyy/MM/dd').parse(inputDate);
-   // final String displayDate = DateFormat('yyyy년 MM월 dd일').format(date);
+    //  final DateTime date = DateFormat('yyyy/MM/dd').parse(inputDate);
+    // final String displayDate = DateFormat('yyyy년 MM월 dd일').format(date);
 
     void _showBottomSheet(BuildContext context) {
       showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
+        // shape: bode
         backgroundColor: Colors.transparent,
         builder: (BuildContext context) {
           return BottomSheetDiary(
@@ -41,7 +43,7 @@ class DiaryCard extends StatelessWidget {
       onTap: () => _showBottomSheet(context), // 여기를 수정합니다.
       child: Padding(
         padding:
-            const EdgeInsets.only(top: 16.0, bottom: 16, right: 16, left: 22),
+        const EdgeInsets.only(top: 16.0, bottom: 16, right: 16, left: 22),
         child: Stack(
           clipBehavior: Clip.none,
           children: [

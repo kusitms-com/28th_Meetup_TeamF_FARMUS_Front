@@ -23,11 +23,12 @@ class _BottomSheetDiaryState extends State<BottomSheetDiary> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 550,
       decoration: const BoxDecoration(
         color: FarmusThemeData.background,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(40),
-          topRight: Radius.circular(40),
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
         ),
       ),
       child: SingleChildScrollView(
@@ -37,9 +38,8 @@ class _BottomSheetDiaryState extends State<BottomSheetDiary> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(
-                top: 16,
-                right: 32,
-                left: 16,
+                top: 5,
+                right: 8,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -61,16 +61,22 @@ class _BottomSheetDiaryState extends State<BottomSheetDiary> {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
-            Image.network(
-              widget.image!,
-              fit: BoxFit.cover,
-              width: MediaQuery.of(context).size.width,
-              height: 200,
-            ),
-            const SizedBox(height: 30),
+            //     const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Image.network(
+                  widget.image!,
+                  fit: BoxFit.cover,
+                  width: MediaQuery.of(context).size.width,
+                  height: 200,
+                ),
+              ),
+            ),
+            const SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
