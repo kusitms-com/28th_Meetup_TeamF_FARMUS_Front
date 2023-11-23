@@ -53,9 +53,7 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
             .challengeId
             .toInt(),
       );
-      setState(() {
-
-      });
+      setState(() {});
     }
   }
 
@@ -234,6 +232,22 @@ class _FarmclubScreenState extends State<FarmclubScreen> {
                         if (_authController.missionUploaded.value) {
                           _authController.missionUploaded.value = false; // 초기화
                           loadFarmclubData(); // FarmclubScreen 새로고침
+
+                          if (_authController.isEnd.value)  {
+                            _authController.isEnd.value = false; // 초기화
+                            _authController.showMissionFinishDialog(
+                              context,
+                              _authController.farmclubComplete.value!.image,
+                              _authController
+                                  .farmclubComplete.value!.challengeName,
+                              _authController.farmclubComplete.value!.day
+                                  .toString(),
+                              _authController.farmclubComplete.value!.mission
+                                  .toString(),
+                              _authController.farmclubComplete.value!.diary
+                                  .toString(),
+                            );
+                          }
                         }
                       },
                     ),

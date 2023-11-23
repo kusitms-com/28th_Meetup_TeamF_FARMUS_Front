@@ -56,7 +56,8 @@ class FarmclubJoinController extends GetxController {
       print("채소 아이디 ${veggieList[selectedVeggieIndex.toInt()].veggieId.toString()}");
 
       int responseData = await FarmclubRepository.postRegister(
-          veggieList[selectedVeggieIndex.toInt()].veggieId.toString(), veggieList[selectedVeggieIndex.toInt()].veggieId.toString());
+
+         challengeId.toString(), veggieList[selectedVeggieIndex.toInt()].veggieId.toString());
       print("채소 아이디 ${veggieList[selectedVeggieIndex.toInt()].veggieId.toString()}");
       return responseData;
     } catch (error) {
