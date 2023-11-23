@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mojacknong_android/model/farmclub_complete.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 import '../../../common/dialog/dialog_mission_farmclub.dart';
@@ -17,6 +18,7 @@ class FarmclubAuthController extends GetxController {
   RxBool missionUploaded = RxBool(false);
   RxBool isLoading = RxBool(false); // 추가: 로딩 상태를 표시하는 변수
   BottomSheetController controller = BottomSheetController();
+  Rx<FarmclubComplete?> farmclubComplete = Rx<FarmclubComplete?>(null);
 
   @override
   void onInit() {
@@ -54,10 +56,28 @@ class FarmclubAuthController extends GetxController {
       farmclubMission.value = response.data;
       missionUploaded.value = true;
 
+      if (farmclubMission.value!.isEnd == true) {
+        deleteFarmclubComplete();
+      }
+
     } catch (e) {
       print("오류: $e");
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<void> deleteFarmclubComplete() async {
+    try {
+      print(registrationId);
+      FarmclubComplete? farmclubCompleteData =
+          await FarmclubRepository.deleteFarmclubComplete(
+              farmclubMission.value!.registrationId.toString());
+      farmclubComplete.refresh();
+      farmclubComplete.value = farmclubCompleteData;
+      print(farmclubComplete.value!.challengeName.toString());
+    } catch (e) {
+      print("오류: $e");
     }
   }
 }
