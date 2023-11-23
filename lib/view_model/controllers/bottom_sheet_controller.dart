@@ -128,31 +128,4 @@ class BottomSheetController extends GetxController {
       },
     );
   }
-
-
-  void showMissionFinishDialog(BuildContext context, String title) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(40.0),
-          topRight: Radius.circular(40.0),
-        ),
-      ),
-      backgroundColor: FarmusThemeData.white,
-      builder: (BuildContext context) {
-        return SizedBox.expand(
-          child:   BottomSheetFarmClubFinal(
-            imagePath: 'assets/image/lettuce1.svg',
-            textContent:
-            '텃밭부터 식탁까지 이어진 {}일의\n팜클럽 기간동안 {n}번 미션 인증을 했고\n{n}번 성장일기를 기록했어요\n\n앞으로의 홈파밍 여정도 팜어스와 함께해요!',
-          ),
-        );
-      },
-    );
-  }
-
-
-
 }
