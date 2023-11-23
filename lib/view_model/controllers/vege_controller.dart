@@ -31,7 +31,10 @@ class VegeController extends GetxController {
   // }
 
   bool vegeRegisterException(){
-    if(nicknameValue.value == " " || selectedDate.value == " "  || selectedVeggieId == " "){
+
+
+    print("닉네임 " +nicknameValue.value +"날짜 "+selectedDate.value +"채소 id "+selectedVeggieId.value);
+    if(nicknameValue.value == "" || selectedDate.value == ""  || selectedVeggieId.value == ""){
       return false;
     }
 

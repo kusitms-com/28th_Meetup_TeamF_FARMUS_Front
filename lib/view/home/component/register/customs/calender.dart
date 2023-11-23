@@ -10,7 +10,7 @@ import '../../../../../view_model/controllers/vege_controller.dart';
 
 class CustomCalendar extends StatefulWidget {
   CustomCalendar({Key? key}) : super(key: key);
-  final VegeController vegeController = Get.find();
+ // final VegeController vegeController = Get.find();
 
   @override
   _CustomCalendarState createState() => _CustomCalendarState();

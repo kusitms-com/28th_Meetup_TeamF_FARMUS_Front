@@ -12,6 +12,7 @@ import 'package:mojacknong_android/view/home/component/diary/diary_post_controll
 import 'package:mojacknong_android/view/home/component/mission_routine/custom_switch.dart';
 
 import '../../../../view_model/controllers/diary_controller.dart';
+import 'diary_calendar_notap.dart';
 
 class WriteDiary extends StatefulWidget {
   final int? vegeId;
@@ -106,7 +107,7 @@ class _WriteDiaryState extends State<WriteDiary> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const DiaryCalendar(),
+                  const DiaryCalendarNoTap(),
                   const SizedBox(
                     height: 16,
                   ),

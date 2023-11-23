@@ -100,27 +100,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   right: 0,
                   child: RegisterButton(
                     text: '등록하기',
-                    onPressed: vegeController.vegeRegisterException()
-                        ? () async {
-                      await vegeController.enrollVegeRequest();
+                    onPressed: () async{
+                      if(vegeController.vegeRegisterException()){
+                            await vegeController.enrollVegeRequest();
 
+                            BottomSheetController().showRegisterDialog(
+                            context, vegeController.selectNicknameValue());
 
+                            vegeController.updateNicknameValue("");
+                            vegeController.updateSelectedDate("");
+                            vegeController.updateSelectedVeggieData("","","");
 
-                      BottomSheetController().showRegisterDialog(
-                          context, vegeController.selectNicknameValue());
-
-                      vegeController.updateNicknameValue(" ");
-                      vegeController.updateSelectedDate(" ");
-                      vegeController.updateSelectedVeggieData(" "," "," ");
-
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(
                             builder: (context) =>
                             const MainScreen()), //home screen으로 가고 이때 작물이 존재하는 상태니, home screen에서 swipescreen호출
-                      );
-                    }: null,
+                            );
+                          }
+                          return null;
+
+                      }
                   ),
 
                 ),
