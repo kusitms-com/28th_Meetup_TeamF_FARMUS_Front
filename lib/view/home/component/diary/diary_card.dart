@@ -5,23 +5,23 @@ import 'package:mojacknong_android/common/farmus_theme_data.dart';
 import 'package:mojacknong_android/view/home/component/diary/diary_bottom_sheet.dart';
 
 class DiaryCard extends StatelessWidget {
-  final String inputDate;
-  final String imagePath;
-  final String textContent;
+  final String? date;
+  final String? image;
+  final String? content;
 
   const DiaryCard({
     Key? key,
-    required this.inputDate,
-    required this.imagePath,
-    required this.textContent,
+    required this.date,
+    required this.image,
+    required this.content,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     const double cardBarHeight = 150 + 27; // card_bar.svg의 높이
     const double cardHeight = 150; // 카드의 높이
-    final DateTime date = DateFormat('yyyy/MM/dd').parse(inputDate);
-    final String displayDate = DateFormat('yyyy년 MM월 dd일').format(date);
+  //  final DateTime date = DateFormat('yyyy/MM/dd').parse(inputDate);
+   // final String displayDate = DateFormat('yyyy년 MM월 dd일').format(date);
 
     void _showBottomSheet(BuildContext context) {
       showModalBottomSheet(
@@ -29,9 +29,9 @@ class DiaryCard extends StatelessWidget {
         backgroundColor: Colors.transparent,
         builder: (BuildContext context) {
           return BottomSheetDiary(
-            displayDate: displayDate,
-            imagePath: imagePath,
-            textContent: textContent,
+            date: date!,
+            image: image!,
+            content: content!,
           );
         },
       );
@@ -65,7 +65,7 @@ class DiaryCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    displayDate,
+                    date!,
                     style: const TextStyle(
                         color: FarmusThemeData.brownText,
                         fontSize: 14.0,
@@ -79,8 +79,8 @@ class DiaryCard extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
-                          child: SvgPicture.asset(
-                            imagePath,
+                          child: Image.network(
+                            image!,
                             fit: BoxFit.cover,
                             width: 100,
                             height: 100,
@@ -90,7 +90,7 @@ class DiaryCard extends StatelessWidget {
 
                         Expanded(
                           child: Text(
-                            textContent,
+                            content!,
                             style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14.0,

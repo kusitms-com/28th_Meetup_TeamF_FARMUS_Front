@@ -3,16 +3,16 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mojacknong_android/common/farmus_theme_data.dart';
 
 class BottomSheetDiary extends StatefulWidget {
-  final String displayDate;
-
-  final String imagePath;
-  final String textContent;
+  final String? date;
+  final String? image;
+  final String? content;
 
   const BottomSheetDiary({
     super.key,
-    required this.displayDate,
-    required this.imagePath,
-    required this.textContent,
+    required this.date,
+    required this.image,
+    required this.content,
+
   });
 
   @override
@@ -62,8 +62,8 @@ class _BottomSheetDiaryState extends State<BottomSheetDiary> {
               ),
             ),
             const SizedBox(height: 10),
-            SvgPicture.asset(
-              widget.imagePath,
+            Image.network(
+              widget.image!,
               fit: BoxFit.cover,
               width: MediaQuery.of(context).size.width,
               height: 200,
@@ -84,7 +84,7 @@ class _BottomSheetDiaryState extends State<BottomSheetDiary> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        widget.displayDate,
+                        widget.date!,
                         style: const TextStyle(
                           color: FarmusThemeData.brownText,
                           fontSize: 14.0,
@@ -92,7 +92,7 @@ class _BottomSheetDiaryState extends State<BottomSheetDiary> {
                       ),
                       const SizedBox(height: 8), // 텍스트 사이 간격
                       Text(
-                        widget.textContent,
+                        widget.content!,
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14.0,

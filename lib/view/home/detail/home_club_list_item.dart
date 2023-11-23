@@ -5,6 +5,7 @@ class FarmClubListItem extends StatelessWidget {
   final String? veggieNickname;
   final int? routineId;
   final String? routineName;
+  final String? color;
 
   final VoidCallback onTap;
 
@@ -14,6 +15,7 @@ class FarmClubListItem extends StatelessWidget {
     required this.routineId,
     required this.routineName,
     required this.onTap,
+    required this.color,
   }) : super(key: key);
 
   double calculateTextWidth(String text, TextStyle style) {
@@ -29,6 +31,9 @@ class FarmClubListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const arrowRightWidth = 22.0;
+
+    Color colorValue =  Color(int.parse("0xff${color?.replaceAll("#", "") ?? "000000"}"));
+
     final textWidth = calculateTextWidth(
       '$veggieNickname  |  Step $routineId  $routineName',
       const TextStyle(
@@ -46,7 +51,7 @@ class FarmClubListItem extends StatelessWidget {
         width: textWidth + arrowRightWidth + 50,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: const Color(0xffDCFFD4),
+          color: colorValue,
           borderRadius: BorderRadius.circular(10),
         ),
         margin: const EdgeInsets.only(left: 20.0, right: 20, bottom: 16),

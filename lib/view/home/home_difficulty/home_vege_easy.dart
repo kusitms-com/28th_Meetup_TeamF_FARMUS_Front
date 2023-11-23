@@ -5,6 +5,7 @@ import 'package:mojacknong_android/view/home/component/register/register_screen.
 
 class HomeVegeEasy extends StatelessWidget {
   final String? name;
+
   const HomeVegeEasy({Key? key, this.name}) : super(key: key);
 
   @override
@@ -111,7 +112,9 @@ class HomeVegeEasy extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            const RegisterScreen()), //페이지 수정하기
+                            RegisterScreen(
+
+                            )), //페이지 수정하기
                   );
                 },
                 child: SvgPicture.asset(
