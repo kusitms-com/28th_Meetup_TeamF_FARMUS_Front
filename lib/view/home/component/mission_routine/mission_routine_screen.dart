@@ -15,6 +15,7 @@ import 'package:mojacknong_android/view/home/component/mission_routine/n_routine
 import 'package:mojacknong_android/view/home/component/mission_routine/routine_calendar.dart';
 import 'package:mojacknong_android/view/home/component/mission_routine/routine_list.dart';
 import 'package:mojacknong_android/view/home/detail/home_content.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_controller.dart';
 
 class MissionRoutineScreen extends StatefulWidget {
   const MissionRoutineScreen({Key? key}) : super(key: key);
@@ -27,6 +28,7 @@ class _MissionRoutineScreenState extends State<MissionRoutineScreen> {
   MissionRoutineController controller = Get.find();
   NRoutineController nRoutineController = Get.put(NRoutineController());
   CalendarController calendarController = Get.put(CalendarController());
+
   final GlobalKey<_MissionRoutineScreenState> _key =
       GlobalKey<_MissionRoutineScreenState>();
   bool isLoading = true;
@@ -109,6 +111,7 @@ class _MissionRoutineScreenState extends State<MissionRoutineScreen> {
                               stepNum: controller.myMissionState[i].stepNum,
                               stepName: controller.myMissionState[i].stepName,
                               color: controller.myMissionState[i].color,
+                              detailId: "0"
                             ),
                           const Padding(
                             padding: EdgeInsets.fromLTRB(16.0, 0.0, 0.0, 0.0),

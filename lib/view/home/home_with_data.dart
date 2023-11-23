@@ -61,6 +61,7 @@ class HomeWithVege extends StatelessWidget {
                 stepNum: currentMissionList?.missions[index].stepNum,
                 stepName: currentMissionList?.missions[index].stepName,
                 color: currentMissionList?.missions[index].color,
+                detailId: currentMissionList?.missions[index].detailId,
               );
             },
           ),

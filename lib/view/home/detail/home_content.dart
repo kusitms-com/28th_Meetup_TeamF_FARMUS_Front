@@ -10,13 +10,15 @@ class HomeContent extends StatefulWidget {
   final int? stepNum;
   final String? stepName;
   final String? color;
+  final String? detailId;
   const HomeContent({
     Key? key,
     required this.challengeId,
     required this.veggieNickname,
     required this.stepNum,
     required this.stepName,
-    required this.color
+    required this.color,
+    required this.detailId
   }) : super(key: key);
 
   @override
@@ -54,6 +56,7 @@ class _HomeContentState extends State<HomeContent> {
                   stepName: widget.stepName,
                   stepNum: widget.stepNum,
                   color: widget.color,
+                  detailId: widget.detailId,
                   onTap: () {},
                 ),
               const SizedBox(height: 10),

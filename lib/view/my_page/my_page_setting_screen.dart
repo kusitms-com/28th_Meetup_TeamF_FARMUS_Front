@@ -33,7 +33,7 @@ class _MyPageSettingScreenState extends State<MyPageSettingScreen> {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (_) => const MyPageSettingWeb(
                     url:
-                        "https://www.notion.so/FARMUS-5a883da34dd14ff594e952b470dd19f6?pvs=4"),
+                    "https://www.notion.so/FARMUS-5a883da34dd14ff594e952b470dd19f6?pvs=4"),
               ));
             },
           ),
@@ -48,7 +48,7 @@ class _MyPageSettingScreenState extends State<MyPageSettingScreen> {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (_) => const MyPageSettingWeb(
                     url:
-                        "https://www.notion.so/FARMUS-b479368ce7e64145943e39d2162e7166?pvs=4"),
+                    "https://www.notion.so/FARMUS-b479368ce7e64145943e39d2162e7166?pvs=4"),
               ));
             },
           ),
@@ -83,7 +83,10 @@ class _MyPageSettingScreenState extends State<MyPageSettingScreen> {
             onPress: () {
               _controller.showCustomCupertinoActionSheet(context,
                   message: "팜어스를 탈퇴하시겠어요?",
-                  options: ["d"],
+                  options: [
+                    "채소/팜클럽 히스토리가 모두 사라져요\n\n미션/루틴을 체크할 수 없어요\n\n성장일기가 모두 사라져요\n\n커뮤니티 소식을 받을 수 없어요",
+                    "탈퇴하기"
+                  ],
                   cancelButtonText: "취소");
             },
           ),

@@ -7,6 +7,7 @@ import 'package:mojacknong_android/view/home/component/mission_routine/mission_r
 import 'package:mojacknong_android/view/home/detail/home_custom_app_bar.dart';
 import 'package:mojacknong_android/view/home/detail/home_swipe.dart';
 import 'package:mojacknong_android/view/home/home_with_data.dart';
+import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_auth_controller.dart';
 import 'package:mojacknong_android/view_model/controllers/farmclub/farmclub_etc_controller.dart';
 import '../../model/current_mission_list.dart';
 import '../../model/my_vege_list.dart';
@@ -31,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final VegeController vegeController = Get.put(VegeController());
   final MissionRoutineController mrController =
       Get.put(MissionRoutineController());
+  FarmclubAuthController farmclubAuthController = Get.put(FarmclubAuthController());
+  FarmclubController farmclubController = Get.put(FarmclubController());
   @override
   Widget build(BuildContext context) {
     print('Building HomeScreen');

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../farmclub/farmclub_challenge_screen.dart';
+
 class FarmClubListItem extends StatelessWidget {
   final String? veggieNickname;
   final int? routineId;
   final String? routineName;
   final String? color;
+  final String? detailId;
 
   final VoidCallback onTap;
 
@@ -16,6 +19,7 @@ class FarmClubListItem extends StatelessWidget {
     required this.routineName,
     required this.onTap,
     required this.color,
+    required this.detailId
   }) : super(key: key);
 
   double calculateTextWidth(String text, TextStyle style) {
@@ -47,6 +51,13 @@ class FarmClubListItem extends StatelessWidget {
     print("textWidth: $textWidth + $arrowRightWidth + 20");
     return InkWell(
       onTap: () {
+       // FarmclubChallengeScreen
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+            builder: (context) => FarmclubChallengeScreen(detailId: detailId,)
+        )
+        );
 
       },
       child: Container(

@@ -4,6 +4,7 @@ class CurrentMissionDto {
   final int? stepNum;
   final String? stepName;
   final String? color;
+  final String? detailId;
 
   CurrentMissionDto({
     required this.challengeId,
@@ -11,6 +12,7 @@ class CurrentMissionDto {
     required this.stepNum,
     required this.stepName,
     required this.color,
+    required this.detailId
   });
 
   factory CurrentMissionDto.fromJson(Map<String, dynamic> json) {
@@ -20,6 +22,7 @@ class CurrentMissionDto {
       stepNum: json['stepNum'],
       stepName: json['stepName'],
       color: json['color'],
+      detailId: json['detailId']
     );
   }
 }
