@@ -73,6 +73,14 @@ class FarmusThemeData {
     fontWeight: FontWeight.w600,
   );
 
+  static const TextStyle darkStyle20 = TextStyle(
+    color: FarmusThemeData.dark,
+    fontSize: 20,
+    fontFamily: "Pretendard",
+    fontWeight: FontWeight.w600,
+  );
+
+
   static const TextStyle darkStyle22 = TextStyle(
     color: FarmusThemeData.dark,
     fontSize: 22,

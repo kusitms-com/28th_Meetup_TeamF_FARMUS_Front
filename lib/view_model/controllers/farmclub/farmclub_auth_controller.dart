@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mojacknong_android/model/farmclub_complete.dart';
-import 'package:mojacknong_android/view/farmclub/BottomSheetFinal/farmclub_finish_final.dart';
+import 'package:mojacknong_android/common/bottom_sheet/farmclub_finish_final.dart';
 import 'package:mojacknong_android/view_model/controllers/bottom_sheet_controller.dart';
 
 import '../../../common/dialog/dialog_mission_farmclub.dart';
